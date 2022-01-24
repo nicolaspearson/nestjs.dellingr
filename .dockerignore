@@ -1,0 +1,22 @@
+# Ignore everything
+*
+
+# Include files and directories in the docker image when running COPY
+!.yarn/**
+!src/**
+!types/**
+!.pnp.cjs
+!.pnp.loader.mjs
+!.yarnrc.yml
+!package.json
+!tsconfig.json
+!tsconfig.build.json
+!webpack.config.js
+!webpack.util.js
+!yarn.lock
+
+# Ignore inside allowed directories (you will most probably never want this in a docker image)
+.yarn/sdks/**
+.yarn/unplugged/**
+.yarn/build-state.yml
+.yarn/install-state.gz

@@ -1,10 +1,10 @@
 {
-  "name": "nestjs.blueprint",
+  "name": "dellingr",
   "version": "0.0.1",
   "description": "This is NestJS starter repository.",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/nicolaspearson/veritas.git"
+    "url": "ssh://git@github.com/nicolaspearson/nestjs.dellingr.git"
   },
   "author": "Nicolas Pearson",
   "license": "MIT",
@@ -14,6 +14,12 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "rimraf dist && webpack --config webpack.config.js",
+    "db:logs": "yarn exec:docker-compose logs -f db",
+    "db:start": "yarn exec:docker-compose up -d --renew-anon-volumes --force-recreate db",
+    "db:stop": "docker-compose rm -f -s -v db",
+    "docker:build": "yarn exec:docker-compose build --no-cache dellingr",
+    "docker:logs": "yarn exec:docker-compose logs -f dellingr",
+    "docker:start": "yarn exec:docker-compose up -d --build dellingr",
     "doctor": "yarn dlx @yarnpkg/doctor .",
     "exec:docker-compose": "docker-compose -f docker-compose.yaml",
     "exec:eslint": "eslint \"{src,test}/**/*.ts\" --cache",
@@ -28,7 +34,7 @@
     "lint:fix": "yarn lint:eslint:fix && yarn lint:prettier:fix",
     "postinstall": "husky install",
     "sdk": "yarn dlx @yarnpkg/sdks vscode",
-    "start:dev": "rimraf dist && nest build --webpack --webpackPath webpack-hmr.config.js --watch",
+    "start:dev": "rimraf dist && yarn db:start && nest build --webpack --webpackPath webpack-hmr.config.js --watch",
     "start": "node dist/main",
     "test:integration": "yarn exec:jest --config $(pwd)/test/integration/jest.config.js",
     "test:unit": "yarn exec:jest --config $(pwd)/test/unit/jest.config.js"
