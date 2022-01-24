@@ -2,8 +2,6 @@
 
 A simple [NestJS](https://github.com/nestjs/nest) starter repository built using TypeScript.
 
-> Dellingr is, in norse mythology, the god of Dawn, or the personification of dawn.
-
 ## Installation
 
 ```bash

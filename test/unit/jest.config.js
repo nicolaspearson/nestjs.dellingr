@@ -1,5 +1,12 @@
 module.exports = Object.assign({}, require('../../jest.config.js'), {
-  collectCoverageFrom: ['src/**/*.ts', '!src/app.module.ts', '!src/main.ts'],
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/**/index.ts',
+    '!src/**/*.enum.ts',
+    '!src/**/*.module.ts',
+    '!src/common/config/environment.config.ts',
+    '!src/main.ts',
+  ],
   coverageThreshold: {
     global: {
       branches: 100,

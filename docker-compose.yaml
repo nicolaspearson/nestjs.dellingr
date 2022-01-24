@@ -21,6 +21,7 @@ services:
     environment:
       - API_HOST=0.0.0.0
       - API_PORT=3000
+      - DATABASE_URL=postgresql://admin:masterkey@db:5432/dellingr?schema=public
       - ENVIRONMENT=development
       - NODE_ENV=production
     ports:
@@ -41,7 +42,7 @@ services:
     environment:
       - POSTGRES_DB=dellingr
       - POSTGRES_PASSWORD=masterkey
-      - POSTGRES_USER=dellingr
+      - POSTGRES_USER=admin
     ports:
       - 5432:5432
     networks:

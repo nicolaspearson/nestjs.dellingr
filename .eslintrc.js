@@ -171,6 +171,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'warn',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_+$' }],
         '@typescript-eslint/restrict-template-expressions': ['error', { allowAny: true }],
+        'import/no-unresolved': 'off',
       },
     },
     {

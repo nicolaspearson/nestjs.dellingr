@@ -2,4 +2,4 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Create the schemas
-CREATE SCHEMA IF NOT EXISTS dellingr;
+CREATE SCHEMA IF NOT EXISTS public;

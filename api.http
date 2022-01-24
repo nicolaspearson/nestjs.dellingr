@@ -1,6 +1,0 @@
-@baseUrl = http://localhost:3000
-
-### GET default route
-GET {{baseUrl}} HTTP/1.1
-Accept: application/json
-Content-Type: application/json
