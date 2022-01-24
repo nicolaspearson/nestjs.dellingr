@@ -1,6 +1,6 @@
 # nestjs.blueprint
 
-[NestJS](https://github.com/nestjs/nest) TypeScript starter repository.
+A simple [NestJS](https://github.com/nestjs/nest) starter repository built using TypeScript.
 
 ## Installation
 
