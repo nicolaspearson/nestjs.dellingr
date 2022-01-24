@@ -1,0 +1,43 @@
+name: code
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/code.yaml
+      - package.json
+      - tsconfig.json
+      - src/*
+      - test/**/*.ts
+  pull_request:
+    paths:
+      - .github/workflows/code.yaml
+      - package.json
+      - tsconfig.json
+      - src/*
+      - test/**/*.ts
+      - types/**/*.ts
+
+jobs:
+  test_unit:
+    name: Build, Lint, & Unit Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Using node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install yarn
+        run: yarn install --immutable
+      - name: Build package
+        run: yarn build
+      - name: Lint package
+        run: yarn lint
+      - name: Run package unit tests
+        run: yarn test:unit

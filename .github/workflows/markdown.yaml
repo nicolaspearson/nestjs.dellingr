@@ -1,0 +1,26 @@
+name: markdown
+'on':
+  push:
+    branches:
+      - master
+    paths:
+      - '**.md'
+      - .github/workflows/markdown.yaml
+  pull_request:
+    paths:
+      - '**.md'
+      - .github/workflows/markdown.yaml
+  repository_dispatch:
+    types:
+      - markdown
+jobs:
+  lint:
+    if: "!(github.event.client_payload.scope == 'job' && !contains(github.event.client_payload.jobs, 'lint'))"
+    name: lint
+    runs-on: ubuntu-latest
+    container: tmknom/markdownlint:latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Lint markdown files
+        run: ' find . -type f \( -name "*.md" \) -print | while IFS="" read -r file; do /usr/bin/markdownlint -c markdownlint.yml "$file"; done; '
