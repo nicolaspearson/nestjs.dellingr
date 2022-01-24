@@ -12,7 +12,7 @@ module.exports = (options) => {
           test: /.ts$/,
           loader: 'ts-loader',
           options: {
-            configFile: 'tsconfig.build.json',
+            configFile: 'tsconfig.json',
           },
         },
       ],

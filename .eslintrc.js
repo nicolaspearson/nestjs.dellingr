@@ -20,7 +20,7 @@ module.exports = {
     {
       files: ['*.ts'],
       parserOptions: {
-        project: ['./tsconfig.eslint.json', './tsconfig.json'],
+        project: ['./tsconfig.json'],
         tsconfigRootDir: __dirname,
       },
     },

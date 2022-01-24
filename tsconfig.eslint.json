@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "noEmit": true,
-    "types": ["@types/node"]
-  },
-  "include": ["src", "test", ".eslintrc.js"]
-}

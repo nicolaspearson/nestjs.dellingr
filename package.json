@@ -46,6 +46,7 @@
     "@nestjs/platform-express": "^8.2.6",
     "express": "^4.17.2",
     "nocache": "^3.0.1",
+    "prisma": "^3.8.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.2"
   },

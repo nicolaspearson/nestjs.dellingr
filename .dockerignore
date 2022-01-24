@@ -10,7 +10,6 @@
 !.yarnrc.yml
 !package.json
 !tsconfig.json
-!tsconfig.build.json
 !webpack.config.js
 !webpack.util.js
 !yarn.lock

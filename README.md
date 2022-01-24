@@ -53,8 +53,7 @@ This repository uses:
   - [fix dependencies with package extensions](https://yarnpkg.com/getting-started/migration#fix-dependencies-with-packageextensions)
 - `docker-compose.yaml`: defines docker image for local testing
 - `jest.config.js`: defines the global Jest configuration which is inherited by each test suite.
-- `tsconfig.json`: defines the global TypeScript configuration which is inherited by each sub
-  `tsconfig`.
+- `tsconfig.json`: defines the global TypeScript configuration.
 - `webpack-hmr.config.js`: defines the hot module replacement configuration used by webpack.
 - `webpack.config.js`: defines the production configuration used by webpack.
 - `webpack.util.js`: defines the global Webpack configuration used by each sub `webpack` config.
