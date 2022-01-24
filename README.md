@@ -5,25 +5,25 @@
 ## Installation
 
 ```bash
-$ yarn install
+yarn install
 ```
 
 ## Running the app
 
 ```bash
 # watch mode
-$ yarn start:dev
+yarn start:dev
 
 # production mode
-$ yarn start
+yarn start
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ yarn test:unit
+yarn test:unit
 
 # integration tests
-$ yarn test:integration
+yarn test:integration
 ```
