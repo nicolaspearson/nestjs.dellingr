@@ -9,7 +9,7 @@
 # ------------------------------------------------------
 
 # BUILDER - Artifacts build for production
-FROM node:16.13-alpine3.12 AS builder
+FROM node:17.3-alpine3.12 AS builder
 
 WORKDIR /usr/src/app
 RUN chown node:node .
@@ -21,7 +21,7 @@ RUN yarn install --immutable
 RUN yarn build
 
 # RUNNER - Production image
-FROM node:16.13-alpine3.12
+FROM node:17.3-alpine3.12
 
 # Set the NODE_ENV to production
 ENV NODE_ENV=production
