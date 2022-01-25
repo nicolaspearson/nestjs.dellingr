@@ -10,7 +10,7 @@ module.exports = (options) => {
       rules: [
         {
           test: /.ts$/,
-          loader: 'ts-loader',
+          loader: require.resolve('ts-loader'),
           options: {
             configFile: 'tsconfig.json',
           },
