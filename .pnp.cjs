@@ -75,7 +75,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["markdownlint-cli", "npm:0.30.0"],
             ["nocache", "npm:3.0.1"],
             ["prettier", "npm:2.5.1"],
-            ["prisma", "npm:3.8.1"],
             ["reflect-metadata", "npm:0.1.13"],
             ["rimraf", "npm:3.0.2"],
             ["run-script-webpack-plugin", "npm:0.0.11"],
@@ -1931,15 +1930,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.2"],
             ["consola", "npm:2.15.3"],
             ["node-fetch", "virtual:72db6b3551c1b46986e711aee96d1643b26ff6991672401c35442adfbef36d10ccd9289b58e518aac04afe4e688ca4b130da9fae9c1c040113a2585b8cfeea9a#npm:2.6.7"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["@prisma/engines", [
-        ["npm:3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f", {
-          "packageLocation": "./.yarn/unplugged/@prisma-engines-npm-3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f-7455cbc51a/node_modules/@prisma/engines/",
-          "packageDependencies": [
-            ["@prisma/engines", "npm:3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"]
           ],
           "linkType": "HARD",
         }]
@@ -4554,7 +4544,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["markdownlint-cli", "npm:0.30.0"],
             ["nocache", "npm:3.0.1"],
             ["prettier", "npm:2.5.1"],
-            ["prisma", "npm:3.8.1"],
             ["reflect-metadata", "npm:0.1.13"],
             ["rimraf", "npm:3.0.2"],
             ["run-script-webpack-plugin", "npm:0.0.11"],
@@ -8975,16 +8964,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ansi-regex", "npm:5.0.1"],
             ["ansi-styles", "npm:5.2.0"],
             ["react-is", "npm:17.0.2"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["prisma", [
-        ["npm:3.8.1", {
-          "packageLocation": "./.yarn/unplugged/prisma-npm-3.8.1-dbc024ef4c/node_modules/prisma/",
-          "packageDependencies": [
-            ["prisma", "npm:3.8.1"],
-            ["@prisma/engines", "npm:3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"]
           ],
           "linkType": "HARD",
         }]
