@@ -5,6 +5,9 @@ module.exports = Object.assign({}, require('../../jest.config.js'), {
     '!src/**/*.enum.ts',
     '!src/**/*.module.ts',
     '!src/common/config/environment.config.ts',
+    '!src/common/config/typeorm-webpack.config.ts',
+    '!src/common/config/typeorm.config.ts',
+    '!src/db/**/*.ts',
     '!src/main.ts',
   ],
   coverageThreshold: {

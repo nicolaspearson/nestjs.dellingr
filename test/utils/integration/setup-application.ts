@@ -1,15 +1,22 @@
+import { oneLine } from 'common-tags';
 import helmet from 'helmet';
+import { Client } from 'pg';
+import { Connection, createConnection } from 'typeorm';
 
 import { ExceptionFilter, INestApplication, ValidationPipe } from '@nestjs/common';
 import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule, TestingModuleBuilder } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { MainModule } from '$/main.module';
+import { AppModule } from '$/app/app.module';
+import { TypeOrmConfigService } from '$/common/config/typeorm.config';
+import { seed } from '$/db/utils/seed.util';
 
 import { NoOutputLogger } from '#/utils/integration/no-output.logger';
 
 export interface Options {
+  dbSchema?: string;
   disableLogging?: boolean;
   enableCors?: boolean;
   enableHelmet?: boolean;
@@ -32,7 +39,7 @@ export async function setupApplication(options?: Options): Promise<{
     globalPrefix: '/api/v1',
   });
 
-  await instance.application.listen('3000', 'localhost');
+  await instance.application.init();
 
   return {
     application: instance.application,
@@ -44,7 +51,7 @@ async function create(options: Options): Promise<{
   application: INestApplication;
   module: TestingModule;
 }> {
-  const imports = [...(options.metadata?.imports ?? []), MainModule];
+  const imports = [...(options.metadata?.imports ?? []), AppModule];
 
   imports.push(
     ConfigModule.forRoot({
@@ -53,6 +60,11 @@ async function create(options: Options): Promise<{
       ignoreEnvVars: false,
     }),
   );
+
+  if (options.dbSchema) {
+    const connection = await createDatabase(options.dbSchema);
+    imports.push(TypeOrmModule.forRoot(connection.options as never));
+  }
 
   const builder: TestingModuleBuilder = Test.createTestingModule({
     controllers: options.metadata?.controllers,
@@ -98,4 +110,43 @@ async function create(options: Options): Promise<{
   }
 
   return { application, module };
+}
+
+async function createDatabase(schema: string): Promise<Connection> {
+  const client = new Client({
+    user: process.env.TYPEORM_USERNAME,
+    host: process.env.TYPEORM_HOST,
+    password: process.env.TYPEORM_PASSWORD,
+    database: process.env.TYPEORM_DATABASE,
+    port: Number(process.env.TYPEORM_PORT),
+  });
+  await client.connect();
+
+  try {
+    // Create database if it does not exist (ignoring errors if it does)
+    await client.query(oneLine`
+        DROP SCHEMA IF EXISTS ${schema} CASCADE;
+        CREATE SCHEMA IF NOT EXISTS ${schema};
+      `);
+  } catch (error) {
+    console.error(error);
+  }
+  await client.end();
+  // Initialize TypeORM with the newly created database
+  const connectionOptions = TypeOrmConfigService.creatConnectionOptions();
+  Object.assign(connectionOptions, {
+    schema,
+    synchronize: true,
+    dropSchema: false,
+    logging: false,
+  });
+  const connection = await createConnection(connectionOptions);
+
+  // Seed the database fixtures
+  await seed(connection);
+
+  // Close default connection, Nest will open a new one
+  await connection.close();
+
+  return connection;
 }

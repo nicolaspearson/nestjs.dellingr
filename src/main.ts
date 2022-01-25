@@ -1,13 +1,18 @@
 import 'dotenv/config';
 import helmet from 'helmet';
 import { default as nocache } from 'nocache';
+import { getConnection } from 'typeorm';
 
 import { LogLevel } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
+import { ApiGroup } from '$/common/enum/api-group.enum';
+import { Environment } from '$/common/enum/environment.enum';
+import { seed } from '$/db/utils/seed.util';
 import { MainModule } from '$/main.module';
 
 declare const module: {
@@ -48,6 +53,19 @@ async function bootstrap() {
 
   // Set the global API route prefix
   app.setGlobalPrefix('/api/v1');
+
+  // Configure swagger
+  const builder = new DocumentBuilder().addBearerAuth().setTitle('Dellingr API').setVersion('1.0');
+  for (const group of Object.values(ApiGroup)) {
+    builder.addTag(group);
+  }
+  const document = SwaggerModule.createDocument(app, builder.build());
+  SwaggerModule.setup('docs/dellingr', app, document);
+
+  if (process.env.NODE_ENV === Environment.Development) {
+    // Seed the database with fixtures in the development environment
+    await seed(getConnection());
+  }
 
   // Serve the application
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

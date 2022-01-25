@@ -46,7 +46,8 @@
     "sdk": "yarn dlx @yarnpkg/sdks vscode",
     "start:dev": "rimraf dist && yarn db:start && nest build --webpack --webpackPath webpack-hmr.config.js --watch",
     "start": "node dist/server.js",
-    "test:integration": "yarn exec:jest --config test/integration/jest.config.js",
+    "test:integration:ci": "yarn exec:jest --config test/integration/jest.config.js",
+    "test:integration": "yarn db:start && yarn test:integration:ci && yarn db:stop",
     "test:unit": "yarn exec:jest --config test/unit/jest.config.js"
   },
   "dependencies": {
@@ -68,6 +69,7 @@
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.2",
+    "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
@@ -82,6 +84,7 @@
     "@types/jest": "27.4.0",
     "@types/joi": "^17.2.3",
     "@types/node": "^16.11.21",
+    "@types/pg": "^8.6.4",
     "@types/supertest": "^2.0.11",
     "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.10.1",

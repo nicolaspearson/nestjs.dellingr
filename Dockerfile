@@ -3,8 +3,8 @@
 # ------------------------------------------------------
 # authors:  Nicolas Pearson
 # image:    dellingr
-# tag:      <COMMIT HASH>
-# how-to:   docker build -t dellingr:<COMMIT HASH> --build-arg VERSION=<COMMIT HASH> .
+# tag:      <GITHUB_SHA>
+# how-to:   docker build -t dellingr:<GITHUB_SHA> --build-arg VERSION=<GITHUB_SHA> .
 # requires: node:16.13-alpine3.12
 # ------------------------------------------------------
 

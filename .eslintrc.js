@@ -96,8 +96,8 @@ module.exports = {
     'unicorn/no-useless-undefined': 'warn',
     'unicorn/no-null': 'warn',
     'unicorn/numeric-separators-style': 'warn',
-    'unicorn/prefer-module': 'warn',
-    'unicorn/prefer-node-protocol': 'warn',
+    'unicorn/prefer-module': 'off',
+    'unicorn/prefer-node-protocol': 'off',
     'unicorn/no-array-callback-reference': 'warn',
     'unicorn/prevent-abbreviations': [
       'error',

@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { AppModule } from '$/app/app.module';
 import { getValidationSchema } from '$/common/config/environment.config';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
-import { HealthModule } from '$/health/health.module';
 
 @Module({
   imports: [
+    AppModule,
     ConfigModule.forRoot({
       envFilePath: ['.env'],
       isGlobal: true,
@@ -16,7 +17,6 @@ import { HealthModule } from '$/health/health.module';
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
-    HealthModule,
   ],
 })
 export class MainModule {}
