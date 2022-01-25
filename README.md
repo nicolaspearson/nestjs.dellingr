@@ -2,30 +2,82 @@
 
 A simple [NestJS](https://github.com/nestjs/nest) starter repository built using TypeScript.
 
-## Installation
+## Getting Started
+
+### Installation
 
 ```bash
 yarn install
 ```
 
-## Running the app
+### Building, Running, and Testing the Application
 
 ```bash
-# watch mode
+# Build the application
+yarn build
+
+# Lint the application
+yarn lint
+
+# Start the application in dev mode
 yarn start:dev
 
-# production mode
-yarn start
-```
-
-## Test
-
-```bash
-# unit tests
+# Execute the unit tests for the application
 yarn test:unit
 
-# integration tests
+# Execute the integration tests for the application
 yarn test:integration
+```
+
+The project can also be built and started using docker:
+
+> Note: Using docker will start the application in production mode, which excludes database
+> fixtures.
+
+```bash
+# Build the application using docker
+yarn docker:build
+
+# Build and start the application using docker
+yarn docker:start
+
+# Attach to the docker logs for the application
+yarn docker:logs
+```
+
+### Swagger
+
+Swagger documentation is served on [localhost](http://localhost:3000/docs/dellingr/#/). Requests
+can be executed directly from the Swagger user interface. The example documentation contains valid
+fixtures that are automatically populated on application start-up.
+
+### Database
+
+This package uses TypeORM and PostgreSQL.
+
+#### Migrations
+
+To generate the missing migrations TypeORM applies existing migrations, and uses the diff between
+the database schema and the TypeORM entities to create a migration file.
+
+```sh
+# Replace <MigrationName> with a descriptive name for the generated migration
+yarn db:migration:generate:missing <MigrationName>
+```
+
+#### Structure
+
+The database structure can be seen below (documented using `mermaid.js`):
+
+```mermaid
+erDiagram
+    USER {
+        uuid uuid
+        string email
+        string password
+        date created_at
+        date updated_at
+    }
 ```
 
 ## Tech Stack

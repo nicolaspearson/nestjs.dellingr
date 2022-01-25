@@ -22,7 +22,7 @@ services:
       - API_HOST=0.0.0.0
       - API_PORT=3000
       - DATABASE_URL=postgresql://admin:masterkey@db:5432/dellingr?schema=public
-      - ENVIRONMENT=development
+      - ENVIRONMENT=production
       - NODE_ENV=production
     ports:
       - 3000:3000
