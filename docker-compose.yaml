@@ -21,9 +21,14 @@ services:
     environment:
       - API_HOST=0.0.0.0
       - API_PORT=3000
-      - DATABASE_URL=postgresql://admin:masterkey@db:5432/dellingr?schema=public
       - ENVIRONMENT=production
       - NODE_ENV=production
+      - TYPEORM_DATABASE=dellingr
+      - TYPEORM_HOST=db
+      - TYPEORM_PASSWORD=masterkey
+      - TYPEORM_PORT=5432
+      - TYPEORM_SCHEMA=public
+      - TYPEORM_USERNAME=admin
     ports:
       - 3000:3000
     depends_on:

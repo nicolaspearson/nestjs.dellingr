@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import Wallet from '$/db/entities/wallet.entity';
 
 @Entity({ name: 'user' })
 export default class User {
@@ -24,4 +27,7 @@ export default class User {
 
   @UpdateDateColumn({ name: 'updated_at', nullable: true, type: 'timestamp with time zone' })
   updatedAt?: Date;
+
+  @OneToOne(() => Wallet, (wallet) => wallet.user)
+  wallet!: Wallet;
 }
