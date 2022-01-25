@@ -35,7 +35,7 @@
     "postinstall": "husky install",
     "sdk": "yarn dlx @yarnpkg/sdks vscode",
     "start:dev": "rimraf dist && yarn db:start && nest build --webpack --webpackPath webpack-hmr.config.js --watch",
-    "start": "node dist/main",
+    "start": "node dist/server.js",
     "test:integration": "yarn exec:jest --config $(pwd)/test/integration/jest.config.js",
     "test:unit": "yarn exec:jest --config $(pwd)/test/unit/jest.config.js"
   },
