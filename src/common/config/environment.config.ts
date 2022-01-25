@@ -12,6 +12,16 @@ export function getValidationSchema(): Joi.ObjectSchema {
       .valid(Environment.Development, Environment.Staging, Environment.Production, Environment.Test)
       .description('The pre-defined deployment environment')
       .required(),
+    JWT_ALGORITHM: Joi.string()
+      .valid('HS256')
+      .description('The algorithm used to encode the JWT')
+      .default('HS256'),
+    JWT_ISSUER: Joi.string().description('The JWT issuer').default('support@granite.com'),
+    JWT_SECRET: Joi.string().description('The JWT signing secret').example('secretKey').required(),
+    JWT_TOKEN_EXPIRATION: Joi.string()
+      .regex(/^\d+[dhms]$/)
+      .description('The validity period of the JWT token')
+      .default('15m'),
     LOG_LEVEL: Joi.string()
       .description('Log verbosity')
       .valid('verbose', 'debug', 'log', 'warn', 'error')

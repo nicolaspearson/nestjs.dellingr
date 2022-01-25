@@ -12,6 +12,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { Environment } from '$/common/enum/environment.enum';
+import { ErrorFilter } from '$/common/filters/error.filter';
+import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
 import { seed } from '$/db/utils/seed.util';
 import { MainModule } from '$/main.module';
 
@@ -50,6 +52,10 @@ async function bootstrap() {
   httpAdapter.set('x-powered-by', false);
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   app.use(nocache());
+
+  // Register global filters, pipes, and interceptors
+  app.useGlobalFilters(new ErrorFilter());
+  app.useGlobalPipes(new DtoValidationPipe());
 
   // Set the global API route prefix
   app.setGlobalPrefix('/api/v1');

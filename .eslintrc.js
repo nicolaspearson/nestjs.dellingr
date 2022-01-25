@@ -93,7 +93,7 @@ module.exports = {
     'no-self-assign': 'warn',
     semi: ['error', 'always'],
     'unicorn/filename-case': 'warn',
-    'unicorn/no-useless-undefined': 'warn',
+    'unicorn/no-useless-undefined': 'off',
     'unicorn/no-null': 'warn',
     'unicorn/numeric-separators-style': 'warn',
     'unicorn/prefer-module': 'off',

@@ -10,8 +10,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import Transaction from '$/db/entities/transaction.entity';
-import User from '$/db/entities/user.entity';
+import Transaction from './transaction.entity';
+import User from './user.entity';
 
 @Entity({ name: 'wallet' })
 export default class Wallet {

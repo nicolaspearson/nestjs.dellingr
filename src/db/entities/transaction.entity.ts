@@ -9,9 +9,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { TransactionState } from '$/common/enum/transaction-state.enum';
-import { TransactionType } from '$/common/enum/transaction-type.enum';
-import Wallet from '$/db/entities/wallet.entity';
+import { TransactionState } from '../../common/enum/transaction-state.enum';
+import { TransactionType } from '../../common/enum/transaction-type.enum';
+import Wallet from './wallet.entity';
 
 @Entity({ name: 'transaction' })
 export default class Transaction {

@@ -1,4 +1,19 @@
 @baseUrl = http://localhost:3000/api/v1
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzMTE5NTYyLCJleHAiOjE2NDMxMjA0NjIsImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiYjU2MjU3NjAtMTRhZC00OGNlLTgxNDUtZjFhNzE1ZWUyMzdlIn0.e0yEsIKmkupdNInE7vbEYHxEBQZ8VLDVKN4289nchyk
+
+########################################################################
+###########                       AUTH                       ###########
+########################################################################
+
+### Authenticates a user
+POST {{baseUrl}}/auth/login HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "myS3cretP@55w0rd!"
+}
 
 ########################################################################
 ###########                      HEALTH                      ###########
@@ -8,3 +23,29 @@
 GET {{baseUrl}}/health HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+
+########################################################################
+###########                       USER                       ###########
+########################################################################
+
+### Get the authenticated user's profile
+GET {{baseUrl}}/user HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Delete the authenticated user's account
+DELETE {{baseUrl}}/user HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Register a new user
+POST {{baseUrl}}/users/registration HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "myS3cretP@55w0rd!"
+}

@@ -11,6 +11,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppModule } from '$/app/app.module';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
+import { ErrorFilter } from '$/common/filters/error.filter';
+import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
 import { seed } from '$/db/utils/seed.util';
 
 import { NoOutputLogger } from '#/utils/integration/no-output.logger';
@@ -37,6 +39,8 @@ export async function setupApplication(options?: Options): Promise<{
     enableCors: true,
     enableHelmet: true,
     globalPrefix: '/api/v1',
+    globalFilters: [new ErrorFilter()],
+    globalPipes: [new DtoValidationPipe()],
   });
 
   await instance.application.init();
@@ -63,7 +67,7 @@ async function create(options: Options): Promise<{
 
   if (options.dbSchema) {
     const connection = await createDatabase(options.dbSchema);
-    imports.push(TypeOrmModule.forRoot(connection.options as never));
+    imports.push(TypeOrmModule.forRoot(connection.options));
   }
 
   const builder: TestingModuleBuilder = Test.createTestingModule({
@@ -125,9 +129,9 @@ async function createDatabase(schema: string): Promise<Connection> {
   try {
     // Create database if it does not exist (ignoring errors if it does)
     await client.query(oneLine`
-        DROP SCHEMA IF EXISTS ${schema} CASCADE;
-        CREATE SCHEMA IF NOT EXISTS ${schema};
-      `);
+      DROP SCHEMA IF EXISTS ${schema} CASCADE;
+      CREATE SCHEMA IF NOT EXISTS ${schema};
+    `);
   } catch (error) {
     console.error(error);
   }

@@ -60,3 +60,17 @@ services:
     volumes:
       - ./scripts/db:/docker-entrypoint-initdb.d
     container_name: dellingr-db
+
+  db-integration:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_DB=dellingr
+      - POSTGRES_PASSWORD=masterkey
+      - POSTGRES_USER=admin
+    ports:
+      - 5433:5432
+    networks:
+      - development
+    volumes:
+      - ./scripts/db:/docker-entrypoint-initdb.d
+    container_name: dellingr-db-integration
