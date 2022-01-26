@@ -1,7 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { UserWalletTransactionService } from '$/user-wallet-transaction/user-wallet-transaction.service';
-import { UserWalletService } from '$/user-wallet/user-wallet.service';
 import { UserController } from '$/user/user.controller';
 import { UserService } from '$/user/user.service';
 
@@ -12,11 +10,7 @@ import {
   userProfileResponseMock,
   userRegistrationRequestMock,
 } from '#/utils/fixtures';
-import {
-  userMockService,
-  userWalletMockService,
-  userWalletTransactionMockService,
-} from '#/utils/mocks/service.mock';
+import { userMockService } from '#/utils/mocks/service.mock';
 
 describe('User Controller', () => {
   let module: TestingModule;
@@ -25,11 +19,7 @@ describe('User Controller', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [UserController],
-      providers: [
-        { provide: UserService, useValue: userMockService },
-        { provide: UserWalletService, useValue: userWalletMockService },
-        { provide: UserWalletTransactionService, useValue: userWalletTransactionMockService },
-      ],
+      providers: [{ provide: UserService, useValue: userMockService }],
     }).compile();
     controller = module.get<UserController>(UserController);
   });
@@ -51,7 +41,7 @@ describe('User Controller', () => {
     test('should allow a user to retrieve their profile', async () => {
       const result = await controller.profile(authenticatedRequestMock);
       expect(result).toMatchObject(userProfileResponseMock);
-      expect(userWalletTransactionMockService.profile).toHaveBeenCalledWith(userMock.uuid);
+      expect(userMockService.profile).toHaveBeenCalledWith(userMock.uuid);
     });
   });
 
@@ -59,7 +49,7 @@ describe('User Controller', () => {
     test('should allow a user to register', async () => {
       const { email, password } = userRegistrationRequestMock;
       await controller.register(responseMock, userRegistrationRequestMock);
-      expect(userWalletMockService.register).toHaveBeenCalledWith(email, password);
+      expect(userMockService.register).toHaveBeenCalledWith(email, password);
     });
   });
 

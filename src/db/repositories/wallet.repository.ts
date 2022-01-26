@@ -1,26 +1,32 @@
-import { AbstractRepository, EntityManager, EntityRepository } from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { Connection } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
+import { InjectConnection } from '@nestjs/typeorm';
 
 import Wallet from '$/db/entities/wallet.entity';
+import { WalletTransactionRepository } from '$/db/repositories/aggregate/wallet-transaction.repository';
+import { WalletEntityRepository } from '$/db/repositories/core/wallet-entity.repository';
 
 @Injectable()
-@EntityRepository(Wallet)
-export class WalletRepository extends AbstractRepository<Wallet> {
-  constructor(protected readonly manager: EntityManager) {
-    super();
+export class WalletRepository {
+  // Aggregate
+  private readonly walletTransactionRepository: WalletTransactionRepository;
+  // Core
+  private readonly walletEntityRepository: WalletEntityRepository;
+
+  constructor(
+    @InjectConnection()
+    private readonly connection: Connection,
+  ) {
+    this.walletTransactionRepository = new WalletTransactionRepository(this.connection);
+    this.walletEntityRepository = new WalletEntityRepository(this.connection.manager);
   }
 
   create(data: { userUuid: Uuid; name: string }): Promise<Wallet> {
-    const partialWallet: QueryDeepPartialEntity<Wallet> = {
-      balance: 0,
-      name: data.name,
-      transactions: [],
-      user: {
-        uuid: data.userUuid,
-      },
-    };
-    return this.manager.save(Wallet, partialWallet as Wallet);
+    return this.walletEntityRepository.create(data);
+  }
+
+  findByWalletUuid(userUuid: Uuid, walletUuid: Uuid): Promise<Wallet | undefined> {
+    return this.walletTransactionRepository.findByWalletUuid(userUuid, walletUuid);
   }
 }

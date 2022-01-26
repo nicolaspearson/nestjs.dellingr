@@ -1,5 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 
 import { TransactionResponse } from '$/common/dto';
 import { NotFoundError } from '$/common/error';
@@ -10,10 +9,7 @@ import { TransactionRepository } from '$/db/repositories/transaction.repository'
 export class TransactionService {
   private readonly logger: Logger = new Logger(TransactionService.name);
 
-  constructor(
-    @InjectRepository(TransactionRepository)
-    private readonly transactionRepository: TransactionRepository,
-  ) {}
+  constructor(private readonly transactionRepository: TransactionRepository) {}
 
   /**
    * Retrieves the specified user transaction from the database.

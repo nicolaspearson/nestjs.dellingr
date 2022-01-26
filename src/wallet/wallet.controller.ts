@@ -18,17 +18,13 @@ import { CreateWalletRequest } from '$/common/dto/req/create-wallet.request.dto'
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { InternalServerError, UnauthorizedError } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
-import { WalletTransactionService } from '$/wallet-transaction/wallet-transaction.service';
 import { WalletService } from '$/wallet/wallet.service';
 
 const TAG = ApiGroup.Wallet;
 
 @Controller('wallet')
 export class WalletController {
-  constructor(
-    private readonly walletService: WalletService,
-    private readonly walletTransactionService: WalletTransactionService,
-  ) {}
+  constructor(private readonly walletService: WalletService) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -88,6 +84,6 @@ export class WalletController {
     // We can use a non-null assertion below because the userUuid must exist on the
     // request because it is verified and added to the request by the JwtAuthGuard.
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.walletTransactionService.getById(req.userUuid!, id);
+    return this.walletService.getById(req.userUuid!, id);
   }
 }

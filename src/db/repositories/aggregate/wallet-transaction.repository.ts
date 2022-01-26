@@ -1,16 +1,9 @@
 import { Connection, SelectQueryBuilder } from 'typeorm';
 
-import { Injectable } from '@nestjs/common';
-import { InjectConnection } from '@nestjs/typeorm';
-
 import Wallet from '$/db/entities/wallet.entity';
 
-@Injectable()
 export class WalletTransactionRepository {
-  constructor(
-    @InjectConnection()
-    private readonly connection: Connection,
-  ) {}
+  constructor(private readonly connection: Connection) {}
 
   private query(): SelectQueryBuilder<Wallet> {
     return this.connection.manager

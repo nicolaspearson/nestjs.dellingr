@@ -1,10 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { UserProfileResponse } from '$/common/dto';
+import { BadRequestError, NotFoundError } from '$/common/error';
 import User from '$/db/entities/user.entity';
 import { UserRepository } from '$/db/repositories/user.repository';
-import { UserService } from '$/user/user.service';
+import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME, UserService } from '$/user/user.service';
 
-import { userMock } from '#/utils/fixtures';
+import { userMock, userMockWithWallet, userRegistrationRequestMock } from '#/utils/fixtures';
 import { userMockRepo } from '#/utils/mocks/repo.mock';
 
 describe('User Service', () => {
@@ -40,6 +42,44 @@ describe('User Service', () => {
         userMock.email,
         userMock.password,
       );
+    });
+  });
+
+  describe('profile', () => {
+    test('should allow a user to retrieve their profile (with events)', async () => {
+      userMockRepo.findByUserUuid?.mockResolvedValueOnce(userMockWithWallet);
+      const result = await service.profile(userMockWithWallet.uuid);
+      expect(result).toMatchObject(new UserProfileResponse(userMockWithWallet));
+      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith(userMockWithWallet.uuid);
+    });
+
+    test('throws when the user does not exist', async () => {
+      userMockRepo.findByUserUuid?.mockResolvedValueOnce(undefined);
+      await expect(service.profile(userMockWithWallet.uuid)).rejects.toThrowError(NotFoundError);
+      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith(userMockWithWallet.uuid);
+    });
+  });
+
+  describe('register', () => {
+    test('should allow a user to register', async () => {
+      const { email, password } = userRegistrationRequestMock;
+      await service.register(email, password);
+      expect(userMockRepo.create).toHaveBeenCalledWith({
+        email,
+        password,
+        wallet: { balance: DEFAULT_WALLET_BALANCE, name: DEFAULT_WALLET_NAME },
+      });
+    });
+
+    test("throws when the user's email address already exists", async () => {
+      userMockRepo.create?.mockRejectedValueOnce(new Error('User already exists!'));
+      const { email, password } = userRegistrationRequestMock;
+      await expect(service.register(email, password)).rejects.toThrowError(BadRequestError);
+      expect(userMockRepo.create).toHaveBeenCalledWith({
+        email,
+        password,
+        wallet: { balance: DEFAULT_WALLET_BALANCE, name: DEFAULT_WALLET_NAME },
+      });
     });
   });
 

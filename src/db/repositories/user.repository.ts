@@ -1,35 +1,47 @@
-import {
-  AbstractRepository,
-  DeleteResult,
-  EntityManager,
-  EntityRepository,
-  SelectQueryBuilder,
-} from 'typeorm';
+import { Connection, DeleteResult } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
+import { InjectConnection } from '@nestjs/typeorm';
 
 import User from '$/db/entities/user.entity';
+import { UserWalletTransactionRepository } from '$/db/repositories/aggregate/user-wallet-transaction.repository';
+import { UserWalletRepository } from '$/db/repositories/aggregate/user-wallet.repository';
+import { UserEntityRepository } from '$/db/repositories/core/user-entity.repository';
 
 @Injectable()
-@EntityRepository(User)
-export class UserRepository extends AbstractRepository<User> {
-  constructor(protected readonly manager: EntityManager) {
-    super();
+export class UserRepository {
+  // Aggregate
+  private readonly userWalletTransactionRepository: UserWalletTransactionRepository;
+  private readonly userWalletRepository: UserWalletRepository;
+  // Core
+  private readonly userEntityRepository: UserEntityRepository;
+
+  constructor(
+    @InjectConnection()
+    private readonly connection: Connection,
+  ) {
+    this.userWalletTransactionRepository = new UserWalletTransactionRepository(this.connection);
+    this.userWalletRepository = new UserWalletRepository(this.connection);
+    this.userEntityRepository = new UserEntityRepository(this.connection.manager);
   }
 
-  private query(): SelectQueryBuilder<User> {
-    return this.manager.createQueryBuilder(User, 'user');
+  create(data: {
+    email: Email;
+    password: string;
+    wallet: { balance: number; name: string };
+  }): Promise<User> {
+    return this.userWalletRepository.create(data);
   }
 
   delete(uuid: Uuid): Promise<DeleteResult> {
-    return this.query().delete().where({ uuid }).execute();
+    return this.userEntityRepository.delete(uuid);
+  }
+
+  findByUserUuid(userUuid: Uuid): Promise<User | undefined> {
+    return this.userWalletTransactionRepository.findByUserUuid(userUuid);
   }
 
   findByValidCredentials(email: Email, password: string): Promise<User | undefined> {
-    // We use the pgcrypto extension to compare the hashed password to the plain text version
-    return this.query()
-      .where({ email })
-      .andWhere('user.password = crypt(:password, user.password)', { password })
-      .getOne();
+    return this.userEntityRepository.findByValidCredentials(email, password);
   }
 }

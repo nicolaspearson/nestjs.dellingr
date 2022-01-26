@@ -1,21 +1,24 @@
-import { AbstractRepository, EntityManager, EntityRepository, SelectQueryBuilder } from 'typeorm';
+import { Connection } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
+import { InjectConnection } from '@nestjs/typeorm';
 
 import Transaction from '$/db/entities/transaction.entity';
+import { TransactionEntityRepository } from '$/db/repositories/core/transaction-entity.repository';
 
 @Injectable()
-@EntityRepository(Transaction)
-export class TransactionRepository extends AbstractRepository<Transaction> {
-  constructor(protected readonly manager: EntityManager) {
-    super();
-  }
+export class TransactionRepository {
+  // Core
+  public readonly transactionEntityRepository: TransactionEntityRepository;
 
-  private query(): SelectQueryBuilder<Transaction> {
-    return this.manager.createQueryBuilder(Transaction, 'transaction');
+  constructor(
+    @InjectConnection()
+    private readonly connection: Connection,
+  ) {
+    this.transactionEntityRepository = new TransactionEntityRepository(this.connection.manager);
   }
 
   findByUuid(uuid: Uuid): Promise<Transaction | undefined> {
-    return this.query().where({ uuid }).getOne();
+    return this.transactionEntityRepository.findByUuid(uuid);
   }
 }
