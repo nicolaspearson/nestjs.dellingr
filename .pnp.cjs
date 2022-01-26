@@ -83,7 +83,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:7.0.4"],
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.4.7"],
             ["jest-mock", "npm:27.4.6"],
-            ["joi", "npm:17.5.0"],
+            ["joi", "npm:17.6.0"],
             ["jsonwebtoken", "npm:8.5.1"],
             ["markdownlint-cli", "npm:0.30.0"],
             ["nocache", "npm:3.0.1"],
@@ -4797,7 +4797,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:7.0.4"],
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.4.7"],
             ["jest-mock", "npm:27.4.6"],
-            ["joi", "npm:17.5.0"],
+            ["joi", "npm:17.6.0"],
             ["jsonwebtoken", "npm:8.5.1"],
             ["markdownlint-cli", "npm:0.30.0"],
             ["nocache", "npm:3.0.1"],
@@ -7806,6 +7806,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/joi-npm-17.5.0-02b9b7e605-6a20d009d2.zip/node_modules/joi/",
           "packageDependencies": [
             ["joi", "npm:17.5.0"],
+            ["@hapi/hoek", "npm:9.2.1"],
+            ["@hapi/topo", "npm:5.1.0"],
+            ["@sideway/address", "npm:4.1.3"],
+            ["@sideway/formula", "npm:3.0.0"],
+            ["@sideway/pinpoint", "npm:2.0.0"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:17.6.0", {
+          "packageLocation": "./.yarn/cache/joi-npm-17.6.0-987ef6515f-eaf62f6c02.zip/node_modules/joi/",
+          "packageDependencies": [
+            ["joi", "npm:17.6.0"],
             ["@hapi/hoek", "npm:9.2.1"],
             ["@hapi/topo", "npm:5.1.0"],
             ["@sideway/address", "npm:4.1.3"],
