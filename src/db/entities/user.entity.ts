@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   Index,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -28,6 +28,6 @@ export default class User {
   @UpdateDateColumn({ name: 'updated_at', nullable: true, type: 'timestamp with time zone' })
   updatedAt?: Date;
 
-  @OneToOne(() => Wallet, (wallet) => wallet.user)
-  wallet!: Wallet;
+  @OneToMany(() => Wallet, (wallet) => wallet.user)
+  wallets!: Wallet[];
 }

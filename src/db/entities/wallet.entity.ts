@@ -4,8 +4,8 @@ import {
   Entity,
   Index,
   JoinColumn,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -33,7 +33,7 @@ export default class Wallet {
   @OneToMany(() => Transaction, (transaction) => transaction.wallet)
   transactions!: Transaction[];
 
-  @OneToOne((_) => User, {
+  @ManyToOne((_) => User, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
     nullable: false,

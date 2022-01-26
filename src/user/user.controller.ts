@@ -19,13 +19,19 @@ import { UserProfileResponse, UserRegistrationRequest } from '$/common/dto';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { InternalServerError, UnauthorizedError } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
+import { UserWalletTransactionService } from '$/user-wallet-transaction/user-wallet-transaction.service';
+import { UserWalletService } from '$/user-wallet/user-wallet.service';
 import { UserService } from '$/user/user.service';
 
 const TAG = ApiGroup.User;
 
 @Controller()
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly userWalletService: UserWalletService,
+    private readonly userWalletTransactionService: UserWalletTransactionService,
+  ) {}
 
   @Get('user')
   @HttpCode(HttpStatus.OK)
@@ -55,7 +61,7 @@ export class UserController {
     // We can use a non-null assertion below because the userUuid must exist on the
     // request because it is verified and added to the request by the JwtAuthGuard.
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.userService.profile(req.userUuid!);
+    return this.userWalletTransactionService.profile(req.userUuid!);
   }
 
   @Delete('user')
@@ -110,7 +116,7 @@ export class UserController {
   })
   async register(@Res() res: Response, @Body() dto: UserRegistrationRequest): Promise<void> {
     try {
-      await this.userService.register(dto.email, dto.password);
+      await this.userWalletService.register(dto.email, dto.password);
     } catch {
       // Ignore errors to avoid user enumeration attacks.
     }

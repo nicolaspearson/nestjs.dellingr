@@ -1,10 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 
 import { JwtResponse } from '$/common/dto';
 import { InternalServerError, NotFoundError } from '$/common/error';
-import { UserRepository } from '$/db/repositories/user.repository';
 import { TokenService } from '$/token/token.service';
+import { UserService } from '$/user/user.service';
 
 @Injectable()
 export class AuthService {
@@ -12,8 +11,7 @@ export class AuthService {
 
   constructor(
     private readonly tokenService: TokenService,
-    @InjectRepository(UserRepository)
-    private readonly userRepository: UserRepository,
+    private readonly userService: UserService,
   ) {}
 
   /**
@@ -47,7 +45,7 @@ export class AuthService {
    */
   async authenticate(email: Email, password: string): Promise<JwtResponse> {
     this.logger.log(`User with email: ${email} is attempting to login`);
-    const user = await this.userRepository.findByValidCredentials(email, password);
+    const user = await this.userService.findByValidCredentials(email, password);
     if (user) {
       const jwt = await this.generateJwt(user.uuid);
       return new JwtResponse({ token: jwt as JwtToken });

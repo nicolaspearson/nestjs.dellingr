@@ -7,17 +7,51 @@ import {
   UserProfileResponse,
   UserRegistrationRequest,
 } from '$/common/dto';
+import { TransactionState } from '$/common/enum/transaction-state.enum';
+import { TransactionType } from '$/common/enum/transaction-type.enum';
+import Transaction from '$/db/entities/transaction.entity';
 import User from '$/db/entities/user.entity';
+import Wallet from '$/db/entities/wallet.entity';
 import { DEFAULT_PASSWORD } from '$/db/fixtures/user.fixture';
 
 const now = new Date();
 
 // Database entities
-export const userMock: Omit<User, 'wallet'> = {
+export const userMock: Omit<User, 'wallets'> = {
   uuid: '7a39a121-fdbf-45db-9353-a006bde4261a' as Uuid,
   email: 'test@example.com' as Email,
   password: DEFAULT_PASSWORD,
   createdAt: now,
+};
+
+export const transactionMock: Omit<Transaction, 'wallet'> = {
+  uuid: '63d929fc-d720-436e-bf02-8bbcab43ba8a' as Uuid,
+  amount: 50,
+  reference: 'Payed Alice',
+  state: TransactionState.Processed,
+  type: TransactionType.Debit,
+  createdAt: now,
+};
+
+export const walletMock: Wallet = {
+  uuid: '91ef6965-3ce4-4b05-ad7c-cec4bcbdca66' as Uuid,
+  balance: 10_000,
+  name: 'Main',
+  createdAt: now,
+  user: { ...userMock, wallets: [] },
+  transactions: [transactionMock as Transaction],
+};
+
+export const userMockWithWallet: User = {
+  ...userMock,
+  uuid: '9d9cd0f5-cc63-40c8-bd03-574e1a519431' as Uuid,
+  wallets: [walletMock],
+};
+
+export const transactionMockWithWallet: Transaction = {
+  ...transactionMock,
+  uuid: 'fa821750-a3c7-471e-a16a-b4a15dce8236' as Uuid,
+  wallet: walletMock,
 };
 
 // ----------------------------
