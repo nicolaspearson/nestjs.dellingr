@@ -79,6 +79,7 @@ export const healthCheckResponseMock = new HealthCheckResponse({ status: 'OK' })
 export const userProfileResponseMock = new UserProfileResponse({
   uuid: userMock.uuid,
   email: userMock.email,
+  wallets: [walletMock],
 });
 
 export const userRegistrationRequestMock = {

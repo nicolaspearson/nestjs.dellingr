@@ -24,4 +24,23 @@ declare namespace Api {
   export type JwtPayload = {
     uuid: Uuid;
   };
+
+  namespace Entities {
+    export type Transaction = {
+      uuid: Uuid;
+      amount: number;
+      reference: string;
+      state: import('../../src/common/enum/transaction-state.enum').TransactionState;
+      type: import('../../src/common/enum/transaction-type.enum').TransactionType;
+      createdAt: Date;
+      updatedAt?: Date;
+    };
+
+    export type Wallet = {
+      uuid: Uuid;
+      name: string;
+      balance: number;
+      transactions: Api.Entities.Transaction[];
+    };
+  }
 }

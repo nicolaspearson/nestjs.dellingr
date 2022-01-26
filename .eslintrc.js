@@ -94,7 +94,7 @@ module.exports = {
     semi: ['error', 'always'],
     'unicorn/filename-case': 'warn',
     'unicorn/no-useless-undefined': 'off',
-    'unicorn/no-null': 'warn',
+    'unicorn/no-null': 'off',
     'unicorn/numeric-separators-style': 'warn',
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-node-protocol': 'off',

@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+import { WalletResponse } from './wallet.response.dto';
+
 export class UserProfileResponse {
   @ApiProperty({
     description: "The user's unique id.",
@@ -19,8 +21,17 @@ export class UserProfileResponse {
   })
   readonly email: Email;
 
-  constructor(data: { uuid: Uuid; email: Email }) {
+  @ApiProperty({
+    description: 'The list of wallets that belong to the user.',
+    isArray: true,
+    required: true,
+    type: /* istanbul ignore next */ () => WalletResponse,
+  })
+  readonly wallets: WalletResponse[];
+
+  constructor(data: { uuid: Uuid; email: Email; wallets: Api.Entities.Wallet[] }) {
     this.id = data.uuid;
     this.email = data.email;
+    this.wallets = data.wallets.map((w) => new WalletResponse(w));
   }
 }
