@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzMTkzODU1LCJleHAiOjE2NDMxOTQ3NTUsImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiYzM2ODkzY2MtOGE1OC00OTZjLWJhMDAtNjYzYmMwZWYwZWM0In0.Y4YdrqQMWvbKi73B0nno1e9-VUoKsWvVgo_YYNE9R9A
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzMTk5Mjg3LCJleHAiOjE2NDMyMDAxODcsImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiYTY2MDdiMjctZDliZS00OWEyLTg2NmMtOGFmMWJhZWViNDJhIn0.vYR5ER6B6gFH-Siv8ya7Zrh42BUDggYXVh5ETxoch5k
 
 ########################################################################
 ###########                       AUTH                       ###########
@@ -25,6 +25,16 @@ Accept: application/json
 Content-Type: application/json
 
 ########################################################################
+###########                   TRANSACTION                    ###########
+########################################################################
+
+### Get transaction
+GET {{baseUrl}}/transaction/699c003c-8157-41c4-b6d1-29ff318c73a3 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+########################################################################
 ###########                       USER                       ###########
 ########################################################################
 
@@ -48,4 +58,24 @@ Content-Type: application/json
 {
   "email": "john.doe@example.com",
   "password": "myS3cretP@55w0rd!"
+}
+
+########################################################################
+###########                     WALLET                       ###########
+########################################################################
+
+### Get wallet
+GET {{baseUrl}}/wallet/2103b97d-2204-440c-aced-e9b3cb38a8c6 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Create a new wallet
+POST {{baseUrl}}/wallet HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Secondary"
 }

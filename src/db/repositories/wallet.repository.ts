@@ -1,4 +1,5 @@
-import { AbstractRepository, EntityManager, EntityRepository, SelectQueryBuilder } from 'typeorm';
+import { AbstractRepository, EntityManager, EntityRepository } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 import { Injectable } from '@nestjs/common';
 
@@ -11,11 +12,15 @@ export class WalletRepository extends AbstractRepository<Wallet> {
     super();
   }
 
-  private walletQuery(): SelectQueryBuilder<Wallet> {
-    return this.manager.createQueryBuilder(Wallet, 'wallet');
-  }
-
-  findByUuid(uuid: Uuid): Promise<Wallet | undefined> {
-    return this.walletQuery().where({ uuid }).getOne();
+  create(data: { userUuid: Uuid; name: string }): Promise<Wallet> {
+    const partialWallet: QueryDeepPartialEntity<Wallet> = {
+      balance: 0,
+      name: data.name,
+      transactions: [],
+      user: {
+        uuid: data.userUuid,
+      },
+    };
+    return this.manager.save(Wallet, partialWallet as Wallet);
   }
 }

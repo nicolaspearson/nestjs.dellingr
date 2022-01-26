@@ -17,17 +17,17 @@ export class UserRepository extends AbstractRepository<User> {
     super();
   }
 
-  private userQuery(): SelectQueryBuilder<User> {
+  private query(): SelectQueryBuilder<User> {
     return this.manager.createQueryBuilder(User, 'user');
   }
 
   delete(uuid: Uuid): Promise<DeleteResult> {
-    return this.userQuery().delete().where({ uuid }).execute();
+    return this.query().delete().where({ uuid }).execute();
   }
 
   findByValidCredentials(email: Email, password: string): Promise<User | undefined> {
     // We use the pgcrypto extension to compare the hashed password to the plain text version
-    return this.userQuery()
+    return this.query()
       .where({ email })
       .andWhere('user.password = crypt(:password, user.password)', { password })
       .getOne();

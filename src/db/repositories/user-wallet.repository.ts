@@ -29,7 +29,7 @@ export class UserWalletRepository {
       const partialWallet: QueryDeepPartialEntity<Wallet> = {
         balance: 0,
         name: 'Main',
-        transactions: [{}],
+        transactions: [],
         user,
       };
       const wallet = await manager.save(Wallet, partialWallet as Wallet);

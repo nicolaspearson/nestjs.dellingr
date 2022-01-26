@@ -22,6 +22,7 @@ export const userMock: Omit<User, 'wallets'> = {
   email: 'test@example.com' as Email,
   password: DEFAULT_PASSWORD,
   createdAt: now,
+  setDefaults: jest.fn(),
 };
 
 export const transactionMock: Omit<Transaction, 'wallet'> = {
@@ -38,8 +39,9 @@ export const walletMock: Wallet = {
   balance: 10_000,
   name: 'Main',
   createdAt: now,
-  user: { ...userMock, wallets: [] },
+  user: { ...userMock, wallets: [] } as User,
   transactions: [transactionMock as Transaction],
+  setDefaults: jest.fn(),
 };
 
 export const userMockWithWallet: User = {

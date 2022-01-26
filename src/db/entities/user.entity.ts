@@ -1,4 +1,7 @@
 import {
+  AfterInsert,
+  AfterLoad,
+  AfterUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -30,4 +33,13 @@ export default class User {
 
   @OneToMany(() => Wallet, (wallet) => wallet.user)
   wallets!: Wallet[];
+
+  @AfterLoad()
+  @AfterInsert()
+  @AfterUpdate()
+  setDefaults() {
+    if (!this.wallets) {
+      this.wallets = [];
+    }
+  }
 }

@@ -2,5 +2,7 @@
 export enum ApiGroup {
   Auth = 'Auth',
   Health = 'Health',
+  Transaction = 'Transaction',
   User = 'User',
+  Wallet = 'Wallet',
 }

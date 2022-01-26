@@ -12,7 +12,7 @@ export class UserWalletTransactionRepository {
     private readonly connection: Connection,
   ) {}
 
-  private userWalletQuery(): SelectQueryBuilder<User> {
+  private query(): SelectQueryBuilder<User> {
     return this.connection.manager
       .createQueryBuilder(User, 'user')
       .leftJoinAndSelect('user.wallets', 'wallets')
@@ -20,6 +20,6 @@ export class UserWalletTransactionRepository {
   }
 
   findByUserUuid(userUuid: Uuid): Promise<User | undefined> {
-    return this.userWalletQuery().where({ uuid: userUuid }).getOne();
+    return this.query().where({ uuid: userUuid }).getOne();
   }
 }

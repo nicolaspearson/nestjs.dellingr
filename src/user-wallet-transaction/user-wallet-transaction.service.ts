@@ -17,6 +17,7 @@ export class UserWalletTransactionService {
    * @param userUuid The uuid of the user.
    * @returns The {@link UserProfileResponse} object.
    *
+   * @throws {@link NotFoundError} If the user does not exist.
    * @throws {@link InternalServerError} If the database transaction fails.
    */
   async profile(userUuid: Uuid): Promise<UserProfileResponse> {

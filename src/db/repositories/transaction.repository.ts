@@ -11,11 +11,11 @@ export class TransactionRepository extends AbstractRepository<Transaction> {
     super();
   }
 
-  private transactionQuery(): SelectQueryBuilder<Transaction> {
+  private query(): SelectQueryBuilder<Transaction> {
     return this.manager.createQueryBuilder(Transaction, 'transaction');
   }
 
   findByUuid(uuid: Uuid): Promise<Transaction | undefined> {
-    return this.transactionQuery().where({ uuid }).getOne();
+    return this.query().where({ uuid }).getOne();
   }
 }

@@ -1,4 +1,7 @@
 import {
+  AfterInsert,
+  AfterLoad,
+  AfterUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -39,6 +42,15 @@ export default class Wallet {
     nullable: false,
   })
   @JoinColumn({ name: 'user_uuid' })
-  @Index('IDX_WALLET_USER_UUID', { unique: true })
+  @Index('IDX_WALLET_USER_UUID')
   user!: User;
+
+  @AfterLoad()
+  @AfterInsert()
+  @AfterUpdate()
+  setDefaults() {
+    if (!this.transactions) {
+      this.transactions = [];
+    }
+  }
 }
