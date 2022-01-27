@@ -3,11 +3,10 @@ import { Connection } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
 
-import Transaction from '$/db/entities/transaction.entity';
 import { TransactionEntityRepository } from '$/db/repositories/core/transaction-entity.repository';
 
 @Injectable()
-export class TransactionRepository {
+export class TransactionRepository implements Api.Repositories.Transaction {
   // Core
   public readonly transactionEntityRepository: TransactionEntityRepository;
 
@@ -18,7 +17,7 @@ export class TransactionRepository {
     this.transactionEntityRepository = new TransactionEntityRepository(this.connection.manager);
   }
 
-  findByUuid(uuid: Uuid): Promise<Transaction | undefined> {
-    return this.transactionEntityRepository.findByUuid(uuid);
+  findByUuid(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction | undefined> {
+    return this.transactionEntityRepository.findByUuid(data);
   }
 }

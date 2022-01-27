@@ -3,12 +3,11 @@ import { Connection } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
 
-import Wallet from '$/db/entities/wallet.entity';
 import { WalletTransactionRepository } from '$/db/repositories/aggregate/wallet-transaction.repository';
 import { WalletEntityRepository } from '$/db/repositories/core/wallet-entity.repository';
 
 @Injectable()
-export class WalletRepository {
+export class WalletRepository implements Api.Repositories.Wallet {
   // Aggregate
   private readonly walletTransactionRepository: WalletTransactionRepository;
   // Core
@@ -22,11 +21,14 @@ export class WalletRepository {
     this.walletEntityRepository = new WalletEntityRepository(this.connection.manager);
   }
 
-  create(data: { userUuid: Uuid; name: string }): Promise<Wallet> {
+  create(data: { userUuid: Uuid; name: string }): Promise<Api.Entities.Wallet> {
     return this.walletEntityRepository.create(data);
   }
 
-  findByWalletUuid(userUuid: Uuid, walletUuid: Uuid): Promise<Wallet | undefined> {
-    return this.walletTransactionRepository.findByWalletUuid(userUuid, walletUuid);
+  findByWalletUuid(data: {
+    userUuid: Uuid;
+    walletUuid: Uuid;
+  }): Promise<Api.Entities.Wallet | undefined> {
+    return this.walletTransactionRepository.findByWalletUuid(data);
   }
 }

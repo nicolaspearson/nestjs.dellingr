@@ -14,7 +14,7 @@ import {
 import Wallet from './wallet.entity';
 
 @Entity({ name: 'user' })
-export default class User {
+export default class User implements Api.Entities.User {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 

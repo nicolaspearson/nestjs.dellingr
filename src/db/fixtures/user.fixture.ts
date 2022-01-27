@@ -1,7 +1,5 @@
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
-import User from '$/db/entities/user.entity';
-
 function hashPassword(password: string) {
   const crypt = `crypt('${password}', gen_salt('bf', 8))`;
   return () => crypt;
@@ -9,7 +7,7 @@ function hashPassword(password: string) {
 
 export const DEFAULT_PASSWORD = 'myS3cretP@55w0rd!';
 
-export const userFixtures: QueryDeepPartialEntity<User>[] = [
+export const userFixtures: QueryDeepPartialEntity<Api.Entities.User>[] = [
   {
     uuid: '343c6ac5-2b72-4c41-a9eb-28f5ae49af80' as Uuid,
     email: 'john.doe@example.com' as Email,

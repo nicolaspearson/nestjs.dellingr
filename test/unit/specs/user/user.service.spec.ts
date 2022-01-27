@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { UserProfileResponse } from '$/common/dto';
 import { BadRequestError, NotFoundError } from '$/common/error';
-import User from '$/db/entities/user.entity';
 import { UserRepository } from '$/db/repositories/user.repository';
 import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME, UserService } from '$/user/user.service';
 
-import { userMock, userMockWithWallet, userRegistrationRequestMock } from '#/utils/fixtures';
+import { userMockJohn, userRegistrationRequestMock } from '#/utils/fixtures';
 import { userMockRepo } from '#/utils/mocks/repo.mock';
 
 describe('User Service', () => {
@@ -28,35 +27,42 @@ describe('User Service', () => {
 
   describe('delete', () => {
     test('should allow a user to delete their account', async () => {
-      await service.delete(userMock.uuid);
-      expect(userMockRepo.delete).toHaveBeenCalledWith(userMock.uuid);
+      await service.delete(userMockJohn.uuid);
+      expect(userMockRepo.delete).toHaveBeenCalledWith({ userUuid: userMockJohn.uuid });
     });
   });
 
   describe('findByValidCredentials', () => {
     test('should retrieve the user that matches the provided credentials', async () => {
-      userMockRepo.findByValidCredentials?.mockResolvedValueOnce(userMock as User);
-      const result = await service.findByValidCredentials(userMock.email, userMock.password);
-      expect(result).toMatchObject(userMock);
-      expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith(
-        userMock.email,
-        userMock.password,
+      userMockRepo.findByValidCredentials?.mockResolvedValueOnce(userMockJohn);
+      const result = await service.findByValidCredentials(
+        userMockJohn.email,
+        userMockJohn.password,
       );
+      expect(result).toMatchObject(userMockJohn);
+      expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith({
+        email: userMockJohn.email,
+        password: userMockJohn.password,
+      });
     });
   });
 
   describe('profile', () => {
     test('should allow a user to retrieve their profile (with events)', async () => {
-      userMockRepo.findByUserUuid?.mockResolvedValueOnce(userMockWithWallet);
-      const result = await service.profile(userMockWithWallet.uuid);
-      expect(result).toMatchObject(new UserProfileResponse(userMockWithWallet));
-      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith(userMockWithWallet.uuid);
+      userMockRepo.findByUserUuid?.mockResolvedValueOnce(userMockJohn);
+      const result = await service.profile(userMockJohn.uuid);
+      expect(result).toMatchObject(userMockJohn);
+      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith({
+        userUuid: userMockJohn.uuid,
+      });
     });
 
     test('throws when the user does not exist', async () => {
       userMockRepo.findByUserUuid?.mockResolvedValueOnce(undefined);
-      await expect(service.profile(userMockWithWallet.uuid)).rejects.toThrowError(NotFoundError);
-      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith(userMockWithWallet.uuid);
+      await expect(service.profile(userMockJohn.uuid)).rejects.toThrowError(NotFoundError);
+      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith({
+        userUuid: userMockJohn.uuid,
+      });
     });
   });
 
@@ -87,3 +93,4 @@ describe('User Service', () => {
     await module.close();
   });
 });
+/* eslint-enable @typescript-eslint/unbound-method */

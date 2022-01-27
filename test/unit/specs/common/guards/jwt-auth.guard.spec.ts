@@ -5,7 +5,7 @@ import { ExecutionContext } from '@nestjs/common';
 import { UnauthorizedError } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
 
-import { jwtResponseMock, userMock } from '#/utils/fixtures';
+import { jwtResponseMock, userMockJohn } from '#/utils/fixtures';
 
 const switchToHttpMock = {
   getRequest: jest.fn(),
@@ -46,7 +46,7 @@ describe('Jwt Auth Guard', () => {
 
   test('should return true if the jwt is valid', () => {
     const jwt = sign(
-      { uuid: userMock.uuid } as Api.JwtPayload,
+      { uuid: userMockJohn.uuid } as Api.JwtPayload,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       process.env.JWT_SECRET!,
       { expiresIn: '15m' },

@@ -14,7 +14,7 @@ import { TransactionType } from '../../common/enum/transaction-type.enum';
 import Wallet from './wallet.entity';
 
 @Entity({ name: 'transaction' })
-export default class Transaction {
+export default class Transaction implements Api.Entities.Transaction {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 

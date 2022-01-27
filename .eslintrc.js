@@ -46,7 +46,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-unsafe-assignment': 'warn',
     '@typescript-eslint/no-unsafe-call': 'warn',
-    '@typescript-eslint/no-unsafe-member-access': 'warn',
     '@typescript-eslint/no-unsafe-return': 'warn',
     'object-curly-spacing': [2, 'always'],
     'ordered-imports/ordered-imports': [
@@ -168,6 +167,7 @@ module.exports = {
         ],
         '@typescript-eslint/no-unsafe-assignment': 'warn',
         '@typescript-eslint/no-unsafe-call': 'warn',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-non-null-assertion': 'warn',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_+$' }],
         '@typescript-eslint/restrict-template-expressions': ['error', { allowAny: true }],

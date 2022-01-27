@@ -12,7 +12,7 @@ export class UserWalletTransactionRepository {
       .leftJoinAndSelect('wallets.transactions', 'transactions');
   }
 
-  findByUserUuid(userUuid: Uuid): Promise<User | undefined> {
-    return this.query().where({ uuid: userUuid }).getOne();
+  findByUserUuid(data: { userUuid: Uuid }): Promise<User | undefined> {
+    return this.query().where({ uuid: data.userUuid }).getOne();
   }
 }

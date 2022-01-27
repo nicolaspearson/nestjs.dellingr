@@ -2,10 +2,9 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
-import Transaction from '$/db/entities/transaction.entity';
 import { walletFixtures } from '$/db/fixtures/wallet.fixture';
 
-export const transactionFixtures: QueryDeepPartialEntity<Transaction>[] = [
+export const transactionFixtures: QueryDeepPartialEntity<Api.Entities.Transaction>[] = [
   {
     reference: 'Deposit',
     amount: 1000,

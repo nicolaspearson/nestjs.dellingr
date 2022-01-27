@@ -5,7 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { TokenService } from '$/token/token.service';
 
-import { jwtPayloadMock, userMock } from '#/utils/fixtures';
+import { jwtPayloadMock, userMockJohn } from '#/utils/fixtures';
 
 describe('Token Service', () => {
   let module: TestingModule;
@@ -35,7 +35,7 @@ describe('Token Service', () => {
       const result = await service.generate(jwtPayloadMock);
       const decodedToken = jwtService.verify(result);
       expect(decodedToken).toEqual({
-        uuid: userMock.uuid,
+        uuid: userMockJohn.uuid,
         exp: expect.any(Number),
         iat: expect.any(Number),
         jti: expect.any(String),

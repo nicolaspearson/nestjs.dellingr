@@ -37,7 +37,8 @@ export class TransactionController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  getById(@Param() { id }: IdParameter): Promise<TransactionResponse> {
-    return this.transactionService.getById(id);
+  async getById(@Param() { id }: IdParameter): Promise<TransactionResponse> {
+    const transaction = await this.transactionService.getById(id);
+    return new TransactionResponse(transaction);
   }
 }

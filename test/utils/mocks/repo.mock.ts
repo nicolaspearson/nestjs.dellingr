@@ -1,46 +1,33 @@
 import { mocked } from 'jest-mock';
 
-import { TransactionRepository } from '$/db/repositories/transaction.repository';
-import { UserRepository } from '$/db/repositories/user.repository';
-import { WalletRepository } from '$/db/repositories/wallet.repository';
-
 import {
-  transactionMockWithWallet,
-  userMock,
-  userMockWithWallet,
-  walletMock,
+  transactionMockPayedAlice,
+  userMockJohn,
+  walletMockMain,
+  walletMockSecondary,
 } from '#/utils/fixtures';
 
-export const transactionMockRepo = mocked<
-  Omit<TransactionRepository, 'transactionEntityRepository'>
->(
+export const transactionMockRepo = mocked<Api.Repositories.Transaction>(
   {
-    findByUuid: jest.fn().mockResolvedValue(transactionMockWithWallet),
+    findByUuid: jest.fn().mockResolvedValue(transactionMockPayedAlice),
   },
   true,
 );
 
-export const userMockRepo = mocked<
-  Omit<
-    UserRepository,
-    'userWalletRepository' | 'userWalletTransactionRepository' | 'userEntityRepository'
-  >
->(
+export const userMockRepo = mocked<Api.Repositories.User>(
   {
-    create: jest.fn().mockResolvedValue(userMockWithWallet),
+    create: jest.fn().mockResolvedValue(userMockJohn),
     delete: jest.fn().mockResolvedValue({ affected: 1 }),
-    findByUserUuid: jest.fn().mockResolvedValue(userMockWithWallet),
-    findByValidCredentials: jest.fn().mockResolvedValue(userMock),
+    findByUserUuid: jest.fn().mockResolvedValue(userMockJohn),
+    findByValidCredentials: jest.fn().mockResolvedValue(userMockJohn),
   },
   true,
 );
 
-export const walletMockRepo = mocked<
-  Omit<WalletRepository, 'walletTransactionRepository' | 'walletEntityRepository'>
->(
+export const walletMockRepo = mocked<Api.Repositories.Wallet>(
   {
-    create: jest.fn().mockResolvedValue(walletMock),
-    findByWalletUuid: jest.fn().mockResolvedValue(walletMock),
+    create: jest.fn().mockResolvedValue(walletMockSecondary),
+    findByWalletUuid: jest.fn().mockResolvedValue(walletMockMain),
   },
   true,
 );

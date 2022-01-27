@@ -18,15 +18,15 @@ export class UserEntityRepository extends AbstractRepository<User> {
     return this.manager.createQueryBuilder(User, 'user');
   }
 
-  delete(uuid: Uuid): Promise<DeleteResult> {
-    return this.query().delete().where({ uuid }).execute();
+  delete(data: { userUuid: Uuid }): Promise<DeleteResult> {
+    return this.query().delete().where({ uuid: data.userUuid }).execute();
   }
 
-  findByValidCredentials(email: Email, password: string): Promise<User | undefined> {
+  findByValidCredentials(data: { email: Email; password: string }): Promise<User | undefined> {
     // We use the pgcrypto extension to compare the hashed password to the plain text version
     return this.query()
-      .where({ email })
-      .andWhere('user.password = crypt(:password, user.password)', { password })
+      .where({ email: data.email })
+      .andWhere('user.password = crypt(:password, user.password)', { password: data.password })
       .getOne();
   }
 }

@@ -12,7 +12,7 @@ export class TransactionEntityRepository extends AbstractRepository<Transaction>
     return this.manager.createQueryBuilder(Transaction, 'transaction');
   }
 
-  findByUuid(uuid: Uuid): Promise<Transaction | undefined> {
-    return this.query().where({ uuid }).getOne();
+  findByUuid(data: { transactionUuid: Uuid }): Promise<Transaction | undefined> {
+    return this.query().where({ uuid: data.transactionUuid }).getOne();
   }
 }

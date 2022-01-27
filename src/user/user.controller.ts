@@ -51,11 +51,12 @@ export class UserController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  profile(@Req() req: Request): Promise<UserProfileResponse> {
+  async profile(@Req() req: Request): Promise<UserProfileResponse> {
     // We can use a non-null assertion below because the userUuid must exist on the
     // request because it is verified and added to the request by the JwtAuthGuard.
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.userService.profile(req.userUuid!);
+    const user = await this.userService.profile(req.userUuid!);
+    return new UserProfileResponse(user);
   }
 
   @Delete('user')

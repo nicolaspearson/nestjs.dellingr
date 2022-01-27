@@ -11,12 +11,12 @@ export class WalletTransactionRepository {
       .leftJoinAndSelect('wallet.transactions', 'transactions');
   }
 
-  findByWalletUuid(userUuid: Uuid, walletUuid: Uuid): Promise<Wallet | undefined> {
+  findByWalletUuid(data: { userUuid: Uuid; walletUuid: Uuid }): Promise<Wallet | undefined> {
     return this.query()
       .where({
-        uuid: walletUuid,
+        uuid: data.walletUuid,
         user: {
-          uuid: userUuid,
+          uuid: data.userUuid,
         },
       })
       .getOne();

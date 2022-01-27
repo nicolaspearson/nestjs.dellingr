@@ -6,7 +6,7 @@ import { UserService } from '$/user/user.service';
 import {
   authenticatedRequestMock,
   responseMock,
-  userMock,
+  userMockJohn,
   userProfileResponseMock,
   userRegistrationRequestMock,
 } from '#/utils/fixtures';
@@ -33,7 +33,7 @@ describe('User Controller', () => {
   describe('delete', () => {
     test('should allow a user to delete their account', async () => {
       await controller.delete(authenticatedRequestMock);
-      expect(userMockService.delete).toHaveBeenCalledWith(userMock.uuid);
+      expect(userMockService.delete).toHaveBeenCalledWith(userMockJohn.uuid);
     });
   });
 
@@ -41,7 +41,7 @@ describe('User Controller', () => {
     test('should allow a user to retrieve their profile', async () => {
       const result = await controller.profile(authenticatedRequestMock);
       expect(result).toMatchObject(userProfileResponseMock);
-      expect(userMockService.profile).toHaveBeenCalledWith(userMock.uuid);
+      expect(userMockService.profile).toHaveBeenCalledWith(authenticatedRequestMock.userUuid);
     });
   });
 

@@ -1,31 +1,36 @@
 import { Injectable, Logger } from '@nestjs/common';
 
-import { WalletResponse } from '$/common/dto';
 import { NotFoundError } from '$/common/error';
-import Wallet from '$/db/entities/wallet.entity';
+import { UserRepository } from '$/db/repositories/user.repository';
 import { WalletRepository } from '$/db/repositories/wallet.repository';
 
 @Injectable()
 export class WalletService {
   private readonly logger: Logger = new Logger(WalletService.name);
 
-  constructor(private readonly walletRepository: WalletRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly walletRepository: WalletRepository,
+  ) {}
 
   /**
    * Creates a new wallet for the specified user.
    *
    * @param userUuid The uuid of the user.
    * @param walletName The name of the new wallet.
-   * @returns The {@link WalletResponse} object.
+   * @returns The {@link Api.Entities.Wallet} object.
    *
    * @throws {@link NotFoundError} If the user does not exist.
    * @throws {@link InternalServerError} If the database transaction fails.
    */
-  async create(userUuid: Uuid, walletName: string): Promise<WalletResponse> {
-    // TODO: Check if the user exists!
+  async create(userUuid: Uuid, walletName: string): Promise<Api.Entities.Wallet> {
+    // Check if the user exists
+    const user = await this.userRepository.findByUserUuid({ userUuid });
+    if (!user) {
+      throw new NotFoundError('User does not exist.');
+    }
     this.logger.log(`Creating new wallet: ${walletName} for user with uuid: ${userUuid}`);
-    const wallet = await this.walletRepository.create({ userUuid, name: walletName });
-    return new WalletResponse(wallet);
+    return this.walletRepository.create({ userUuid, name: walletName });
   }
 
   /**
@@ -33,19 +38,18 @@ export class WalletService {
    *
    * @param userUuid The uuid of the user.
    * @param walletUuid The uuid of the wallet.
-   * @returns The {@link WalletResponse} object.
+   * @returns The {@link Api.Entities.Wallet} object.
    *
    * @throws {@link NotFoundError} If the wallet does not exist.
    * @throws {@link InternalServerError} If the database transaction fails.
    */
-  async getById(userUuid: Uuid, walletUuid: Uuid): Promise<WalletResponse> {
+  getById(userUuid: Uuid, walletUuid: Uuid): Promise<Api.Entities.Wallet> {
     this.logger.log(`Retrieving user wallet with uuid: ${userUuid} & wallet uuid: ${walletUuid}`);
-    const wallet = await this.findWalletOrFail(userUuid, walletUuid);
-    return new WalletResponse(wallet);
+    return this.findWalletOrFail(userUuid, walletUuid);
   }
 
-  private async findWalletOrFail(userUuid: Uuid, walletUuid: Uuid): Promise<Wallet> {
-    const wallet = await this.walletRepository.findByWalletUuid(userUuid, walletUuid);
+  private async findWalletOrFail(userUuid: Uuid, walletUuid: Uuid): Promise<Api.Entities.Wallet> {
+    const wallet = await this.walletRepository.findByWalletUuid({ userUuid, walletUuid });
     if (!wallet) {
       throw new NotFoundError('Wallet does not exist.');
     }

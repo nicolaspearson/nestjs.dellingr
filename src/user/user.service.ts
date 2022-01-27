@@ -1,8 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 
-import { UserProfileResponse } from '$/common/dto';
 import { BadRequestError, NotFoundError } from '$/common/error';
-import User from '$/db/entities/user.entity';
 import { UserRepository } from '$/db/repositories/user.repository';
 
 export const DEFAULT_WALLET_BALANCE = 0;
@@ -14,6 +12,14 @@ export class UserService {
 
   constructor(private readonly userRepository: UserRepository) {}
 
+  private async findByUserUuidOrFail(userUuid: Uuid): Promise<Api.Entities.User> {
+    const user = await this.userRepository.findByUserUuid({ userUuid });
+    if (!user) {
+      throw new NotFoundError('User does not exist.');
+    }
+    return user;
+  }
+
   /**
    * Deletes a user's account from the database.
    *
@@ -23,7 +29,7 @@ export class UserService {
    */
   async delete(userUuid: Uuid): Promise<void> {
     this.logger.log(`Deleting user with uuid: ${userUuid}`);
-    await this.userRepository.delete(userUuid);
+    await this.userRepository.delete({ userUuid });
   }
 
   /**
@@ -36,31 +42,25 @@ export class UserService {
    *
    * @throws {@link InternalServerError} If the database transaction fails.
    */
-  async findByValidCredentials(email: Email, password: string): Promise<User | undefined> {
-    return this.userRepository.findByValidCredentials(email, password);
+  async findByValidCredentials(
+    email: Email,
+    password: string,
+  ): Promise<Api.Entities.User | undefined> {
+    return this.userRepository.findByValidCredentials({ email, password });
   }
 
   /**
    * Retrieves a user's profile from the database.
    *
    * @param userUuid The uuid of the user.
-   * @returns The {@link UserProfileResponse} object.
+   * @returns The {@link Api.Entities.User} object.
    *
    * @throws {@link NotFoundError} If the user does not exist.
    * @throws {@link InternalServerError} If the database transaction fails.
    */
-  async profile(userUuid: Uuid): Promise<UserProfileResponse> {
+  profile(userUuid: Uuid): Promise<Api.Entities.User> {
     this.logger.log(`Retrieving profile for user with uuid: ${userUuid}`);
-    const user = await this.findByUserUuidOrFail(userUuid);
-    return new UserProfileResponse(user);
-  }
-
-  private async findByUserUuidOrFail(userUuid: Uuid): Promise<User> {
-    const user = await this.userRepository.findByUserUuid(userUuid);
-    if (!user) {
-      throw new NotFoundError('User does not exist.');
-    }
-    return user;
+    return this.findByUserUuidOrFail(userUuid);
   }
 
   /**
