@@ -63,10 +63,29 @@ declare namespace Api {
       type DeleteResult = {
         affected?: Nullable<number>;
       };
+
+      type UpdateResult = {
+        affected?: Nullable<number>;
+      };
     }
 
     type Transaction = {
-      findByUuid(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction | undefined>;
+      create(data: {
+        amount: number;
+        reference: string;
+        state: import('$/common/enum/transaction-state.enum').TransactionState;
+        type: import('$/common/enum/transaction-type.enum').TransactionType;
+        walletUuid: Uuid;
+      }): Promise<Api.Entities.Transaction>;
+      findByUuid(data: {
+        transactionUuid: Uuid;
+        userUuid: Uuid;
+      }): Promise<Api.Entities.Transaction | undefined>;
+      process(data: { balance: number; transactionUuid: Uuid; walletUuid: Uuid }): Promise<void>;
+      updateState(data: {
+        state: import('$/common/enum/transaction-state.enum').TransactionState;
+        transactionUuid: Uuid;
+      }): Promise<Api.Repositories.Responses.UpdateResult>;
     };
 
     type User = {
@@ -76,7 +95,7 @@ declare namespace Api {
         wallet: { balance: number; name: string };
       }): Promise<Api.Entities.User>;
       delete(data: { userUuid: Uuid }): Promise<Api.Repositories.Responses.DeleteResult>;
-      findByUserUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined>;
+      findByUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined>;
       findByValidCredentials(data: {
         email: Email;
         password: string;
@@ -85,7 +104,7 @@ declare namespace Api {
 
     type Wallet = {
       create(data: { userUuid: Uuid; name: string }): Promise<Api.Entities.Wallet>;
-      findByWalletUuid(data: {
+      findByUuid(data: {
         userUuid: Uuid;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Wallet | undefined>;

@@ -6,7 +6,7 @@ import Wallet from '$/db/entities/wallet.entity';
 import { generateSalt } from '$/db/utils/user.util';
 
 export class UserWalletRepository {
-  constructor(private readonly connection: Connection) {}
+  constructor(protected readonly connection: Connection) {}
 
   create(data: {
     email: Email;

@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzMjA4MTM4LCJleHAiOjE2NDMyMDkwMzgsImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiMzgzYWMyOTMtZGM0OS00NTBhLWFiNTEtZTY5ZGJlMjgzMTllIn0.nFyuEvhTu9l3cDWDWoaCVel5n43UppVYY-2t2YbCYE0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzMjk4Njc0LCJleHAiOjE2NDMyOTk1NzQsImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiMjBkOWEzYTctNWFiMS00MWZjLThlYWEtYjk1ODg1OTEyMTAxIn0.xZAN6xKeBgK8SuV3u-XYXkkoeOByJaolLOl6Zjs3-kg
 
 ########################################################################
 ###########                       AUTH                       ###########
@@ -29,10 +29,24 @@ Content-Type: application/json
 ########################################################################
 
 ### Get transaction
-GET {{baseUrl}}/transaction/699c003c-8157-41c4-b6d1-29ff318c73a3 HTTP/1.1
+GET {{baseUrl}}/transaction/b514e04c-b3e7-4346-b9f9-41c9d66cf5e2 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+### Create a new transaction
+POST {{baseUrl}}/transaction HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "amount": 10,
+  "reference": "Add 10 Dollars",
+  "type": "credit",
+  "walletId": "2103b97d-2204-440c-aced-e9b3cb38a8c6"
+}
+
 
 ########################################################################
 ###########                       USER                       ###########
@@ -56,7 +70,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "john.doe@example.com",
+  "email": "jane.doe@example.com",
   "password": "myS3cretP@55w0rd!"
 }
 

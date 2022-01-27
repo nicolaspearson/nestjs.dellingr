@@ -49,18 +49,18 @@ describe('User Service', () => {
 
   describe('profile', () => {
     test('should allow a user to retrieve their profile (with events)', async () => {
-      userMockRepo.findByUserUuid?.mockResolvedValueOnce(userMockJohn);
+      userMockRepo.findByUuid?.mockResolvedValueOnce(userMockJohn);
       const result = await service.profile(userMockJohn.uuid);
       expect(result).toMatchObject(userMockJohn);
-      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith({
+      expect(userMockRepo.findByUuid).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
       });
     });
 
     test('throws when the user does not exist', async () => {
-      userMockRepo.findByUserUuid?.mockResolvedValueOnce(undefined);
+      userMockRepo.findByUuid?.mockResolvedValueOnce(undefined);
       await expect(service.profile(userMockJohn.uuid)).rejects.toThrowError(NotFoundError);
-      expect(userMockRepo.findByUserUuid).toHaveBeenCalledWith({
+      expect(userMockRepo.findByUuid).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
       });
     });

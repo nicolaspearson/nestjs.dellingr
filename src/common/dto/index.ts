@@ -1,4 +1,6 @@
 // Requests
+export { CreateTransactionRequest } from './req/create-transaction.request.dto';
+export { CreateWalletRequest } from './req/create-wallet.request.dto';
 export { IdParameter } from './req/id.parameter.dto';
 export {} from './req/create-wallet.request.dto';
 export { LoginRequest } from './req/login.request.dto';

@@ -6,8 +6,11 @@ import {
   SelectQueryBuilder,
 } from 'typeorm';
 
+import { Injectable } from '@nestjs/common';
+
 import User from '$/db/entities/user.entity';
 
+@Injectable()
 @EntityRepository(User)
 export class UserEntityRepository extends AbstractRepository<User> {
   constructor(protected readonly manager: EntityManager) {

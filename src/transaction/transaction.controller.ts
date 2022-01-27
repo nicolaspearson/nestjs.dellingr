@@ -1,7 +1,19 @@
-import { Controller, Get, HttpCode, HttpStatus, Param, UseGuards } from '@nestjs/common';
+import { Request } from 'express';
+
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { IdParameter, TransactionResponse } from '$/common/dto';
+import { CreateTransactionRequest, IdParameter, TransactionResponse } from '$/common/dto';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { InternalServerError, UnauthorizedError } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
@@ -12,6 +24,40 @@ const TAG = ApiGroup.Transaction;
 @Controller('transaction')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({
+    summary: 'Allows a user to create a new transaction.',
+    description: 'Creates a new transaction for the authenticated user.',
+  })
+  @ApiTags(TAG)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Transaction successfully created.',
+    type: TransactionResponse,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Access denied.',
+    type: UnauthorizedError,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'An internal error occurred.',
+    type: InternalServerError,
+  })
+  async create(
+    @Req() req: Request,
+    @Body() dto: CreateTransactionRequest,
+  ): Promise<TransactionResponse> {
+    // We can use a non-null assertion below because the userUuid must exist on the
+    // request because it is verified and added to the request by the JwtAuthGuard.
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const transaction = await this.transactionService.create(req.userUuid!, dto);
+    return new TransactionResponse(transaction);
+  }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
@@ -37,8 +83,11 @@ export class TransactionController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  async getById(@Param() { id }: IdParameter): Promise<TransactionResponse> {
-    const transaction = await this.transactionService.getById(id);
+  async getById(@Req() req: Request, @Param() { id }: IdParameter): Promise<TransactionResponse> {
+    // We can use a non-null assertion below because the userUuid must exist on the
+    // request because it is verified and added to the request by the JwtAuthGuard.
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const transaction = await this.transactionService.getById(req.userUuid!, id);
     return new TransactionResponse(transaction);
   }
 }

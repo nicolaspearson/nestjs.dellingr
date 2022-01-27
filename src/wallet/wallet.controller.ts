@@ -13,8 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { IdParameter, WalletResponse } from '$/common/dto';
-import { CreateWalletRequest } from '$/common/dto/req/create-wallet.request.dto';
+import { CreateWalletRequest, IdParameter, WalletResponse } from '$/common/dto';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { InternalServerError, UnauthorizedError } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';

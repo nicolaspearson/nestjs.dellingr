@@ -7,6 +7,7 @@ export class IdParameter {
     description: 'The id of the resource',
     example: 'c6bc6249-74e4-4f0c-b9b1-690b545c97c9',
     required: true,
+    nullable: false,
     type: String,
   })
   @IsNotEmpty()

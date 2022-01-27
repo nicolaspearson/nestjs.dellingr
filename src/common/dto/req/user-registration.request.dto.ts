@@ -10,6 +10,7 @@ export class UserRegistrationRequest {
     description: "The user's email address.",
     example: 'john.doe@example.com',
     required: true,
+    nullable: false,
     type: String,
   })
   @IsEmail()
@@ -20,6 +21,7 @@ export class UserRegistrationRequest {
     description: "The user's password.",
     example: DEFAULT_PASSWORD,
     required: true,
+    nullable: false,
     type: String,
   })
   @IsValidPassword()

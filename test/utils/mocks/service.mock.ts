@@ -30,6 +30,7 @@ export const tokenMockService = mocked<PublicOnly<TokenService>>(
 
 export const transactionMockService = mocked<PublicOnly<TransactionService>>(
   {
+    create: jest.fn().mockResolvedValue(transactionMockPayedAlice),
     getById: jest.fn().mockResolvedValue(transactionMockPayedAlice),
   },
   true,

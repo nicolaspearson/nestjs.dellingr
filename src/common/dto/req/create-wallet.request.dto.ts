@@ -7,6 +7,7 @@ export class CreateWalletRequest {
     description: 'The name of the wallet',
     example: 'Secondary',
     required: true,
+    nullable: false,
     type: String,
   })
   @IsNotEmpty()

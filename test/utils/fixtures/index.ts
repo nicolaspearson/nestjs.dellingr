@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 
 import {
+  CreateTransactionRequest,
+  CreateWalletRequest,
   HealthCheckResponse,
   JwtResponse,
   LoginRequest,
@@ -9,7 +11,6 @@ import {
   UserRegistrationRequest,
   WalletResponse,
 } from '$/common/dto';
-import { CreateWalletRequest } from '$/common/dto/req/create-wallet.request.dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
 import { DEFAULT_PASSWORD } from '$/db/fixtures/user.fixture';
@@ -88,6 +89,13 @@ export const jwtPayloadMock = {
 export const jwtResponseMock = new JwtResponse({ token: jwtTokenMock });
 
 // Transaction
+export const createTransactionRequestMock = {
+  amount: transactionMockPayedAlice.amount,
+  reference: transactionMockPayedAlice.reference,
+  type: transactionMockPayedAlice.type,
+  walletId: transactionMockPayedAlice.wallet.uuid,
+} as CreateTransactionRequest;
+
 export const transactionResponseMock = new TransactionResponse(transactionMockPayedAlice);
 
 // User

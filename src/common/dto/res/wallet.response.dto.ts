@@ -4,7 +4,7 @@ import { TransactionResponse } from './transaction.response.dto';
 
 export class WalletResponse {
   @ApiProperty({
-    description: "The user's unique id.",
+    description: "The wallet's unique id.",
     example: '343c6ac5-2b72-4c41-a9eb-28f5ae49af80',
     nullable: false,
     required: true,

@@ -1,8 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
-import { UserRepository } from '$/db/repositories/user.repository';
-import { WalletRepository } from '$/db/repositories/wallet.repository';
+import { UserRepository, WalletRepository } from '$/db/repositories';
 
 @Injectable()
 export class WalletService {
@@ -25,7 +24,7 @@ export class WalletService {
    */
   async create(userUuid: Uuid, walletName: string): Promise<Api.Entities.Wallet> {
     // Check if the user exists
-    const user = await this.userRepository.findByUserUuid({ userUuid });
+    const user = await this.userRepository.findByUuid({ userUuid });
     if (!user) {
       throw new NotFoundError('User does not exist.');
     }
@@ -44,12 +43,14 @@ export class WalletService {
    * @throws {@link InternalServerError} If the database transaction fails.
    */
   getById(userUuid: Uuid, walletUuid: Uuid): Promise<Api.Entities.Wallet> {
-    this.logger.log(`Retrieving user wallet with uuid: ${userUuid} & wallet uuid: ${walletUuid}`);
+    this.logger.log(
+      `Retrieving user wallet with user uuid: ${userUuid} & wallet uuid: ${walletUuid}`,
+    );
     return this.findWalletOrFail(userUuid, walletUuid);
   }
 
   private async findWalletOrFail(userUuid: Uuid, walletUuid: Uuid): Promise<Api.Entities.Wallet> {
-    const wallet = await this.walletRepository.findByWalletUuid({ userUuid, walletUuid });
+    const wallet = await this.walletRepository.findByUuid({ userUuid, walletUuid });
     if (!wallet) {
       throw new NotFoundError('Wallet does not exist.');
     }

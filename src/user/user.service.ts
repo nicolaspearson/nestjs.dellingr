@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 
 import { BadRequestError, NotFoundError } from '$/common/error';
-import { UserRepository } from '$/db/repositories/user.repository';
+import { UserRepository } from '$/db/repositories';
 
 export const DEFAULT_WALLET_BALANCE = 0;
 export const DEFAULT_WALLET_NAME = 'Main';
@@ -13,7 +13,7 @@ export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   private async findByUserUuidOrFail(userUuid: Uuid): Promise<Api.Entities.User> {
-    const user = await this.userRepository.findByUserUuid({ userUuid });
+    const user = await this.userRepository.findByUuid({ userUuid });
     if (!user) {
       throw new NotFoundError('User does not exist.');
     }

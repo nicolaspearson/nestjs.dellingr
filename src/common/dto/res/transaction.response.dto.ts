@@ -63,11 +63,11 @@ export class TransactionResponse {
   @ApiProperty({
     description: 'The date the transaction was updated.',
     example: '2022-01-26T10:49:53.129Z',
-    nullable: false,
-    required: true,
+    nullable: true,
+    required: false,
     type: String,
   })
-  readonly updatedAt: string | null;
+  readonly updatedAt: Nullable<string>;
 
   constructor(data: {
     uuid: Uuid;
