@@ -1,4 +1,4 @@
-import { AbstractRepository, EntityManager, EntityRepository, SelectQueryBuilder } from 'typeorm';
+import { AbstractRepository, EntityManager, EntityRepository } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 import { Injectable } from '@nestjs/common';
@@ -12,10 +12,6 @@ import Transaction from '$/db/entities/transaction.entity';
 export class TransactionEntityRepository extends AbstractRepository<Transaction> {
   constructor(protected readonly manager: EntityManager) {
     super();
-  }
-
-  private query(): SelectQueryBuilder<Transaction> {
-    return this.manager.createQueryBuilder(Transaction, 'transaction');
   }
 
   create(data: {
@@ -38,9 +34,9 @@ export class TransactionEntityRepository extends AbstractRepository<Transaction>
   }
 
   findByUuid(data: { transactionUuid: Uuid; userUuid: Uuid }): Promise<Transaction | undefined> {
-    return this.query()
-      .where({ uuid: data.transactionUuid, wallet: { user: data.userUuid } })
-      .getOne();
+    return this.manager.findOne(Transaction, {
+      where: { uuid: data.transactionUuid, wallet: { user: data.userUuid } },
+    });
   }
 
   updateState(

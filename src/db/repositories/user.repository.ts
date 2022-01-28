@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
+import { NotFoundError } from '$/common/error';
 import { UserWalletTransactionRepository } from '$/db/repositories/aggregate/user-wallet-transaction.repository';
 import { UserWalletRepository } from '$/db/repositories/aggregate/user-wallet.repository';
 import { UserEntityRepository } from '$/db/repositories/entity/user-entity.repository';
@@ -28,6 +29,14 @@ export class UserRepository implements Api.Repositories.User {
 
   findByUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined> {
     return this.userWalletTransactionRepository.findByUserUuid(data);
+  }
+
+  async findByUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User> {
+    const user = await this.findByUuid(data);
+    if (!user) {
+      throw new NotFoundError(`User with uuid: ${data.userUuid} does not exist.`);
+    }
+    return user;
   }
 
   findByValidCredentials(data: {

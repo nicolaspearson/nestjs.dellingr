@@ -23,13 +23,14 @@ export class TokenService {
    *
    * @param payload The payload that will included in the JWT as claims.
    */
-  generate(payload: Api.JwtPayload): Promise<string> {
+  async generate(payload: Api.JwtPayload): Promise<JwtToken> {
     this.logger.log(`Generating JWT for user with uuid: ${payload.uuid}`);
-    return this.jwtService.signAsync(payload, {
+    const token = await this.jwtService.signAsync(payload, {
       // Set the `exp` here to include it in the claims.
       expiresIn: this.tokenExpiration,
       // Set the `jti` to avoid replay attacks.
       jwtid: uuidv4(),
     });
+    return token as JwtToken;
   }
 }

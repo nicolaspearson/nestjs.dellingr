@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 
-import { BadRequestError, NotFoundError } from '$/common/error';
+import { ConflictError } from '$/common/error';
 import { UserRepository } from '$/db/repositories';
 
 export const DEFAULT_WALLET_BALANCE = 0;
@@ -11,14 +11,6 @@ export class UserService {
   private readonly logger: Logger = new Logger(UserService.name);
 
   constructor(private readonly userRepository: UserRepository) {}
-
-  private async findByUserUuidOrFail(userUuid: Uuid): Promise<Api.Entities.User> {
-    const user = await this.userRepository.findByUuid({ userUuid });
-    if (!user) {
-      throw new NotFoundError('User does not exist.');
-    }
-    return user;
-  }
 
   /**
    * Deletes a user's account from the database.
@@ -33,23 +25,6 @@ export class UserService {
   }
 
   /**
-   * Retrieves a user using the provided credentials.
-   *
-   * @param email The user's email address
-   * @param password The user's password
-   * @returns The {@link User} that was found using the provided credentials or undefined
-   * if the provided credentials are invalid or the user does not exist.
-   *
-   * @throws {@link InternalServerError} If the database transaction fails.
-   */
-  async findByValidCredentials(
-    email: Email,
-    password: string,
-  ): Promise<Api.Entities.User | undefined> {
-    return this.userRepository.findByValidCredentials({ email, password });
-  }
-
-  /**
    * Retrieves a user's profile from the database.
    *
    * @param userUuid The uuid of the user.
@@ -60,7 +35,7 @@ export class UserService {
    */
   profile(userUuid: Uuid): Promise<Api.Entities.User> {
     this.logger.log(`Retrieving profile for user with uuid: ${userUuid}`);
-    return this.findByUserUuidOrFail(userUuid);
+    return this.userRepository.findByUuidOrFail({ userUuid });
   }
 
   /**
@@ -69,7 +44,7 @@ export class UserService {
    * @param email The user's email address.
    * @param password The user's plain-text password.
    *
-   * @throws {@link BadRequestError} If the user already exists.
+   * @throws {@link ConflictError} If the user already exists.
    * @throws {@link InternalServerError} If the database transaction fails.
    */
   async register(email: Email, password: string): Promise<void> {
@@ -82,7 +57,7 @@ export class UserService {
       });
       this.logger.log(`Successfully registered user with email address: ${user.email}`);
     } catch {
-      throw new BadRequestError('Invalid email address or password provided.');
+      throw new ConflictError('The provided email address is already in use.');
     }
   }
 }

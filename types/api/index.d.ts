@@ -81,6 +81,10 @@ declare namespace Api {
         transactionUuid: Uuid;
         userUuid: Uuid;
       }): Promise<Api.Entities.Transaction | undefined>;
+      findByUuidOrFail(data: {
+        transactionUuid: Uuid;
+        userUuid: Uuid;
+      }): Promise<Api.Entities.Transaction>;
       process(data: { balance: number; transactionUuid: Uuid; walletUuid: Uuid }): Promise<void>;
       updateState(data: {
         state: import('$/common/enum/transaction-state.enum').TransactionState;
@@ -96,6 +100,7 @@ declare namespace Api {
       }): Promise<Api.Entities.User>;
       delete(data: { userUuid: Uuid }): Promise<Api.Repositories.Responses.DeleteResult>;
       findByUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined>;
+      findByUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User>;
       findByValidCredentials(data: {
         email: Email;
         password: string;
@@ -108,6 +113,7 @@ declare namespace Api {
         userUuid: Uuid;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Wallet | undefined>;
+      findByUuidOrFail(data: { userUuid: Uuid; walletUuid: Uuid }): Promise<Api.Entities.Wallet>;
     };
   }
 }

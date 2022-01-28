@@ -1,5 +1,5 @@
-const { WebpackPnpExternals } = require('webpack-pnp-externals');
 const { RunScriptWebpackPlugin } = require('run-script-webpack-plugin');
+const { WebpackPnpExternals } = require('webpack-pnp-externals');
 
 const webpackConfig = require('./webpack.util');
 

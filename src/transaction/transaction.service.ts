@@ -3,7 +3,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { CreateTransactionRequest } from '$/common/dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
-import { BadRequestError, NotFoundError } from '$/common/error';
+import { BadRequestError } from '$/common/error';
 import { TransactionRepository, WalletRepository } from '$/db/repositories';
 
 @Injectable()
@@ -27,16 +27,19 @@ export class TransactionService {
    * @throws {@link InternalServerError} If the database transaction fails.
    */
   async create(userUuid: Uuid, dto: CreateTransactionRequest): Promise<Api.Entities.Transaction> {
-    const wallet = await this.walletRepository.findByUuid({ userUuid, walletUuid: dto.walletId });
-    if (!wallet) {
-      throw new NotFoundError('Wallet does not exist.');
-    }
+    const wallet = await this.walletRepository.findByUuidOrFail({
+      userUuid,
+      walletUuid: dto.walletId,
+    });
     this.logger.log(`Creating new transaction for user with uuid: ${userUuid}`);
-    // Creating the transaction in a pending state
+    // Creating the transaction in a `pending` state. We do not need to wrap this
+    // operation in a database transaction because it is being created in a `pending`
+    // state. If subsequent operations fail the user's wallet balance is not impacted
+    // and the transaction remains in an unprocessed `pending` state.
     const transaction = await this.transactionRepository.create({
       ...dto,
       state: TransactionState.Pending,
-      walletUuid: dto.walletId,
+      walletUuid: wallet.uuid,
     });
     let balance;
     switch (dto.type) {
@@ -78,19 +81,7 @@ export class TransactionService {
    * @throws {@link InternalServerError} If the database transaction fails.
    */
   getById(userUuid: Uuid, transactionUuid: Uuid): Promise<Api.Entities.Transaction> {
-    // TODO: Ensure the transaction belongs to the user
     this.logger.log(`Retrieving user transaction with uuid: ${transactionUuid}`);
-    return this.findTransactionOrFail(userUuid, transactionUuid);
-  }
-
-  private async findTransactionOrFail(
-    userUuid: Uuid,
-    transactionUuid: Uuid,
-  ): Promise<Api.Entities.Transaction> {
-    const transaction = await this.transactionRepository.findByUuid({ transactionUuid, userUuid });
-    if (!transaction) {
-      throw new NotFoundError('Transaction does not exist.');
-    }
-    return transaction;
+    return this.transactionRepository.findByUuidOrFail({ transactionUuid, userUuid });
   }
 }

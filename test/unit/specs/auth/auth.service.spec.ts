@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AuthService } from '$/auth/auth.service';
-import { JwtResponse } from '$/common/dto';
 import { InternalServerError, NotFoundError } from '$/common/error';
+import { UserRepository } from '$/db/repositories';
 import { TokenService } from '$/token/token.service';
-import { UserService } from '$/user/user.service';
 
-import { jwtPayloadMock, jwtTokenMock, loginRequestMock } from '#/utils/fixtures';
-import { tokenMockService, userMockService } from '#/utils/mocks/service.mock';
+import { jwtPayloadMock, jwtTokenMock, loginRequestMock, userMockJohn } from '#/utils/fixtures';
+import { userMockRepo } from '#/utils/mocks/repo.mock';
+import { tokenMockService } from '#/utils/mocks/service.mock';
 
 describe('Auth Service', () => {
   let module: TestingModule;
@@ -21,8 +22,8 @@ describe('Auth Service', () => {
           useValue: tokenMockService,
         },
         {
-          provide: UserService,
-          useValue: userMockService,
+          provide: UserRepository,
+          useValue: userMockRepo,
         },
         AuthService,
       ],
@@ -40,24 +41,27 @@ describe('Auth Service', () => {
     test('should allow a user to authenticate', async () => {
       const { email, password } = loginRequestMock;
       const result = await service.authenticate(email, password);
-      expect(result).toMatchObject(new JwtResponse({ token: jwtTokenMock }));
-      expect(userMockService.findByValidCredentials).toHaveBeenCalledWith(email, password);
+      expect(result).toEqual(jwtTokenMock);
+      expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith({ email, password });
       expect(tokenMockService.generate).toHaveBeenCalledWith(jwtPayloadMock);
     });
 
     test("throws when the user's credentials are invalid", async () => {
-      userMockService.findByValidCredentials?.mockResolvedValueOnce(undefined);
+      userMockRepo.findByValidCredentials?.mockResolvedValueOnce(undefined);
       const { email, password } = loginRequestMock;
       await expect(service.authenticate(email, password)).rejects.toThrowError(NotFoundError);
-      expect(userMockService.findByValidCredentials).toHaveBeenCalledWith(email, password);
+      expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith({ email, password });
       expect(tokenMockService.generate).not.toHaveBeenCalled();
     });
 
     test('throws when jwt generation fails', async () => {
-      tokenMockService.generate?.mockRejectedValueOnce(new Error('Jwt generation failed'));
+      userMockRepo.findByValidCredentials?.mockResolvedValueOnce(userMockJohn);
+      tokenMockService.generate?.mockRejectedValueOnce(
+        new InternalServerError('Jwt generation failed'),
+      );
       const { email, password } = loginRequestMock;
       await expect(service.authenticate(email, password)).rejects.toThrowError(InternalServerError);
-      expect(userMockService.findByValidCredentials).toHaveBeenCalledWith(email, password);
+      expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith({ email, password });
       expect(tokenMockService.generate).toHaveBeenCalledWith(jwtPayloadMock);
     });
   });
@@ -66,3 +70,4 @@ describe('Auth Service', () => {
     await module.close();
   });
 });
+/* eslint-enable @typescript-eslint/unbound-method */

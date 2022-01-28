@@ -1,5 +1,6 @@
 export enum ErrorName {
   BadRequest = 'BadRequest',
+  Conflict = 'Conflict',
   Forbidden = 'Forbidden',
   InternalServerError = 'InternalServerError',
   NotFound = 'NotFound',

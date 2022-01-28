@@ -15,7 +15,7 @@ export const transactionFixtures: QueryDeepPartialEntity<Api.Entities.Transactio
   },
   {
     uuid: '8c4bf666-bc2d-4816-86b0-928b81620526' as Uuid,
-    reference: 'Pay Bob',
+    reference: 'Payed Bob',
     amount: 125,
     state: TransactionState.Processed,
     type: TransactionType.Debit,

@@ -50,6 +50,16 @@ export const transactionMockPayedAlice: Api.Entities.Transaction = {
   wallet: walletMockMain,
 };
 
+export const transactionMockPaymentFromBob: Api.Entities.Transaction = {
+  uuid: '6ca66bda-552a-4890-aae3-8610307fc548' as Uuid,
+  amount: 150,
+  reference: 'Payment From Bob',
+  state: TransactionState.Processed,
+  type: TransactionType.Credit,
+  createdAt: now,
+  wallet: walletMockMain,
+};
+
 // Assign the transaction to the main wallet
 walletMockMain.transactions = [transactionMockPayedAlice];
 
@@ -89,7 +99,14 @@ export const jwtPayloadMock = {
 export const jwtResponseMock = new JwtResponse({ token: jwtTokenMock });
 
 // Transaction
-export const createTransactionRequestMock = {
+export const createTransactionRequestMockCredit = {
+  amount: transactionMockPaymentFromBob.amount,
+  reference: transactionMockPaymentFromBob.reference,
+  type: transactionMockPaymentFromBob.type,
+  walletId: transactionMockPaymentFromBob.wallet.uuid,
+} as CreateTransactionRequest;
+
+export const createTransactionRequestMockDebit = {
   amount: transactionMockPayedAlice.amount,
   reference: transactionMockPayedAlice.reference,
   type: transactionMockPayedAlice.type,

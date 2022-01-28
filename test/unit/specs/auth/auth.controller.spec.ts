@@ -2,8 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { AuthController } from '$/auth/auth.controller';
 import { AuthService } from '$/auth/auth.service';
+import { JwtResponse } from '$/common/dto';
 
-import { jwtResponseMock, loginRequestMock } from '#/utils/fixtures';
+import { jwtTokenMock, loginRequestMock } from '#/utils/fixtures';
 import { authMockService } from '#/utils/mocks/service.mock';
 
 describe('Auth Controller', () => {
@@ -29,7 +30,7 @@ describe('Auth Controller', () => {
     test('should allow a user to authenticate', async () => {
       const { email, password } = loginRequestMock;
       const result = await controller.authenticate(loginRequestMock);
-      expect(result).toMatchObject(jwtResponseMock);
+      expect(result).toMatchObject(new JwtResponse({ token: jwtTokenMock }));
       expect(authMockService.authenticate).toHaveBeenCalledWith(email, password);
     });
   });

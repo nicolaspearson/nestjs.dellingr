@@ -4,6 +4,21 @@ A simple [NestJS](https://github.com/nestjs/nest) starter repository built using
 
 ## Getting Started
 
+TODO:
+
+- Add ER Diagram
+- Add Directory Tree Structure and descriptions
+- Explain the idea behind aggregate and entity repositories
+- Explain the idea behind the module vs common structure of the directories
+- Add document generator tsdoc
+- Add yarn commands table
+- Add snake case naming strategy for typeorm
+- Add http timeout interceptor
+- Explain the idea behind importing multiple repositories instead of multiple services, i.e. avoids
+  circular dependencies, no business logic in db layer etc.
+- Add a section describing why we use response dtos in the controllers and interfaces for entities
+  in the services
+
 ### Installation
 
 ```bash
@@ -47,7 +62,7 @@ yarn docker:logs
 
 ### Swagger
 
-Swagger documentation is served on [localhost](http://localhost:3000/docs/dellingr/#/). Requests
+Swagger documentation is served on [localhost](http://localhost:3000/docs/dellingr/). Requests
 can be executed directly from the Swagger user interface. The example documentation contains valid
 fixtures that are automatically populated on application start-up.
 
@@ -104,6 +119,7 @@ This repository uses:
 - `docker-compose.yaml`: defines docker image for local testing
 - `jest.config.js`: defines the global Jest configuration which is inherited by each test suite.
 - `tsconfig.json`: defines the global TypeScript configuration.
+- `webpack-dts.config.js`: defines the type generation configuration used by webpack.
 - `webpack-hmr.config.js`: defines the hot module replacement configuration used by webpack.
 - `webpack.config.js`: defines the production configuration used by webpack.
 - `webpack.util.js`: defines the global Webpack configuration used by each sub `webpack` config.

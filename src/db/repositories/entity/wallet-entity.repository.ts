@@ -12,7 +12,7 @@ export class WalletEntityRepository extends AbstractRepository<Wallet> {
     super();
   }
 
-  create(data: { userUuid: Uuid; name: string }): Promise<Wallet> {
+  create(data: { name: string; userUuid: Uuid }): Promise<Wallet> {
     const partialWallet: QueryDeepPartialEntity<Wallet> = {
       balance: 0,
       name: data.name,

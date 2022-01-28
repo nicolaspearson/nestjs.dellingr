@@ -1,3 +1,4 @@
+import { oneLine } from 'common-tags';
 import { Request } from 'express';
 
 import {
@@ -15,7 +16,12 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 
 import { CreateTransactionRequest, IdParameter, TransactionResponse } from '$/common/dto';
 import { ApiGroup } from '$/common/enum/api-group.enum';
-import { InternalServerError, UnauthorizedError } from '$/common/error';
+import {
+  BadRequestError,
+  InternalServerError,
+  NotFoundError,
+  UnauthorizedError,
+} from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
 import { TransactionService } from '$/transaction/transaction.service';
 
@@ -39,9 +45,22 @@ export class TransactionController {
     type: TransactionResponse,
   })
   @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: oneLine`
+        An invalid request payload has been provided or the user
+        has insufficient funds to complete the transaction.
+      `,
+    type: BadRequestError,
+  })
+  @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
     description: 'Access denied.',
     type: UnauthorizedError,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'The provided wallet does not exist.',
+    type: NotFoundError,
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -74,9 +93,19 @@ export class TransactionController {
     type: TransactionResponse,
   })
   @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid payload provided.',
+    type: BadRequestError,
+  })
+  @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
     description: 'Access denied.',
     type: UnauthorizedError,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'The requested transaction does not exist.',
+    type: NotFoundError,
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,

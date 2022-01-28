@@ -17,7 +17,13 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 
 import { UserProfileResponse, UserRegistrationRequest } from '$/common/dto';
 import { ApiGroup } from '$/common/enum/api-group.enum';
-import { InternalServerError, UnauthorizedError } from '$/common/error';
+import {
+  BadRequestError,
+  ConflictError,
+  InternalServerError,
+  NotFoundError,
+  UnauthorizedError,
+} from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
 import { UserService } from '$/user/user.service';
 
@@ -45,6 +51,11 @@ export class UserController {
     status: HttpStatus.UNAUTHORIZED,
     description: 'Access denied.',
     type: UnauthorizedError,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'The requested user does not exist.',
+    type: NotFoundError,
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -105,6 +116,11 @@ export class UserController {
     description: 'User has successfully registered.',
   })
   @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid payload provided.',
+    type: BadRequestError,
+  })
+  @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'An internal error occurred.',
     type: InternalServerError,
@@ -112,8 +128,11 @@ export class UserController {
   async register(@Res() res: Response, @Body() dto: UserRegistrationRequest): Promise<void> {
     try {
       await this.userService.register(dto.email, dto.password);
-    } catch {
-      // Ignore errors to avoid user enumeration attacks.
+    } catch (error) {
+      // Ignore conflict errors to avoid user enumeration attacks.
+      if (!(error instanceof ConflictError)) {
+        throw error;
+      }
     }
     res.status(201).json({});
   }

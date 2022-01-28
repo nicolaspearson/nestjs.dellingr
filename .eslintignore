@@ -5,6 +5,7 @@ dist/**
 .eslintrc.js
 commitlint.config.js
 jest.config.js
+webpack-dts.config.js
 webpack-hmr.config.js
 webpack.config.js
 webpack.util.js

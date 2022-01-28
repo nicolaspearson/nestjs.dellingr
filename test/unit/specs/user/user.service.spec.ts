@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { BadRequestError, NotFoundError } from '$/common/error';
+import { ConflictError, NotFoundError } from '$/common/error';
 import { UserRepository } from '$/db/repositories/user.repository';
 import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME, UserService } from '$/user/user.service';
 
@@ -32,35 +32,22 @@ describe('User Service', () => {
     });
   });
 
-  describe('findByValidCredentials', () => {
-    test('should retrieve the user that matches the provided credentials', async () => {
-      userMockRepo.findByValidCredentials?.mockResolvedValueOnce(userMockJohn);
-      const result = await service.findByValidCredentials(
-        userMockJohn.email,
-        userMockJohn.password,
-      );
-      expect(result).toMatchObject(userMockJohn);
-      expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith({
-        email: userMockJohn.email,
-        password: userMockJohn.password,
-      });
-    });
-  });
-
   describe('profile', () => {
-    test('should allow a user to retrieve their profile (with events)', async () => {
-      userMockRepo.findByUuid?.mockResolvedValueOnce(userMockJohn);
+    test('should allow a user to retrieve their profile', async () => {
+      userMockRepo.findByUuidOrFail?.mockResolvedValueOnce(userMockJohn);
       const result = await service.profile(userMockJohn.uuid);
       expect(result).toMatchObject(userMockJohn);
-      expect(userMockRepo.findByUuid).toHaveBeenCalledWith({
+      expect(userMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
       });
     });
 
     test('throws when the user does not exist', async () => {
-      userMockRepo.findByUuid?.mockResolvedValueOnce(undefined);
+      userMockRepo.findByUuidOrFail?.mockRejectedValueOnce(
+        new NotFoundError('User does not exist.'),
+      );
       await expect(service.profile(userMockJohn.uuid)).rejects.toThrowError(NotFoundError);
-      expect(userMockRepo.findByUuid).toHaveBeenCalledWith({
+      expect(userMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
       });
     });
@@ -80,7 +67,7 @@ describe('User Service', () => {
     test("throws when the user's email address already exists", async () => {
       userMockRepo.create?.mockRejectedValueOnce(new Error('User already exists!'));
       const { email, password } = userRegistrationRequestMock;
-      await expect(service.register(email, password)).rejects.toThrowError(BadRequestError);
+      await expect(service.register(email, password)).rejects.toThrowError(ConflictError);
       expect(userMockRepo.create).toHaveBeenCalledWith({
         email,
         password,

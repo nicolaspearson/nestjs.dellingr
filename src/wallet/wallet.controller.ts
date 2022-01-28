@@ -15,7 +15,12 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 
 import { CreateWalletRequest, IdParameter, WalletResponse } from '$/common/dto';
 import { ApiGroup } from '$/common/enum/api-group.enum';
-import { InternalServerError, UnauthorizedError } from '$/common/error';
+import {
+  BadRequestError,
+  InternalServerError,
+  NotFoundError,
+  UnauthorizedError,
+} from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
 import { WalletService } from '$/wallet/wallet.service';
 
@@ -39,9 +44,19 @@ export class WalletController {
     type: WalletResponse,
   })
   @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid payload provided.',
+    type: BadRequestError,
+  })
+  @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
     description: 'Access denied.',
     type: UnauthorizedError,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'The provided user does not exist.',
+    type: NotFoundError,
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -52,7 +67,7 @@ export class WalletController {
     // We can use a non-null assertion below because the userUuid must exist on the
     // request because it is verified and added to the request by the JwtAuthGuard.
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const wallet = await this.walletService.create(req.userUuid!, dto.name);
+    const wallet = await this.walletService.create(req.userUuid!, dto);
     return new WalletResponse(wallet);
   }
 
@@ -71,9 +86,19 @@ export class WalletController {
     type: WalletResponse,
   })
   @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid payload provided.',
+    type: BadRequestError,
+  })
+  @ApiResponse({
     status: HttpStatus.UNAUTHORIZED,
     description: 'Access denied.',
     type: UnauthorizedError,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'The requested wallet does not exist.',
+    type: NotFoundError,
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,

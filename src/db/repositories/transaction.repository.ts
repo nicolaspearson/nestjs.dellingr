@@ -5,6 +5,7 @@ import { InjectConnection } from '@nestjs/typeorm';
 
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
+import { NotFoundError } from '$/common/error';
 import { TransactionWalletUserRepository } from '$/db/repositories/aggregate/transaction-wallet-user.repository';
 import { TransactionEntityRepository } from '$/db/repositories/entity/transaction-entity.repository';
 import { WalletEntityRepository } from '$/db/repositories/entity/wallet-entity.repository';
@@ -14,6 +15,7 @@ export class TransactionRepository implements Api.Repositories.Transaction {
   constructor(
     @InjectConnection()
     protected readonly connection: Connection,
+    // Aggregate Repositories
     private readonly transactionWalletUserRepository: TransactionWalletUserRepository,
     // Entity Repositories
     private readonly transactionEntityRepository: TransactionEntityRepository,
@@ -35,6 +37,17 @@ export class TransactionRepository implements Api.Repositories.Transaction {
     userUuid: Uuid;
   }): Promise<Api.Entities.Transaction | undefined> {
     return this.transactionWalletUserRepository.findByTransactionUuid(data);
+  }
+
+  async findByUuidOrFail(data: {
+    transactionUuid: Uuid;
+    userUuid: Uuid;
+  }): Promise<Api.Entities.Transaction> {
+    const transaction = await this.findByUuid(data);
+    if (!transaction) {
+      throw new NotFoundError(`Transaction with uuid: ${data.transactionUuid} does not exist.`);
+    }
+    return transaction;
   }
 
   process(data: { balance: number; transactionUuid: Uuid; walletUuid: Uuid }): Promise<void> {
