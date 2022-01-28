@@ -6,7 +6,6 @@ import { UserService } from '$/user/user.service';
 
 import {
   authenticatedRequestMock,
-  responseMock,
   userMockJohn,
   userProfileResponseMock,
   userRegistrationRequestMock,
@@ -49,14 +48,14 @@ describe('User Controller', () => {
   describe('register', () => {
     test('should allow a user to register', async () => {
       const { email, password } = userRegistrationRequestMock;
-      await controller.register(responseMock, userRegistrationRequestMock);
+      await controller.register(userRegistrationRequestMock);
       expect(userMockService.register).toHaveBeenCalledWith(email, password);
     });
 
     test('should swallow conflict errors to avoid user enumeration attacks.', async () => {
       userMockService.register.mockRejectedValueOnce(new ConflictError('User already exists.'));
       const { email, password } = userRegistrationRequestMock;
-      await controller.register(responseMock, userRegistrationRequestMock);
+      await controller.register(userRegistrationRequestMock);
       expect(userMockService.register).toHaveBeenCalledWith(email, password);
     });
 
@@ -65,9 +64,9 @@ describe('User Controller', () => {
         new InternalServerError('An unexpected error occurred.'),
       );
       const { email, password } = userRegistrationRequestMock;
-      await expect(
-        controller.register(responseMock, userRegistrationRequestMock),
-      ).rejects.toThrowError(InternalServerError);
+      await expect(controller.register(userRegistrationRequestMock)).rejects.toThrowError(
+        InternalServerError,
+      );
       expect(userMockService.register).toHaveBeenCalledWith(email, password);
     });
   });

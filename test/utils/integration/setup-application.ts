@@ -11,14 +11,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppModule } from '$/app/app.module';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
+import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
 import { seed } from '$/db/utils/seed.util';
 
 import { NoOutputLogger } from '#/utils/integration/no-output.logger';
 
+export interface IntegrationTestApplication {
+  application: INestApplication;
+  connection: Connection;
+  module: TestingModule;
+}
+
 export interface Options {
-  dbSchema?: string;
+  dbSchema: string;
   disableLogging?: boolean;
   enableCors?: boolean;
   enableHelmet?: boolean;
@@ -29,32 +36,21 @@ export interface Options {
   overrides?: { token: string | symbol | Type<unknown>; value: unknown }[];
 }
 
-export async function setupApplication(options?: Options): Promise<{
-  application: INestApplication;
-  module: TestingModule;
-}> {
-  const instance = await create({
+export async function setupApplication(options: Options): Promise<IntegrationTestApplication> {
+  const instance = await createApplication({
     ...options,
     disableLogging: true,
     enableCors: true,
     enableHelmet: true,
-    globalPrefix: '/api/v1',
+    globalPrefix: API_GLOBAL_PREFIX,
     globalFilters: [new ErrorFilter()],
     globalPipes: [new DtoValidationPipe()],
   });
-
   await instance.application.init();
-
-  return {
-    application: instance.application,
-    module: instance.module,
-  };
+  return instance;
 }
 
-async function create(options: Options): Promise<{
-  application: INestApplication;
-  module: TestingModule;
-}> {
+async function createApplication(options: Options): Promise<IntegrationTestApplication> {
   const imports = [...(options.metadata?.imports ?? []), AppModule];
 
   imports.push(
@@ -65,10 +61,8 @@ async function create(options: Options): Promise<{
     }),
   );
 
-  if (options.dbSchema) {
-    const connection = await createDatabase(options.dbSchema);
-    imports.push(TypeOrmModule.forRoot(connection.options));
-  }
+  const connection = await createDatabase(options.dbSchema);
+  imports.push(TypeOrmModule.forRoot(connection.options));
 
   const builder: TestingModuleBuilder = Test.createTestingModule({
     controllers: options.metadata?.controllers,
@@ -113,7 +107,7 @@ async function create(options: Options): Promise<{
     application.useGlobalPipes(...options.globalPipes);
   }
 
-  return { application, module };
+  return { application, connection, module };
 }
 
 async function createDatabase(schema: string): Promise<Connection> {

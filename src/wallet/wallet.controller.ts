@@ -26,11 +26,11 @@ import { WalletService } from '$/wallet/wallet.service';
 
 const TAG = ApiGroup.Wallet;
 
-@Controller('wallet')
+@Controller()
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
-  @Post()
+  @Post('wallets')
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
   @ApiOperation({
@@ -39,7 +39,7 @@ export class WalletController {
   })
   @ApiTags(TAG)
   @ApiResponse({
-    status: HttpStatus.OK,
+    status: HttpStatus.CREATED,
     description: 'Wallet successfully created.',
     type: WalletResponse,
   })
@@ -71,7 +71,7 @@ export class WalletController {
     return new WalletResponse(wallet);
   }
 
-  @Get(':id')
+  @Get('wallet/:id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard)
   @ApiOperation({

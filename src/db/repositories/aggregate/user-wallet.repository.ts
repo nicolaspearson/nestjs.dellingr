@@ -1,12 +1,19 @@
 import { Connection } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
+import { Injectable } from '@nestjs/common';
+import { InjectConnection } from '@nestjs/typeorm';
+
 import User from '$/db/entities/user.entity';
 import Wallet from '$/db/entities/wallet.entity';
 import { generateSalt } from '$/db/utils/user.util';
 
+@Injectable()
 export class UserWalletRepository {
-  constructor(protected readonly connection: Connection) {}
+  constructor(
+    @InjectConnection()
+    protected readonly connection: Connection,
+  ) {}
 
   create(data: {
     email: Email;

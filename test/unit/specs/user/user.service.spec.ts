@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME } from '$/common/constants';
 import { ConflictError, NotFoundError } from '$/common/error';
 import { UserRepository } from '$/db/repositories/user.repository';
-import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME, UserService } from '$/user/user.service';
+import { UserService } from '$/user/user.service';
 
 import { userMockJohn, userRegistrationRequestMock } from '#/utils/fixtures';
 import { userMockRepo } from '#/utils/mocks/repo.mock';
@@ -56,7 +57,8 @@ describe('User Service', () => {
   describe('register', () => {
     test('should allow a user to register', async () => {
       const { email, password } = userRegistrationRequestMock;
-      await service.register(email, password);
+      const result = await service.register(email, password);
+      expect(result).toMatchObject(userMockJohn);
       expect(userMockRepo.create).toHaveBeenCalledWith({
         email,
         password,

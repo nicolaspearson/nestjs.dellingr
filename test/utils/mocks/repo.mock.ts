@@ -12,7 +12,7 @@ export const transactionMockRepo = mocked<Api.Repositories.Transaction>(
     create: jest.fn().mockResolvedValue(transactionMockPayedAlice),
     findByUuid: jest.fn().mockResolvedValue(transactionMockPayedAlice),
     findByUuidOrFail: jest.fn().mockResolvedValue(transactionMockPayedAlice),
-    process: jest.fn().mockResolvedValue(undefined),
+    process: jest.fn().mockResolvedValue(transactionMockPayedAlice),
     updateState: jest.fn().mockResolvedValue({ affected: 1 }),
   },
   true,

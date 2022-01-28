@@ -2,6 +2,7 @@ import { default as request } from 'supertest';
 
 import { HttpStatus, INestApplication } from '@nestjs/common';
 
+import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, LoginRequest } from '$/common/dto';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
@@ -10,13 +11,14 @@ import { setupApplication } from '#/utils/integration/setup-application';
 describe('Auth Module', () => {
   let app: INestApplication;
 
-  const baseUrl = '/api/v1/auth';
+  const baseUrl = `${API_GLOBAL_PREFIX}/auth`;
+  const user = userFixtures[0] as Api.Entities.User;
 
   beforeEach(jest.clearAllMocks);
 
   beforeAll(async () => {
-    const setup = await setupApplication({ dbSchema: 'integration_auth' });
-    app = setup.application;
+    const instance = await setupApplication({ dbSchema: 'integration_auth' });
+    app = instance.application;
   });
 
   describe(`POST ${baseUrl}/login`, () => {
@@ -24,7 +26,7 @@ describe('Auth Module', () => {
       const res = await request(app.getHttpServer())
         .post(`${baseUrl}/login`)
         .send({
-          email: userFixtures[0].email,
+          email: user.email,
           password: DEFAULT_PASSWORD,
         } as LoginRequest)
         .expect(HttpStatus.OK);
@@ -45,7 +47,7 @@ describe('Auth Module', () => {
       const res = await request(app.getHttpServer())
         .post(`${baseUrl}/login`)
         .send({
-          email: userFixtures[0].email,
+          email: user.email,
           password: 'invalid-password',
         } as LoginRequest);
       expect(res.status).toEqual(HttpStatus.NOT_FOUND);

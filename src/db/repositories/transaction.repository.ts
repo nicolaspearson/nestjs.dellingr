@@ -50,8 +50,12 @@ export class TransactionRepository implements Api.Repositories.Transaction {
     return transaction;
   }
 
-  process(data: { balance: number; transactionUuid: Uuid; walletUuid: Uuid }): Promise<void> {
-    return this.connection.manager.transaction(async (manager) => {
+  async process(data: {
+    balance: number;
+    transactionUuid: Uuid;
+    walletUuid: Uuid;
+  }): Promise<Api.Entities.Transaction> {
+    await this.connection.manager.transaction(async (manager) => {
       await this.walletEntityRepository.updateBalance(
         {
           balance: data.balance,
@@ -67,6 +71,11 @@ export class TransactionRepository implements Api.Repositories.Transaction {
         manager,
       );
     });
+    const transaction = await this.transactionEntityRepository.findByUuid({
+      transactionUuid: data.transactionUuid,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return transaction!;
   }
 
   updateState(data: {

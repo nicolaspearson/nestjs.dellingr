@@ -2,30 +2,29 @@ import { default as request } from 'supertest';
 
 import { HttpStatus, INestApplication } from '@nestjs/common';
 
+import { API_GLOBAL_PREFIX } from '$/common/constants';
+
 import { healthCheckResponseMock } from '#/utils/fixtures';
 import { setupApplication } from '#/utils/integration/setup-application';
 
 describe('Health Module', () => {
   let app: INestApplication;
 
-  const baseUrl = '/api/v1/health';
+  const baseUrl = `${API_GLOBAL_PREFIX}/health`;
 
   beforeEach(jest.clearAllMocks);
 
   beforeAll(async () => {
-    const setup = await setupApplication({ dbSchema: 'integration_health' });
-    app = setup.application;
+    const instance = await setupApplication({ dbSchema: 'integration_health' });
+    app = instance.application;
   });
 
   describe(`GET ${baseUrl}`, () => {
     test('[200] => should return the health status correctly', async () => {
       const res = await request(app.getHttpServer()).get(baseUrl).expect(HttpStatus.OK);
       expect(res.body).toMatchObject(healthCheckResponseMock);
-    });
-
-    test('[200] => should set headers correctly', async () => {
-      const res = await request(app.getHttpServer()).get(baseUrl).expect(HttpStatus.OK);
       /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+      // Should set headers correctly
       expect(res.header).toMatchObject({
         'access-control-allow-credentials': 'true',
         connection: 'close',

@@ -27,11 +27,11 @@ import { TransactionService } from '$/transaction/transaction.service';
 
 const TAG = ApiGroup.Transaction;
 
-@Controller('transaction')
+@Controller()
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  @Post()
+  @Post('transactions')
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
   @ApiOperation({
@@ -40,7 +40,7 @@ export class TransactionController {
   })
   @ApiTags(TAG)
   @ApiResponse({
-    status: HttpStatus.OK,
+    status: HttpStatus.CREATED,
     description: 'Transaction successfully created.',
     type: TransactionResponse,
   })
@@ -78,7 +78,7 @@ export class TransactionController {
     return new TransactionResponse(transaction);
   }
 
-  @Get(':id')
+  @Get('transaction/:id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard)
   @ApiOperation({

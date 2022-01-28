@@ -1,5 +1,5 @@
 import { oneLineTrim } from 'common-tags';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 
 import {
   Body,
@@ -10,7 +10,6 @@ import {
   HttpStatus,
   Post,
   Req,
-  Res,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -32,6 +31,36 @@ const TAG = ApiGroup.User;
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Delete('user')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({
+    summary: 'Allows a user to delete their account.',
+    description: 'Deletes the account of the authenticated user.',
+  })
+  @ApiTags(TAG)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'User has been successfully deleted.',
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Access denied.',
+    type: UnauthorizedError,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'An internal error occurred.',
+    type: InternalServerError,
+  })
+  delete(@Req() req: Request): Promise<void> {
+    // We can use a non-null assertion below because the userUuid must exist on the
+    // request because it is verified and added to the request by the JwtAuthGuard.
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return this.userService.delete(req.userUuid!);
+  }
 
   @Get('user')
   @HttpCode(HttpStatus.OK)
@@ -70,36 +99,6 @@ export class UserController {
     return new UserProfileResponse(user);
   }
 
-  @Delete('user')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @UseGuards(JwtAuthGuard)
-  @ApiOperation({
-    summary: 'Allows a user to delete their account.',
-    description: 'Deletes the account of the authenticated user.',
-  })
-  @ApiTags(TAG)
-  @ApiBearerAuth()
-  @ApiResponse({
-    status: HttpStatus.NO_CONTENT,
-    description: 'User has been successfully deleted.',
-  })
-  @ApiResponse({
-    status: HttpStatus.UNAUTHORIZED,
-    description: 'Access denied.',
-    type: UnauthorizedError,
-  })
-  @ApiResponse({
-    status: HttpStatus.INTERNAL_SERVER_ERROR,
-    description: 'An internal error occurred.',
-    type: InternalServerError,
-  })
-  delete(@Req() req: Request): Promise<void> {
-    // We can use a non-null assertion below because the userUuid must exist on the
-    // request because it is verified and added to the request by the JwtAuthGuard.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.userService.delete(req.userUuid!);
-  }
-
   @Post('users/registration')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
@@ -125,15 +124,16 @@ export class UserController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  async register(@Res() res: Response, @Body() dto: UserRegistrationRequest): Promise<void> {
+  async register(@Body() dto: UserRegistrationRequest): Promise<void> {
     try {
       await this.userService.register(dto.email, dto.password);
     } catch (error) {
       // Ignore conflict errors to avoid user enumeration attacks.
+      /* istanbul ignore next: else path does not matter */
       if (!(error instanceof ConflictError)) {
+        /* istanbul ignore next: covered in the unit tests */
         throw error;
       }
     }
-    res.status(201).json({});
   }
 }

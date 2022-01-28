@@ -85,7 +85,11 @@ declare namespace Api {
         transactionUuid: Uuid;
         userUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
-      process(data: { balance: number; transactionUuid: Uuid; walletUuid: Uuid }): Promise<void>;
+      process(data: {
+        balance: number;
+        transactionUuid: Uuid;
+        walletUuid: Uuid;
+      }): Promise<Api.Entities.Transaction>;
       updateState(data: {
         state: import('$/common/enum/transaction-state.enum').TransactionState;
         transactionUuid: Uuid;

@@ -1,10 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 
+import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME } from '$/common/constants';
 import { ConflictError } from '$/common/error';
 import { UserRepository } from '$/db/repositories';
-
-export const DEFAULT_WALLET_BALANCE = 0;
-export const DEFAULT_WALLET_NAME = 'Main';
 
 @Injectable()
 export class UserService {
@@ -47,7 +45,7 @@ export class UserService {
    * @throws {@link ConflictError} If the user already exists.
    * @throws {@link InternalServerError} If the database transaction fails.
    */
-  async register(email: Email, password: string): Promise<void> {
+  async register(email: Email, password: string): Promise<Api.Entities.User> {
     this.logger.log(`Registering user with email address: ${email}`);
     try {
       const user = await this.userRepository.create({
@@ -56,6 +54,7 @@ export class UserService {
         wallet: { balance: DEFAULT_WALLET_BALANCE, name: DEFAULT_WALLET_NAME },
       });
       this.logger.log(`Successfully registered user with email address: ${user.email}`);
+      return user;
     } catch {
       throw new ConflictError('The provided email address is already in use.');
     }

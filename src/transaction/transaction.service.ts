@@ -63,12 +63,11 @@ export class TransactionService {
         }
         break;
     }
-    await this.transactionRepository.process({
+    return this.transactionRepository.process({
       balance,
       transactionUuid: transaction.uuid,
       walletUuid: wallet.uuid,
     });
-    return transaction;
   }
 
   /**

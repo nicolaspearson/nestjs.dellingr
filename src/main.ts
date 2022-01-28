@@ -10,6 +10,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
+import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { Environment } from '$/common/enum/environment.enum';
 import { ErrorFilter } from '$/common/filters/error.filter';
@@ -57,8 +58,8 @@ async function bootstrap() {
   app.useGlobalFilters(new ErrorFilter());
   app.useGlobalPipes(new DtoValidationPipe());
 
-  // Set the global API route prefix
-  app.setGlobalPrefix('/api/v1');
+  // Set the global route prefix
+  app.setGlobalPrefix(API_GLOBAL_PREFIX);
 
   // Configure swagger
   const builder = new DocumentBuilder().addBearerAuth().setTitle('Dellingr API').setVersion('1.0');

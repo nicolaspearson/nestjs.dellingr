@@ -29,10 +29,9 @@ export class WalletEntityRepository extends AbstractRepository<Wallet> {
       balance: number;
       walletUuid: Uuid;
     },
-    manager?: EntityManager,
+    manager: EntityManager,
   ): Promise<Api.Repositories.Responses.UpdateResult> {
-    const entityManager = manager ?? this.manager;
-    return entityManager
+    return manager
       .createQueryBuilder()
       .update(Wallet)
       .set({ balance: data.balance })

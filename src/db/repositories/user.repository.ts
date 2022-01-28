@@ -15,7 +15,7 @@ export class UserRepository implements Api.Repositories.User {
     private readonly userEntityRepository: UserEntityRepository,
   ) {}
 
-  create(data: {
+  async create(data: {
     email: Email;
     password: string;
     wallet: { balance: number; name: string };

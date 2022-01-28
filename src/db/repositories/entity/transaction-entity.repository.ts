@@ -33,9 +33,9 @@ export class TransactionEntityRepository extends AbstractRepository<Transaction>
     return this.manager.save(Transaction, partialTransaction as Transaction);
   }
 
-  findByUuid(data: { transactionUuid: Uuid; userUuid: Uuid }): Promise<Transaction | undefined> {
+  findByUuid(data: { transactionUuid: Uuid }): Promise<Transaction | undefined> {
     return this.manager.findOne(Transaction, {
-      where: { uuid: data.transactionUuid, wallet: { user: data.userUuid } },
+      where: { uuid: data.transactionUuid },
     });
   }
 

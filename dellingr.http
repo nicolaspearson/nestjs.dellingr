@@ -35,7 +35,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### Create a new transaction
-POST {{baseUrl}}/transaction HTTP/1.1
+POST {{baseUrl}}/transactions HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -85,7 +85,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### Create a new wallet
-POST {{baseUrl}}/wallet HTTP/1.1
+POST {{baseUrl}}/wallets HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{token}}

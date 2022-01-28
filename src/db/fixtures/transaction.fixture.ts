@@ -2,7 +2,8 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
-import { walletFixtures } from '$/db/fixtures/wallet.fixture';
+
+import { walletFixtures } from './wallet.fixture';
 
 export const transactionFixtures: QueryDeepPartialEntity<Api.Entities.Transaction>[] = [
   {
@@ -11,7 +12,7 @@ export const transactionFixtures: QueryDeepPartialEntity<Api.Entities.Transactio
     amount: 1000,
     state: TransactionState.Processed,
     type: TransactionType.Credit,
-    wallet: { uuid: walletFixtures[0].uuid },
+    wallet: walletFixtures[0],
   },
   {
     uuid: '8c4bf666-bc2d-4816-86b0-928b81620526' as Uuid,
@@ -19,6 +20,6 @@ export const transactionFixtures: QueryDeepPartialEntity<Api.Entities.Transactio
     amount: 125,
     state: TransactionState.Processed,
     type: TransactionType.Debit,
-    wallet: { uuid: walletFixtures[0].uuid },
+    wallet: walletFixtures[0],
   },
 ];

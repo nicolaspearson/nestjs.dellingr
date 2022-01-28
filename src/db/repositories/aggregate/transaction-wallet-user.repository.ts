@@ -1,9 +1,11 @@
 import { Connection, SelectQueryBuilder } from 'typeorm';
 
+import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
 
 import Transaction from '$/db/entities/transaction.entity';
 
+@Injectable()
 export class TransactionWalletUserRepository {
   constructor(
     @InjectConnection()
