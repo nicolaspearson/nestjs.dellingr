@@ -45,7 +45,7 @@ describe('Transaction Service', () => {
 
   describe('create', () => {
     test('should allow a user to create a new credit transaction', async () => {
-      walletMockRepo.findByUuidOrFail.mockResolvedValueOnce(walletMockMain);
+      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMockMain);
       transactionMockRepo.create.mockResolvedValueOnce(transactionMockPaymentFromBob);
       const processedTransaction = {
         ...transactionMockPaymentFromBob,
@@ -54,7 +54,7 @@ describe('Transaction Service', () => {
       transactionMockRepo.process.mockResolvedValueOnce(processedTransaction);
       const result = await service.create(userMockJohn.uuid, createTransactionRequestMockCredit);
       expect(result).toMatchObject(processedTransaction);
-      expect(walletMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
+      expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         walletUuid: walletMockMain.uuid,
       });
@@ -73,7 +73,7 @@ describe('Transaction Service', () => {
     });
 
     test('should allow a user to create a new debit transaction', async () => {
-      walletMockRepo.findByUuidOrFail.mockResolvedValueOnce(walletMockMain);
+      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMockMain);
       transactionMockRepo.create.mockResolvedValueOnce(transactionMockPayedAlice);
       const processedTransaction = {
         ...transactionMockPayedAlice,
@@ -82,7 +82,7 @@ describe('Transaction Service', () => {
       transactionMockRepo.process.mockResolvedValueOnce(processedTransaction);
       const result = await service.create(userMockJohn.uuid, createTransactionRequestMockDebit);
       expect(result).toMatchObject(processedTransaction);
-      expect(walletMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
+      expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         walletUuid: walletMockMain.uuid,
       });
@@ -105,12 +105,12 @@ describe('Transaction Service', () => {
         ...walletMockMain,
         balance: 1,
       };
-      walletMockRepo.findByUuidOrFail.mockResolvedValueOnce(walletMock);
+      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMock);
       transactionMockRepo.create.mockResolvedValueOnce(transactionMockPayedAlice);
       await expect(
         service.create(userMockJohn.uuid, createTransactionRequestMockDebit),
       ).rejects.toThrowError(BadRequestError);
-      expect(walletMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
+      expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         walletUuid: walletMock.uuid,
       });
@@ -129,10 +129,12 @@ describe('Transaction Service', () => {
 
   describe('getById', () => {
     test('should allow a user to retrieve a specific transaction', async () => {
-      transactionMockRepo.findByUuidOrFail?.mockResolvedValueOnce(transactionMockPaymentFromBob);
+      transactionMockRepo.findByTransactionAndUserUuidOrFail?.mockResolvedValueOnce(
+        transactionMockPaymentFromBob,
+      );
       const result = await service.getById(userMockJohn.uuid, transactionMockPaymentFromBob.uuid);
       expect(result).toMatchObject(transactionMockPaymentFromBob);
-      expect(transactionMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
+      expect(transactionMockRepo.findByTransactionAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         transactionUuid: transactionMockPaymentFromBob.uuid,
       });

@@ -19,7 +19,7 @@ export class TransactionWalletUserRepository {
       .leftJoinAndSelect('wallet.user', 'user');
   }
 
-  findByTransactionUuid(data: {
+  findByTransactionAndUserUuid(data: {
     transactionUuid: Uuid;
     userUuid: Uuid;
   }): Promise<Transaction | undefined> {

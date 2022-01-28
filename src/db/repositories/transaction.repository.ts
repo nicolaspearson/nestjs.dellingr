@@ -32,18 +32,18 @@ export class TransactionRepository implements Api.Repositories.Transaction {
     return this.transactionEntityRepository.create(data);
   }
 
-  findByUuid(data: {
+  findByTransactionAndUserUuid(data: {
     transactionUuid: Uuid;
     userUuid: Uuid;
   }): Promise<Api.Entities.Transaction | undefined> {
-    return this.transactionWalletUserRepository.findByTransactionUuid(data);
+    return this.transactionWalletUserRepository.findByTransactionAndUserUuid(data);
   }
 
-  async findByUuidOrFail(data: {
+  async findByTransactionAndUserUuidOrFail(data: {
     transactionUuid: Uuid;
     userUuid: Uuid;
   }): Promise<Api.Entities.Transaction> {
-    const transaction = await this.findByUuid(data);
+    const transaction = await this.findByTransactionAndUserUuid(data);
     if (!transaction) {
       throw new NotFoundError(`Transaction with uuid: ${data.transactionUuid} does not exist.`);
     }

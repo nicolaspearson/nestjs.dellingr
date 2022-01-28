@@ -33,7 +33,7 @@ export class UserService {
    */
   profile(userUuid: Uuid): Promise<Api.Entities.User> {
     this.logger.log(`Retrieving profile for user with uuid: ${userUuid}`);
-    return this.userRepository.findByUuidOrFail({ userUuid });
+    return this.userRepository.findByUserUuidOrFail({ userUuid });
   }
 
   /**

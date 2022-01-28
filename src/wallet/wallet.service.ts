@@ -24,7 +24,7 @@ export class WalletService {
    */
   async create(userUuid: Uuid, dto: CreateWalletRequest): Promise<Api.Entities.Wallet> {
     // Check if the user exists
-    const user = await this.userRepository.findByUuidOrFail({ userUuid });
+    const user = await this.userRepository.findByUserUuidOrFail({ userUuid });
     this.logger.log(`Creating new wallet: "${dto.name}" for user with uuid: ${user.uuid}`);
     return this.walletRepository.create({ name: dto.name, userUuid: user.uuid });
   }
@@ -41,6 +41,6 @@ export class WalletService {
    */
   getById(userUuid: Uuid, walletUuid: Uuid): Promise<Api.Entities.Wallet> {
     this.logger.log(`Retrieving wallet with uuid: ${walletUuid} for user with uuid: ${userUuid}`);
-    return this.walletRepository.findByUuidOrFail({ userUuid, walletUuid });
+    return this.walletRepository.findByWalletAndUserUuidOrFail({ userUuid, walletUuid });
   }
 }

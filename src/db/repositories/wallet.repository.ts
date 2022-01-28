@@ -22,12 +22,18 @@ export class WalletRepository implements Api.Repositories.Wallet {
     return this.walletEntityRepository.create(data);
   }
 
-  findByUuid(data: { userUuid: Uuid; walletUuid: Uuid }): Promise<Api.Entities.Wallet | undefined> {
-    return this.walletTransactionRepository.findByWalletUuid(data);
+  findByWalletAndUserUuid(data: {
+    userUuid: Uuid;
+    walletUuid: Uuid;
+  }): Promise<Api.Entities.Wallet | undefined> {
+    return this.walletTransactionRepository.findByWalletAndUserUuid(data);
   }
 
-  async findByUuidOrFail(data: { userUuid: Uuid; walletUuid: Uuid }): Promise<Api.Entities.Wallet> {
-    const wallet = await this.findByUuid(data);
+  async findByWalletAndUserUuidOrFail(data: {
+    userUuid: Uuid;
+    walletUuid: Uuid;
+  }): Promise<Api.Entities.Wallet> {
+    const wallet = await this.findByWalletAndUserUuid(data);
     if (!wallet) {
       throw new NotFoundError(`Wallet with uuid: ${data.userUuid} does not exist.`);
     }

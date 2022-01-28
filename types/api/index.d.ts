@@ -77,11 +77,11 @@ declare namespace Api {
         type: import('$/common/enum/transaction-type.enum').TransactionType;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
-      findByUuid(data: {
+      findByTransactionAndUserUuid(data: {
         transactionUuid: Uuid;
         userUuid: Uuid;
       }): Promise<Api.Entities.Transaction | undefined>;
-      findByUuidOrFail(data: {
+      findByTransactionAndUserUuidOrFail(data: {
         transactionUuid: Uuid;
         userUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
@@ -103,8 +103,8 @@ declare namespace Api {
         wallet: { balance: number; name: string };
       }): Promise<Api.Entities.User>;
       delete(data: { userUuid: Uuid }): Promise<Api.Repositories.Responses.DeleteResult>;
-      findByUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined>;
-      findByUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User>;
+      findByUserUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined>;
+      findByUserUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User>;
       findByValidCredentials(data: {
         email: Email;
         password: string;
@@ -113,11 +113,14 @@ declare namespace Api {
 
     type Wallet = {
       create(data: { userUuid: Uuid; name: string }): Promise<Api.Entities.Wallet>;
-      findByUuid(data: {
+      findByWalletAndUserUuid(data: {
         userUuid: Uuid;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Wallet | undefined>;
-      findByUuidOrFail(data: { userUuid: Uuid; walletUuid: Uuid }): Promise<Api.Entities.Wallet>;
+      findByWalletAndUserUuidOrFail(data: {
+        userUuid: Uuid;
+        walletUuid: Uuid;
+      }): Promise<Api.Entities.Wallet>;
     };
   }
 }

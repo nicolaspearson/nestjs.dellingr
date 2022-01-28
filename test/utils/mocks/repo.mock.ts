@@ -10,8 +10,8 @@ import {
 export const transactionMockRepo = mocked<Api.Repositories.Transaction>(
   {
     create: jest.fn().mockResolvedValue(transactionMockPayedAlice),
-    findByUuid: jest.fn().mockResolvedValue(transactionMockPayedAlice),
-    findByUuidOrFail: jest.fn().mockResolvedValue(transactionMockPayedAlice),
+    findByTransactionAndUserUuid: jest.fn().mockResolvedValue(transactionMockPayedAlice),
+    findByTransactionAndUserUuidOrFail: jest.fn().mockResolvedValue(transactionMockPayedAlice),
     process: jest.fn().mockResolvedValue(transactionMockPayedAlice),
     updateState: jest.fn().mockResolvedValue({ affected: 1 }),
   },
@@ -22,8 +22,8 @@ export const userMockRepo = mocked<Api.Repositories.User>(
   {
     create: jest.fn().mockResolvedValue(userMockJohn),
     delete: jest.fn().mockResolvedValue({ affected: 1 }),
-    findByUuid: jest.fn().mockResolvedValue(userMockJohn),
-    findByUuidOrFail: jest.fn().mockResolvedValue(userMockJohn),
+    findByUserUuid: jest.fn().mockResolvedValue(userMockJohn),
+    findByUserUuidOrFail: jest.fn().mockResolvedValue(userMockJohn),
     findByValidCredentials: jest.fn().mockResolvedValue(userMockJohn),
   },
   true,
@@ -32,8 +32,8 @@ export const userMockRepo = mocked<Api.Repositories.User>(
 export const walletMockRepo = mocked<Api.Repositories.Wallet>(
   {
     create: jest.fn().mockResolvedValue(walletMockSecondary),
-    findByUuid: jest.fn().mockResolvedValue(walletMockMain),
-    findByUuidOrFail: jest.fn().mockResolvedValue(walletMockMain),
+    findByWalletAndUserUuid: jest.fn().mockResolvedValue(walletMockMain),
+    findByWalletAndUserUuidOrFail: jest.fn().mockResolvedValue(walletMockMain),
   },
   true,
 );

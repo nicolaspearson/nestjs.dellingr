@@ -27,12 +27,12 @@ export class UserRepository implements Api.Repositories.User {
     return this.userEntityRepository.delete(data);
   }
 
-  findByUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined> {
+  findByUserUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined> {
     return this.userWalletTransactionRepository.findByUserUuid(data);
   }
 
-  async findByUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User> {
-    const user = await this.findByUuid(data);
+  async findByUserUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User> {
+    const user = await this.findByUserUuid(data);
     if (!user) {
       throw new NotFoundError(`User with uuid: ${data.userUuid} does not exist.`);
     }

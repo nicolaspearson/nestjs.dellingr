@@ -43,7 +43,9 @@ describe('Wallet Service', () => {
     test('should allow a user to create a new wallet', async () => {
       const result = await service.create(userMockJohn.uuid, createWalletRequestMock);
       expect(result).toMatchObject(walletMockSecondary);
-      expect(userMockRepo.findByUuidOrFail).toHaveBeenCalledWith({ userUuid: userMockJohn.uuid });
+      expect(userMockRepo.findByUserUuidOrFail).toHaveBeenCalledWith({
+        userUuid: userMockJohn.uuid,
+      });
       expect(walletMockRepo.create).toHaveBeenCalledWith({
         name: createWalletRequestMock.name,
         userUuid: userMockJohn.uuid,
@@ -53,10 +55,10 @@ describe('Wallet Service', () => {
 
   describe('getById', () => {
     test('should allow a user to retrieve a specific wallet', async () => {
-      walletMockRepo.findByUuidOrFail?.mockResolvedValueOnce(walletMockMain);
+      walletMockRepo.findByWalletAndUserUuidOrFail?.mockResolvedValueOnce(walletMockMain);
       const result = await service.getById(userMockJohn.uuid, walletMockMain.uuid);
       expect(result).toMatchObject(walletMockMain);
-      expect(walletMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
+      expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         walletUuid: walletMockMain.uuid,
       });

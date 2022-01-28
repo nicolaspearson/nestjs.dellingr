@@ -18,7 +18,7 @@ export class WalletTransactionRepository {
       .leftJoinAndSelect('wallet.transactions', 'transactions');
   }
 
-  findByWalletUuid(data: { userUuid: Uuid; walletUuid: Uuid }): Promise<Wallet | undefined> {
+  findByWalletAndUserUuid(data: { userUuid: Uuid; walletUuid: Uuid }): Promise<Wallet | undefined> {
     return this.query()
       .where({
         uuid: data.walletUuid,

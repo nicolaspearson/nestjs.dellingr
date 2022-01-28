@@ -27,7 +27,7 @@ export class TransactionService {
    * @throws {@link InternalServerError} If the database transaction fails.
    */
   async create(userUuid: Uuid, dto: CreateTransactionRequest): Promise<Api.Entities.Transaction> {
-    const wallet = await this.walletRepository.findByUuidOrFail({
+    const wallet = await this.walletRepository.findByWalletAndUserUuidOrFail({
       userUuid,
       walletUuid: dto.walletId,
     });
@@ -81,6 +81,9 @@ export class TransactionService {
    */
   getById(userUuid: Uuid, transactionUuid: Uuid): Promise<Api.Entities.Transaction> {
     this.logger.log(`Retrieving user transaction with uuid: ${transactionUuid}`);
-    return this.transactionRepository.findByUuidOrFail({ transactionUuid, userUuid });
+    return this.transactionRepository.findByTransactionAndUserUuidOrFail({
+      transactionUuid,
+      userUuid,
+    });
   }
 }
