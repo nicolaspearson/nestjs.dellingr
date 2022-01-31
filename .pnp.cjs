@@ -101,6 +101,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.1.3"],
             ["ts-loader", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.2.6"],
             ["ts-node", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:10.4.0"],
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11"],
             ["typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.2.41"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["uuid", "npm:8.3.2"],
@@ -4827,6 +4828,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.1.3"],
             ["ts-loader", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.2.6"],
             ["ts-node", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:10.4.0"],
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11"],
             ["typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.2.41"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["uuid", "npm:8.3.2"],
@@ -8316,6 +8318,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["lunr", [
+        ["npm:2.3.9", {
+          "packageLocation": "./.yarn/cache/lunr-npm-2.3.9-fa3aa9c2d6-176719e24f.zip/node_modules/lunr/",
+          "packageDependencies": [
+            ["lunr", "npm:2.3.9"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["macos-release", [
         ["npm:2.5.0", {
           "packageLocation": "./.yarn/cache/macos-release-npm-2.5.0-1856dc5241-57379ba354.zip/node_modules/macos-release/",
@@ -8457,6 +8468,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/markdownlint-rule-helpers-npm-0.15.0-a9ff1ff8dd-c8cc35fdad.zip/node_modules/markdownlint-rule-helpers/",
           "packageDependencies": [
             ["markdownlint-rule-helpers", "npm:0.15.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["marked", [
+        ["npm:4.0.12", {
+          "packageLocation": "./.yarn/cache/marked-npm-4.0.12-1fc6e0ed31-7575117f85.zip/node_modules/marked/",
+          "packageDependencies": [
+            ["marked", "npm:4.0.12"]
           ],
           "linkType": "HARD",
         }]
@@ -10292,6 +10312,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["shiki", [
+        ["npm:0.10.0", {
+          "packageLocation": "./.yarn/cache/shiki-npm-0.10.0-fc0b9f8d84-b72630a56c.zip/node_modules/shiki/",
+          "packageDependencies": [
+            ["shiki", "npm:0.10.0"],
+            ["jsonc-parser", "npm:3.0.0"],
+            ["vscode-oniguruma", "npm:1.6.1"],
+            ["vscode-textmate", "npm:5.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["side-channel", [
         ["npm:1.0.4", {
           "packageLocation": "./.yarn/cache/side-channel-npm-1.0.4-e1f38b9e06-351e41b947.zip/node_modules/side-channel/",
@@ -11396,6 +11428,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["typedoc", [
+        ["npm:0.22.11", {
+          "packageLocation": "./.yarn/cache/typedoc-npm-0.22.11-aa5ea7b88b-7d29f4b771.zip/node_modules/typedoc/",
+          "packageDependencies": [
+            ["typedoc", "npm:0.22.11"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11", {
+          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-a61b887e0d/0/cache/typedoc-npm-0.22.11-aa5ea7b88b-7d29f4b771.zip/node_modules/typedoc/",
+          "packageDependencies": [
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11"],
+            ["@types/typescript", null],
+            ["glob", "npm:7.2.0"],
+            ["lunr", "npm:2.3.9"],
+            ["marked", "npm:4.0.12"],
+            ["minimatch", "npm:3.0.4"],
+            ["shiki", "npm:0.10.0"],
+            ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"]
+          ],
+          "packagePeers": [
+            "@types/typescript",
+            "typescript"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["typeorm", [
         ["npm:0.2.41", {
           "packageLocation": "./.yarn/cache/typeorm-npm-0.2.41-a6cfe0064b-edae24c359.zip/node_modules/typeorm/",
@@ -11656,6 +11715,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/vary-npm-1.1.2-b49f70ae63-ae0123222c.zip/node_modules/vary/",
           "packageDependencies": [
             ["vary", "npm:1.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["vscode-oniguruma", [
+        ["npm:1.6.1", {
+          "packageLocation": "./.yarn/cache/vscode-oniguruma-npm-1.6.1-5af2337283-b019563a0d.zip/node_modules/vscode-oniguruma/",
+          "packageDependencies": [
+            ["vscode-oniguruma", "npm:1.6.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["vscode-textmate", [
+        ["npm:5.2.0", {
+          "packageLocation": "./.yarn/cache/vscode-textmate-npm-5.2.0-82267678b1-5449b42d45.zip/node_modules/vscode-textmate/",
+          "packageDependencies": [
+            ["vscode-textmate", "npm:5.2.0"]
           ],
           "linkType": "HARD",
         }]

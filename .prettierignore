@@ -4,6 +4,7 @@
 .vscode/**
 coverage/**
 dist/**
+docs/**
 
 # Files
 .editorconfig
