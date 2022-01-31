@@ -2,9 +2,11 @@
 .yarn/**
 coverage/**
 dist/**
+docs/**
 .eslintrc.js
 commitlint.config.js
 jest.config.js
+typedoc.js
 webpack-dts.config.js
 webpack-hmr.config.js
 webpack.config.js
