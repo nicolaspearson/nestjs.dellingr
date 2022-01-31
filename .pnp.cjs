@@ -66,7 +66,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-transformer", "npm:0.5.1"],
             ["class-validator", "npm:0.13.2"],
             ["common-tags", "npm:1.8.2"],
-            ["dotenv", "npm:14.3.2"],
+            ["dotenv", "npm:15.0.0"],
             ["dtsgenerator", "npm:3.14.0"],
             ["eslint", "npm:8.8.0"],
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.3.0"],
@@ -4792,7 +4792,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-transformer", "npm:0.5.1"],
             ["class-validator", "npm:0.13.2"],
             ["common-tags", "npm:1.8.2"],
-            ["dotenv", "npm:14.3.2"],
+            ["dotenv", "npm:15.0.0"],
             ["dtsgenerator", "npm:3.14.0"],
             ["eslint", "npm:8.8.0"],
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.3.0"],
@@ -4961,10 +4961,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "HARD",
         }],
-        ["npm:14.3.2", {
-          "packageLocation": "./.yarn/cache/dotenv-npm-14.3.2-08998c870b-86c0675891.zip/node_modules/dotenv/",
+        ["npm:15.0.0", {
+          "packageLocation": "./.yarn/cache/dotenv-npm-15.0.0-596676c735-be5d852b2a.zip/node_modules/dotenv/",
           "packageDependencies": [
-            ["dotenv", "npm:14.3.2"]
+            ["dotenv", "npm:15.0.0"]
           ],
           "linkType": "HARD",
         }],
