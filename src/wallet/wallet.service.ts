@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 
+import { DEFAULT_WALLET_BALANCE } from '$/common/constants';
 import { CreateWalletRequest } from '$/common/dto';
 import { UserRepository, WalletRepository } from '$/db/repositories';
 
@@ -10,7 +11,9 @@ export class WalletService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly walletRepository: WalletRepository,
-  ) {}
+  ) {
+    this.logger.debug('Wallet service created!');
+  }
 
   /**
    * Creates a new wallet for the specified user.
@@ -26,7 +29,11 @@ export class WalletService {
     // Check if the user exists
     const user = await this.userRepository.findByUserUuidOrFail({ userUuid });
     this.logger.log(`Creating new wallet: "${dto.name}" for user with uuid: ${user.uuid}`);
-    return this.walletRepository.create({ name: dto.name, userUuid: user.uuid });
+    return this.walletRepository.create({
+      balance: DEFAULT_WALLET_BALANCE,
+      name: dto.name,
+      userUuid: user.uuid,
+    });
   }
 
   /**

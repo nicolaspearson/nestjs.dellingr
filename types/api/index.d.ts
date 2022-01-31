@@ -77,6 +77,8 @@ declare namespace Api {
         type: import('$/common/enum/transaction-type.enum').TransactionType;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
+      findByUuid(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction | undefined>;
+      findByUuidOrFail(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction>;
       findByTransactionAndUserUuid(data: {
         transactionUuid: Uuid;
         userUuid: Uuid;
@@ -85,11 +87,6 @@ declare namespace Api {
         transactionUuid: Uuid;
         userUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
-      process(data: {
-        balance: number;
-        transactionUuid: Uuid;
-        walletUuid: Uuid;
-      }): Promise<Api.Entities.Transaction>;
       updateState(data: {
         state: import('$/common/enum/transaction-state.enum').TransactionState;
         transactionUuid: Uuid;
@@ -97,11 +94,7 @@ declare namespace Api {
     };
 
     type User = {
-      create(data: {
-        email: Email;
-        password: string;
-        wallet: { balance: number; name: string };
-      }): Promise<Api.Entities.User>;
+      create(data: { email: Email; password: string }): Promise<Api.Entities.User>;
       delete(data: { userUuid: Uuid }): Promise<Api.Repositories.Responses.DeleteResult>;
       findByUserUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined>;
       findByUserUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User>;
@@ -112,7 +105,7 @@ declare namespace Api {
     };
 
     type Wallet = {
-      create(data: { userUuid: Uuid; name: string }): Promise<Api.Entities.Wallet>;
+      create(data: { balance: number; name: string; userUuid: Uuid }): Promise<Api.Entities.Wallet>;
       findByWalletAndUserUuid(data: {
         userUuid: Uuid;
         walletUuid: Uuid;
@@ -121,6 +114,10 @@ declare namespace Api {
         userUuid: Uuid;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Wallet>;
+      updateBalance(data: {
+        balance: number;
+        walletUuid: Uuid;
+      }): Promise<Api.Repositories.Responses.UpdateResult>;
     };
   }
 }

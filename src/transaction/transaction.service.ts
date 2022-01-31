@@ -5,6 +5,7 @@ import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
 import { BadRequestError } from '$/common/error';
 import { TransactionRepository, WalletRepository } from '$/db/repositories';
+import { UnitOfWorkService } from '$/db/services';
 
 @Injectable()
 export class TransactionService {
@@ -12,8 +13,31 @@ export class TransactionService {
 
   constructor(
     private readonly transactionRepository: TransactionRepository,
+    private readonly unitOfWorkService: UnitOfWorkService,
     private readonly walletRepository: WalletRepository,
-  ) {}
+  ) {
+    this.logger.debug('Transaction service created!');
+  }
+
+  private async processTransaction(data: {
+    balance: number;
+    transactionUuid: Uuid;
+    walletUuid: Uuid;
+  }): Promise<Api.Entities.Transaction> {
+    // Update the wallet balance
+    await this.walletRepository.updateBalance({
+      balance: data.balance,
+      walletUuid: data.walletUuid,
+    });
+    // Update the state of the transaction
+    await this.transactionRepository.updateState({
+      state: TransactionState.Processed,
+      transactionUuid: data.transactionUuid,
+    });
+    return this.transactionRepository.findByUuidOrFail({
+      transactionUuid: data.transactionUuid,
+    });
+  }
 
   /**
    * Creates a new transaction using the specified wallet.
@@ -41,7 +65,7 @@ export class TransactionService {
       state: TransactionState.Pending,
       walletUuid: wallet.uuid,
     });
-    let balance;
+    let balance: number;
     switch (dto.type) {
       case TransactionType.Credit:
         // Credit the wallet balance
@@ -63,11 +87,14 @@ export class TransactionService {
         }
         break;
     }
-    return this.transactionRepository.process({
-      balance,
-      transactionUuid: transaction.uuid,
-      walletUuid: wallet.uuid,
-    });
+    return this.unitOfWorkService.doTransactional(
+      /* istanbul ignore next: this needs to be tested */ () =>
+        this.processTransaction({
+          balance,
+          transactionUuid: transaction.uuid,
+          walletUuid: wallet.uuid,
+        }),
+    );
   }
 
   /**

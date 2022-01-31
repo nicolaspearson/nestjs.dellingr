@@ -2,13 +2,38 @@ import { Injectable, Logger } from '@nestjs/common';
 
 import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME } from '$/common/constants';
 import { ConflictError } from '$/common/error';
-import { UserRepository } from '$/db/repositories';
+import { UserRepository, WalletRepository } from '$/db/repositories';
+import { UnitOfWorkService } from '$/db/services';
 
 @Injectable()
 export class UserService {
   private readonly logger: Logger = new Logger(UserService.name);
 
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly unitOfWorkService: UnitOfWorkService,
+    private readonly userRepository: UserRepository,
+    private readonly walletRepository: WalletRepository,
+  ) {
+    this.logger.debug('User service created!');
+  }
+
+  private async processUserRegistration(
+    email: Email,
+    password: string,
+  ): Promise<Api.Entities.User> {
+    const user = await this.userRepository.create({
+      email,
+      password,
+    });
+    const wallet = await this.walletRepository.create({
+      balance: DEFAULT_WALLET_BALANCE,
+      name: DEFAULT_WALLET_NAME,
+      userUuid: user.uuid,
+    });
+    // Assign the default wallet to user object so that it is available to upstream consumers.
+    user.wallets = [wallet];
+    return user;
+  }
 
   /**
    * Deletes a user's account from the database.
@@ -48,11 +73,10 @@ export class UserService {
   async register(email: Email, password: string): Promise<Api.Entities.User> {
     this.logger.log(`Registering user with email address: ${email}`);
     try {
-      const user = await this.userRepository.create({
-        email,
-        password,
-        wallet: { balance: DEFAULT_WALLET_BALANCE, name: DEFAULT_WALLET_NAME },
-      });
+      const user = await this.unitOfWorkService.doTransactional(
+        /* istanbul ignore next: this needs to be tested */ () =>
+          this.processUserRegistration(email, password),
+      );
       this.logger.log(`Successfully registered user with email address: ${user.email}`);
       return user;
     } catch {

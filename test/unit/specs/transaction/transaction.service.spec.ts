@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { BadRequestError } from '$/common/error';
 import { TransactionRepository, WalletRepository } from '$/db/repositories';
+import { UnitOfWorkService } from '$/db/services';
 import { TransactionService } from '$/transaction/transaction.service';
 
 import {
@@ -15,6 +16,7 @@ import {
   walletMockMain,
 } from '#/utils/fixtures';
 import { transactionMockRepo, walletMockRepo } from '#/utils/mocks/repo.mock';
+import { unitOfWorkMockService } from '#/utils/mocks/service.mock';
 
 describe('Transaction Service', () => {
   let module: TestingModule;
@@ -26,6 +28,10 @@ describe('Transaction Service', () => {
         {
           provide: TransactionRepository,
           useValue: transactionMockRepo,
+        },
+        {
+          provide: UnitOfWorkService,
+          useValue: unitOfWorkMockService,
         },
         {
           provide: WalletRepository,
@@ -51,7 +57,7 @@ describe('Transaction Service', () => {
         ...transactionMockPaymentFromBob,
         state: TransactionState.Processed,
       };
-      transactionMockRepo.process.mockResolvedValueOnce(processedTransaction);
+      unitOfWorkMockService.doTransactional.mockResolvedValueOnce(processedTransaction);
       const result = await service.create(userMockJohn.uuid, createTransactionRequestMockCredit);
       expect(result).toMatchObject(processedTransaction);
       expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
@@ -63,13 +69,8 @@ describe('Transaction Service', () => {
         state: TransactionState.Pending,
         walletUuid: createTransactionRequestMockCredit.walletId,
       });
-      const balance = walletMockMain.balance + transactionMockPaymentFromBob.amount;
       expect(transactionMockRepo.updateState).not.toHaveBeenCalled();
-      expect(transactionMockRepo.process).toHaveBeenCalledWith({
-        balance,
-        transactionUuid: transactionMockPaymentFromBob.uuid,
-        walletUuid: walletMockMain.uuid,
-      });
+      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
     });
 
     test('should allow a user to create a new debit transaction', async () => {
@@ -79,7 +80,7 @@ describe('Transaction Service', () => {
         ...transactionMockPayedAlice,
         state: TransactionState.Processed,
       };
-      transactionMockRepo.process.mockResolvedValueOnce(processedTransaction);
+      unitOfWorkMockService.doTransactional.mockResolvedValueOnce(processedTransaction);
       const result = await service.create(userMockJohn.uuid, createTransactionRequestMockDebit);
       expect(result).toMatchObject(processedTransaction);
       expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
@@ -91,13 +92,8 @@ describe('Transaction Service', () => {
         state: TransactionState.Pending,
         walletUuid: createTransactionRequestMockDebit.walletId,
       });
-      const balance = walletMockMain.balance - transactionMockPayedAlice.amount;
       expect(transactionMockRepo.updateState).not.toHaveBeenCalled();
-      expect(transactionMockRepo.process).toHaveBeenCalledWith({
-        balance,
-        transactionUuid: transactionMockPayedAlice.uuid,
-        walletUuid: walletMockMain.uuid,
-      });
+      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
     });
 
     test('throws if the user has insufficient funds in their wallet', async () => {
@@ -123,7 +119,7 @@ describe('Transaction Service', () => {
         state: TransactionState.Rejected,
         transactionUuid: transactionMockPayedAlice.uuid,
       });
-      expect(transactionMockRepo.process).not.toHaveBeenCalled();
+      expect(unitOfWorkMockService.doTransactional).not.toHaveBeenCalled();
     });
   });
 
@@ -136,6 +132,30 @@ describe('Transaction Service', () => {
       expect(result).toMatchObject(transactionMockPaymentFromBob);
       expect(transactionMockRepo.findByTransactionAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
+        transactionUuid: transactionMockPaymentFromBob.uuid,
+      });
+    });
+  });
+
+  describe('processTransaction', () => {
+    test('should process a transaction correctly', async () => {
+      transactionMockRepo.findByUuidOrFail.mockResolvedValueOnce(transactionMockPaymentFromBob);
+      const balance = walletMockMain.balance + transactionMockPaymentFromBob.amount;
+      const result = await service['processTransaction']({
+        balance,
+        transactionUuid: transactionMockPaymentFromBob.uuid,
+        walletUuid: walletMockMain.uuid,
+      });
+      expect(result).toMatchObject(transactionMockPaymentFromBob);
+      expect(walletMockRepo.updateBalance).toHaveBeenCalledWith({
+        balance,
+        walletUuid: walletMockMain.uuid,
+      });
+      expect(transactionMockRepo.updateState).toHaveBeenCalledWith({
+        state: TransactionState.Processed,
+        transactionUuid: transactionMockPaymentFromBob.uuid,
+      });
+      expect(transactionMockRepo.findByUuidOrFail).toHaveBeenCalledWith({
         transactionUuid: transactionMockPaymentFromBob.uuid,
       });
     });

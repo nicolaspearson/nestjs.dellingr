@@ -130,43 +130,12 @@ src
 
 ### Repositories
 
-The repositories have been divided into the following groups:
-
-Private:
-
-- `aggregate`: These repositories `aggregate` / `join` multiple entities together.
-- `entities`: These repositories only operate on a single `entity`.
-
-Public:
-
-- `root`: The `root` / `compositional` repositories compose multiple `aggregate` or `entity`
-  repositories together, and expose the functionality to `services`.
-
-This structure ensures that a single repository class is **ONLY** responsible for operating within a
-specific `entity` scope. The `root` / `compositional` repositories adhere to an interface defined
-in the `types/api/index.d.ts` file. All entities also extend interfaces declared in the this file,
-this assists in ensuring that the database layer is completely encapsulated from the rest of the
-source code. A database `entity` **MUST** never be directly referenced outside of the `db` directory
-within the source code.
-
-All `root` / `compositional` repositories are exported by the `repository.module`. A `service` is
-permitted to use on or more `repositories`. A repository must **NEVER** contain business logic. The
-ability of a `service` to use multiple `repositories` via a single module import greatly reduces the
-risk of creating circular dependency issues between `services`.
+This repository uses the `unit-of-work` pattern
+([implementation reference](https://github.com/LuanMaik/nestjs-unit-of-work)) in order to handle
+database transactions.
 
 ```sh
 src/db/repositories
-├── aggregate
-│   ├── aggregate.module.ts
-│   ├── transaction-wallet-user.repository.ts
-│   ├── user-wallet-transaction.repository.ts
-│   ├── user-wallet.repository.ts
-│   └── wallet-transaction.repository.ts
-├── entity
-│   ├── entity.module.ts
-│   ├── transaction-entity.repository.ts
-│   ├── user-entity.repository.ts
-│   └── wallet-entity.repository.ts
 ├── index.ts
 ├── repository.module.ts
 ├── transaction.repository.ts
@@ -273,3 +242,7 @@ This repository uses:
 - **prettier**: Code auto formatter.
 - **yarn2**: The preferred package manager.
 - **webpack**: The preferred application bundler.
+
+## References
+
+- [Unit of Work](https://github.com/LuanMaik/nestjs-unit-of-work)

@@ -1,34 +1,59 @@
-import { Injectable } from '@nestjs/common';
+import { EntityManager, SelectQueryBuilder } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+
+import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
-import { UserWalletTransactionRepository } from '$/db/repositories/aggregate/user-wallet-transaction.repository';
-import { UserWalletRepository } from '$/db/repositories/aggregate/user-wallet.repository';
-import { UserEntityRepository } from '$/db/repositories/entity/user-entity.repository';
+import User from '$/db/entities/user.entity';
+import { UnitOfWorkService } from '$/db/services';
+import { generateSalt } from '$/db/utils/user.util';
+
+type QueryOptions = {
+  withWallets: boolean;
+  withWalletTransactions: boolean;
+};
 
 @Injectable()
 export class UserRepository implements Api.Repositories.User {
-  constructor(
-    // Aggregate Repositories
-    private readonly userWalletTransactionRepository: UserWalletTransactionRepository,
-    private readonly userWalletRepository: UserWalletRepository,
-    // Entity Repositories
-    private readonly userEntityRepository: UserEntityRepository,
-  ) {}
+  private readonly logger: Logger = new Logger(UserRepository.name);
 
-  async create(data: {
-    email: Email;
-    password: string;
-    wallet: { balance: number; name: string };
-  }): Promise<Api.Entities.User> {
-    return this.userWalletRepository.create(data);
+  constructor(private readonly unitOfWorkService: UnitOfWorkService) {
+    this.logger.debug('User repository created!');
+  }
+
+  private getManager(): EntityManager {
+    return this.unitOfWorkService.getManager();
+  }
+
+  private query(options?: QueryOptions): SelectQueryBuilder<User> {
+    const query = this.getManager().createQueryBuilder(User, 'user');
+    if (options?.withWallets) {
+      query.leftJoinAndSelect('user.wallets', 'wallets');
+      if (options?.withWalletTransactions) {
+        query.leftJoinAndSelect('wallets.transactions', 'transactions');
+      }
+    }
+    return query;
+  }
+
+  async create(data: { email: Email; password: string }): Promise<Api.Entities.User> {
+    // Create the user with the required fields populated.
+    const partialUser: QueryDeepPartialEntity<User> = {
+      email: data.email,
+      // The pgcrypto extension salts and hashes the user's password.
+      password: generateSalt(data.password, "'bf', 8"),
+    };
+    return this.getManager().save(User, partialUser as User);
   }
 
   delete(data: { userUuid: Uuid }): Promise<Api.Repositories.Responses.DeleteResult> {
-    return this.userEntityRepository.delete(data);
+    return this.query().delete().where({ uuid: data.userUuid }).execute();
   }
 
   findByUserUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined> {
-    return this.userWalletTransactionRepository.findByUserUuid(data);
+    return this.query({ withWallets: true, withWalletTransactions: true })
+      .where({ uuid: data.userUuid })
+      .getOne();
   }
 
   async findByUserUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User> {
@@ -43,6 +68,10 @@ export class UserRepository implements Api.Repositories.User {
     email: Email;
     password: string;
   }): Promise<Api.Entities.User | undefined> {
-    return this.userEntityRepository.findByValidCredentials(data);
+    // We use the pgcrypto extension to compare the hashed password to the plain text version
+    return this.query()
+      .where({ email: data.email })
+      .andWhere('user.password = crypt(:password, user.password)', { password: data.password })
+      .getOne();
   }
 }

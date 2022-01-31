@@ -1,6 +1,7 @@
 import { mocked } from 'jest-mock';
 
 import { AuthService } from '$/auth/auth.service';
+import { UnitOfWorkService } from '$/db/services';
 import { TokenService } from '$/token/token.service';
 import { TransactionService } from '$/transaction/transaction.service';
 import { UserService } from '$/user/user.service';
@@ -32,6 +33,14 @@ export const transactionMockService = mocked<PublicOnly<TransactionService>>(
   {
     create: jest.fn().mockResolvedValue(transactionMockPayedAlice),
     getById: jest.fn().mockResolvedValue(transactionMockPayedAlice),
+  },
+  true,
+);
+
+export const unitOfWorkMockService = mocked<PublicOnly<UnitOfWorkService>>(
+  {
+    doTransactional: jest.fn().mockResolvedValue(undefined),
+    getManager: jest.fn().mockResolvedValue(undefined),
   },
   true,
 );

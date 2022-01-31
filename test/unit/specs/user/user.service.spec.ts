@@ -3,11 +3,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME } from '$/common/constants';
 import { ConflictError, NotFoundError } from '$/common/error';
-import { UserRepository } from '$/db/repositories/user.repository';
+import { UserRepository, WalletRepository } from '$/db/repositories';
+import { UnitOfWorkService } from '$/db/services';
 import { UserService } from '$/user/user.service';
 
-import { userMockJohn, userRegistrationRequestMock } from '#/utils/fixtures';
-import { userMockRepo } from '#/utils/mocks/repo.mock';
+import { userMockJohn, userRegistrationRequestMock, walletMockMain } from '#/utils/fixtures';
+import { userMockRepo, walletMockRepo } from '#/utils/mocks/repo.mock';
+import { unitOfWorkMockService } from '#/utils/mocks/service.mock';
 
 describe('User Service', () => {
   let module: TestingModule;
@@ -15,7 +17,18 @@ describe('User Service', () => {
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
-      providers: [{ provide: UserRepository, useValue: userMockRepo }, UserService],
+      providers: [
+        {
+          provide: UnitOfWorkService,
+          useValue: unitOfWorkMockService,
+        },
+        { provide: UserRepository, useValue: userMockRepo },
+        {
+          provide: WalletRepository,
+          useValue: walletMockRepo,
+        },
+        UserService,
+      ],
     }).compile();
     service = module.get<UserService>(UserService);
   });
@@ -30,6 +43,28 @@ describe('User Service', () => {
     test('should allow a user to delete their account', async () => {
       await service.delete(userMockJohn.uuid);
       expect(userMockRepo.delete).toHaveBeenCalledWith({ userUuid: userMockJohn.uuid });
+    });
+  });
+
+  describe('processUserRegistration', () => {
+    test('should process a user registration correctly', async () => {
+      userMockRepo.create.mockResolvedValueOnce(userMockJohn);
+      walletMockRepo.create.mockResolvedValueOnce(walletMockMain);
+      const { email, password } = userRegistrationRequestMock;
+      const result = await service['processUserRegistration'](email, password);
+      expect(result).toMatchObject({
+        ...userMockJohn,
+        wallets: [walletMockMain],
+      });
+      expect(userMockRepo.create).toHaveBeenCalledWith({
+        email,
+        password,
+      });
+      expect(walletMockRepo.create).toHaveBeenCalledWith({
+        balance: DEFAULT_WALLET_BALANCE,
+        name: DEFAULT_WALLET_NAME,
+        userUuid: userMockJohn.uuid,
+      });
     });
   });
 
@@ -56,25 +91,20 @@ describe('User Service', () => {
 
   describe('register', () => {
     test('should allow a user to register', async () => {
+      unitOfWorkMockService.doTransactional?.mockResolvedValueOnce(userMockJohn);
       const { email, password } = userRegistrationRequestMock;
       const result = await service.register(email, password);
       expect(result).toMatchObject(userMockJohn);
-      expect(userMockRepo.create).toHaveBeenCalledWith({
-        email,
-        password,
-        wallet: { balance: DEFAULT_WALLET_BALANCE, name: DEFAULT_WALLET_NAME },
-      });
+      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
     });
 
     test("throws when the user's email address already exists", async () => {
-      userMockRepo.create?.mockRejectedValueOnce(new Error('User already exists!'));
+      unitOfWorkMockService.doTransactional?.mockRejectedValueOnce(
+        new Error('User already exists!'),
+      );
       const { email, password } = userRegistrationRequestMock;
       await expect(service.register(email, password)).rejects.toThrowError(ConflictError);
-      expect(userMockRepo.create).toHaveBeenCalledWith({
-        email,
-        password,
-        wallet: { balance: DEFAULT_WALLET_BALANCE, name: DEFAULT_WALLET_NAME },
-      });
+      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
     });
   });
 
