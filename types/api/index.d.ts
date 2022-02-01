@@ -77,8 +77,6 @@ declare namespace Api {
         type: import('$/common/enum/transaction-type.enum').TransactionType;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
-      findByUuid(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction | undefined>;
-      findByUuidOrFail(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction>;
       findByTransactionAndUserUuid(data: {
         transactionUuid: Uuid;
         userUuid: Uuid;
@@ -87,10 +85,6 @@ declare namespace Api {
         transactionUuid: Uuid;
         userUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
-      updateState(data: {
-        state: import('$/common/enum/transaction-state.enum').TransactionState;
-        transactionUuid: Uuid;
-      }): Promise<Api.Repositories.Responses.UpdateResult>;
     };
 
     type User = {

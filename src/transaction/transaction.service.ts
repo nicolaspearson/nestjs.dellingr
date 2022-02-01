@@ -19,23 +19,35 @@ export class TransactionService {
     this.logger.debug('Transaction service created!');
   }
 
-  private async processTransaction(data: {
-    balance: number;
-    transactionUuid: Uuid;
-    walletUuid: Uuid;
-  }): Promise<Api.Entities.Transaction> {
+  private async processTransaction(
+    data: {
+      balance: number;
+    } & CreateTransactionRequest,
+  ): Promise<Api.Entities.Transaction> {
+    const transaction = await this.transactionRepository.create({
+      amount: data.amount,
+      reference: data.reference,
+      state: TransactionState.Processed,
+      type: data.type,
+      walletUuid: data.walletId,
+    });
     // Update the wallet balance
     await this.walletRepository.updateBalance({
       balance: data.balance,
-      walletUuid: data.walletUuid,
+      walletUuid: data.walletId,
     });
-    // Update the state of the transaction
-    await this.transactionRepository.updateState({
-      state: TransactionState.Processed,
-      transactionUuid: data.transactionUuid,
-    });
-    return this.transactionRepository.findByUuidOrFail({
-      transactionUuid: data.transactionUuid,
+    return transaction;
+  }
+
+  private async rejectTransaction(
+    data: CreateTransactionRequest,
+  ): Promise<Api.Entities.Transaction> {
+    return this.transactionRepository.create({
+      amount: data.amount,
+      reference: data.reference,
+      state: TransactionState.Rejected,
+      type: data.type,
+      walletUuid: data.walletId,
     });
   }
 
@@ -56,43 +68,19 @@ export class TransactionService {
       walletUuid: dto.walletId,
     });
     this.logger.log(`Creating new transaction for user with uuid: ${userUuid}`);
-    // Creating the transaction in a `pending` state. We do not need to wrap this
-    // operation in a database transaction because it is being created in a `pending`
-    // state. If subsequent operations fail the user's wallet balance is not impacted
-    // and the transaction remains in an unprocessed `pending` state.
-    const transaction = await this.transactionRepository.create({
-      ...dto,
-      state: TransactionState.Pending,
-      walletUuid: wallet.uuid,
-    });
-    let balance: number;
-    switch (dto.type) {
-      case TransactionType.Credit:
-        // Credit the wallet balance
-        balance = wallet.balance + dto.amount;
-        break;
-
-      case TransactionType.Debit:
-        // Ensure there is enough credit in the wallet to process the transaction
-        if (wallet.balance - dto.amount >= 0) {
-          // Debit the wallet balance
-          balance = wallet.balance - dto.amount;
-        } else {
-          // Reject the transaction
-          await this.transactionRepository.updateState({
-            state: TransactionState.Rejected,
-            transactionUuid: transaction.uuid,
-          });
-          throw new BadRequestError('Insufficient funds');
-        }
-        break;
+    const balance: number =
+      dto.type === TransactionType.Credit
+        ? wallet.balance + dto.amount
+        : wallet.balance - dto.amount;
+    if (balance < 0) {
+      await this.rejectTransaction(dto);
+      throw new BadRequestError('Insufficient funds');
     }
     return this.unitOfWorkService.doTransactional(
       /* istanbul ignore next: this needs to be tested */ () =>
         this.processTransaction({
+          ...dto,
           balance,
-          transactionUuid: transaction.uuid,
-          walletUuid: wallet.uuid,
         }),
     );
   }

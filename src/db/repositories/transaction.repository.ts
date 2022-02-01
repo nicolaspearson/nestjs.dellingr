@@ -56,22 +56,6 @@ export class TransactionRepository implements Api.Repositories.Transaction {
     return this.getManager().save(Transaction, partialTransaction as Transaction);
   }
 
-  findByUuid(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction | undefined> {
-    return this.getManager().findOne(Transaction, {
-      where: { uuid: data.transactionUuid },
-    });
-  }
-
-  async findByUuidOrFail(data: { transactionUuid: Uuid }): Promise<Api.Entities.Transaction> {
-    const transaction = await this.findByUuid(data);
-    /* istanbul ignore next */
-    if (!transaction) {
-      /* istanbul ignore next: unable to reach this via integration tests at the moment */
-      throw new NotFoundError(`Transaction with uuid: ${data.transactionUuid} does not exist.`);
-    }
-    return transaction;
-  }
-
   findByTransactionAndUserUuid(data: {
     transactionUuid: Uuid;
     userUuid: Uuid;
@@ -100,19 +84,5 @@ export class TransactionRepository implements Api.Repositories.Transaction {
       throw new NotFoundError(`Transaction with uuid: ${data.transactionUuid} does not exist.`);
     }
     return transaction;
-  }
-
-  updateState(data: {
-    state: TransactionState;
-    transactionUuid: Uuid;
-  }): Promise<Api.Repositories.Responses.UpdateResult> {
-    return this.getManager()
-      .createQueryBuilder()
-      .update(Transaction)
-      .set({ state: data.state })
-      .where({
-        uuid: data.transactionUuid,
-      })
-      .execute();
   }
 }
