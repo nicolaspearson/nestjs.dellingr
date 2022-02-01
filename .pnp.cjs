@@ -54,7 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:27.4.0"],
             ["@types/joi", "npm:17.2.3"],
             ["@types/jsonwebtoken", "npm:8.5.8"],
-            ["@types/node", "npm:16.11.21"],
+            ["@types/node", "npm:16.11.22"],
             ["@types/pg", "npm:8.6.4"],
             ["@types/prettier", "npm:2.4.3"],
             ["@types/supertest", "npm:2.0.11"],
@@ -2375,10 +2375,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@types/node", [
-        ["npm:16.11.21", {
-          "packageLocation": "./.yarn/cache/@types-node-npm-16.11.21-7c4c341552-75b679dc63.zip/node_modules/@types/node/",
+        ["npm:16.11.22", {
+          "packageLocation": "./.yarn/cache/@types-node-npm-16.11.22-e445de895f-9d879b9b04.zip/node_modules/@types/node/",
           "packageDependencies": [
-            ["@types/node", "npm:16.11.21"]
+            ["@types/node", "npm:16.11.22"]
           ],
           "linkType": "HARD",
         }],
@@ -4859,7 +4859,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:27.4.0"],
             ["@types/joi", "npm:17.2.3"],
             ["@types/jsonwebtoken", "npm:8.5.8"],
-            ["@types/node", "npm:16.11.21"],
+            ["@types/node", "npm:16.11.22"],
             ["@types/pg", "npm:8.6.4"],
             ["@types/prettier", "npm:2.4.3"],
             ["@types/supertest", "npm:2.0.11"],
@@ -11274,7 +11274,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tsconfig/node12", "npm:1.0.9"],
             ["@tsconfig/node14", "npm:1.0.1"],
             ["@tsconfig/node16", "npm:1.0.2"],
-            ["@types/node", "npm:16.11.21"],
+            ["@types/node", "npm:16.11.22"],
             ["@types/swc__core", null],
             ["@types/swc__wasm", null],
             ["@types/typescript", null],
