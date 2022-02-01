@@ -8,6 +8,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Logger,
   Post,
   Req,
   UseGuards,
@@ -24,13 +25,21 @@ import {
   UnauthorizedError,
 } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
+import { UnitOfWorkService } from '$/db/services';
 import { UserService } from '$/user/user.service';
 
 const TAG = ApiGroup.User;
 
 @Controller()
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  private readonly logger: Logger = new Logger(UserController.name);
+
+  constructor(
+    private readonly unitOfWorkService: UnitOfWorkService,
+    private readonly userService: UserService,
+  ) {
+    this.logger.debug('User controller created!');
+  }
 
   @Delete('user')
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -126,7 +135,10 @@ export class UserController {
   })
   async register(@Body() dto: UserRegistrationRequest): Promise<void> {
     try {
-      await this.userService.register(dto.email, dto.password);
+      await this.unitOfWorkService.doTransactional(
+        /* istanbul ignore next: covered in the integration tests */ () =>
+          this.userService.register(dto.email, dto.password),
+      );
     } catch (error) {
       // Ignore conflict errors to avoid user enumeration attacks.
       /* istanbul ignore next: else path does not matter */

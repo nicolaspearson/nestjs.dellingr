@@ -1,32 +1,60 @@
-import { Connection } from 'typeorm';
+import { EntityManager, SelectQueryBuilder } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
-import { Injectable } from '@nestjs/common';
-import { InjectConnection } from '@nestjs/typeorm';
+import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
-import { WalletTransactionRepository } from '$/db/repositories/aggregate/wallet-transaction.repository';
-import { WalletEntityRepository } from '$/db/repositories/entity/wallet-entity.repository';
+import Wallet from '$/db/entities/wallet.entity';
+import { UnitOfWorkService } from '$/db/services';
+
+type QueryOptions = {
+  withTransactions: boolean;
+};
 
 @Injectable()
 export class WalletRepository implements Api.Repositories.Wallet {
-  constructor(
-    @InjectConnection()
-    protected readonly connection: Connection,
-    // Aggregate Repositories
-    private readonly walletTransactionRepository: WalletTransactionRepository,
-    // Entity Repositories
-    private readonly walletEntityRepository: WalletEntityRepository,
-  ) {}
+  private readonly logger: Logger = new Logger(WalletRepository.name);
 
-  create(data: { name: string; userUuid: Uuid }): Promise<Api.Entities.Wallet> {
-    return this.walletEntityRepository.create(data);
+  constructor(private readonly unitOfWorkService: UnitOfWorkService) {
+    this.logger.debug('Wallet repository created!');
+  }
+
+  private getManager(): EntityManager {
+    return this.unitOfWorkService.getManager();
+  }
+
+  private query(options?: QueryOptions): SelectQueryBuilder<Wallet> {
+    const query = this.getManager().createQueryBuilder(Wallet, 'wallet');
+    if (options?.withTransactions) {
+      query.leftJoinAndSelect('wallet.transactions', 'transactions');
+    }
+    return query;
+  }
+
+  create(data: { balance: number; name: string; userUuid: Uuid }): Promise<Api.Entities.Wallet> {
+    const partialWallet: QueryDeepPartialEntity<Wallet> = {
+      balance: data.balance,
+      name: data.name,
+      transactions: [],
+      user: {
+        uuid: data.userUuid,
+      },
+    };
+    return this.getManager().save(Wallet, partialWallet as Wallet);
   }
 
   findByWalletAndUserUuid(data: {
     userUuid: Uuid;
     walletUuid: Uuid;
   }): Promise<Api.Entities.Wallet | undefined> {
-    return this.walletTransactionRepository.findByWalletAndUserUuid(data);
+    return this.query({ withTransactions: true })
+      .where({
+        uuid: data.walletUuid,
+        user: {
+          uuid: data.userUuid,
+        },
+      })
+      .getOne();
   }
 
   async findByWalletAndUserUuidOrFail(data: {
@@ -38,5 +66,19 @@ export class WalletRepository implements Api.Repositories.Wallet {
       throw new NotFoundError(`Wallet with uuid: ${data.userUuid} does not exist.`);
     }
     return wallet;
+  }
+
+  updateBalance(data: {
+    balance: number;
+    walletUuid: Uuid;
+  }): Promise<Api.Repositories.Responses.UpdateResult> {
+    return this.getManager()
+      .createQueryBuilder()
+      .update(Wallet)
+      .set({ balance: data.balance })
+      .where({
+        uuid: data.walletUuid,
+      })
+      .execute();
   }
 }

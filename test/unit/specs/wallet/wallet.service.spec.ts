@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { DEFAULT_WALLET_BALANCE } from '$/common/constants';
 import { UserRepository, WalletRepository } from '$/db/repositories';
 import { WalletService } from '$/wallet/wallet.service';
 
@@ -47,6 +48,7 @@ describe('Wallet Service', () => {
         userUuid: userMockJohn.uuid,
       });
       expect(walletMockRepo.create).toHaveBeenCalledWith({
+        balance: DEFAULT_WALLET_BALANCE,
         name: createWalletRequestMock.name,
         userUuid: userMockJohn.uuid,
       });

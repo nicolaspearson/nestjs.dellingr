@@ -1,26 +1,41 @@
-import { Connection } from 'typeorm';
+import { EntityManager, SelectQueryBuilder } from 'typeorm';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
-import { Injectable } from '@nestjs/common';
-import { InjectConnection } from '@nestjs/typeorm';
+import { Injectable, Logger } from '@nestjs/common';
 
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
 import { NotFoundError } from '$/common/error';
-import { TransactionWalletUserRepository } from '$/db/repositories/aggregate/transaction-wallet-user.repository';
-import { TransactionEntityRepository } from '$/db/repositories/entity/transaction-entity.repository';
-import { WalletEntityRepository } from '$/db/repositories/entity/wallet-entity.repository';
+import Transaction from '$/db/entities/transaction.entity';
+import { UnitOfWorkService } from '$/db/services';
+
+type QueryOptions = {
+  withWallet: boolean;
+  withWalletUser: boolean;
+};
 
 @Injectable()
 export class TransactionRepository implements Api.Repositories.Transaction {
-  constructor(
-    @InjectConnection()
-    protected readonly connection: Connection,
-    // Aggregate Repositories
-    private readonly transactionWalletUserRepository: TransactionWalletUserRepository,
-    // Entity Repositories
-    private readonly transactionEntityRepository: TransactionEntityRepository,
-    private readonly walletEntityRepository: WalletEntityRepository,
-  ) {}
+  private readonly logger: Logger = new Logger(TransactionRepository.name);
+
+  constructor(private readonly unitOfWorkService: UnitOfWorkService) {
+    this.logger.debug('Transaction repository created!');
+  }
+
+  private getManager(): EntityManager {
+    return this.unitOfWorkService.getManager();
+  }
+
+  private query(options?: QueryOptions): SelectQueryBuilder<Transaction> {
+    const query = this.getManager().createQueryBuilder(Transaction, 'transaction');
+    if (options?.withWallet) {
+      query.leftJoinAndSelect('transaction.wallet', 'wallet');
+      if (options?.withWalletUser) {
+        query.leftJoinAndSelect('wallet.user', 'user');
+      }
+    }
+    return query;
+  }
 
   create(data: {
     amount: number;
@@ -29,14 +44,35 @@ export class TransactionRepository implements Api.Repositories.Transaction {
     type: TransactionType;
     walletUuid: Uuid;
   }): Promise<Api.Entities.Transaction> {
-    return this.transactionEntityRepository.create(data);
+    const partialTransaction: QueryDeepPartialEntity<Api.Entities.Transaction> = {
+      amount: data.amount,
+      reference: data.reference,
+      state: data.state,
+      type: data.type,
+      wallet: {
+        uuid: data.walletUuid,
+      },
+    };
+    return this.getManager().save(Transaction, partialTransaction as Transaction);
   }
 
   findByTransactionAndUserUuid(data: {
     transactionUuid: Uuid;
     userUuid: Uuid;
   }): Promise<Api.Entities.Transaction | undefined> {
-    return this.transactionWalletUserRepository.findByTransactionAndUserUuid(data);
+    return this.query({
+      withWallet: true,
+      withWalletUser: true,
+    })
+      .where({
+        uuid: data.transactionUuid,
+        wallet: {
+          user: {
+            uuid: data.userUuid,
+          },
+        },
+      })
+      .getOne();
   }
 
   async findByTransactionAndUserUuidOrFail(data: {
@@ -48,40 +84,5 @@ export class TransactionRepository implements Api.Repositories.Transaction {
       throw new NotFoundError(`Transaction with uuid: ${data.transactionUuid} does not exist.`);
     }
     return transaction;
-  }
-
-  async process(data: {
-    balance: number;
-    transactionUuid: Uuid;
-    walletUuid: Uuid;
-  }): Promise<Api.Entities.Transaction> {
-    await this.connection.manager.transaction(async (manager) => {
-      await this.walletEntityRepository.updateBalance(
-        {
-          balance: data.balance,
-          walletUuid: data.walletUuid,
-        },
-        manager,
-      );
-      await this.transactionEntityRepository.updateState(
-        {
-          state: TransactionState.Processed,
-          transactionUuid: data.transactionUuid,
-        },
-        manager,
-      );
-    });
-    const transaction = await this.transactionEntityRepository.findByUuid({
-      transactionUuid: data.transactionUuid,
-    });
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return transaction!;
-  }
-
-  updateState(data: {
-    state: TransactionState;
-    transactionUuid: Uuid;
-  }): Promise<Api.Repositories.Responses.UpdateResult> {
-    return this.transactionEntityRepository.updateState(data);
   }
 }

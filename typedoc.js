@@ -6,7 +6,7 @@ module.exports = {
   excludeExternals: true,
   excludePrivate: true,
   excludeProtected: true,
-  name: 'Dellinger',
+  name: 'Dellingr',
   out: 'docs',
   tsconfig: 'tsconfig.json',
 };

@@ -6,6 +6,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Logger,
   Param,
   Post,
   Req,
@@ -28,7 +29,11 @@ const TAG = ApiGroup.Wallet;
 
 @Controller()
 export class WalletController {
-  constructor(private readonly walletService: WalletService) {}
+  private readonly logger: Logger = new Logger(WalletController.name);
+
+  constructor(private readonly walletService: WalletService) {
+    this.logger.debug('Wallet controller created!');
+  }
 
   @Post('wallets')
   @HttpCode(HttpStatus.CREATED)
