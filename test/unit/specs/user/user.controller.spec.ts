@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { ConflictError, InternalServerError } from '$/common/error';
+import { UnitOfWorkService } from '$/db/services';
 import { UserController } from '$/user/user.controller';
 import { UserService } from '$/user/user.service';
 
@@ -10,7 +11,7 @@ import {
   userProfileResponseMock,
   userRegistrationRequestMock,
 } from '#/utils/fixtures';
-import { userMockService } from '#/utils/mocks/service.mock';
+import { unitOfWorkMockService, userMockService } from '#/utils/mocks/service.mock';
 
 describe('User Controller', () => {
   let module: TestingModule;
@@ -19,7 +20,13 @@ describe('User Controller', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [UserController],
-      providers: [{ provide: UserService, useValue: userMockService }],
+      providers: [
+        {
+          provide: UnitOfWorkService,
+          useValue: unitOfWorkMockService,
+        },
+        { provide: UserService, useValue: userMockService },
+      ],
     }).compile();
     controller = module.get<UserController>(UserController);
   });
@@ -47,27 +54,26 @@ describe('User Controller', () => {
 
   describe('register', () => {
     test('should allow a user to register', async () => {
-      const { email, password } = userRegistrationRequestMock;
       await controller.register(userRegistrationRequestMock);
-      expect(userMockService.register).toHaveBeenCalledWith(email, password);
+      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
     });
 
     test('should swallow conflict errors to avoid user enumeration attacks.', async () => {
-      userMockService.register.mockRejectedValueOnce(new ConflictError('User already exists.'));
-      const { email, password } = userRegistrationRequestMock;
+      unitOfWorkMockService.doTransactional.mockRejectedValueOnce(
+        new ConflictError('User already exists.'),
+      );
       await controller.register(userRegistrationRequestMock);
-      expect(userMockService.register).toHaveBeenCalledWith(email, password);
+      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
     });
 
     test('throws if an internal service error occurs', async () => {
-      userMockService.register.mockRejectedValueOnce(
+      unitOfWorkMockService.doTransactional.mockRejectedValueOnce(
         new InternalServerError('An unexpected error occurred.'),
       );
-      const { email, password } = userRegistrationRequestMock;
       await expect(controller.register(userRegistrationRequestMock)).rejects.toThrowError(
         InternalServerError,
       );
-      expect(userMockService.register).toHaveBeenCalledWith(email, password);
+      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
     });
   });
 

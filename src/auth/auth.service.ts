@@ -11,7 +11,9 @@ export class AuthService {
   constructor(
     private readonly tokenService: TokenService,
     private readonly userRepository: UserRepository,
-  ) {}
+  ) {
+    this.logger.debug('Auth service created!');
+  }
 
   /**
    * Generates a new JWT for a user.

@@ -7,6 +7,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Logger,
   Param,
   Post,
   Req,
@@ -16,6 +17,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 
 import { CreateTransactionRequest, IdParameter, TransactionResponse } from '$/common/dto';
 import { ApiGroup } from '$/common/enum/api-group.enum';
+import { TransactionState } from '$/common/enum/transaction-state.enum';
 import {
   BadRequestError,
   InternalServerError,
@@ -23,13 +25,21 @@ import {
   UnauthorizedError,
 } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
+import { UnitOfWorkService } from '$/db/services';
 import { TransactionService } from '$/transaction/transaction.service';
 
 const TAG = ApiGroup.Transaction;
 
 @Controller()
 export class TransactionController {
-  constructor(private readonly transactionService: TransactionService) {}
+  private readonly logger: Logger = new Logger(TransactionController.name);
+
+  constructor(
+    private readonly transactionService: TransactionService,
+    private readonly unitOfWorkService: UnitOfWorkService,
+  ) {
+    this.logger.debug('Transaction controller created!');
+  }
 
   @Post('transactions')
   @HttpCode(HttpStatus.CREATED)
@@ -71,10 +81,19 @@ export class TransactionController {
     @Req() req: Request,
     @Body() dto: CreateTransactionRequest,
   ): Promise<TransactionResponse> {
-    // We can use a non-null assertion below because the userUuid must exist on the
-    // request because it is verified and added to the request by the JwtAuthGuard.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const transaction = await this.transactionService.create(req.userUuid!, dto);
+    const transaction = await this.unitOfWorkService.doTransactional(
+      /* istanbul ignore next: covered in the integration tests */ () =>
+        // We can use a non-null assertion below because the userUuid must exist on the
+        // request because it is verified and added to the request by the JwtAuthGuard.
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        this.transactionService.create(req.userUuid!, dto),
+    );
+    // Ideally this business logic should not reside in the controller, however
+    // due to the fact that the function call above is wrapped in a transaction
+    // throwing from the function will cause the transaction to be rolled back.
+    if (transaction.state === TransactionState.Rejected) {
+      throw new BadRequestError('Insufficient funds');
+    }
     return new TransactionResponse(transaction);
   }
 

@@ -134,6 +134,10 @@ This repository uses the `unit-of-work` pattern
 ([implementation reference](https://github.com/LuanMaik/nestjs-unit-of-work)) in order to handle
 database transactions.
 
+This will always create a new instance of the controller, service, and repository for every HTTP
+request that the application receives, regardless of whether or not the the function call is wrapped
+in a unit-of-work.
+
 ```sh
 src/db/repositories
 ├── index.ts

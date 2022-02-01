@@ -3,9 +3,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { CreateTransactionRequest } from '$/common/dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
-import { BadRequestError } from '$/common/error';
 import { TransactionRepository, WalletRepository } from '$/db/repositories';
-import { UnitOfWorkService } from '$/db/services';
 
 @Injectable()
 export class TransactionService {
@@ -13,7 +11,6 @@ export class TransactionService {
 
   constructor(
     private readonly transactionRepository: TransactionRepository,
-    private readonly unitOfWorkService: UnitOfWorkService,
     private readonly walletRepository: WalletRepository,
   ) {
     this.logger.debug('Transaction service created!');
@@ -58,7 +55,6 @@ export class TransactionService {
    * @param dto The {@link CreateTransactionRequest} object.
    * @returns The {@link Api.Entities.Transaction} object.
    *
-   * @throws {@link BadRequestError} If the wallet has insufficient funds.
    * @throws {@link NotFoundError} If the wallet does not exist.
    * @throws {@link InternalServerError} If the database transaction fails.
    */
@@ -72,17 +68,13 @@ export class TransactionService {
       dto.type === TransactionType.Credit
         ? wallet.balance + dto.amount
         : wallet.balance - dto.amount;
-    if (balance < 0) {
-      await this.rejectTransaction(dto);
-      throw new BadRequestError('Insufficient funds');
-    }
-    return this.unitOfWorkService.doTransactional(
-      /* istanbul ignore next: this needs to be tested */ () =>
-        this.processTransaction({
+    const transaction = await (balance < 0
+      ? this.rejectTransaction(dto)
+      : this.processTransaction({
           ...dto,
           balance,
-        }),
-    );
+        }));
+    return transaction;
   }
 
   /**

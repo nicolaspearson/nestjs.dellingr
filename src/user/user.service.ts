@@ -3,14 +3,12 @@ import { Injectable, Logger } from '@nestjs/common';
 import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME } from '$/common/constants';
 import { ConflictError } from '$/common/error';
 import { UserRepository, WalletRepository } from '$/db/repositories';
-import { UnitOfWorkService } from '$/db/services';
 
 @Injectable()
 export class UserService {
   private readonly logger: Logger = new Logger(UserService.name);
 
   constructor(
-    private readonly unitOfWorkService: UnitOfWorkService,
     private readonly userRepository: UserRepository,
     private readonly walletRepository: WalletRepository,
   ) {
@@ -73,10 +71,7 @@ export class UserService {
   async register(email: Email, password: string): Promise<Api.Entities.User> {
     this.logger.log(`Registering user with email address: ${email}`);
     try {
-      const user = await this.unitOfWorkService.doTransactional(
-        /* istanbul ignore next: this needs to be tested */ () =>
-          this.processUserRegistration(email, password),
-      );
+      const user = await this.processUserRegistration(email, password);
       this.logger.log(`Successfully registered user with email address: ${user.email}`);
       return user;
     } catch {

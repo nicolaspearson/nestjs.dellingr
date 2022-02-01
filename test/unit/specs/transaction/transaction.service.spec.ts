@@ -2,9 +2,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { TransactionState } from '$/common/enum/transaction-state.enum';
-import { BadRequestError } from '$/common/error';
 import { TransactionRepository, WalletRepository } from '$/db/repositories';
-import { UnitOfWorkService } from '$/db/services';
 import { TransactionService } from '$/transaction/transaction.service';
 
 import {
@@ -16,7 +14,6 @@ import {
   walletMockMain,
 } from '#/utils/fixtures';
 import { transactionMockRepo, walletMockRepo } from '#/utils/mocks/repo.mock';
-import { unitOfWorkMockService } from '#/utils/mocks/service.mock';
 
 describe('Transaction Service', () => {
   let module: TestingModule;
@@ -29,10 +26,7 @@ describe('Transaction Service', () => {
           provide: TransactionRepository,
           useValue: transactionMockRepo,
         },
-        {
-          provide: UnitOfWorkService,
-          useValue: unitOfWorkMockService,
-        },
+
         {
           provide: WalletRepository,
           useValue: walletMockRepo,
@@ -51,48 +45,60 @@ describe('Transaction Service', () => {
 
   describe('create', () => {
     test('should allow a user to create a new credit transaction', async () => {
-      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMockMain);
       const processedTransaction = {
         ...transactionMockPaymentFromBob,
         state: TransactionState.Processed,
       };
-      unitOfWorkMockService.doTransactional.mockResolvedValueOnce(processedTransaction);
+      transactionMockRepo.create.mockResolvedValueOnce(processedTransaction);
+      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMockMain);
       const result = await service.create(userMockJohn.uuid, createTransactionRequestMockCredit);
       expect(result).toMatchObject(processedTransaction);
       expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         walletUuid: walletMockMain.uuid,
       });
-      expect(transactionMockRepo.create).not.toHaveBeenCalled();
       const balance = walletMockMain.balance + transactionMockPaymentFromBob.amount;
-      // This assertion is pointless, and is a placeholder for asserting that
-      // the anonymous inner function is called with the correct arguments.
-      expect(balance).toEqual(10_150);
-      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
+      expect(transactionMockRepo.create).toHaveBeenCalledWith({
+        amount: createTransactionRequestMockCredit.amount,
+        reference: createTransactionRequestMockCredit.reference,
+        state: TransactionState.Processed,
+        type: createTransactionRequestMockCredit.type,
+        walletUuid: createTransactionRequestMockCredit.walletId,
+      });
+      expect(walletMockRepo.updateBalance).toHaveBeenCalledWith({
+        balance,
+        walletUuid: walletMockMain.uuid,
+      });
     });
 
     test('should allow a user to create a new debit transaction', async () => {
-      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMockMain);
       const processedTransaction = {
         ...transactionMockPayedAlice,
         state: TransactionState.Processed,
       };
-      unitOfWorkMockService.doTransactional.mockResolvedValueOnce(processedTransaction);
+      transactionMockRepo.create.mockResolvedValueOnce(processedTransaction);
+      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMockMain);
       const result = await service.create(userMockJohn.uuid, createTransactionRequestMockDebit);
       expect(result).toMatchObject(processedTransaction);
       expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         walletUuid: walletMockMain.uuid,
       });
-      expect(transactionMockRepo.create).not.toHaveBeenCalled();
       const balance = walletMockMain.balance - transactionMockPayedAlice.amount;
-      // This assertion is pointless, and is a placeholder for asserting that
-      // the anonymous inner function is called with the correct arguments.
-      expect(balance).toEqual(9950);
-      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
+      expect(transactionMockRepo.create).toHaveBeenCalledWith({
+        amount: createTransactionRequestMockDebit.amount,
+        reference: createTransactionRequestMockDebit.reference,
+        state: TransactionState.Processed,
+        type: createTransactionRequestMockDebit.type,
+        walletUuid: createTransactionRequestMockDebit.walletId,
+      });
+      expect(walletMockRepo.updateBalance).toHaveBeenCalledWith({
+        balance,
+        walletUuid: walletMockMain.uuid,
+      });
     });
 
-    test('throws if the user has insufficient funds in their wallet', async () => {
+    test('should reject the transaction if the user has insufficient funds in their wallet', async () => {
       const walletMock: Api.Entities.Wallet = {
         ...walletMockMain,
         balance: 1,
@@ -103,9 +109,8 @@ describe('Transaction Service', () => {
         state: TransactionState.Rejected,
       };
       transactionMockRepo.create.mockResolvedValueOnce(rejectedTransaction);
-      await expect(
-        service.create(userMockJohn.uuid, createTransactionRequestMockDebit),
-      ).rejects.toThrowError(BadRequestError);
+      const result = await service.create(userMockJohn.uuid, createTransactionRequestMockDebit);
+      expect(result).toMatchObject(rejectedTransaction);
       expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
         userUuid: userMockJohn.uuid,
         walletUuid: walletMock.uuid,
@@ -117,7 +122,6 @@ describe('Transaction Service', () => {
         type: createTransactionRequestMockDebit.type,
         walletUuid: createTransactionRequestMockDebit.walletId,
       });
-      expect(unitOfWorkMockService.doTransactional).not.toHaveBeenCalled();
     });
   });
 

@@ -4,12 +4,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME } from '$/common/constants';
 import { ConflictError, NotFoundError } from '$/common/error';
 import { UserRepository, WalletRepository } from '$/db/repositories';
-import { UnitOfWorkService } from '$/db/services';
 import { UserService } from '$/user/user.service';
 
 import { userMockJohn, userRegistrationRequestMock, walletMockMain } from '#/utils/fixtures';
 import { userMockRepo, walletMockRepo } from '#/utils/mocks/repo.mock';
-import { unitOfWorkMockService } from '#/utils/mocks/service.mock';
 
 describe('User Service', () => {
   let module: TestingModule;
@@ -18,10 +16,6 @@ describe('User Service', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       providers: [
-        {
-          provide: UnitOfWorkService,
-          useValue: unitOfWorkMockService,
-        },
         { provide: UserRepository, useValue: userMockRepo },
         {
           provide: WalletRepository,
@@ -91,20 +85,31 @@ describe('User Service', () => {
 
   describe('register', () => {
     test('should allow a user to register', async () => {
-      unitOfWorkMockService.doTransactional?.mockResolvedValueOnce(userMockJohn);
+      userMockRepo.create.mockResolvedValueOnce(userMockJohn);
+      walletMockRepo.create.mockResolvedValueOnce(walletMockMain);
       const { email, password } = userRegistrationRequestMock;
       const result = await service.register(email, password);
       expect(result).toMatchObject(userMockJohn);
-      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
+      expect(userMockRepo.create).toHaveBeenCalledWith({
+        email,
+        password,
+      });
+      expect(walletMockRepo.create).toHaveBeenCalledWith({
+        balance: DEFAULT_WALLET_BALANCE,
+        name: DEFAULT_WALLET_NAME,
+        userUuid: userMockJohn.uuid,
+      });
     });
 
     test("throws when the user's email address already exists", async () => {
-      unitOfWorkMockService.doTransactional?.mockRejectedValueOnce(
-        new Error('User already exists!'),
-      );
+      userMockRepo.create.mockRejectedValueOnce(new Error('User already exists!'));
       const { email, password } = userRegistrationRequestMock;
       await expect(service.register(email, password)).rejects.toThrowError(ConflictError);
-      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
+      expect(userMockRepo.create).toHaveBeenCalledWith({
+        email,
+        password,
+      });
+      expect(walletMockRepo.create).not.toHaveBeenCalled();
     });
   });
 

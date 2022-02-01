@@ -14,6 +14,7 @@ export class TokenService {
     protected readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {
+    this.logger.debug('Token service created!');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.tokenExpiration = configService.get<Api.ExpirationTime>('JWT_TOKEN_EXPIRATION')!;
   }

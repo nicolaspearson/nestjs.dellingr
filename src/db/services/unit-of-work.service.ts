@@ -3,17 +3,22 @@ import { Connection, EntityManager } from 'typeorm';
 import { Injectable, Scope } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
 
+// Source: https://github.com/LuanMaik/nestjs-unit-of-work
 @Injectable({
-  scope: Scope.REQUEST, // <-- VERY IMPORTANT to create one instance per request
+  // This will always create a new instance of the controller, service, and
+  // repository for every HTTP request that the application receives, regardless
+  // of whether or not the the function call is wrapped in a unit-of-work.
+  scope: Scope.REQUEST,
 })
 export class UnitOfWorkService {
   private manager: EntityManager;
 
   constructor(
     @InjectConnection()
-    private readonly connection: Connection, // <-- get the database connection
+    private readonly connection: Connection,
   ) {
-    this.manager = this.connection.manager; // <-- set the default manager
+    // Set the default entity manager
+    this.manager = this.connection.manager;
   }
 
   getManager() {
@@ -22,8 +27,10 @@ export class UnitOfWorkService {
 
   async doTransactional<T>(doWork: (manager: EntityManager) => Promise<T>): Promise<T> {
     return await this.connection.transaction(async (manager) => {
-      this.manager = manager; // <-- set the entity manager to share
-      return doWork(manager); // <-- executes the transactional work
+      // Share the entity manager
+      this.manager = manager;
+      // Executes the transactional work
+      return doWork(manager);
     });
   }
 }
