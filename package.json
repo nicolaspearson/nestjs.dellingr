@@ -16,7 +16,7 @@
   "engineStrict": true,
   "main": "src/main.ts",
   "scripts": {
-    "build": "rimraf dist && mkdir -p dist && nest build --webpack --webpackPath webpack.config.js",
+    "build": "rimraf dist && mkdirp dist && nest build --webpack --webpackPath webpack.config.js",
     "build:tsc": "rimraf dist && tsc --project tsconfig.tsc.json",
     "db:logs": "yarn exec:docker-compose logs -f db",
     "db:logs:integration": "yarn exec:docker-compose logs -f db-integration",
@@ -120,6 +120,7 @@
     "jest": "^27.4.7",
     "jest-mock": "^27.4.6",
     "markdownlint-cli": "^0.30.0",
+    "mkdirp": "^1.0.4",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "run-script-webpack-plugin": "^0.0.11",
