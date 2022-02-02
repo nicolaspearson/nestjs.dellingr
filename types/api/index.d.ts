@@ -6,13 +6,12 @@ type Email = Opaque<'Email', string>;
 type JwtToken = Opaque<'JwtToken', string>;
 type Uuid = Opaque<'Uuid', string>;
 
-declare namespace Express {
-  interface Request {
-    userUuid?: Uuid;
-  }
-}
-
 declare namespace Api {
+  type Request = import('express').Request;
+  interface AuthenticatedRequest extends Request {
+    userUuid: Uuid;
+  }
+
   type TransactionState = import('$/common/enum/transaction-state.enum').TransactionState;
   type TransactionType = import('$/common/enum/transaction-type.enum').TransactionType;
 

@@ -1,5 +1,3 @@
-import { Request } from 'express';
-
 import {
   Body,
   Controller,
@@ -68,11 +66,11 @@ export class WalletController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  async create(@Req() req: Request, @Body() dto: CreateWalletRequest): Promise<WalletResponse> {
-    // We can use a non-null assertion below because the userUuid must exist on the
-    // request because it is verified and added to the request by the JwtAuthGuard.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const wallet = await this.walletService.create(req.userUuid!, dto);
+  async create(
+    @Req() req: Api.AuthenticatedRequest,
+    @Body() dto: CreateWalletRequest,
+  ): Promise<WalletResponse> {
+    const wallet = await this.walletService.create(req.userUuid, dto);
     return new WalletResponse(wallet);
   }
 
@@ -110,11 +108,11 @@ export class WalletController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  async getById(@Req() req: Request, @Param() { id }: IdParameter): Promise<WalletResponse> {
-    // We can use a non-null assertion below because the userUuid must exist on the
-    // request because it is verified and added to the request by the JwtAuthGuard.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const wallet = await this.walletService.getById(req.userUuid!, id);
+  async getById(
+    @Req() req: Api.AuthenticatedRequest,
+    @Param() { id }: IdParameter,
+  ): Promise<WalletResponse> {
+    const wallet = await this.walletService.getById(req.userUuid, id);
     return new WalletResponse(wallet);
   }
 }

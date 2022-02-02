@@ -1,5 +1,4 @@
 import { oneLineTrim } from 'common-tags';
-import { Request } from 'express';
 
 import {
   Body,
@@ -62,11 +61,8 @@ export class UserController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  delete(@Req() req: Request): Promise<void> {
-    // We can use a non-null assertion below because the userUuid must exist on the
-    // request because it is verified and added to the request by the JwtAuthGuard.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.userService.delete(req.userUuid!);
+  delete(@Req() req: Api.AuthenticatedRequest): Promise<void> {
+    return this.userService.delete(req.userUuid);
   }
 
   @Get('user')
@@ -98,11 +94,8 @@ export class UserController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  async profile(@Req() req: Request): Promise<UserProfileResponse> {
-    // We can use a non-null assertion below because the userUuid must exist on the
-    // request because it is verified and added to the request by the JwtAuthGuard.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const user = await this.userService.profile(req.userUuid!);
+  async profile(@Req() req: Api.AuthenticatedRequest): Promise<UserProfileResponse> {
+    const user = await this.userService.profile(req.userUuid);
     return new UserProfileResponse(user);
   }
 

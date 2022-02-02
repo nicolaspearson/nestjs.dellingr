@@ -144,7 +144,7 @@ export const requestMock = {
 export const authenticatedRequestMock = {
   ...requestMock,
   userUuid: userMockJohn.uuid,
-} as Request;
+} as Api.AuthenticatedRequest;
 
 // Response
 export const responseMock = {

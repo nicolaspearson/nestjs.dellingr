@@ -1,4 +1,3 @@
-import { Request } from 'express';
 import { verify } from 'jsonwebtoken';
 import { Observable } from 'rxjs';
 
@@ -9,7 +8,7 @@ import { UnauthorizedError } from '$/common/error';
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    const req: Request = context.switchToHttp().getRequest();
+    const req: Api.AuthenticatedRequest = context.switchToHttp().getRequest();
     const authorizationHeader = req.get('authorization');
     if (!authorizationHeader) {
       throw new UnauthorizedError('The JWT is missing from the request.');

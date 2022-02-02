@@ -1,5 +1,4 @@
 import { oneLine } from 'common-tags';
-import { Request } from 'express';
 
 import {
   Body,
@@ -78,15 +77,12 @@ export class TransactionController {
     type: InternalServerError,
   })
   async create(
-    @Req() req: Request,
+    @Req() req: Api.AuthenticatedRequest,
     @Body() dto: CreateTransactionRequest,
   ): Promise<TransactionResponse> {
     const transaction = await this.databaseTransactionService.execute(
       /* istanbul ignore next: covered in the integration tests */ () =>
-        // We can use a non-null assertion below because the userUuid must exist on the
-        // request because it is verified and added to the request by the JwtAuthGuard.
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.transactionService.create(req.userUuid!, dto),
+        this.transactionService.create(req.userUuid, dto),
     );
     // Ideally this business logic should not reside in the controller, however
     // due to the fact that the function call above is wrapped in a transaction
@@ -131,11 +127,11 @@ export class TransactionController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
-  async getById(@Req() req: Request, @Param() { id }: IdParameter): Promise<TransactionResponse> {
-    // We can use a non-null assertion below because the userUuid must exist on the
-    // request because it is verified and added to the request by the JwtAuthGuard.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const transaction = await this.transactionService.getById(req.userUuid!, id);
+  async getById(
+    @Req() req: Api.AuthenticatedRequest,
+    @Param() { id }: IdParameter,
+  ): Promise<TransactionResponse> {
+    const transaction = await this.transactionService.getById(req.userUuid, id);
     return new TransactionResponse(transaction);
   }
 }

@@ -249,12 +249,12 @@ An HTTP request may be wrapped in a transaction in one of the following two ways
 
    ```typescript
    async create(
-    @Req() req: Request,
+    @Req() req: Api.AuthenticatedRequest,
     @Body() dto: CreateTransactionRequest,
    ): Promise<TransactionResponse> {
      // Wrapped in a database transaction
     const transaction = await this.databaseTransactionService.execute(() =>
-        this.transactionService.create(req.userUuid!, dto),
+        this.transactionService.create(req.userUuid, dto),
     );
     // Ideally this business logic should not reside in the controller, however
     // due to the fact that the function call above is wrapped in a transaction
