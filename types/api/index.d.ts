@@ -35,7 +35,7 @@ declare namespace Api {
       url: string;
       createdAt: Date;
       updatedAt?: Date;
-      transaction: Api.Entities.Transaction;
+      transaction?: Api.Entities.Transaction;
     }
 
     interface Transaction {

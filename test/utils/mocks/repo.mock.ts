@@ -1,11 +1,19 @@
 import { mocked } from 'jest-mock';
 
 import {
+  documentMockInvoice,
   transactionMockPayedAlice,
   userMockJohn,
   walletMockMain,
   walletMockSecondary,
 } from '#/utils/fixtures';
+
+export const documentMockRepo = mocked<Api.Repositories.Document>(
+  {
+    create: jest.fn().mockResolvedValue(documentMockInvoice),
+  },
+  true,
+);
 
 export const transactionMockRepo = mocked<Api.Repositories.Transaction>(
   {

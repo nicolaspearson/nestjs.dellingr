@@ -10,16 +10,16 @@ import { DatabaseTransactionService } from './services/database-transaction.serv
 
 @Module({
   exports: [
+    DatabaseTransactionService,
     DocumentRepository,
     TransactionRepository,
-    DatabaseTransactionService,
     UserRepository,
     WalletRepository,
   ],
   providers: [
+    DatabaseTransactionService,
     DocumentRepository,
     TransactionRepository,
-    DatabaseTransactionService,
     UserRepository,
     WalletRepository,
   ],
