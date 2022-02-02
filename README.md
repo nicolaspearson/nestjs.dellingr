@@ -273,6 +273,15 @@ An HTTP request may be wrapped in a transaction in one of the following two ways
        business logic is tightly coupled to the transport protocol, i.e. throwing an HTTP exception
        vs throw a gRPC error.
 
+#### References
+
+- [Martin Fowler: Unit Of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html)
+- [Per-Request Database Transactions with NestJS and TypeORM](https://aaronboman.com/programming/2020/05/15/per-request-database-transactions-with-nestjs-and-typeorm/)
+- [Nest.js Unit Of Work](https://github.com/LuanMaik/nestjs-unit-of-work)
+- [Nest.js Interceptors](https://progressivecoder.com/nestjs-interceptors-and-how-to-use-them-learn-nestjs-series-part-8/)
+- [Async Local Storage](https://nodejs.org/api/async_context.html#class-asynclocalstorage)
+- [The Most Convenient Ways of Writing Transactions Within the Nest.js + TypeORM Stack](https://hackernoon.com/the-most-convenient-ways-of-writing-transactions-within-the-nestjs-typeorm-stack-3q3q33jd)
+
 ### Testing
 
 The tests are divided into `integration` and `unit` tests. The `unit` test directory mimics the
