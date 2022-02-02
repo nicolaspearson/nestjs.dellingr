@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class UpdateConstraints1643790225628 implements MigrationInterface {
-  name = 'test1643790225628';
+  name = 'updateConstraints1643790225628';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`DROP INDEX "public"."IDX_WALLET_USER_UUID"`);

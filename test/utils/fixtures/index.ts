@@ -47,6 +47,7 @@ export const transactionMockPayedAlice: Api.Entities.Transaction = {
   state: TransactionState.Processed,
   type: TransactionType.Debit,
   createdAt: now,
+  documents: [],
   wallet: walletMockMain,
 };
 
@@ -57,6 +58,7 @@ export const transactionMockPaymentFromBob: Api.Entities.Transaction = {
   state: TransactionState.Processed,
   type: TransactionType.Credit,
   createdAt: now,
+  documents: [],
   wallet: walletMockMain,
 };
 
@@ -103,14 +105,14 @@ export const createTransactionRequestMockCredit = {
   amount: transactionMockPaymentFromBob.amount,
   reference: transactionMockPaymentFromBob.reference,
   type: transactionMockPaymentFromBob.type,
-  walletId: transactionMockPaymentFromBob.wallet.uuid,
+  walletId: transactionMockPaymentFromBob.wallet!.uuid,
 } as CreateTransactionRequest;
 
 export const createTransactionRequestMockDebit = {
   amount: transactionMockPayedAlice.amount,
   reference: transactionMockPayedAlice.reference,
   type: transactionMockPayedAlice.type,
-  walletId: transactionMockPayedAlice.wallet.uuid,
+  walletId: transactionMockPayedAlice.wallet!.uuid,
 } as CreateTransactionRequest;
 
 export const transactionResponseMock = new TransactionResponse(transactionMockPayedAlice);

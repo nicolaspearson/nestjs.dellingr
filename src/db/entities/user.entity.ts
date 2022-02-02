@@ -18,11 +18,11 @@ export default class User implements Api.Entities.User {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 
-  @Column('varchar', { name: 'email', unique: true })
+  @Column({ unique: true })
   @Index('IDX_USER_EMAIL')
   email!: Email;
 
-  @Column('varchar', { name: 'password', select: false })
+  @Column({ select: false })
   password!: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })

@@ -8,6 +8,12 @@ export function getValidationSchema(): Joi.ObjectSchema {
   return Joi.object({
     API_HOST: Joi.string().hostname().description('The server host url').default('localhost'),
     API_PORT: Joi.number().port().description('The server port').default(3000),
+    AWS_ACCESS_KEY_ID: Joi.string().description('The access key id for the AWS user.').required(),
+    AWS_REGION: Joi.string().description('The AWS region').required(),
+    AWS_SECRET_ACCESS_KEY: Joi.string()
+      .description('The secret access key for the AWS user.')
+      .required(),
+    AWS_S3_BUCKET_NAME: Joi.string().description('The name of the AWS S3 bucket.').required(),
     ENVIRONMENT: Joi.string()
       .valid(Environment.Development, Environment.Staging, Environment.Production, Environment.Test)
       .description('The pre-defined deployment environment')

@@ -45,12 +45,9 @@ describe('Jwt Auth Guard', () => {
   });
 
   test('should return true if the jwt is valid', () => {
-    const jwt = sign(
-      { uuid: userMockJohn.uuid } as Api.JwtPayload,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      process.env.JWT_SECRET!,
-      { expiresIn: '15m' },
-    );
+    const jwt = sign({ uuid: userMockJohn.uuid } as Api.JwtPayload, process.env.JWT_SECRET!, {
+      expiresIn: '15m',
+    });
     switchToHttpMock.getRequest.mockReturnValueOnce({
       get: jest.fn(() => `Bearer ${jwt}`),
     });

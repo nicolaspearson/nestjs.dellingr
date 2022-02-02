@@ -23,7 +23,6 @@ describe('Health Module', () => {
     test('[200] => should return the health status correctly', async () => {
       const res = await request(app.getHttpServer()).get(baseUrl).expect(HttpStatus.OK);
       expect(res.body).toMatchObject(healthCheckResponseMock);
-      /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       // Should set headers correctly
       expect(res.header).toMatchObject({
         'access-control-allow-credentials': 'true',
@@ -45,7 +44,6 @@ describe('Health Module', () => {
         'x-permitted-cross-domain-policies': 'none',
         'x-xss-protection': '0',
       });
-      /* eslint-enable @typescript-eslint/no-unsafe-assignment */
     });
   });
 

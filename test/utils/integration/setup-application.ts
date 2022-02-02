@@ -10,6 +10,7 @@ import { Test, TestingModule, TestingModuleBuilder } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppModule } from '$/app/app.module';
+import { getValidationSchema } from '$/common/config/environment.config';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ErrorFilter } from '$/common/filters/error.filter';
@@ -58,6 +59,7 @@ async function createApplication(options: Options): Promise<IntegrationTestAppli
       isGlobal: true,
       ignoreEnvFile: true,
       ignoreEnvVars: false,
+      validationSchema: getValidationSchema(),
     }),
   );
 

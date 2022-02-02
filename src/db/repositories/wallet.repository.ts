@@ -31,7 +31,7 @@ export class WalletRepository implements Api.Repositories.Wallet {
     return query;
   }
 
-  create(data: { balance: number; name: string; userUuid: Uuid }): Promise<Api.Entities.Wallet> {
+  create(data: Api.Repositories.Requests.CreateWallet): Promise<Api.Entities.Wallet> {
     const partialWallet: QueryDeepPartialEntity<Wallet> = {
       balance: data.balance,
       name: data.name,
@@ -43,10 +43,9 @@ export class WalletRepository implements Api.Repositories.Wallet {
     return this.getManager().save(Wallet, partialWallet as Wallet);
   }
 
-  findByWalletAndUserUuid(data: {
-    userUuid: Uuid;
-    walletUuid: Uuid;
-  }): Promise<Api.Entities.Wallet | undefined> {
+  findByWalletAndUserUuid(
+    data: Api.Repositories.Requests.FindByWalletAndUserUuid,
+  ): Promise<Api.Entities.Wallet | undefined> {
     return this.query({ withTransactions: true })
       .where({
         uuid: data.walletUuid,
@@ -57,10 +56,9 @@ export class WalletRepository implements Api.Repositories.Wallet {
       .getOne();
   }
 
-  async findByWalletAndUserUuidOrFail(data: {
-    userUuid: Uuid;
-    walletUuid: Uuid;
-  }): Promise<Api.Entities.Wallet> {
+  async findByWalletAndUserUuidOrFail(
+    data: Api.Repositories.Requests.FindByWalletAndUserUuid,
+  ): Promise<Api.Entities.Wallet> {
     const wallet = await this.findByWalletAndUserUuid(data);
     if (!wallet) {
       throw new NotFoundError(`Wallet with uuid: ${data.userUuid} does not exist.`);
@@ -68,10 +66,9 @@ export class WalletRepository implements Api.Repositories.Wallet {
     return wallet;
   }
 
-  updateBalance(data: {
-    balance: number;
-    walletUuid: Uuid;
-  }): Promise<Api.Repositories.Responses.UpdateResult> {
+  updateBalance(
+    data: Api.Repositories.Requests.UpdateBalance,
+  ): Promise<Api.Repositories.Responses.UpdateResult> {
     return this.getManager()
       .createQueryBuilder()
       .update(Wallet)

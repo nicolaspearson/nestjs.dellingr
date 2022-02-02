@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { DEFAULT_WALLET_BALANCE, DEFAULT_WALLET_NAME } from '$/common/constants';
@@ -42,7 +41,7 @@ describe('User Service', () => {
 
   describe('profile', () => {
     test('should allow a user to retrieve their profile', async () => {
-      userMockRepo.findByUserUuidOrFail?.mockResolvedValueOnce(userMockJohn);
+      userMockRepo.findByUserUuidOrFail.mockResolvedValueOnce(userMockJohn);
       const result = await service.profile(userMockJohn.uuid);
       expect(result).toMatchObject(userMockJohn);
       expect(userMockRepo.findByUserUuidOrFail).toHaveBeenCalledWith({
@@ -51,7 +50,7 @@ describe('User Service', () => {
     });
 
     test('throws when the user does not exist', async () => {
-      userMockRepo.findByUserUuidOrFail?.mockRejectedValueOnce(
+      userMockRepo.findByUserUuidOrFail.mockRejectedValueOnce(
         new NotFoundError('User does not exist.'),
       );
       await expect(service.profile(userMockJohn.uuid)).rejects.toThrowError(NotFoundError);
@@ -95,4 +94,3 @@ describe('User Service', () => {
     await module.close();
   });
 });
-/* eslint-enable @typescript-eslint/unbound-method */

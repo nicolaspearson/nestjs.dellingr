@@ -52,7 +52,6 @@ describe('Error Filter', () => {
     const error = new BadRequestException(badRequestErrorMock.message);
     // eslint-disable-next-line promise/valid-params
     const result = filter.catch(error as unknown as Record<string, unknown>, contextMock);
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(contextMock.switchToHttp).toBeCalled();
     expect(result.code).toEqual(badRequestErrorMock.code);
     expect(result.errors).toEqual(badRequestErrorMock.errors);
@@ -65,7 +64,6 @@ describe('Error Filter', () => {
     const error = new BadRequestError(badRequestErrorMock.message);
     // eslint-disable-next-line promise/valid-params
     const result = filter.catch(error as unknown as Record<string, unknown>, contextMock);
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(contextMock.switchToHttp).toBeCalled();
     expect(result.code).toEqual(badRequestErrorMock.code);
     expect(result.errors).toEqual(badRequestErrorMock.errors);

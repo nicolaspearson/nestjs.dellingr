@@ -24,12 +24,21 @@ declare namespace Api {
     name: string;
   }
 
-  type JwtPayload = {
+  interface JwtPayload {
     uuid: Uuid;
-  };
+  }
 
   namespace Entities {
-    type Transaction = {
+    interface Document {
+      uuid: Uuid;
+      name: string;
+      url: string;
+      createdAt: Date;
+      updatedAt?: Date;
+      transaction: Api.Entities.Transaction;
+    }
+
+    interface Transaction {
       uuid: Uuid;
       amount: number;
       reference: string;
@@ -37,84 +46,142 @@ declare namespace Api {
       type: TransactionType;
       createdAt: Date;
       updatedAt?: Date;
-      wallet: Api.Entities.Wallet;
-    };
+      documents: Api.Entities.Document[];
+      wallet?: Api.Entities.Wallet;
+    }
 
-    type User = {
+    interface User {
       uuid: Uuid;
       email: Email;
       password: string;
       createdAt: Date;
       updatedAt?: Date;
       wallets: Api.Entities.Wallet[];
-    };
+    }
 
-    type Wallet = {
+    interface Wallet {
       uuid: Uuid;
       balance: number;
       name: string;
       createdAt: Date;
       updatedAt?: Date;
       transactions: Api.Entities.Transaction[];
-      user: Api.Entities.User;
-    };
+      user?: Api.Entities.User;
+    }
   }
 
   namespace Repositories {
-    namespace Responses {
-      type DeleteResult = {
-        affected?: Nullable<number>;
-      };
+    namespace Requests {
+      // Document
+      interface CreateDocument {
+        name: string;
+        transactionUuid: Uuid;
+        url: string;
+        uuid: Uuid;
+      }
 
-      type UpdateResult = {
-        affected?: Nullable<number>;
-      };
-    }
-
-    type Transaction = {
-      create(data: {
+      // Transaction
+      interface CreateTransaction {
         amount: number;
         reference: string;
         state: TransactionState;
         type: TransactionType;
         walletUuid: Uuid;
-      }): Promise<Api.Entities.Transaction>;
-      findByTransactionAndUserUuid(data: {
-        transactionUuid: Uuid;
-        userUuid: Uuid;
-      }): Promise<Api.Entities.Transaction | undefined>;
-      findByTransactionAndUserUuidOrFail(data: {
-        transactionUuid: Uuid;
-        userUuid: Uuid;
-      }): Promise<Api.Entities.Transaction>;
-    };
+      }
 
-    type User = {
-      create(data: { email: Email; password: string }): Promise<Api.Entities.User>;
-      delete(data: { userUuid: Uuid }): Promise<Api.Repositories.Responses.DeleteResult>;
-      findByUserUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined>;
-      findByUserUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User>;
-      findByValidCredentials(data: {
+      interface FindByTransactionAndUserUuid {
+        transactionUuid: Uuid;
+        userUuid: Uuid;
+      }
+
+      // User
+      interface CreateUser {
         email: Email;
         password: string;
-      }): Promise<Api.Entities.User | undefined>;
-    };
+      }
 
-    type Wallet = {
-      create(data: { balance: number; name: string; userUuid: Uuid }): Promise<Api.Entities.Wallet>;
-      findByWalletAndUserUuid(data: {
+      interface DeleteUser {
+        userUuid: Uuid;
+      }
+
+      interface FindByUserUuid {
+        userUuid: Uuid;
+      }
+
+      interface FindByValidCredentials {
+        email: Email;
+        password: string;
+      }
+
+      // Wallet
+      interface CreateWallet {
+        balance: number;
+        name: string;
+        userUuid: Uuid;
+      }
+
+      interface FindByWalletAndUserUuid {
         userUuid: Uuid;
         walletUuid: Uuid;
-      }): Promise<Api.Entities.Wallet | undefined>;
-      findByWalletAndUserUuidOrFail(data: {
-        userUuid: Uuid;
-        walletUuid: Uuid;
-      }): Promise<Api.Entities.Wallet>;
-      updateBalance(data: {
+      }
+
+      interface UpdateBalance {
         balance: number;
         walletUuid: Uuid;
-      }): Promise<Api.Repositories.Responses.UpdateResult>;
-    };
+      }
+    }
+    namespace Responses {
+      interface DeleteResult {
+        affected?: Nullable<number>;
+      }
+
+      interface UpdateResult {
+        affected?: Nullable<number>;
+      }
+    }
+
+    interface Document {
+      create(data: Api.Repositories.Requests.CreateDocument): Promise<Api.Entities.Document>;
+    }
+
+    interface Transaction {
+      create(data: Api.Repositories.Requests.CreateTransaction): Promise<Api.Entities.Transaction>;
+      findByTransactionAndUserUuid(
+        data: Api.Repositories.Requests.FindByTransactionAndUserUuid,
+      ): Promise<Api.Entities.Transaction | undefined>;
+      findByTransactionAndUserUuidOrFail(
+        data: Api.Repositories.Requests.FindByTransactionAndUserUuid,
+      ): Promise<Api.Entities.Transaction>;
+    }
+
+    interface User {
+      create(data: Api.Repositories.Requests.CreateUser): Promise<Api.Entities.User>;
+      delete(
+        data: Api.Repositories.Requests.DeleteUser,
+      ): Promise<Api.Repositories.Responses.DeleteResult>;
+      findByUserUuid(
+        data: Api.Repositories.Requests.FindByUserUuid,
+      ): Promise<Api.Entities.User | undefined>;
+      findByUserUuidOrFail(
+        data: Api.Repositories.Requests.FindByUserUuid,
+      ): Promise<Api.Entities.User>;
+      findByValidCredentials(
+        data: Api.Repositories.Requests.FindByValidCredentials,
+      ): Promise<Api.Entities.User | undefined>;
+    }
+
+    interface Wallet {
+      create(data: Api.Repositories.Requests.CreateWallet): Promise<Api.Entities.Wallet>;
+      findByWalletAndUserUuid(
+        data: Api.Repositories.Requests.FindByWalletAndUserUuid,
+      ): Promise<Api.Entities.Wallet | undefined>;
+      findByWalletAndUserUuidOrFail(
+        data: Api.Repositories.Requests.FindByWalletAndUserUuid,
+      ): Promise<Api.Entities.Wallet>;
+      updateBalance(
+        data: Api.Repositories.Requests.UpdateBalance,
+      ): Promise<Api.Repositories.Responses.UpdateResult>;
+    }
   }
 
   namespace Services {
@@ -122,10 +189,10 @@ declare namespace Api {
     type Observable<T> = import('rxjs').Observable<T>;
     type EntityManager = import('typeorm').EntityManager;
 
-    type DatabaseTransaction = {
+    interface DatabaseTransaction {
       getManager(): EntityManager;
       execute<T>(next: (manager: EntityManager) => Promise<T>): Promise<T>;
       executeHandler<T>(next: CallHandler<Observable<T>>): Promise<Observable<T>>;
-    };
+    }
   }
 }

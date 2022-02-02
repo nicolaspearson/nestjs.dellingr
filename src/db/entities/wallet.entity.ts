@@ -24,7 +24,7 @@ export default class Wallet implements Api.Entities.Wallet {
   @Column({ default: 0 })
   balance!: number;
 
-  @Column({ nullable: false })
+  @Column()
   name!: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })

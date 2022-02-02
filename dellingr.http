@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzNzI5ODg0LCJleHAiOjE2NDM3MzA3ODQsImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiY2Q3MDA3YzUtNjFkNC00NDljLWIyMTctZDc3YTI1MWViYjljIn0.Kq79LHZalHhyOT5OEBCoCjDJFsjkPCvPyIh6u99N2Js
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzODA5OTY5LCJleHAiOjE2NDM4MTA4NjksImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiZDZjY2ZhZDktZjNmYy00OWFjLTk2NTctNDdkM2VkMWM3ZmQyIn0.PGq8R-xn0PXpBBl-Q683h-6WYXnhwrNTuK8xEHOY85k
 
 ########################################################################
 ###########                       AUTH                       ###########
@@ -14,6 +14,30 @@ Content-Type: application/json
   "email": "john.doe@example.com",
   "password": "myS3cretP@55w0rd!"
 }
+
+########################################################################
+###########                     DOCUMENT                     ###########
+########################################################################
+
+### Upload a document
+POST {{baseUrl}}/documents HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
+
+Payment invoice
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="transactionId"
+
+b514e04c-b3e7-4346-b9f9-41c9d66cf5e2
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="document.pdf"
+Content-Type: application/pdf
+
+< ./test/utils/files/invoice.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ########################################################################
 ###########                      HEALTH                      ###########

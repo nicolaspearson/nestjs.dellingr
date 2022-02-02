@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -50,4 +49,3 @@ describe('Token Service', () => {
     await module.close();
   });
 });
-/* eslint-enable @typescript-eslint/no-unsafe-assignment */

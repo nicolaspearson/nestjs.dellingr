@@ -1,16 +1,21 @@
 import {
+  AfterInsert,
+  AfterLoad,
+  AfterUpdate,
   Column,
   CreateDateColumn,
   Entity,
   Index,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { TransactionState } from '../../common/enum/transaction-state.enum';
 import { TransactionType } from '../../common/enum/transaction-type.enum';
+import Document from './document.entity';
 import Wallet from './wallet.entity';
 
 @Entity({ name: 'transaction' })
@@ -21,7 +26,7 @@ export default class Transaction implements Api.Entities.Transaction {
   @Column({ type: 'numeric', default: 0 })
   amount!: number;
 
-  @Column('varchar', { name: 'reference' })
+  @Column()
   reference!: string;
 
   @Column('enum', { enum: TransactionState })
@@ -38,6 +43,9 @@ export default class Transaction implements Api.Entities.Transaction {
   @UpdateDateColumn({ name: 'updated_at', nullable: true, type: 'timestamp with time zone' })
   updatedAt?: Date;
 
+  @OneToMany(() => Document, (document) => document.transaction)
+  documents!: Document[];
+
   @ManyToOne((_) => Wallet, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
@@ -46,4 +54,13 @@ export default class Transaction implements Api.Entities.Transaction {
   @JoinColumn({ name: 'wallet_uuid' })
   @Index('IDX_TRANSACTION_WALLET_UUID')
   wallet!: Wallet;
+
+  @AfterLoad()
+  @AfterInsert()
+  @AfterUpdate()
+  setDefaults() {
+    if (!this.documents) {
+      this.documents = [];
+    }
+  }
 }

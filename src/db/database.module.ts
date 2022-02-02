@@ -1,12 +1,27 @@
 import { Module } from '@nestjs/common';
 
-import { TransactionRepository } from './repositories/transaction.repository';
-import { UserRepository } from './repositories/user.repository';
-import { WalletRepository } from './repositories/wallet.repository';
+import {
+  DocumentRepository,
+  TransactionRepository,
+  UserRepository,
+  WalletRepository,
+} from './repositories';
 import { DatabaseTransactionService } from './services/database-transaction.service';
 
 @Module({
-  exports: [TransactionRepository, DatabaseTransactionService, UserRepository, WalletRepository],
-  providers: [TransactionRepository, DatabaseTransactionService, UserRepository, WalletRepository],
+  exports: [
+    DocumentRepository,
+    TransactionRepository,
+    DatabaseTransactionService,
+    UserRepository,
+    WalletRepository,
+  ],
+  providers: [
+    DocumentRepository,
+    TransactionRepository,
+    DatabaseTransactionService,
+    UserRepository,
+    WalletRepository,
+  ],
 })
 export class DatabaseModule {}

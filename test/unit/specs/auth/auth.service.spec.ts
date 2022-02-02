@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AuthService } from '$/auth/auth.service';
@@ -47,7 +46,7 @@ describe('Auth Service', () => {
     });
 
     test("throws when the user's credentials are invalid", async () => {
-      userMockRepo.findByValidCredentials?.mockResolvedValueOnce(undefined);
+      userMockRepo.findByValidCredentials.mockResolvedValueOnce(undefined);
       const { email, password } = loginRequestMock;
       await expect(service.authenticate(email, password)).rejects.toThrowError(NotFoundError);
       expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith({ email, password });
@@ -55,7 +54,7 @@ describe('Auth Service', () => {
     });
 
     test('throws when jwt generation fails', async () => {
-      userMockRepo.findByValidCredentials?.mockResolvedValueOnce(userMockJohn);
+      userMockRepo.findByValidCredentials.mockResolvedValueOnce(userMockJohn);
       tokenMockService.generate?.mockRejectedValueOnce(
         new InternalServerError('Jwt generation failed'),
       );
@@ -70,4 +69,3 @@ describe('Auth Service', () => {
     await module.close();
   });
 });
-/* eslint-enable @typescript-eslint/unbound-method */

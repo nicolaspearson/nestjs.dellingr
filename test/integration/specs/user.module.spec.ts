@@ -71,7 +71,6 @@ describe('User Module', () => {
         relations: ['wallets', 'wallets.transactions'],
       });
       expect(databaseUser).toBeDefined();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       expect(res.body).toMatchObject(new UserProfileResponse(databaseUser!));
     });
 
