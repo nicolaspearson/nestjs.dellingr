@@ -15,24 +15,6 @@ export class UserService {
     this.logger.debug('User service created!');
   }
 
-  private async processUserRegistration(
-    email: Email,
-    password: string,
-  ): Promise<Api.Entities.User> {
-    const user = await this.userRepository.create({
-      email,
-      password,
-    });
-    const wallet = await this.walletRepository.create({
-      balance: DEFAULT_WALLET_BALANCE,
-      name: DEFAULT_WALLET_NAME,
-      userUuid: user.uuid,
-    });
-    // Assign the default wallet to user object so that it is available to upstream consumers.
-    user.wallets = [wallet];
-    return user;
-  }
-
   /**
    * Deletes a user's account from the database.
    *
@@ -71,7 +53,17 @@ export class UserService {
   async register(email: Email, password: string): Promise<Api.Entities.User> {
     this.logger.log(`Registering user with email address: ${email}`);
     try {
-      const user = await this.processUserRegistration(email, password);
+      const user = await this.userRepository.create({
+        email,
+        password,
+      });
+      const wallet = await this.walletRepository.create({
+        balance: DEFAULT_WALLET_BALANCE,
+        name: DEFAULT_WALLET_NAME,
+        userUuid: user.uuid,
+      });
+      // Assign the default wallet to user object so that it is available to upstream consumers.
+      user.wallets = [wallet];
       this.logger.log(`Successfully registered user with email address: ${user.email}`);
       return user;
     } catch {

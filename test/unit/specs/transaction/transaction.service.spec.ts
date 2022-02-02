@@ -139,33 +139,6 @@ describe('Transaction Service', () => {
     });
   });
 
-  describe('processTransaction', () => {
-    test('should process a transaction correctly', async () => {
-      const processedTransaction = {
-        ...transactionMockPaymentFromBob,
-        state: TransactionState.Processed,
-      };
-      transactionMockRepo.create.mockResolvedValueOnce(processedTransaction);
-      const balance = walletMockMain.balance + transactionMockPaymentFromBob.amount;
-      const result = await service['processTransaction']({
-        ...createTransactionRequestMockCredit,
-        balance,
-      });
-      expect(result).toMatchObject(processedTransaction);
-      expect(transactionMockRepo.create).toHaveBeenCalledWith({
-        amount: createTransactionRequestMockCredit.amount,
-        reference: createTransactionRequestMockCredit.reference,
-        state: TransactionState.Processed,
-        type: createTransactionRequestMockCredit.type,
-        walletUuid: createTransactionRequestMockCredit.walletId,
-      });
-      expect(walletMockRepo.updateBalance).toHaveBeenCalledWith({
-        balance,
-        walletUuid: walletMockMain.uuid,
-      });
-    });
-  });
-
   afterAll(async () => {
     await module.close();
   });

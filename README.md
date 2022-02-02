@@ -168,6 +168,17 @@ An HTTP request may be wrapped in a transaction in one of the following two ways
    }
    ```
 
+   - Pros:
+     - The usage of decorators and interceptors makes the usage, implementation and maintenance of
+       database transactions really straight forward.
+   - Cons:
+     - More complex / special use cases as can be seen below require a different approach, due to
+       the fact that throwing an exception from a function that is wrapped in a database transaction
+       should ALWAYS rollback the transaction.
+     - Async Local Storage (ALS) can be considered to be request-scoped global state, and generally
+       [global variables are considered to be bad.](https://wiki.c2.com/?GlobalVariablesAreBad)
+     - Testing and debugging becomes much more challenging.
+
 2. Using an instance of the `DatabaseTransactionService`:
 
    > Note: This project has a database entity named `transaction` which represents a financial
@@ -191,6 +202,13 @@ An HTTP request may be wrapped in a transaction in one of the following two ways
     return new TransactionResponse(transaction);
    }
    ```
+
+   - Pros:
+     - Datbase transactions can be exectuted on individual service functions.
+   - Cons:
+     - It is not ideal to have business logic in the presentation layer, although in this case the
+       business logic is tightly coupled to the transport protocol, i.e. throwing an HTTP exception
+       vs throw a gRPC error.
 
 ### Testing
 

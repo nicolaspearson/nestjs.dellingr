@@ -40,28 +40,6 @@ describe('User Service', () => {
     });
   });
 
-  describe('processUserRegistration', () => {
-    test('should process a user registration correctly', async () => {
-      userMockRepo.create.mockResolvedValueOnce(userMockJohn);
-      walletMockRepo.create.mockResolvedValueOnce(walletMockMain);
-      const { email, password } = userRegistrationRequestMock;
-      const result = await service['processUserRegistration'](email, password);
-      expect(result).toMatchObject({
-        ...userMockJohn,
-        wallets: [walletMockMain],
-      });
-      expect(userMockRepo.create).toHaveBeenCalledWith({
-        email,
-        password,
-      });
-      expect(walletMockRepo.create).toHaveBeenCalledWith({
-        balance: DEFAULT_WALLET_BALANCE,
-        name: DEFAULT_WALLET_NAME,
-        userUuid: userMockJohn.uuid,
-      });
-    });
-  });
-
   describe('profile', () => {
     test('should allow a user to retrieve their profile', async () => {
       userMockRepo.findByUserUuidOrFail?.mockResolvedValueOnce(userMockJohn);

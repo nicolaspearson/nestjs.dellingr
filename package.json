@@ -16,7 +16,7 @@
   "engineStrict": true,
   "main": "src/main.ts",
   "scripts": {
-    "build": "rimraf dist && webpack --config webpack.config.js",
+    "build": "rimraf dist && nest build --webpack --webpackPath webpack.config.js",
     "build:tsc": "rimraf dist && tsc --project tsconfig.tsc.json",
     "db:logs": "yarn exec:docker-compose logs -f db",
     "db:logs:integration": "yarn exec:docker-compose logs -f db-integration",
@@ -127,11 +127,9 @@
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.3",
     "ts-loader": "^9.2.6",
-    "ts-node": "^10.4.0",
     "typedoc": "^0.22.11",
     "typescript": "^4.5.5",
     "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2",
     "webpack-pnp-externals": "^1.1.0"
   },
   "packageManager": "yarn@3.1.1"

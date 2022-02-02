@@ -2,7 +2,7 @@ import { AsyncLocalStorage } from 'async_hooks';
 import { Observable, lastValueFrom } from 'rxjs';
 import { Connection, EntityManager } from 'typeorm';
 
-import { CallHandler, Injectable } from '@nestjs/common';
+import { CallHandler, Injectable, Logger } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
 
 interface Store {
@@ -11,12 +11,15 @@ interface Store {
 
 @Injectable()
 export class DatabaseTransactionService {
+  private readonly logger: Logger = new Logger(DatabaseTransactionService.name);
   private readonly storage = new AsyncLocalStorage<Store>();
 
   constructor(
     @InjectConnection()
     private readonly connection: Connection,
-  ) {}
+  ) {
+    this.logger.debug('Database transaction service created!');
+  }
 
   getManager(): EntityManager {
     const store = this.storage.getStore();
