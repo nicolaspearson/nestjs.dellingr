@@ -16,7 +16,7 @@
   "engineStrict": true,
   "main": "src/main.ts",
   "scripts": {
-    "build": "rimraf dist && nest build --webpack --webpackPath webpack.config.js",
+    "build": "rimraf dist && mkdir -p dist && nest build --webpack --webpackPath webpack.config.js",
     "build:tsc": "rimraf dist && tsc --project tsconfig.tsc.json",
     "db:logs": "yarn exec:docker-compose logs -f db",
     "db:logs:integration": "yarn exec:docker-compose logs -f db-integration",
