@@ -6,8 +6,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
 import { NotFoundError } from '$/common/error';
+import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
 import Transaction from '$/db/entities/transaction.entity';
-import { UnitOfWorkService } from '$/db/services';
 
 type QueryOptions = {
   withWallet: boolean;
@@ -18,12 +18,12 @@ type QueryOptions = {
 export class TransactionRepository implements Api.Repositories.Transaction {
   private readonly logger: Logger = new Logger(TransactionRepository.name);
 
-  constructor(private readonly unitOfWorkService: UnitOfWorkService) {
+  constructor(private readonly databaseTransactionService: DatabaseTransactionService) {
     this.logger.debug('Transaction repository created!');
   }
 
   private getManager(): EntityManager {
-    return this.unitOfWorkService.getManager();
+    return this.databaseTransactionService.getManager();
   }
 
   private query(options?: QueryOptions): SelectQueryBuilder<Transaction> {

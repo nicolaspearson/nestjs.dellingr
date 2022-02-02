@@ -110,7 +110,9 @@ src
 │   ├── error
 │   ├── filters
 │   ├── guards
+│   ├── interceptors
 │   ├── pipes
+│   ├── services
 │   ├── swagger
 │   └── validators
 ├── db
@@ -118,8 +120,6 @@ src
 │   ├── fixtures
 │   ├── migrations
 │   ├── repositories
-│   │   ├── aggregate
-│   │   └── entity
 │   └── utils
 ├── health
 ├── token
@@ -130,13 +130,9 @@ src
 
 ### Repositories
 
-This repository uses the `unit-of-work` pattern
-([implementation reference](https://github.com/LuanMaik/nestjs-unit-of-work)) in order to handle
-database transactions.
-
-This will always create a new instance of the controller, service, and repository for every HTTP
-request that the application receives, regardless of whether or not the the function call is wrapped
-in a unit-of-work.
+This project uses the [`unit-of-work`](https://martinfowler.com/eaaCatalog/unitOfWork.html)
+pattern ([implementation reference](https://github.com/LuanMaik/nestjs-unit-of-work)) in order to
+handle database transactions in all database repositories:
 
 ```sh
 src/db/repositories
@@ -146,6 +142,55 @@ src/db/repositories
 ├── user.repository.ts
 └── wallet.repository.ts
 ```
+
+The `DatabaseTransactionService` uses
+[`AsyncLocalStorage`](https://nodejs.org/api/async_context.html#class-asynclocalstorage) to store an
+instance of the TypeORM `EntityManager` used by the database transaction for each HTTP request. This
+avoids the need to create a new instance of the `controller`, `service`, and `repository` for every
+HTTP request that the application receives.
+
+An HTTP request may be wrapped in a transaction in one of the following two ways:
+
+1. Using the interceptor:
+
+   ```typescript
+   // Uses an interceptor to wrap the HTTP request in a database transaction.
+   @UseInterceptors(DatabaseTransactionInterceptor)
+   async register(@Body() dto: UserRegistrationRequest): Promise<void> {
+    try {
+      await this.userService.register(dto.email, dto.password);
+    } catch (error) {
+      // Ignore conflict errors to avoid user enumeration attacks.
+      if (!(error instanceof ConflictError)) {
+        throw error;
+      }
+    }
+   }
+   ```
+
+2. Using an instance of the `DatabaseTransactionService`:
+
+   > Note: This project has a database entity named `transaction` which represents a financial
+   > transaction in the use-case. This should not be confused with a database transaction.
+
+   ```typescript
+   async create(
+    @Req() req: Request,
+    @Body() dto: CreateTransactionRequest,
+   ): Promise<TransactionResponse> {
+     // Wrapped in a database transaction
+    const transaction = await this.databaseTransactionService.execute(() =>
+        this.transactionService.create(req.userUuid!, dto),
+    );
+    // Ideally this business logic should not reside in the controller, however
+    // due to the fact that the function call above is wrapped in a transaction
+    // throwing from the function will cause the transaction to be rolled back.
+    if (transaction.state === TransactionState.Rejected) {
+      throw new BadRequestError('Insufficient funds');
+    }
+    return new TransactionResponse(transaction);
+   }
+   ```
 
 ### Testing
 
@@ -246,7 +291,3 @@ This repository uses:
 - **prettier**: Code auto formatter.
 - **yarn2**: The preferred package manager.
 - **webpack**: The preferred application bundler.
-
-## References
-
-- [Unit of Work](https://github.com/LuanMaik/nestjs-unit-of-work)

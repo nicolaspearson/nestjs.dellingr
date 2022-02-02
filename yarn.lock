@@ -2441,6 +2441,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"async_hooks@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "async_hooks@npm:1.0.0"
+  checksum: d31a4cb971a980b095cde18879598d1b196b32cb38905d1c2ed0aca7ebc7e040344af52fe2dedba410a1eaf4bc12d63db797b91285048387cac78319a6366901
+  languageName: node
+  linkType: hard
+
 "asynckit@npm:^0.4.0":
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0"
@@ -3532,6 +3539,7 @@ __metadata:
     "@types/webpack-env": ^1.16.3
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
+    async_hooks: ^1.0.0
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
     common-tags: ^1.8.2
