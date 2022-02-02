@@ -21,7 +21,7 @@ export class DatabaseTransactionService {
   getManager(): EntityManager {
     const store = this.storage.getStore();
     if (!store?.manager) {
-      return this.connection.createEntityManager();
+      return this.connection.manager;
     }
     return store.manager;
   }
