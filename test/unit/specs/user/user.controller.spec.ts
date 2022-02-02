@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { ConflictError, InternalServerError } from '$/common/error';
-import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
+import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 import { UserController } from '$/user/user.controller';
 import { UserService } from '$/user/user.service';
 

@@ -4,8 +4,8 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
-import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
 import Wallet from '$/db/entities/wallet.entity';
+import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 
 type QueryOptions = {
   withTransactions: boolean;

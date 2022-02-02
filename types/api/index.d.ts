@@ -13,6 +13,9 @@ declare namespace Express {
 }
 
 declare namespace Api {
+  type TransactionState = import('$/common/enum/transaction-state.enum').TransactionState;
+  type TransactionType = import('$/common/enum/transaction-type.enum').TransactionType;
+
   type ExpirationTime = Opaque<'ExpirationTime', string>;
 
   interface Error {
@@ -31,8 +34,8 @@ declare namespace Api {
       uuid: Uuid;
       amount: number;
       reference: string;
-      state: import('$/common/enum/transaction-state.enum').TransactionState;
-      type: import('$/common/enum/transaction-type.enum').TransactionType;
+      state: TransactionState;
+      type: TransactionType;
       createdAt: Date;
       updatedAt?: Date;
       wallet: Api.Entities.Wallet;
@@ -73,8 +76,8 @@ declare namespace Api {
       create(data: {
         amount: number;
         reference: string;
-        state: import('$/common/enum/transaction-state.enum').TransactionState;
-        type: import('$/common/enum/transaction-type.enum').TransactionType;
+        state: TransactionState;
+        type: TransactionType;
         walletUuid: Uuid;
       }): Promise<Api.Entities.Transaction>;
       findByTransactionAndUserUuid(data: {
@@ -112,6 +115,18 @@ declare namespace Api {
         balance: number;
         walletUuid: Uuid;
       }): Promise<Api.Repositories.Responses.UpdateResult>;
+    };
+  }
+
+  namespace Services {
+    type CallHandler<T> = import('@nestjs/common').CallHandler<T>;
+    type Observable<T> = import('rxjs').Observable<T>;
+    type EntityManager = import('typeorm').EntityManager;
+
+    type DatabaseTransaction = {
+      getManager(): EntityManager;
+      execute<T>(next: (manager: EntityManager) => Promise<T>): Promise<T>;
+      executeHandler<T>(next: CallHandler<Observable<T>>): Promise<Observable<T>>;
     };
   }
 }

@@ -10,7 +10,7 @@ interface Store {
 }
 
 @Injectable()
-export class DatabaseTransactionService {
+export class DatabaseTransactionService implements Api.Services.DatabaseTransaction {
   private readonly logger: Logger = new Logger(DatabaseTransactionService.name);
   private readonly storage = new AsyncLocalStorage<Store>();
 

@@ -6,8 +6,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { TransactionType } from '$/common/enum/transaction-type.enum';
 import { NotFoundError } from '$/common/error';
-import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
 import Transaction from '$/db/entities/transaction.entity';
+import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 
 type QueryOptions = {
   withWallet: boolean;

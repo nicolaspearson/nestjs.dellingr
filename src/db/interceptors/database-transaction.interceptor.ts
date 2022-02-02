@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 
-import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
+import { DatabaseTransactionService } from '../services/database-transaction.service';
 
 @Injectable()
 export class DatabaseTransactionInterceptor<T> implements NestInterceptor {

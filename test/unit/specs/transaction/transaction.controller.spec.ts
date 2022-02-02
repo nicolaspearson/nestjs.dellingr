@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionResponse } from '$/common/dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { BadRequestError } from '$/common/error';
-import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
+import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 import { TransactionController } from '$/transaction/transaction.controller';
 import { TransactionService } from '$/transaction/transaction.service';
 

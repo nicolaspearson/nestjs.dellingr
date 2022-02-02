@@ -1,7 +1,7 @@
 import { mocked } from 'jest-mock';
 
 import { AuthService } from '$/auth/auth.service';
-import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
+import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 import { TokenService } from '$/token/token.service';
 import { TransactionService } from '$/transaction/transaction.service';
 import { UserService } from '$/user/user.service';

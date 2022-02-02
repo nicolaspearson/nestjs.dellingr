@@ -10,8 +10,6 @@ module.exports = Object.assign({}, require('../../jest.config.js'), {
     '!src/common/dto/req/user-registration.request.dto.ts',
     '!src/common/enum/*.enum.ts',
     '!src/common/error/*.error.ts',
-    '!src/common/interceptors/**/*.ts',
-    '!src/common/services/**/*.ts',
     '!src/common/swagger/**/*.ts',
     '!src/db/**/*.ts',
     '!src/main.ts',

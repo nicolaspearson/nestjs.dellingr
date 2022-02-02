@@ -99,33 +99,105 @@ except for the `common` and `db` directories.
 ```sh
 src
 ├── app
+│   └── app.module.ts
 ├── auth
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   └── auth.service.ts
 ├── common
 │   ├── config
+│   │   ├── environment.config.ts
+│   │   ├── helmet.config.ts
+│   │   ├── typeorm-webpack.config.ts
+│   │   └── typeorm.config.ts
 │   ├── constants
+│   │   └── index.ts
 │   ├── dto
+│   │   ├── index.ts
 │   │   ├── req
+│   │   │   ├── create-transaction.request.dto.ts
+│   │   │   ├── create-wallet.request.dto.ts
+│   │   │   ├── id.parameter.dto.ts
+│   │   │   ├── login.request.dto.ts
+│   │   │   └── user-registration.request.dto.ts
 │   │   └── res
+│   │       ├── health-check.response.dto.ts
+│   │       ├── jwt.response.dto.ts
+│   │       ├── transaction.response.dto.ts
+│   │       ├── user-profile.response.dto.ts
+│   │       └── wallet.response.dto.ts
 │   ├── enum
+│   │   ├── api-group.enum.ts
+│   │   ├── environment.enum.ts
+│   │   ├── error-name.enum.ts
+│   │   ├── transaction-state.enum.ts
+│   │   └── transaction-type.enum.ts
 │   ├── error
+│   │   ├── bad-request.error.ts
+│   │   ├── base.error.ts
+│   │   ├── conflict.error.ts
+│   │   ├── index.ts
+│   │   ├── internal-server.error.ts
+│   │   ├── not-found.error.ts
+│   │   ├── request-timeout.error.ts
+│   │   ├── unauthorized.error.ts
+│   │   └── unprocessable-entity.error.ts
 │   ├── filters
+│   │   └── error.filter.ts
 │   ├── guards
-│   ├── interceptors
+│   │   └── jwt-auth.guard.ts
 │   ├── pipes
-│   ├── services
+│   │   └── dto-validation.pipe.ts
 │   ├── swagger
+│   │   ├── dts-exporter.swagger.ts
+│   │   └── dts-generator.swagger.ts
 │   └── validators
+│       └── is-valid-password.validator.ts
 ├── db
+│   ├── database.module.ts
 │   ├── entities
+│   │   ├── transaction.entity.ts
+│   │   ├── user.entity.ts
+│   │   └── wallet.entity.ts
 │   ├── fixtures
+│   │   ├── transaction.fixture.ts
+│   │   ├── user.fixture.ts
+│   │   └── wallet.fixture.ts
+│   ├── interceptors
+│   │   └── database-transaction.interceptor.ts
 │   ├── migrations
+│   │   ├── 1643121437236-initial.ts
+│   │   └── 1643790225628-update-constraints.ts
 │   ├── repositories
+│   │   ├── index.ts
+│   │   ├── transaction.repository.ts
+│   │   ├── user.repository.ts
+│   │   └── wallet.repository.ts
+│   ├── services
+│   │   └── database-transaction.service.ts
 │   └── utils
+│       ├── seed.util.ts
+│       └── user.util.ts
 ├── health
+│   ├── health.controller.ts
+│   └── health.module.ts
+├── main.module.ts
+├── main.ts
 ├── token
+│   ├── token.module.ts
+│   └── token.service.ts
 ├── transaction
+│   ├── transaction.controller.ts
+│   ├── transaction.module.ts
+│   └── transaction.service.ts
 ├── user
+│   ├── user.controller.ts
+│   ├── user.module.ts
+│   └── user.service.ts
 └── wallet
+    ├── wallet.controller.ts
+    ├── wallet.module.ts
+    └── wallet.service.ts
 ```
 
 ### Repositories
@@ -133,15 +205,6 @@ src
 This project uses the [`unit-of-work`](https://martinfowler.com/eaaCatalog/unitOfWork.html)
 pattern ([implementation reference](https://github.com/LuanMaik/nestjs-unit-of-work)) in order to
 handle database transactions in all database repositories:
-
-```sh
-src/db/repositories
-├── index.ts
-├── repository.module.ts
-├── transaction.repository.ts
-├── user.repository.ts
-└── wallet.repository.ts
-```
 
 The `DatabaseTransactionService` uses
 [`AsyncLocalStorage`](https://nodejs.org/api/async_context.html#class-asynclocalstorage) to store an

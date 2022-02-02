@@ -25,7 +25,7 @@ import {
   UnauthorizedError,
 } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
-import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
+import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 import { TransactionService } from '$/transaction/transaction.service';
 
 const TAG = ApiGroup.Transaction;
