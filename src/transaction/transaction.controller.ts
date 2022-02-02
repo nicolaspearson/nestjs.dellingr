@@ -25,7 +25,7 @@ import {
   UnauthorizedError,
 } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
-import { UnitOfWorkService } from '$/db/services';
+import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
 import { TransactionService } from '$/transaction/transaction.service';
 
 const TAG = ApiGroup.Transaction;
@@ -36,7 +36,7 @@ export class TransactionController {
 
   constructor(
     private readonly transactionService: TransactionService,
-    private readonly unitOfWorkService: UnitOfWorkService,
+    private readonly databaseTransactionService: DatabaseTransactionService,
   ) {
     this.logger.debug('Transaction controller created!');
   }
@@ -81,7 +81,7 @@ export class TransactionController {
     @Req() req: Request,
     @Body() dto: CreateTransactionRequest,
   ): Promise<TransactionResponse> {
-    const transaction = await this.unitOfWorkService.doTransactional(
+    const transaction = await this.databaseTransactionService.execute(
       /* istanbul ignore next: covered in the integration tests */ () =>
         // We can use a non-null assertion below because the userUuid must exist on the
         // request because it is verified and added to the request by the JwtAuthGuard.

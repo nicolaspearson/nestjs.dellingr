@@ -4,8 +4,8 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
+import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
 import Wallet from '$/db/entities/wallet.entity';
-import { UnitOfWorkService } from '$/db/services';
 
 type QueryOptions = {
   withTransactions: boolean;
@@ -15,12 +15,12 @@ type QueryOptions = {
 export class WalletRepository implements Api.Repositories.Wallet {
   private readonly logger: Logger = new Logger(WalletRepository.name);
 
-  constructor(private readonly unitOfWorkService: UnitOfWorkService) {
+  constructor(private readonly databaseTransactionService: DatabaseTransactionService) {
     this.logger.debug('Wallet repository created!');
   }
 
   private getManager(): EntityManager {
-    return this.unitOfWorkService.getManager();
+    return this.databaseTransactionService.getManager();
   }
 
   private query(options?: QueryOptions): SelectQueryBuilder<Wallet> {

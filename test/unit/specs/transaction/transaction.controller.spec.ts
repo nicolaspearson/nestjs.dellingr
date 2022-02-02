@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionResponse } from '$/common/dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { BadRequestError } from '$/common/error';
-import { UnitOfWorkService } from '$/db/services';
+import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
 import { TransactionController } from '$/transaction/transaction.controller';
 import { TransactionService } from '$/transaction/transaction.service';
 
@@ -15,7 +15,7 @@ import {
   transactionMockPaymentFromBob,
   transactionResponseMock,
 } from '#/utils/fixtures';
-import { transactionMockService, unitOfWorkMockService } from '#/utils/mocks/service.mock';
+import { databaseTransactionMockService, transactionMockService } from '#/utils/mocks/service.mock';
 
 describe('Transaction Controller', () => {
   let module: TestingModule;
@@ -27,8 +27,8 @@ describe('Transaction Controller', () => {
       providers: [
         { provide: TransactionService, useValue: transactionMockService },
         {
-          provide: UnitOfWorkService,
-          useValue: unitOfWorkMockService,
+          provide: DatabaseTransactionService,
+          useValue: databaseTransactionMockService,
         },
       ],
     }).compile();
@@ -48,13 +48,13 @@ describe('Transaction Controller', () => {
         ...transactionMockPaymentFromBob,
         state: TransactionState.Processed,
       };
-      unitOfWorkMockService.doTransactional.mockResolvedValueOnce(processedTransaction);
+      databaseTransactionMockService.execute.mockResolvedValueOnce(processedTransaction);
       const result = await controller.create(
         authenticatedRequestMock,
         createTransactionRequestMockCredit,
       );
       expect(result).toMatchObject(new TransactionResponse(processedTransaction));
-      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
+      expect(databaseTransactionMockService.execute).toHaveBeenCalledTimes(1);
     });
 
     test('throws if the transaction has been rejected', async () => {
@@ -62,11 +62,11 @@ describe('Transaction Controller', () => {
         ...transactionMockPayedAlice,
         state: TransactionState.Rejected,
       };
-      unitOfWorkMockService.doTransactional.mockResolvedValueOnce(rejectedTransaction);
+      databaseTransactionMockService.execute.mockResolvedValueOnce(rejectedTransaction);
       await expect(
         controller.create(authenticatedRequestMock, createTransactionRequestMockDebit),
       ).rejects.toThrowError(BadRequestError);
-      expect(unitOfWorkMockService.doTransactional).toHaveBeenCalledTimes(1);
+      expect(databaseTransactionMockService.execute).toHaveBeenCalledTimes(1);
     });
   });
 

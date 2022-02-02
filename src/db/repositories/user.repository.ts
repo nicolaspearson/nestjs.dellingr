@@ -4,8 +4,8 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
+import { DatabaseTransactionService } from '$/common/services/database-transaction.service';
 import User from '$/db/entities/user.entity';
-import { UnitOfWorkService } from '$/db/services';
 import { generateSalt } from '$/db/utils/user.util';
 
 type QueryOptions = {
@@ -17,12 +17,12 @@ type QueryOptions = {
 export class UserRepository implements Api.Repositories.User {
   private readonly logger: Logger = new Logger(UserRepository.name);
 
-  constructor(private readonly unitOfWorkService: UnitOfWorkService) {
+  constructor(private readonly databaseTransactionService: DatabaseTransactionService) {
     this.logger.debug('User repository created!');
   }
 
   private getManager(): EntityManager {
-    return this.unitOfWorkService.getManager();
+    return this.databaseTransactionService.getManager();
   }
 
   private query(options?: QueryOptions): SelectQueryBuilder<User> {

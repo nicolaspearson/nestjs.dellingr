@@ -12,6 +12,7 @@ import {
   Post,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -25,7 +26,7 @@ import {
   UnauthorizedError,
 } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
-import { UnitOfWorkService } from '$/db/services';
+import { DatabaseTransactionInterceptor } from '$/common/interceptors/database-transaction.interceptor';
 import { UserService } from '$/user/user.service';
 
 const TAG = ApiGroup.User;
@@ -34,10 +35,7 @@ const TAG = ApiGroup.User;
 export class UserController {
   private readonly logger: Logger = new Logger(UserController.name);
 
-  constructor(
-    private readonly unitOfWorkService: UnitOfWorkService,
-    private readonly userService: UserService,
-  ) {
+  constructor(private readonly userService: UserService) {
     this.logger.debug('User controller created!');
   }
 
@@ -133,12 +131,11 @@ export class UserController {
     description: 'An internal error occurred.',
     type: InternalServerError,
   })
+  // Uses an interceptor to wrap the HTTP request in a database transaction.
+  @UseInterceptors(DatabaseTransactionInterceptor)
   async register(@Body() dto: UserRegistrationRequest): Promise<void> {
     try {
-      await this.unitOfWorkService.doTransactional(
-        /* istanbul ignore next: covered in the integration tests */ () =>
-          this.userService.register(dto.email, dto.password),
-      );
+      await this.userService.register(dto.email, dto.password);
     } catch (error) {
       // Ignore conflict errors to avoid user enumeration attacks.
       /* istanbul ignore next: else path does not matter */
