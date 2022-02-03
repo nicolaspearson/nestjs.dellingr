@@ -128,7 +128,7 @@
     "jest": "^27.4.7",
     "jest-mock": "^27.4.6",
     "markdownlint-cli": "^0.30.0",
-    "p-memoize": "^4.0.4",
+    "p-memoize": "^6.0.1",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "run-script-webpack-plugin": "^0.0.11",
