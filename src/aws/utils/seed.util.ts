@@ -8,7 +8,7 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3';
 
-export async function seed(): Promise<void> {
+export async function seedS3(): Promise<void> {
   try {
     const bucketName = process.env.AWS_S3_BUCKET_NAME!;
 

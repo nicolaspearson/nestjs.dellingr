@@ -9,14 +9,14 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-import { seed as awsSeed } from '$/aws/utils/seed.util';
+import { seedS3 } from '$/aws/utils/seed.util';
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { Environment } from '$/common/enum/environment.enum';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
-import { seed as databaseSeed } from '$/db/utils/seed.util';
+import { seedDatabase } from '$/db/utils/seed.util';
 import { MainModule } from '$/main.module';
 
 declare const module: {
@@ -70,11 +70,13 @@ async function bootstrap(): Promise<void> {
   const document = SwaggerModule.createDocument(app, builder.build());
   SwaggerModule.setup('docs/dellingr', app, document);
 
+  // FIXME: Remove the seeding source code from the `src` dir, and use a
+  //  `SEED_ENVIRONMENT = true` flag instead of relying on the `NODE_ENV`
   if (process.env.NODE_ENV === Environment.Development) {
     // Seed the database with fixtures in the development environment
-    await databaseSeed(getConnection());
+    await seedDatabase(getConnection());
     // Create the S3 bucket in the development environment
-    await awsSeed();
+    await seedS3();
   }
 
   // Serve the application
