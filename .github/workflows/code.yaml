@@ -69,6 +69,16 @@ jobs:
       - name: Run package integration tests
         run: yarn test:integration:ci
     services:
+      localstack:
+        image: localstack/localstack:latest
+        env:
+          AWS_ACCESS_KEY_ID: test
+          AWS_SECRET_ACCESS_KEY: test
+          DEFAULT_REGION: eu-west-1
+          SERVICES: s3
+        ports:
+          - 4510-4559:4510-4559
+          - 4566:4566
       postgres:
         image: postgres:14-alpine
         env:
@@ -85,6 +95,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
+      AWS_ENDPOINT: http://0.0.0.0:4566
       TYPEORM_HOST: 0.0.0.0
       TYPEORM_PORT: 5432
       TYPEORM_DATABASE: dellingr

@@ -71,6 +71,8 @@ services:
   localstack:
     image: localstack/localstack:latest
     environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
       - DATA_DIR=${DATA_DIR-}
       - DEBUG=${DEBUG-}
       - DEFAULT_REGION=eu-west-1
@@ -82,8 +84,8 @@ services:
       - PORT_WEB_UI=8080
       - SERVICES=s3
     ports:
-      - '4510-4559:4510-4559' # External service port range
-      - '4566:4566' # LocalStack edge proxy
+      - 4510-4559:4510-4559 # External service port range
+      - 4566:4566 # LocalStack edge proxy
     network_mode: bridge
     networks:
       - development
@@ -97,6 +99,6 @@ services:
       timeout: 10s
       start_period: 10s
     volumes:
-      - '${TMPDIR:-/tmp}/localstack:/tmp/localstack'
-      - '/var/run/docker.sock:/var/run/docker.sock'
-    container_name: '${LOCALSTACK_DOCKER_NAME-localstack_main}'
+      - ${TMPDIR:-/tmp}/localstack:/tmp/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: ${LOCALSTACK_DOCKER_NAME-localstack_main}
