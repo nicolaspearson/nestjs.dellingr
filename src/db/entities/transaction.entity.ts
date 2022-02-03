@@ -15,11 +15,11 @@ import {
 
 import { TransactionState } from '../../common/enum/transaction-state.enum';
 import { TransactionType } from '../../common/enum/transaction-type.enum';
-import Document from './document.entity';
-import Wallet from './wallet.entity';
+import { Document } from './document.entity';
+import { Wallet } from './wallet.entity';
 
 @Entity({ name: 'transaction' })
-export default class Transaction implements Api.Entities.Transaction {
+export class Transaction implements Api.Entities.Transaction {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 

@@ -5,7 +5,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { UserProfileResponse, UserRegistrationRequest } from '$/common/dto';
-import User from '$/db/entities/user.entity';
+import { User } from '$/db/entities/user.entity';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
 import { jwtResponseMock } from '#/utils/fixtures';

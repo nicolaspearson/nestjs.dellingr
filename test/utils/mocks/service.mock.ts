@@ -1,7 +1,9 @@
 import { mocked } from 'jest-mock';
 
 import { AuthService } from '$/auth/auth.service';
+import { AwsS3SeederService } from '$/aws/s3-seeder/aws-s3-seeder.service';
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
+import { DatabaseSeederService } from '$/db/services/database-seeder.service';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 import { DocumentService } from '$/document/document.service';
 import { TokenService } from '$/token/token.service';
@@ -27,6 +29,20 @@ export const authMockService = mocked<PublicOnly<AuthService>>(
 export const awsS3MockService = mocked<PublicOnly<Pick<AwsS3Service, 'upload'>>>(
   {
     upload: jest.fn().mockResolvedValue(undefined),
+  },
+  true,
+);
+
+export const awsS3SeederMockService = mocked<PublicOnly<AwsS3SeederService>>(
+  {
+    seed: jest.fn().mockResolvedValue(undefined),
+  },
+  true,
+);
+
+export const databaseSeederMockService = mocked<PublicOnly<DatabaseSeederService>>(
+  {
+    seed: jest.fn().mockResolvedValue(undefined),
   },
   true,
 );

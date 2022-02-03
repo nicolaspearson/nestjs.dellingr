@@ -4,9 +4,9 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
-import User from '$/db/entities/user.entity';
+import { User } from '$/db/entities/user.entity';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
-import { generateSalt } from '$/db/utils/user.util';
+import { generateSalt } from '$/db/utils/password.util';
 
 type QueryOptions = {
   withWallets: boolean;

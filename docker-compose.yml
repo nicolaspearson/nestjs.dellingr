@@ -22,8 +22,9 @@ services:
       - API_HOST=0.0.0.0
       - API_PORT=3000
       - AWS_ENDPOINT=http://localstack:4566
-      - ENVIRONMENT=production
+      - ENVIRONMENT=staging
       - NODE_ENV=production
+      - SEED_ENVIRONMENT=true
       - TYPEORM_DATABASE=dellingr
       - TYPEORM_HOST=db
       - TYPEORM_PASSWORD=masterkey

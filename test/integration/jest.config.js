@@ -5,6 +5,7 @@ module.exports = Object.assign({}, require(`../../jest.config.js`), {
     'src/**/*.module.ts',
     'src/**/*.repository.ts',
     'src/**/*.service.ts',
+    '!src/**/*-seeder.service.ts',
     '!src/main.module.ts',
   ],
   coverageThreshold: {

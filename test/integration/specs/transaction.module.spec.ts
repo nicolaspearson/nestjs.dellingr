@@ -6,7 +6,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { CreateTransactionRequest, JwtResponse, TransactionResponse } from '$/common/dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
-import Transaction from '$/db/entities/transaction.entity';
+import { Transaction } from '$/db/entities/transaction.entity';
 import { transactionFixtures } from '$/db/fixtures/transaction.fixture';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 

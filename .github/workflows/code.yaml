@@ -96,6 +96,7 @@ jobs:
           --health-retries 5
     env:
       AWS_ENDPOINT: http://0.0.0.0:4566
+      SEED_ENVIRONMENT: true
       TYPEORM_HOST: 0.0.0.0
       TYPEORM_PORT: 5432
       TYPEORM_DATABASE: dellingr

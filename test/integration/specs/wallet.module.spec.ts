@@ -5,7 +5,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX, DEFAULT_WALLET_BALANCE } from '$/common/constants';
 import { CreateWalletRequest, JwtResponse, WalletResponse } from '$/common/dto';
-import Wallet from '$/db/entities/wallet.entity';
+import { Wallet } from '$/db/entities/wallet.entity';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 import { walletFixtures } from '$/db/fixtures/wallet.fixture';
 

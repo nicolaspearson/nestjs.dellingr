@@ -10,7 +10,7 @@ import { Environment } from '$/common/enum/environment.enum';
  * @returns The {@link ContentSecurityPolicyOptions} in development, and true in production.
  */
 export function getContentResourcePolicy(): boolean | ContentSecurityPolicyOptions {
-  if (process.env.ENVIRONMENT !== Environment.Production) {
+  if (process.env.NODE_ENV !== Environment.Production) {
     return {
       directives: {
         defaultSrc: [`'self'`],

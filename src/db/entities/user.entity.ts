@@ -11,10 +11,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import Wallet from './wallet.entity';
+import { Wallet } from './wallet.entity';
 
 @Entity({ name: 'user' })
-export default class User implements Api.Entities.User {
+export class User implements Api.Entities.User {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 

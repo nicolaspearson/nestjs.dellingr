@@ -22,8 +22,8 @@ cp .env.example .env
 Locally no additional configuration for `AWS` is required. We use
 [`localstack`](https://localstack.cloud/) in the development environment.
 
-There is a seeding process that automatically creates an `S3` bucket in the **development**
-environment.
+There is a seeding process that automatically creates an `S3` bucket if the `SEED_ENVIRONMENT`
+environment variable is set to `true`.
 
 The following is important for a **production** environment:
 

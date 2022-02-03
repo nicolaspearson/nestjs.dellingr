@@ -1,4 +1,5 @@
 import { default as request } from 'supertest';
+import { Connection } from 'typeorm';
 
 import { HttpStatus, INestApplication } from '@nestjs/common';
 
@@ -10,6 +11,7 @@ import { setupApplication } from '#/utils/integration/setup-application';
 
 describe('Auth Module', () => {
   let app: INestApplication;
+  let connection: Connection;
 
   const baseUrl = `${API_GLOBAL_PREFIX}/auth`;
   const user = userFixtures[0] as Api.Entities.User;
@@ -19,6 +21,8 @@ describe('Auth Module', () => {
   beforeAll(async () => {
     const instance = await setupApplication({ dbSchema: 'integration_auth' });
     app = instance.application;
+    connection = instance.connection;
+    await connection.connect();
   });
 
   describe(`POST ${baseUrl}/login`, () => {
@@ -64,6 +68,7 @@ describe('Auth Module', () => {
   });
 
   afterAll(async () => {
+    await connection.close();
     await app.close();
   });
 });

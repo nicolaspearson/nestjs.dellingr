@@ -37,6 +37,9 @@ export function getValidationSchema(): Joi.ObjectSchema {
       .valid(Environment.Development, Environment.Production)
       .description('The Node runtime environment')
       .default(Environment.Development),
+    SEED_ENVIRONMENT: Joi.boolean()
+      .description('Whether or not the environment should be seeded')
+      .default(false),
     TYPEORM_CONNECTION: Joi.string()
       .valid('postgres')
       .description('The database connection type to be used by TypeORM')

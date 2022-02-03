@@ -3,7 +3,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 
 import { Injectable, Logger } from '@nestjs/common';
 
-import Document from '$/db/entities/document.entity';
+import { Document } from '$/db/entities/document.entity';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 
 @Injectable()

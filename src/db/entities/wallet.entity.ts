@@ -13,11 +13,11 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import Transaction from './transaction.entity';
-import User from './user.entity';
+import { Transaction } from './transaction.entity';
+import { User } from './user.entity';
 
 @Entity({ name: 'wallet' })
-export default class Wallet implements Api.Entities.Wallet {
+export class Wallet implements Api.Entities.Wallet {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 

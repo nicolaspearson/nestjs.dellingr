@@ -9,10 +9,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import Transaction from './transaction.entity';
+import { Transaction } from './transaction.entity';
 
 @Entity({ name: 'document' })
-export default class Document implements Api.Entities.Document {
+export class Document implements Api.Entities.Document {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 

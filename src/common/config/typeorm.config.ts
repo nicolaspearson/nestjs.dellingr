@@ -45,6 +45,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       dropSchema: process.env.TYPEORM_DROP_SCHEMA === 'true',
       entities: [process.env.TYPEORM_ENTITIES as string],
       migrations: [process.env.TYPEORM_MIGRATIONS as string],
+      keepConnectionAlive: false,
     };
 
     // This option should always be set to false in the integration tests.
@@ -55,27 +56,22 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       } as ConnectionOptions);
     }
 
-    // FIXME: Find a better way to configure this instead of relying on the `NODE_ENV`
     if (process.env.NODE_ENV === Environment.Production) {
-      // Production options that will override anything 'unsafe'
+      // Production options that will override anything considered 'unsafe'
       const productionOptions: MergedConnectionOptions = {
-        type,
+        dropSchema: false, // Never drop the database schema in production
         logging: ['schema', 'error'],
-        synchronize: false, // Never auto create database schema
-        dropSchema: false, // Never auto drop the schema in each connection
         migrationsRun: true, // Run migrations automatically on each application launch
-        keepConnectionAlive: false,
+        synchronize: false, // Never synchronize database entities in production
+        type,
       };
       Object.assign(connectionOptions, productionOptions);
     } else {
-      // Development options that will always recreate the schema automatically and skip migrations
+      // Development options that will always keep the connection alive.
       const developmentOptions: MergedConnectionOptions = {
-        type,
+        keepConnectionAlive: true, // This allows HMR to work seamlessly
         logging: ['error', 'schema', 'warn'],
-        synchronize: true,
-        dropSchema: true,
-        migrationsRun: false,
-        keepConnectionAlive: true,
+        type,
       };
       Object.assign(connectionOptions, developmentOptions);
     }

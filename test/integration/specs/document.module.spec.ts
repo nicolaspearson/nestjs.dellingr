@@ -5,7 +5,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, UploadDocumentRequest } from '$/common/dto';
-import Document from '$/db/entities/document.entity';
+import { Document } from '$/db/entities/document.entity';
 import { transactionFixtures } from '$/db/fixtures/transaction.fixture';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
@@ -38,7 +38,7 @@ describe('Document Module', () => {
   describe(`POST ${baseUrl}/documents`, () => {
     const filePath = require.resolve(`../../utils/files/invoice.pdf`);
 
-    beforeEach(() => {
+    afterEach(() => {
       process.env.AWS_S3_BUCKET_NAME = 'dellingr';
     });
 

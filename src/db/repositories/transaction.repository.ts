@@ -4,7 +4,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 import { Injectable, Logger } from '@nestjs/common';
 
 import { NotFoundError } from '$/common/error';
-import Transaction from '$/db/entities/transaction.entity';
+import { Transaction } from '$/db/entities/transaction.entity';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 
 type QueryOptions = {
