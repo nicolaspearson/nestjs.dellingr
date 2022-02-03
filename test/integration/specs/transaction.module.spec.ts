@@ -1,7 +1,6 @@
 import { default as request } from 'supertest';
-import { Connection } from 'typeorm';
 
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { CreateTransactionRequest, JwtResponse, TransactionResponse } from '$/common/dto';
@@ -17,28 +16,26 @@ import {
   transactionMockPayedAlice,
 } from '#/utils/fixtures';
 import { getJwt } from '#/utils/integration/auth.util';
-import { setupApplication } from '#/utils/integration/setup-application';
+import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('Transaction Module', () => {
-  let app: INestApplication;
-  let connection: Connection;
   let jwt: JwtResponse;
+  let runner: TestRunner;
 
   const baseUrl = API_GLOBAL_PREFIX;
   const transaction = transactionFixtures[0] as Api.Entities.Transaction;
   const user = userFixtures[0] as Api.Entities.User;
 
-  beforeEach(jest.clearAllMocks);
-
   beforeAll(async () => {
-    const instance = await setupApplication({ dbSchema: 'integration_transaction' });
-    app = instance.application;
-    connection = instance.connection;
-    await connection.connect();
-    jwt = await getJwt(app, {
+    runner = await createTestRunner({ schema: 'integration_transaction' });
+    jwt = await getJwt(runner.application, {
       email: user.email,
       password: DEFAULT_PASSWORD,
     });
+  });
+
+  afterAll(async () => {
+    await runner.close();
   });
 
   describe(`POST ${baseUrl}/transactions`, () => {
@@ -49,12 +46,12 @@ describe('Transaction Module', () => {
         reference: 'Integration test #1 credit transaction!',
         walletId: transaction.wallet!.uuid,
       };
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/transactions`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .send(createTransactionRequest)
         .expect(HttpStatus.CREATED);
-      const databaseTransaction = await connection.manager.findOne(Transaction, {
+      const databaseTransaction = await runner.connection.manager.findOne(Transaction, {
         where: {
           reference: createTransactionRequest.reference,
         },
@@ -70,12 +67,12 @@ describe('Transaction Module', () => {
         reference: '#Integration test #2 debit transaction!',
         walletId: transaction.wallet!.uuid,
       };
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/transactions`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .send(createTransactionRequest)
         .expect(HttpStatus.CREATED);
-      const databaseTransaction = await connection.manager.findOne(Transaction, {
+      const databaseTransaction = await runner.connection.manager.findOne(Transaction, {
         where: {
           reference: createTransactionRequest.reference,
         },
@@ -92,12 +89,12 @@ describe('Transaction Module', () => {
         reference: 'Integration test #3 insufficient funds!',
         walletId: transaction.wallet!.uuid,
       };
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/transactions`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .send(createTransactionRequest);
       expect(res.status).toEqual(HttpStatus.BAD_REQUEST);
-      const databaseTransaction = await connection.manager.findOne(Transaction, {
+      const databaseTransaction = await runner.connection.manager.findOne(Transaction, {
         where: {
           reference: createTransactionRequest.reference,
         },
@@ -108,7 +105,7 @@ describe('Transaction Module', () => {
 
     test('[400] => should throw a bad request error if validation fails', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/transactions`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .send({});
@@ -117,7 +114,7 @@ describe('Transaction Module', () => {
 
     test('[401] => should throw an unauthorized error if a valid jwt is not provided', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/transactions`)
         .set('Authorization', `Bearer ${jwtResponseMock.token}`);
       expect(res.status).toEqual(HttpStatus.UNAUTHORIZED);
@@ -127,18 +124,21 @@ describe('Transaction Module', () => {
   describe(`GET ${baseUrl}/transaction/:id`, () => {
     test('[200] => should allow a user to retrieve a transaction', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/transaction/${transaction.uuid}`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .expect(HttpStatus.OK);
-      const databaseTransaction = await connection.manager.findOne(Transaction, transaction.uuid);
+      const databaseTransaction = await runner.connection.manager.findOne(
+        Transaction,
+        transaction.uuid,
+      );
       expect(databaseTransaction).toBeDefined();
       expect(res.body).toMatchObject(new TransactionResponse(databaseTransaction!));
     });
 
     test('[400] => should throw a bad request error if validation fails', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/transaction/12345`)
         .set('Authorization', `Bearer ${jwt.token}`);
       expect(res.status).toEqual(HttpStatus.BAD_REQUEST);
@@ -146,7 +146,7 @@ describe('Transaction Module', () => {
 
     test('[401] => should throw an unauthorized error if a valid jwt is not provided', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/transaction/${transaction.uuid}`)
         .set('Authorization', `Bearer ${jwtResponseMock.token}`);
       expect(res.status).toEqual(HttpStatus.UNAUTHORIZED);
@@ -154,15 +154,10 @@ describe('Transaction Module', () => {
 
     test('[404] => should throw a not found error if the transaction does not exist', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/transaction/${transactionMockPayedAlice.uuid}`)
         .set('Authorization', `Bearer ${jwt.token}`);
       expect(res.status).toEqual(HttpStatus.NOT_FOUND);
     });
-  });
-
-  afterAll(async () => {
-    await connection.close();
-    await app.close();
   });
 });

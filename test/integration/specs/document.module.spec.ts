@@ -1,7 +1,6 @@
 import { default as request } from 'supertest';
-import { Connection } from 'typeorm';
 
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, UploadDocumentRequest } from '$/common/dto';
@@ -11,28 +10,26 @@ import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
 import { jwtResponseMock } from '#/utils/fixtures';
 import { getJwt } from '#/utils/integration/auth.util';
-import { setupApplication } from '#/utils/integration/setup-application';
+import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('Document Module', () => {
-  let app: INestApplication;
-  let connection: Connection;
   let jwt: JwtResponse;
+  let runner: TestRunner;
 
   const baseUrl = API_GLOBAL_PREFIX;
   const transaction = transactionFixtures[0] as Api.Entities.Transaction;
   const user = userFixtures[0] as Api.Entities.User;
 
-  beforeEach(jest.clearAllMocks);
-
   beforeAll(async () => {
-    const instance = await setupApplication({ dbSchema: 'integration_document', seedS3: true });
-    app = instance.application;
-    connection = instance.connection;
-    await connection.connect();
-    jwt = await getJwt(app, {
+    runner = await createTestRunner({ schema: 'integration_document' });
+    jwt = await getJwt(runner.application, {
       email: user.email,
       password: DEFAULT_PASSWORD,
     });
+  });
+
+  afterAll(async () => {
+    await runner.close();
   });
 
   describe(`POST ${baseUrl}/documents`, () => {
@@ -48,14 +45,14 @@ describe('Document Module', () => {
         name: 'First integration test document',
         transactionId: transaction.uuid,
       };
-      await request(app.getHttpServer())
+      await request(runner.application.getHttpServer())
         .post(`${baseUrl}/documents`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .attach('file', filePath)
         .field('name', uploadDocumentRequest.name)
         .field('transactionId', uploadDocumentRequest.transactionId)
         .expect(HttpStatus.CREATED);
-      const databaseDocument = await connection.manager.findOne(Document, {
+      const databaseDocument = await runner.connection.manager.findOne(Document, {
         relations: ['transaction'],
         where: {
           name: uploadDocumentRequest.name,
@@ -77,7 +74,7 @@ describe('Document Module', () => {
 
     test('[400] => should throw a bad request error if validation fails', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/documents`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .send({});
@@ -86,7 +83,7 @@ describe('Document Module', () => {
 
     test('[401] => should throw an unauthorized error if a valid jwt is not provided', async () => {
       expect(jwt.token).toBeDefined();
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/documents`)
         .set('Authorization', `Bearer ${jwtResponseMock.token}`);
       expect(res.status).toEqual(HttpStatus.UNAUTHORIZED);
@@ -99,14 +96,14 @@ describe('Document Module', () => {
         name: 'Second integration test document',
         transactionId: transaction.uuid,
       };
-      await request(app.getHttpServer())
+      await request(runner.application.getHttpServer())
         .post(`${baseUrl}/documents`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .attach('file', filePath)
         .field('name', uploadDocumentRequest.name)
         .field('transactionId', uploadDocumentRequest.transactionId)
         .expect(HttpStatus.FAILED_DEPENDENCY);
-      const databaseDocument = await connection.manager.findOne(Document, {
+      const databaseDocument = await runner.connection.manager.findOne(Document, {
         relations: ['transaction'],
         where: {
           name: uploadDocumentRequest.name,
@@ -114,10 +111,5 @@ describe('Document Module', () => {
       });
       expect(databaseDocument).not.toBeDefined();
     });
-  });
-
-  afterAll(async () => {
-    await connection.close();
-    await app.close();
   });
 });

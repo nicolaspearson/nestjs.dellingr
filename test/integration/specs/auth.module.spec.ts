@@ -1,33 +1,30 @@
 import { default as request } from 'supertest';
-import { Connection } from 'typeorm';
 
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, LoginRequest } from '$/common/dto';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
-import { setupApplication } from '#/utils/integration/setup-application';
+import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('Auth Module', () => {
-  let app: INestApplication;
-  let connection: Connection;
+  let runner: TestRunner;
 
   const baseUrl = `${API_GLOBAL_PREFIX}/auth`;
   const user = userFixtures[0] as Api.Entities.User;
 
-  beforeEach(jest.clearAllMocks);
-
   beforeAll(async () => {
-    const instance = await setupApplication({ dbSchema: 'integration_auth' });
-    app = instance.application;
-    connection = instance.connection;
-    await connection.connect();
+    runner = await createTestRunner({ schema: 'integration_auth' });
+  });
+
+  afterAll(async () => {
+    await runner.close();
   });
 
   describe(`POST ${baseUrl}/login`, () => {
     test('[200] => should allow a user to login', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/login`)
         .send({
           email: user.email,
@@ -40,14 +37,14 @@ describe('Auth Module', () => {
     });
 
     test('[400] => should throw a bad request error if validation fails', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/login`)
         .send({ email: 'invalid-email' } as LoginRequest);
       expect(res.status).toEqual(HttpStatus.BAD_REQUEST);
     });
 
     test("[404] => should throw a not found error if the user's credentials are invalid", async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/login`)
         .send({
           email: user.email,
@@ -57,7 +54,7 @@ describe('Auth Module', () => {
     });
 
     test('[404] => should throw a not found error if the user does not exist', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/login`)
         .send({
           email: 'brand-new-user@example.com',
@@ -65,10 +62,5 @@ describe('Auth Module', () => {
         } as LoginRequest);
       expect(res.status).toEqual(HttpStatus.NOT_FOUND);
     });
-  });
-
-  afterAll(async () => {
-    await connection.close();
-    await app.close();
   });
 });

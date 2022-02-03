@@ -1,27 +1,32 @@
 import { default as request } from 'supertest';
 
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 
 import { healthCheckResponseMock } from '#/utils/fixtures';
-import { setupApplication } from '#/utils/integration/setup-application';
+import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('Health Module', () => {
-  let app: INestApplication;
+  let runner: TestRunner;
 
   const baseUrl = `${API_GLOBAL_PREFIX}/health`;
 
   beforeEach(jest.clearAllMocks);
 
   beforeAll(async () => {
-    const instance = await setupApplication({ dbSchema: 'integration_health' });
-    app = instance.application;
+    runner = await createTestRunner({ schema: 'integration_health' });
+  });
+
+  afterAll(async () => {
+    await runner.close();
   });
 
   describe(`GET ${baseUrl}`, () => {
     test('[200] => should return the health status correctly', async () => {
-      const res = await request(app.getHttpServer()).get(baseUrl).expect(HttpStatus.OK);
+      const res = await request(runner.application.getHttpServer())
+        .get(baseUrl)
+        .expect(HttpStatus.OK);
       expect(res.body).toMatchObject(healthCheckResponseMock);
       // Should set headers correctly
       expect(res.header).toMatchObject({
@@ -45,9 +50,5 @@ describe('Health Module', () => {
         'x-xss-protection': '0',
       });
     });
-  });
-
-  afterAll(async () => {
-    await app.close();
   });
 });
