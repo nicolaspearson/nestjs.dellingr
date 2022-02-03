@@ -9,13 +9,14 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import { seed as awsSeed } from '$/aws/utils/seed.util';
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { Environment } from '$/common/enum/environment.enum';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
-import { seed } from '$/db/utils/seed.util';
+import { seed as databaseSeed } from '$/db/utils/seed.util';
 import { MainModule } from '$/main.module';
 
 declare const module: {
@@ -71,7 +72,9 @@ async function bootstrap(): Promise<void> {
 
   if (process.env.NODE_ENV === Environment.Development) {
     // Seed the database with fixtures in the development environment
-    await seed(getConnection());
+    await databaseSeed(getConnection());
+    // Create the S3 bucket in the development environment
+    await awsSeed();
   }
 
   // Serve the application

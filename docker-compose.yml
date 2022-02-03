@@ -21,6 +21,7 @@ services:
     environment:
       - API_HOST=0.0.0.0
       - API_PORT=3000
+      - AWS_ENDPOINT=http://localstack:4566
       - ENVIRONMENT=production
       - NODE_ENV=production
       - TYPEORM_DATABASE=dellingr
@@ -33,6 +34,8 @@ services:
       - 3000:3000
     depends_on:
       db:
+        condition: service_healthy
+      localstack:
         condition: service_healthy
     networks:
       - development
@@ -82,11 +85,32 @@ services:
   localstack:
     image: localstack/localstack:latest
     environment:
+      - DATA_DIR=${DATA_DIR-}
+      - DEBUG=${DEBUG-}
       - DEFAULT_REGION=eu-west-1
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOSTNAME_EXTERNAL=localstack
+      - HOSTNAME=localstack
+      - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+      - PORT_WEB_UI=8080
       - SERVICES=s3
     ports:
-      - 4566-4599:4566-4599
+      - '4510-4559:4510-4559' # External service port range
+      - '4566:4566' # LocalStack edge proxy
+    network_mode: bridge
+    networks:
+      - development
+    healthcheck:
+      test:
+        - CMD
+        - bash
+        - -c
+        - awslocal s3 ls # && awslocal dynamodb list-tables
+      interval: 5s
+      timeout: 10s
+      start_period: 10s
     volumes:
       - '${TMPDIR:-/tmp}/localstack:/tmp/localstack'
       - '/var/run/docker.sock:/var/run/docker.sock'
+    container_name: '${LOCALSTACK_DOCKER_NAME-localstack_main}'

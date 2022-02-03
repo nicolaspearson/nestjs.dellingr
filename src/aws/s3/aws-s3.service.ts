@@ -18,6 +18,7 @@ export class AwsS3Service extends S3Client {
         /* eslint-enable @typescript-eslint/no-non-null-assertion */
       },
       endpoint: configService.get<string>('AWS_ENDPOINT'),
+      forcePathStyle: true,
       region: configService.get<string>('AWS_REGION'),
     });
     this.logger.debug('AWS S3 service created!');
