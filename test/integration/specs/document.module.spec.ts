@@ -3,29 +3,21 @@ import { default as request } from 'supertest';
 import { HttpStatus } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
-import { JwtResponse, UploadDocumentRequest } from '$/common/dto';
+import { UploadDocumentRequest } from '$/common/dto';
 import { Document } from '$/db/entities/document.entity';
 import { transactionFixtures } from '$/db/fixtures/transaction.fixture';
-import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
+import { TestRunner } from '#/integration/test-runner';
 import { jwtResponseMock } from '#/utils/fixtures';
-import { getJwt } from '#/utils/integration/auth.util';
-import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('Document Module', () => {
-  let jwt: JwtResponse;
   let runner: TestRunner;
 
   const baseUrl = API_GLOBAL_PREFIX;
   const transaction = transactionFixtures[0] as Api.Entities.Transaction;
-  const user = userFixtures[0] as Api.Entities.User;
 
   beforeAll(async () => {
-    runner = await createTestRunner({ schema: 'integration_document' });
-    jwt = await getJwt(runner.application, {
-      email: user.email,
-      password: DEFAULT_PASSWORD,
-    });
+    runner = await TestRunner.create({ schema: 'integration_document' });
   });
 
   afterAll(async () => {
@@ -40,6 +32,7 @@ describe('Document Module', () => {
     });
 
     test('[201] => should allow a user to upload a new document', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const uploadDocumentRequest: UploadDocumentRequest = {
         name: 'First integration test document',
@@ -73,6 +66,7 @@ describe('Document Module', () => {
     });
 
     test('[400] => should throw a bad request error if validation fails', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/documents`)
@@ -82,6 +76,7 @@ describe('Document Module', () => {
     });
 
     test('[401] => should throw an unauthorized error if a valid jwt is not provided', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/documents`)
@@ -90,6 +85,7 @@ describe('Document Module', () => {
     });
 
     test('[424] => should throw a failed dependency error if the AWS S3 upload fails', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       process.env.AWS_S3_BUCKET_NAME = 'this-bucket-does-not-exist';
       const uploadDocumentRequest: UploadDocumentRequest = {

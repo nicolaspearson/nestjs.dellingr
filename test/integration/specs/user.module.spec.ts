@@ -7,9 +7,8 @@ import { UserProfileResponse, UserRegistrationRequest } from '$/common/dto';
 import { User } from '$/db/entities/user.entity';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
+import { TestRunner } from '#/integration/test-runner';
 import { jwtResponseMock } from '#/utils/fixtures';
-import { getJwt } from '#/utils/integration/auth.util';
-import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('User Module', () => {
   let runner: TestRunner;
@@ -18,7 +17,7 @@ describe('User Module', () => {
   const user = userFixtures[0] as Api.Entities.User;
 
   beforeAll(async () => {
-    runner = await createTestRunner({ schema: 'integration_user' });
+    runner = await TestRunner.create({ schema: 'integration_user' });
   });
 
   afterAll(async () => {
@@ -28,7 +27,7 @@ describe('User Module', () => {
   describe(`DELETE ${baseUrl}/user`, () => {
     test('[204] => should allow a user to delete their account', async () => {
       const deletableUser = userFixtures[2] as Api.Entities.User;
-      const jwt = await getJwt(runner.application, {
+      const jwt = await runner.getJwt({
         email: deletableUser.email,
         password: DEFAULT_PASSWORD,
       });
@@ -55,10 +54,7 @@ describe('User Module', () => {
 
   describe(`GET ${baseUrl}/user`, () => {
     test('[200] => should allow a user to retrieve their profile', async () => {
-      const jwt = await getJwt(runner.application, {
-        email: user.email,
-        password: DEFAULT_PASSWORD,
-      });
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/user`)

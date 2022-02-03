@@ -4,8 +4,8 @@ import { HttpStatus } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 
+import { TestRunner } from '#/integration/test-runner';
 import { healthCheckResponseMock } from '#/utils/fixtures';
-import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('Health Module', () => {
   let runner: TestRunner;
@@ -15,7 +15,7 @@ describe('Health Module', () => {
   beforeEach(jest.clearAllMocks);
 
   beforeAll(async () => {
-    runner = await createTestRunner({ schema: 'integration_health' });
+    runner = await TestRunner.create({ schema: 'integration_health' });
   });
 
   afterAll(async () => {

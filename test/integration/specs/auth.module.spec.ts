@@ -6,7 +6,7 @@ import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, LoginRequest } from '$/common/dto';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
-import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
+import { TestRunner } from '#/integration/test-runner';
 
 describe('Auth Module', () => {
   let runner: TestRunner;
@@ -15,7 +15,7 @@ describe('Auth Module', () => {
   const user = userFixtures[0] as Api.Entities.User;
 
   beforeAll(async () => {
-    runner = await createTestRunner({ schema: 'integration_auth' });
+    runner = await TestRunner.create({ schema: 'integration_auth' });
   });
 
   afterAll(async () => {

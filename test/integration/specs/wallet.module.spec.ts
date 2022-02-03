@@ -3,29 +3,21 @@ import { default as request } from 'supertest';
 import { HttpStatus } from '@nestjs/common';
 
 import { API_GLOBAL_PREFIX, DEFAULT_WALLET_BALANCE } from '$/common/constants';
-import { CreateWalletRequest, JwtResponse, WalletResponse } from '$/common/dto';
+import { CreateWalletRequest, WalletResponse } from '$/common/dto';
 import { Wallet } from '$/db/entities/wallet.entity';
-import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 import { walletFixtures } from '$/db/fixtures/wallet.fixture';
 
+import { TestRunner } from '#/integration/test-runner';
 import { jwtResponseMock, walletMockSecondary } from '#/utils/fixtures';
-import { getJwt } from '#/utils/integration/auth.util';
-import { TestRunner, createTestRunner } from '#/utils/integration/setup-application';
 
 describe('Wallet Module', () => {
-  let jwt: JwtResponse;
   let runner: TestRunner;
 
   const baseUrl = API_GLOBAL_PREFIX;
-  const user = userFixtures[0] as Api.Entities.User;
   const wallet = walletFixtures[0] as Api.Entities.Wallet;
 
   beforeAll(async () => {
-    runner = await createTestRunner({ schema: 'integration_wallet' });
-    jwt = await getJwt(runner.application, {
-      email: user.email,
-      password: DEFAULT_PASSWORD,
-    });
+    runner = await TestRunner.create({ schema: 'integration_wallet' });
   });
 
   afterAll(async () => {
@@ -34,6 +26,7 @@ describe('Wallet Module', () => {
 
   describe(`POST ${baseUrl}/wallets`, () => {
     test('[201] => should allow a user to create a new wallet', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const createWalletRequest: CreateWalletRequest = {
         name: 'An integration test wallet',
@@ -58,6 +51,7 @@ describe('Wallet Module', () => {
     });
 
     test('[400] => should throw a bad request error if validation fails', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/wallets`)
@@ -67,6 +61,7 @@ describe('Wallet Module', () => {
     });
 
     test('[401] => should throw an unauthorized error if a valid jwt is not provided', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .post(`${baseUrl}/wallets`)
@@ -77,6 +72,7 @@ describe('Wallet Module', () => {
 
   describe(`GET ${baseUrl}/wallet/:id`, () => {
     test('[200] => should allow a user to retrieve their wallet', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/wallet/${wallet.uuid}`)
@@ -90,6 +86,7 @@ describe('Wallet Module', () => {
     });
 
     test('[400] => should throw a bad request error if validation fails', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/wallet/12345`)
@@ -98,6 +95,7 @@ describe('Wallet Module', () => {
     });
 
     test('[401] => should throw an unauthorized error if a valid jwt is not provided', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/wallet/${wallet.uuid}`)
@@ -106,6 +104,7 @@ describe('Wallet Module', () => {
     });
 
     test('[404] => should throw a not found error if the wallet does not exist', async () => {
+      const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const res = await request(runner.application.getHttpServer())
         .get(`${baseUrl}/wallet/${walletMockSecondary.uuid}`)

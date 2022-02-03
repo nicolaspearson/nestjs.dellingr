@@ -121,11 +121,19 @@ except for the `common` and `db` directories.
 ```sh
 src
 ├── app
-│   └── app.module.ts
+│   ├── app.module.ts
+│   └── app.service.ts
 ├── auth
 │   ├── auth.controller.ts
 │   ├── auth.module.ts
 │   └── auth.service.ts
+├── aws
+│   ├── s3
+│   │   ├── aws-s3.module.ts
+│   │   └── aws-s3.service.ts
+│   └── s3-seeder
+│       ├── aws-s3-seeder.module.ts
+│       └── aws-s3-seeder.service.ts
 ├── common
 │   ├── config
 │   │   ├── environment.config.ts
@@ -141,6 +149,7 @@ src
 │   │   │   ├── create-wallet.request.dto.ts
 │   │   │   ├── id.parameter.dto.ts
 │   │   │   ├── login.request.dto.ts
+│   │   │   ├── upload-document.request.dto.ts
 │   │   │   └── user-registration.request.dto.ts
 │   │   └── res
 │   │       ├── health-check.response.dto.ts
@@ -158,6 +167,7 @@ src
 │   │   ├── bad-request.error.ts
 │   │   ├── base.error.ts
 │   │   ├── conflict.error.ts
+│   │   ├── failed-dependency.error.ts
 │   │   ├── index.ts
 │   │   ├── internal-server.error.ts
 │   │   ├── not-found.error.ts
@@ -165,7 +175,8 @@ src
 │   │   ├── unauthorized.error.ts
 │   │   └── unprocessable-entity.error.ts
 │   ├── filters
-│   │   └── error.filter.ts
+│   │   ├── error.filter.ts
+│   │   └── multer-pdf-file.filter.ts
 │   ├── guards
 │   │   └── jwt-auth.guard.ts
 │   ├── pipes
@@ -178,6 +189,7 @@ src
 ├── db
 │   ├── database.module.ts
 │   ├── entities
+│   │   ├── document.entity.ts
 │   │   ├── transaction.entity.ts
 │   │   ├── user.entity.ts
 │   │   └── wallet.entity.ts
@@ -189,17 +201,23 @@ src
 │   │   └── database-transaction.interceptor.ts
 │   ├── migrations
 │   │   ├── 1643121437236-initial.ts
-│   │   └── 1643790225628-update-constraints.ts
+│   │   ├── 1643790225628-update-constraints.ts
+│   │   └── 1643802227558-add-document-table.ts
 │   ├── repositories
+│   │   ├── document.repository.ts
 │   │   ├── index.ts
 │   │   ├── transaction.repository.ts
 │   │   ├── user.repository.ts
 │   │   └── wallet.repository.ts
 │   ├── services
+│   │   ├── database-seeder.service.ts
 │   │   └── database-transaction.service.ts
 │   └── utils
-│       ├── seed.util.ts
-│       └── user.util.ts
+│       └── password.util.ts
+├── document
+│   ├── document.controller.ts
+│   ├── document.module.ts
+│   └── document.service.ts
 ├── health
 │   ├── health.controller.ts
 │   └── health.module.ts
@@ -316,31 +334,42 @@ The `utils` directory contains test helper functions, `fixtures`, and `mocks`.
 test
 ├── integration
 │   ├── jest.config.js
+│   ├── no-output.logger.ts
 │   ├── setup.ts
-│   └── specs
-│       ├── auth.module.spec.ts
-│       ├── health.module.spec.ts
-│       ├── transaction.module.spec.ts
-│       ├── user.module.spec.ts
-│       └── wallet.module.spec.ts
+│   ├── specs
+│   │   ├── auth.module.spec.ts
+│   │   ├── document.module.spec.ts
+│   │   ├── health.module.spec.ts
+│   │   ├── transaction.module.spec.ts
+│   │   ├── user.module.spec.ts
+│   │   └── wallet.module.spec.ts
+│   └── test-runner.ts
 ├── unit
 │   ├── jest.config.js
 │   ├── setup.ts
 │   └── specs
+│       ├── app
+│       │   └── app.service.spec.ts
 │       ├── auth
 │       │   ├── auth.controller.spec.ts
 │       │   └── auth.service.spec.ts
+│       ├── aws
+│       │   └── aws-s3.service.spec.ts
 │       ├── common
 │       │   ├── config
 │       │   │   └── helmet.config.spec.ts
 │       │   ├── filters
-│       │   │   └── error.filter.spec.ts
+│       │   │   ├── error.filter.spec.ts
+│       │   │   └── multer-pdf-file.filter.spec.ts
 │       │   ├── guards
 │       │   │   └── jwt-auth.guard.spec.ts
 │       │   ├── pipes
 │       │   │   └── dto-validation.pipe.spec.ts
 │       │   └── validators
 │       │       └── is-valid-password.validator.spec.ts
+│       ├── document
+│       │   ├── document.controller.spec.ts
+│       │   └── document.service.spec.ts
 │       ├── health
 │       │   └── health.controller.spec.ts
 │       ├── token
@@ -355,12 +384,10 @@ test
 │           ├── wallet.controller.spec.ts
 │           └── wallet.service.spec.ts
 └── utils
+    ├── files
+    │   └── invoice.pdf
     ├── fixtures
     │   └── index.ts
-    ├── integration
-    │   ├── auth.util.ts
-    │   ├── no-output.logger.ts
-    │   └── setup-application.ts
     └── mocks
         ├── repo.mock.ts
         └── service.mock.ts
