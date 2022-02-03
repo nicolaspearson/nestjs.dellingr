@@ -25,7 +25,7 @@ declare const module: {
   };
 };
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   const logLevel = [process.env.LOG_LEVEL || 'log'] as LogLevel[];
   const app = await NestFactory.create(MainModule, {
     // Cross-origin resource sharing (CORS) is a mechanism that

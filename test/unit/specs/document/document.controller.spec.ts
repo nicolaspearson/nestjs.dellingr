@@ -29,8 +29,8 @@ describe('Document Controller', () => {
     expect(controller).toBeDefined();
   });
 
-  describe('documententicate', () => {
-    test('should allow a user to documententicate', async () => {
+  describe('upload', () => {
+    test('should allow a user to upload', async () => {
       await controller.upload(authenticatedRequestMock, uploadDocumentRequestMock, multerFileMock);
       expect(documentMockService.upload).toHaveBeenCalledWith(
         authenticatedRequestMock.userUuid,

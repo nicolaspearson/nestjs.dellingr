@@ -1,8 +1,8 @@
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
-function hashPassword(password: string) {
+function hashPassword(password: string): () => string {
   const crypt = `crypt('${password}', gen_salt('bf', 8))`;
-  return () => crypt;
+  return (): string => crypt;
 }
 
 export const DEFAULT_PASSWORD = 'myS3cretP@55w0rd!';

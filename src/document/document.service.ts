@@ -1,17 +1,18 @@
-import { S3 } from 'aws-sdk';
 import { v4 as uuid } from 'uuid';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+import { AwsS3Service } from '$/aws/s3/aws-s3.service';
 import { UploadDocumentRequest } from '$/common/dto';
 import { FailedDependencyError } from '$/common/error';
-import { AwsS3Service } from '$/common/services/aws-s3.service';
 import { DocumentRepository, TransactionRepository } from '$/db/repositories';
 
 @Injectable()
 export class DocumentService {
   private readonly logger: Logger = new Logger(DocumentService.name);
+
+  private readonly bucketName: string;
 
   constructor(
     private readonly awsS3Service: AwsS3Service,
@@ -20,6 +21,8 @@ export class DocumentService {
     private readonly transactionRepository: TransactionRepository,
   ) {
     this.logger.debug('Document service created!');
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.bucketName = this.configService.get('AWS_S3_BUCKET_NAME')!;
   }
 
   /**
@@ -40,34 +43,25 @@ export class DocumentService {
       userUuid,
     });
     const documentUuid = uuid() as Uuid;
+    const documentKey = `${documentUuid}-${dto.name.toLowerCase().split(' ').join('-')}`;
     this.logger.log(`Uploading new document: "${dto.name}" for user with uuid: ${userUuid}`);
-    let result: S3.ManagedUpload.SendData;
     try {
-      result = await this.awsS3Service
-        .getClient()
-        .upload(
-          /* eslint-disable @typescript-eslint/naming-convention */
-          {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            Bucket: this.configService.get('AWS_S3_BUCKET_NAME')!,
-            Body: buffer,
-            Key: `${documentUuid}-${dto.name.toLowerCase().split(' ').join('-')}.pdf`,
-          },
-          /* eslint-enable @typescript-eslint/naming-convention */
-        )
-        .promise();
-    } catch (error: unknown) {
+      await this.awsS3Service.upload({
+        body: buffer,
+        bucket: this.bucketName,
+        key: documentKey,
+      });
+    } catch (error) {
       this.logger.error(`AWS S3 file upload failed for user with uuid: ${userUuid}`, error);
-      const s3Error = error as S3.Error;
-      throw new FailedDependencyError(s3Error.Message);
+      throw new FailedDependencyError();
     }
     this.logger.log(
-      `Document successfully upload to S3: "${result.Location}" for user with uuid: ${userUuid}`,
+      `Document successfully upload to S3: "${documentKey}" for user with uuid: ${userUuid}`,
     );
     await this.documentRepository.create({
+      key: documentKey,
       name: dto.name,
       transactionUuid: transaction.uuid,
-      url: result.Location,
       uuid: documentUuid,
     });
   }

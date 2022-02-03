@@ -6,7 +6,7 @@ networks:
 
 services:
   #########################
-  ##      Backend        ##
+  ##       Service       ##
   #########################
 
   dellingr:
@@ -74,3 +74,19 @@ services:
     volumes:
       - ./scripts/db:/docker-entrypoint-initdb.d
     container_name: dellingr-db-integration
+
+  #########################
+  ##     Localstack      ##
+  #########################
+
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - DEFAULT_REGION=eu-west-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=s3
+    ports:
+      - 4566-4599:4566-4599
+    volumes:
+      - '${TMPDIR:-/tmp}/localstack:/tmp/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'

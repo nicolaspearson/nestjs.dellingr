@@ -4,7 +4,7 @@
  * @param value The raw string value.
  * @returns The escaped string.
  */
-function escapePostgresString(value: string) {
+function escapePostgresString(value: string): string {
   return `E'${value.replace(/(\\)/g, `\\\\`).replace(/(')/g, `\\'`)}'`;
 }
 

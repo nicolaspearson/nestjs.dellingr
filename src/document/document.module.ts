@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 
-import { AwsS3Service } from '$/common/services/aws-s3.service';
+import { AwsS3Module } from '$/aws/s3/aws-s3.module';
 import { DatabaseModule } from '$/db/database.module';
 import { DocumentController } from '$/document/document.controller';
 import { DocumentService } from '$/document/document.service';
 
 @Module({
   controllers: [DocumentController],
-  imports: [DatabaseModule],
-  providers: [AwsS3Service, DocumentService],
+  imports: [AwsS3Module, DatabaseModule],
+  providers: [DocumentService],
 })
 export class DocumentModule {}

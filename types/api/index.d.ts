@@ -31,8 +31,8 @@ declare namespace Api {
   namespace Entities {
     interface Document {
       uuid: Uuid;
+      key: string;
       name: string;
-      url: string;
       createdAt: Date;
       updatedAt?: Date;
       transaction?: Api.Entities.Transaction;
@@ -74,9 +74,9 @@ declare namespace Api {
     namespace Requests {
       // Document
       interface CreateDocument {
+        key: string;
         name: string;
         transactionUuid: Uuid;
-        url: string;
         uuid: Uuid;
       }
 

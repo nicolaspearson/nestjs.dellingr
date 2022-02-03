@@ -21,7 +21,7 @@ export type WebpackConnectionOptions = Pick<ConnectionOptions, 'entities' | 'mig
  * https://spin.atomicobject.com/2020/12/21/typeorm-webpack/
  * https://webpack.js.org/guides/dependency-management/#requirecontext
  */
-function importFunctions(requireContext: __WebpackModuleApi.RequireContext) {
+function importFunctions(requireContext: __WebpackModuleApi.RequireContext): ClassReference[] {
   return requireContext
     .keys()
     .sort()

@@ -19,15 +19,17 @@ cp .env.example .env
 
 ### AWS
 
-Create an `AWS` user and `S3` bucket and set the environment variables outlined in the `.env` file
-accordingly:
+Locally no additional configuration for `AWS` is required. We use
+[`localstack`](https://localstack.cloud/) in the development environment.
 
-```sh
-AWS_ACCESS_KEY_ID=
-AWS_REGION=
-AWS_SECRET_ACCESS_KEY=
-AWS_S3_BUCKET_NAME=
-```
+There is a seeding process that automatically creates an `S3` bucket in the **development**
+environment.
+
+The following is important for a **production** environment:
+
+- A new bucket that will contain `document` uploads will need to be created.
+- All `AWS_*` environment variables except for `AWS_ENDPOINT` which is optional and only used in
+  **development**
 
 ### Building, Running, and Testing the Application
 

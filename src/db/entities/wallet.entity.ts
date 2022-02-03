@@ -48,7 +48,7 @@ export default class Wallet implements Api.Entities.Wallet {
   @AfterLoad()
   @AfterInsert()
   @AfterUpdate()
-  setDefaults() {
+  setDefaults(): void {
     if (!this.transactions) {
       this.transactions = [];
     }
