@@ -2440,7 +2440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:*, aws-sdk@npm:^2.1066.0":
+"aws-sdk@npm:*":
   version: 2.1066.0
   resolution: "aws-sdk@npm:2.1066.0"
   dependencies:
@@ -2454,6 +2454,23 @@ __metadata:
     uuid: 3.3.2
     xml2js: 0.4.19
   checksum: 5ed48ddd14fa01478222d989be06d75a9a3d7521a5bb9324547f745fbde8ee760836c80c6ee9678449b591c67e1d447671ed16ab36583a3a6266c4fc6ba6eb7c
+  languageName: node
+  linkType: hard
+
+"aws-sdk@npm:^2.1067.0":
+  version: 2.1067.0
+  resolution: "aws-sdk@npm:2.1067.0"
+  dependencies:
+    buffer: 4.9.2
+    events: 1.1.1
+    ieee754: 1.1.13
+    jmespath: 0.16.0
+    querystring: 0.2.0
+    sax: 1.2.1
+    url: 0.10.3
+    uuid: 3.3.2
+    xml2js: 0.4.19
+  checksum: 04288cd1aa145153711f0376f65f5690c69b1e28dfb28588a1f27d4b7f4b726a4abaafc4d234fb389599396f7c72f797ede40e75e6e38a44052c74d613248f9f
   languageName: node
   linkType: hard
 
@@ -3523,7 +3540,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
     async_hooks: ^1.0.0
-    aws-sdk: ^2.1066.0
+    aws-sdk: ^2.1067.0
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
     common-tags: ^1.8.2

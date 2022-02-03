@@ -66,7 +66,7 @@
     "@nestjs/typeorm": "^8.0.3",
     "@types/validator": "^13.7.1",
     "async_hooks": "^1.0.0",
-    "aws-sdk": "^2.1066.0",
+    "aws-sdk": "^2.1067.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "common-tags": "^1.8.2",

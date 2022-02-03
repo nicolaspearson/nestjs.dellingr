@@ -66,7 +66,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.10.2"],
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.10.2"],
             ["async_hooks", "npm:1.0.0"],
-            ["aws-sdk", "npm:2.1066.0"],
+            ["aws-sdk", "npm:2.1067.0"],
             ["class-transformer", "npm:0.5.1"],
             ["class-validator", "npm:0.13.2"],
             ["common-tags", "npm:1.8.2"],
@@ -3525,6 +3525,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["xml2js", "npm:0.4.19"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:2.1067.0", {
+          "packageLocation": "./.yarn/cache/aws-sdk-npm-2.1067.0-2a8150ed12-04288cd1aa.zip/node_modules/aws-sdk/",
+          "packageDependencies": [
+            ["aws-sdk", "npm:2.1067.0"],
+            ["buffer", "npm:4.9.2"],
+            ["events", "npm:1.1.1"],
+            ["ieee754", "npm:1.1.13"],
+            ["jmespath", "npm:0.16.0"],
+            ["querystring", "npm:0.2.0"],
+            ["sax", "npm:1.2.1"],
+            ["url", "npm:0.10.3"],
+            ["uuid", "npm:3.3.2"],
+            ["xml2js", "npm:0.4.19"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["axios", [
@@ -4820,7 +4836,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.10.2"],
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.10.2"],
             ["async_hooks", "npm:1.0.0"],
-            ["aws-sdk", "npm:2.1066.0"],
+            ["aws-sdk", "npm:2.1067.0"],
             ["class-transformer", "npm:0.5.1"],
             ["class-validator", "npm:0.13.2"],
             ["common-tags", "npm:1.8.2"],
