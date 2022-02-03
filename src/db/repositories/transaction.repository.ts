@@ -3,8 +3,6 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 
 import { Injectable, Logger } from '@nestjs/common';
 
-import { TransactionState } from '$/common/enum/transaction-state.enum';
-import { TransactionType } from '$/common/enum/transaction-type.enum';
 import { NotFoundError } from '$/common/error';
 import Transaction from '$/db/entities/transaction.entity';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
@@ -37,13 +35,7 @@ export class TransactionRepository implements Api.Repositories.Transaction {
     return query;
   }
 
-  create(data: {
-    amount: number;
-    reference: string;
-    state: TransactionState;
-    type: TransactionType;
-    walletUuid: Uuid;
-  }): Promise<Api.Entities.Transaction> {
+  create(data: Api.Repositories.Requests.CreateTransaction): Promise<Api.Entities.Transaction> {
     const partialTransaction: QueryDeepPartialEntity<Api.Entities.Transaction> = {
       amount: data.amount,
       reference: data.reference,
@@ -56,10 +48,9 @@ export class TransactionRepository implements Api.Repositories.Transaction {
     return this.getManager().save(Transaction, partialTransaction as Transaction);
   }
 
-  findByTransactionAndUserUuid(data: {
-    transactionUuid: Uuid;
-    userUuid: Uuid;
-  }): Promise<Api.Entities.Transaction | undefined> {
+  findByTransactionAndUserUuid(
+    data: Api.Repositories.Requests.FindByTransactionAndUserUuid,
+  ): Promise<Api.Entities.Transaction | undefined> {
     return this.query({
       withWallet: true,
       withWalletUser: true,
@@ -75,10 +66,9 @@ export class TransactionRepository implements Api.Repositories.Transaction {
       .getOne();
   }
 
-  async findByTransactionAndUserUuidOrFail(data: {
-    transactionUuid: Uuid;
-    userUuid: Uuid;
-  }): Promise<Api.Entities.Transaction> {
+  async findByTransactionAndUserUuidOrFail(
+    data: Api.Repositories.Requests.FindByTransactionAndUserUuid,
+  ): Promise<Api.Entities.Transaction> {
     const transaction = await this.findByTransactionAndUserUuid(data);
     if (!transaction) {
       throw new NotFoundError(`Transaction with uuid: ${data.transactionUuid} does not exist.`);

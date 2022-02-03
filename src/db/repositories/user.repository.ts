@@ -36,7 +36,7 @@ export class UserRepository implements Api.Repositories.User {
     return query;
   }
 
-  async create(data: { email: Email; password: string }): Promise<Api.Entities.User> {
+  async create(data: Api.Repositories.Requests.CreateUser): Promise<Api.Entities.User> {
     // Create the user with the required fields populated.
     const partialUser: QueryDeepPartialEntity<User> = {
       email: data.email,
@@ -46,17 +46,23 @@ export class UserRepository implements Api.Repositories.User {
     return this.getManager().save(User, partialUser as User);
   }
 
-  delete(data: { userUuid: Uuid }): Promise<Api.Repositories.Responses.DeleteResult> {
+  delete(
+    data: Api.Repositories.Requests.DeleteUser,
+  ): Promise<Api.Repositories.Responses.DeleteResult> {
     return this.query().delete().where({ uuid: data.userUuid }).execute();
   }
 
-  findByUserUuid(data: { userUuid: Uuid }): Promise<Api.Entities.User | undefined> {
+  findByUserUuid(
+    data: Api.Repositories.Requests.FindByUserUuid,
+  ): Promise<Api.Entities.User | undefined> {
     return this.query({ withWallets: true, withWalletTransactions: true })
       .where({ uuid: data.userUuid })
       .getOne();
   }
 
-  async findByUserUuidOrFail(data: { userUuid: Uuid }): Promise<Api.Entities.User> {
+  async findByUserUuidOrFail(
+    data: Api.Repositories.Requests.FindByUserUuid,
+  ): Promise<Api.Entities.User> {
     const user = await this.findByUserUuid(data);
     if (!user) {
       throw new NotFoundError(`User with uuid: ${data.userUuid} does not exist.`);
@@ -64,10 +70,9 @@ export class UserRepository implements Api.Repositories.User {
     return user;
   }
 
-  findByValidCredentials(data: {
-    email: Email;
-    password: string;
-  }): Promise<Api.Entities.User | undefined> {
+  findByValidCredentials(
+    data: Api.Repositories.Requests.FindByValidCredentials,
+  ): Promise<Api.Entities.User | undefined> {
     // We use the pgcrypto extension to compare the hashed password to the plain text version
     return this.query()
       .where({ email: data.email })

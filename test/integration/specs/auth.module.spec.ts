@@ -31,7 +31,6 @@ describe('Auth Module', () => {
         } as LoginRequest)
         .expect(HttpStatus.OK);
       expect(res.body).toMatchObject({
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         token: expect.any(String),
       } as JwtResponse);
     });

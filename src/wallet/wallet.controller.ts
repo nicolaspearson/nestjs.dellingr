@@ -41,6 +41,7 @@ export class WalletController {
     description: 'Creates a new wallet for the authenticated user.',
   })
   @ApiTags(TAG)
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Wallet successfully created.',

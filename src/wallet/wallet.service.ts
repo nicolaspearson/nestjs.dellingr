@@ -26,7 +26,7 @@ export class WalletService {
    * @throws {@link InternalServerError} If the database transaction fails.
    */
   async create(userUuid: Uuid, dto: CreateWalletRequest): Promise<Api.Entities.Wallet> {
-    // Check if the user exists
+    // Check if the user exists.
     const user = await this.userRepository.findByUserUuidOrFail({ userUuid });
     this.logger.log(`Creating new wallet: "${dto.name}" for user with uuid: ${user.uuid}`);
     return this.walletRepository.create({

@@ -48,6 +48,7 @@ export class TransactionController {
     description: 'Creates a new transaction for the authenticated user.',
   })
   @ApiTags(TAG)
+  @ApiBearerAuth()
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Transaction successfully created.',

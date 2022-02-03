@@ -89,7 +89,6 @@ describe('Wallet Module', () => {
         relations: ['transactions'],
       });
       expect(databaseWallet).toBeDefined();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       expect(res.body).toMatchObject(new WalletResponse(databaseWallet!));
     });
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { TransactionState } from '$/common/enum/transaction-state.enum';
@@ -127,7 +126,7 @@ describe('Transaction Service', () => {
 
   describe('getById', () => {
     test('should allow a user to retrieve a specific transaction', async () => {
-      transactionMockRepo.findByTransactionAndUserUuidOrFail?.mockResolvedValueOnce(
+      transactionMockRepo.findByTransactionAndUserUuidOrFail.mockResolvedValueOnce(
         transactionMockPaymentFromBob,
       );
       const result = await service.getById(userMockJohn.uuid, transactionMockPaymentFromBob.uuid);
@@ -143,4 +142,3 @@ describe('Transaction Service', () => {
     await module.close();
   });
 });
-/* eslint-enable @typescript-eslint/unbound-method */

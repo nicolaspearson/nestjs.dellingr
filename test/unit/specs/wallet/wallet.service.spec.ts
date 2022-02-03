@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method */
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { DEFAULT_WALLET_BALANCE } from '$/common/constants';
@@ -57,7 +56,7 @@ describe('Wallet Service', () => {
 
   describe('getById', () => {
     test('should allow a user to retrieve a specific wallet', async () => {
-      walletMockRepo.findByWalletAndUserUuidOrFail?.mockResolvedValueOnce(walletMockMain);
+      walletMockRepo.findByWalletAndUserUuidOrFail.mockResolvedValueOnce(walletMockMain);
       const result = await service.getById(userMockJohn.uuid, walletMockMain.uuid);
       expect(result).toMatchObject(walletMockMain);
       expect(walletMockRepo.findByWalletAndUserUuidOrFail).toHaveBeenCalledWith({
@@ -71,4 +70,3 @@ describe('Wallet Service', () => {
     await module.close();
   });
 });
-/* eslint-enable @typescript-eslint/unbound-method */

@@ -1,7 +1,10 @@
+import { S3 } from 'aws-sdk';
 import { mocked } from 'jest-mock';
 
 import { AuthService } from '$/auth/auth.service';
+import { AwsS3Service } from '$/common/services/aws-s3.service';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
+import { DocumentService } from '$/document/document.service';
 import { TokenService } from '$/token/token.service';
 import { TransactionService } from '$/transaction/transaction.service';
 import { UserService } from '$/user/user.service';
@@ -9,6 +12,7 @@ import { WalletService } from '$/wallet/wallet.service';
 
 import {
   jwtTokenMock,
+  managedUploadMock,
   transactionMockPayedAlice,
   userMockJohn,
   walletMockMain,
@@ -18,6 +22,27 @@ import {
 export const authMockService = mocked<PublicOnly<AuthService>>(
   {
     authenticate: jest.fn().mockResolvedValue(jwtTokenMock),
+  },
+  true,
+);
+
+export const s3ClientMock = mocked<Pick<S3, 'upload'>>(
+  {
+    upload: jest.fn().mockReturnValue(managedUploadMock),
+  },
+  true,
+);
+
+export const awsS3MockService = mocked<PublicOnly<AwsS3Service>>(
+  {
+    getClient: jest.fn().mockReturnValue(s3ClientMock),
+  },
+  true,
+);
+
+export const documentMockService = mocked<PublicOnly<DocumentService>>(
+  {
+    upload: jest.fn().mockResolvedValue(undefined),
   },
   true,
 );

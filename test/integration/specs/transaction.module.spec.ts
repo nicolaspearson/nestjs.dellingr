@@ -47,7 +47,7 @@ describe('Transaction Module', () => {
       const createTransactionRequest: CreateTransactionRequest = {
         ...createTransactionRequestMockCredit,
         reference: 'Integration test #1 credit transaction!',
-        walletId: transaction.wallet.uuid,
+        walletId: transaction.wallet!.uuid,
       };
       const res = await request(app.getHttpServer())
         .post(`${baseUrl}/transactions`)
@@ -60,7 +60,6 @@ describe('Transaction Module', () => {
         },
       });
       expect(databaseTransaction).toBeDefined();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       expect(res.body).toMatchObject(new TransactionResponse(databaseTransaction!));
     });
 
@@ -69,7 +68,7 @@ describe('Transaction Module', () => {
       const createTransactionRequest: CreateTransactionRequest = {
         ...createTransactionRequestMockDebit,
         reference: '#Integration test #2 debit transaction!',
-        walletId: transaction.wallet.uuid,
+        walletId: transaction.wallet!.uuid,
       };
       const res = await request(app.getHttpServer())
         .post(`${baseUrl}/transactions`)
@@ -82,7 +81,6 @@ describe('Transaction Module', () => {
         },
       });
       expect(databaseTransaction).toBeDefined();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       expect(res.body).toMatchObject(new TransactionResponse(databaseTransaction!));
     });
 
@@ -92,7 +90,7 @@ describe('Transaction Module', () => {
         ...createTransactionRequestMockDebit,
         amount: 100_000,
         reference: 'Integration test #3 insufficient funds!',
-        walletId: transaction.wallet.uuid,
+        walletId: transaction.wallet!.uuid,
       };
       const res = await request(app.getHttpServer())
         .post(`${baseUrl}/transactions`)
@@ -135,7 +133,6 @@ describe('Transaction Module', () => {
         .expect(HttpStatus.OK);
       const databaseTransaction = await connection.manager.findOne(Transaction, transaction.uuid);
       expect(databaseTransaction).toBeDefined();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       expect(res.body).toMatchObject(new TransactionResponse(databaseTransaction!));
     });
 

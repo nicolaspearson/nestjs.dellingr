@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+import { ManagedUpload } from 'aws-sdk/clients/s3';
 import { Request, Response } from 'express';
+import { mocked } from 'jest-mock';
 
 import {
   CreateTransactionRequest,
@@ -7,6 +10,7 @@ import {
   JwtResponse,
   LoginRequest,
   TransactionResponse,
+  UploadDocumentRequest,
   UserProfileResponse,
   UserRegistrationRequest,
   WalletResponse,
@@ -20,6 +24,7 @@ const now = new Date();
 // ----------------------------
 // Database Entities
 // ----------------------------
+
 export const userMockJohn: Api.Entities.User = {
   uuid: '7a39a121-fdbf-45db-9353-a006bde4261a' as Uuid,
   email: 'john@example.com' as Email,
@@ -47,6 +52,7 @@ export const transactionMockPayedAlice: Api.Entities.Transaction = {
   state: TransactionState.Processed,
   type: TransactionType.Debit,
   createdAt: now,
+  documents: [],
   wallet: walletMockMain,
 };
 
@@ -57,8 +63,19 @@ export const transactionMockPaymentFromBob: Api.Entities.Transaction = {
   state: TransactionState.Processed,
   type: TransactionType.Credit,
   createdAt: now,
+  documents: [],
   wallet: walletMockMain,
 };
+
+export const documentMockInvoice: Api.Entities.Document = {
+  uuid: '61513aab-e6ea-48bf-af75-3da0e5f7b2e4' as Uuid,
+  name: 'invoice',
+  url: 'http://localhost/61513aab-e6ea-48bf-af75-3da0e5f7b2e4-invoice.pdf',
+  createdAt: now,
+  transaction: transactionMockPaymentFromBob,
+};
+
+transactionMockPaymentFromBob.documents = [documentMockInvoice];
 
 // Assign the transaction to the main wallet
 walletMockMain.transactions = [transactionMockPayedAlice];
@@ -85,6 +102,12 @@ export const loginRequestMock = {
   password: userMockJohn.password,
 } as LoginRequest;
 
+// Document
+export const uploadDocumentRequestMock = {
+  name: documentMockInvoice.name,
+  transactionId: documentMockInvoice.transaction!.uuid,
+} as UploadDocumentRequest;
+
 // Health
 export const healthCheckResponseMock = new HealthCheckResponse({ status: 'OK' });
 
@@ -103,14 +126,14 @@ export const createTransactionRequestMockCredit = {
   amount: transactionMockPaymentFromBob.amount,
   reference: transactionMockPaymentFromBob.reference,
   type: transactionMockPaymentFromBob.type,
-  walletId: transactionMockPaymentFromBob.wallet.uuid,
+  walletId: transactionMockPaymentFromBob.wallet!.uuid,
 } as CreateTransactionRequest;
 
 export const createTransactionRequestMockDebit = {
   amount: transactionMockPayedAlice.amount,
   reference: transactionMockPayedAlice.reference,
   type: transactionMockPayedAlice.type,
-  walletId: transactionMockPayedAlice.wallet.uuid,
+  walletId: transactionMockPayedAlice.wallet!.uuid,
 } as CreateTransactionRequest;
 
 export const transactionResponseMock = new TransactionResponse(transactionMockPayedAlice);
@@ -134,6 +157,11 @@ export const walletResponseMock = new WalletResponse(walletMockMain);
 // Express
 // ----------------------------
 
+// Multer File
+export const multerFileMock = {
+  buffer: Buffer.from('Test buffer!'),
+} as Express.Multer.File;
+
 // Request
 export const requestMock = {
   body: {},
@@ -156,3 +184,30 @@ export const responseMock = {
   send: jest.fn((body) => body),
   status: jest.fn().mockReturnThis(),
 } as unknown as Response;
+
+// ----------------------------
+// AWS
+// ----------------------------
+
+export const sendDataMock: ManagedUpload.SendData = {
+  Location: documentMockInvoice.url,
+  ETag: 'pdf-upload',
+  Bucket: process.env.AWS_S3_BUCKET_NAME!,
+  Key: `${documentMockInvoice.uuid}-${documentMockInvoice.name}.pdf`,
+};
+
+export const managedUploadMockFactory = (data: { sendData: ManagedUpload.SendData }) => {
+  return mocked<ManagedUpload>(
+    {
+      abort: jest.fn(),
+      on: jest.fn(),
+      promise: jest.fn().mockResolvedValue(data.sendData),
+      send: jest.fn(),
+    },
+    true,
+  );
+};
+
+export const managedUploadMock = managedUploadMockFactory({ sendData: sendDataMock });
+
+/* eslint-enable @typescript-eslint/naming-convention */

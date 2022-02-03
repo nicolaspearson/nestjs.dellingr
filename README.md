@@ -10,6 +10,25 @@ A simple [NestJS](https://github.com/nestjs/nest) starter repository built using
 yarn install
 ```
 
+### Environment Configuration
+
+```bash
+# Make a copy of the default environment variables
+cp .env.example .env
+```
+
+### AWS
+
+Create an `AWS` user and `S3` bucket and set the environment variables outlined in the `.env` file
+accordingly:
+
+```sh
+AWS_ACCESS_KEY_ID=
+AWS_REGION=
+AWS_SECRET_ACCESS_KEY=
+AWS_S3_BUCKET_NAME=
+```
+
 ### Building, Running, and Testing the Application
 
 ```bash
