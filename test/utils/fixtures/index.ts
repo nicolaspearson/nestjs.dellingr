@@ -161,8 +161,10 @@ export const awsS3DocumentBucketName = process.env.AWS_S3_BUCKET_NAME!;
 // ----------------------------
 
 // Multer File
+export const multerFileBufferStringMock = 'Test buffer!';
+
 export const multerFileMock = {
-  buffer: Buffer.from('Test buffer!'),
+  buffer: Buffer.from(multerFileBufferStringMock),
 } as Express.Multer.File;
 
 // Request

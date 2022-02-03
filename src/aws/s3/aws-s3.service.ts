@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { S3Client } from '@aws-sdk/client-s3';
+import { S3Client, ServiceOutputTypes } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 
 import { Injectable, Logger } from '@nestjs/common';
@@ -23,8 +23,8 @@ export class AwsS3Service extends S3Client {
     this.logger.debug('AWS S3 service created!');
   }
 
-  async upload(data: { bucket: string; key: string; body: Buffer }): Promise<void> {
-    const parallelUpload = new Upload({
+  async upload(data: { bucket: string; key: string; body: Buffer }): Promise<ServiceOutputTypes> {
+    const s3Upload = new Upload({
       client: this,
       params: {
         Body: data.body,
@@ -32,12 +32,10 @@ export class AwsS3Service extends S3Client {
         Key: data.key,
       },
     });
-
-    parallelUpload.on('httpUploadProgress', (progress) => {
+    s3Upload.on('httpUploadProgress', (progress) => {
       this.logger.log(`AWS S3 upload progress: ${JSON.stringify(progress)}`);
     });
-
-    await parallelUpload.done();
+    return s3Upload.done();
   }
 }
 /* eslint-enable @typescript-eslint/naming-convention */
