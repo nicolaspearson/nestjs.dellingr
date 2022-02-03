@@ -217,6 +217,20 @@ declare namespace Dellingr {
      */
     name: string;
   }
+  export interface UploadDocumentRequest {
+    /**
+     * The name of the document
+     * example:
+     * Payment invoice
+     */
+    name: string;
+    /**
+     * The unique id of the transaction.
+     * example:
+     * 343c6ac5-2b72-4c41-a9eb-28f5ae49af80
+     */
+    transactionId: string;
+  }
   export interface UserProfileResponse {
     /**
      * The user's unique id.

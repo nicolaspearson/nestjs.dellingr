@@ -1,22 +1,21 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { AwsS3Service } from '$/aws/s3/aws-s3.service';
 import { FailedDependencyError } from '$/common/error';
-import { AwsS3Service } from '$/common/services/aws-s3.service';
 import { DocumentRepository, TransactionRepository } from '$/db/repositories';
 import { DocumentService } from '$/document/document.service';
 
 import {
+  awsS3DocumentBucketName,
   documentMockInvoice,
-  managedUploadMockFactory,
   multerFileMock,
-  sendDataMock,
   transactionMockPaymentFromBob,
   uploadDocumentRequestMock,
   userMockJohn,
 } from '#/utils/fixtures';
 import { documentMockRepo, transactionMockRepo } from '#/utils/mocks/repo.mock';
-import { awsS3MockService, s3ClientMock } from '#/utils/mocks/service.mock';
+import { awsS3MockService } from '#/utils/mocks/service.mock';
 
 describe('Document Service', () => {
   let module: TestingModule;
@@ -60,19 +59,15 @@ describe('Document Service', () => {
         transactionUuid: uploadDocumentRequestMock.transactionId,
         userUuid: userMockJohn.uuid,
       });
-      expect(s3ClientMock.upload).toHaveBeenCalledWith(
-        /* eslint-disable @typescript-eslint/naming-convention */
-        {
-          Bucket: sendDataMock.Bucket,
-          Body: multerFileMock.buffer,
-          Key: expect.stringContaining(`-${documentMockInvoice.name}.pdf`),
-        },
-        /* eslint-enable @typescript-eslint/naming-convention */
-      );
+      expect(awsS3MockService.upload).toHaveBeenCalledWith({
+        body: multerFileMock.buffer,
+        bucket: awsS3DocumentBucketName,
+        key: expect.stringContaining(`-${documentMockInvoice.name}`),
+      });
       expect(documentMockRepo.create).toHaveBeenCalledWith({
+        key: expect.stringContaining(`-${documentMockInvoice.name}`),
         name: uploadDocumentRequestMock.name,
         transactionUuid: transactionMockPaymentFromBob.uuid,
-        url: sendDataMock.Location,
         uuid: expect.any(String),
       });
     });
@@ -81,9 +76,7 @@ describe('Document Service', () => {
       transactionMockRepo.findByTransactionAndUserUuidOrFail.mockResolvedValueOnce(
         transactionMockPaymentFromBob,
       );
-      const failedManagedUploadMock = managedUploadMockFactory({ sendData: sendDataMock });
-      failedManagedUploadMock.promise.mockRejectedValueOnce(new Error('Upload failed.'));
-      s3ClientMock.upload.mockReturnValueOnce(failedManagedUploadMock);
+      awsS3MockService.upload.mockRejectedValueOnce(new Error('Upload failed.'));
       await expect(
         service.upload(userMockJohn.uuid, uploadDocumentRequestMock, multerFileMock.buffer),
       ).rejects.toThrowError(FailedDependencyError);
@@ -91,15 +84,11 @@ describe('Document Service', () => {
         transactionUuid: uploadDocumentRequestMock.transactionId,
         userUuid: userMockJohn.uuid,
       });
-      expect(s3ClientMock.upload).toHaveBeenCalledWith(
-        /* eslint-disable @typescript-eslint/naming-convention */
-        {
-          Bucket: sendDataMock.Bucket,
-          Body: multerFileMock.buffer,
-          Key: expect.stringContaining(`-${documentMockInvoice.name}.pdf`),
-        },
-        /* eslint-enable @typescript-eslint/naming-convention */
-      );
+      expect(awsS3MockService.upload).toHaveBeenCalledWith({
+        body: multerFileMock.buffer,
+        bucket: awsS3DocumentBucketName,
+        key: expect.stringContaining(`-${documentMockInvoice.name}`),
+      });
       expect(documentMockRepo.create).not.toHaveBeenCalled();
     });
   });

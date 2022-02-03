@@ -37,7 +37,7 @@ export default class User implements Api.Entities.User {
   @AfterLoad()
   @AfterInsert()
   @AfterUpdate()
-  setDefaults() {
+  setDefaults(): void {
     if (!this.wallets) {
       this.wallets = [];
     }

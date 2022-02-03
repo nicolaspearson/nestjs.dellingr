@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID, Length, Matches } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -12,6 +12,8 @@ export class UploadDocumentRequest {
   })
   @IsNotEmpty()
   @IsString()
+  @Length(1, 100)
+  @Matches(/^[\s\w\-]+$/)
   readonly name!: string;
 
   @ApiProperty({

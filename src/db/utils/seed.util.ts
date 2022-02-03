@@ -22,7 +22,7 @@ const fixtures: Fixture[] = [
   { entity: Transaction, values: transactionFixtures },
 ];
 
-export async function seed(connection: Connection): Promise<void> {
+export async function seedDatabase(connection: Connection): Promise<void> {
   // Avoid seeding multiple times when webpack HMR is used
   const user = await connection.manager
     .createQueryBuilder(User, 'user')

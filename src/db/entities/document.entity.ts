@@ -17,10 +17,10 @@ export default class Document implements Api.Entities.Document {
   uuid!: Uuid;
 
   @Column()
-  name!: string;
+  key!: string;
 
   @Column()
-  url!: string;
+  name!: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   createdAt!: Date;

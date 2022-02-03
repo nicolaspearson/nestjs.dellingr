@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { ManagedUpload } from 'aws-sdk/clients/s3';
 import { Request, Response } from 'express';
-import { mocked } from 'jest-mock';
 
 import {
   CreateTransactionRequest,
@@ -69,8 +66,8 @@ export const transactionMockPaymentFromBob: Api.Entities.Transaction = {
 
 export const documentMockInvoice: Api.Entities.Document = {
   uuid: '61513aab-e6ea-48bf-af75-3da0e5f7b2e4' as Uuid,
+  key: '61513aab-e6ea-48bf-af75-3da0e5f7b2e4-invoice',
   name: 'invoice',
-  url: 'http://localhost/61513aab-e6ea-48bf-af75-3da0e5f7b2e4-invoice.pdf',
   createdAt: now,
   transaction: transactionMockPaymentFromBob,
 };
@@ -154,12 +151,20 @@ export const createWalletRequestMock = {
 export const walletResponseMock = new WalletResponse(walletMockMain);
 
 // ----------------------------
+// AWS
+// ----------------------------
+
+export const awsS3DocumentBucketName = process.env.AWS_S3_BUCKET_NAME!;
+
+// ----------------------------
 // Express
 // ----------------------------
 
 // Multer File
+export const multerFileBufferStringMock = 'Test buffer!';
+
 export const multerFileMock = {
-  buffer: Buffer.from('Test buffer!'),
+  buffer: Buffer.from(multerFileBufferStringMock),
 } as Express.Multer.File;
 
 // Request
@@ -184,30 +189,3 @@ export const responseMock = {
   send: jest.fn((body) => body),
   status: jest.fn().mockReturnThis(),
 } as unknown as Response;
-
-// ----------------------------
-// AWS
-// ----------------------------
-
-export const sendDataMock: ManagedUpload.SendData = {
-  Location: documentMockInvoice.url,
-  ETag: 'pdf-upload',
-  Bucket: process.env.AWS_S3_BUCKET_NAME!,
-  Key: `${documentMockInvoice.uuid}-${documentMockInvoice.name}.pdf`,
-};
-
-export const managedUploadMockFactory = (data: { sendData: ManagedUpload.SendData }) => {
-  return mocked<ManagedUpload>(
-    {
-      abort: jest.fn(),
-      on: jest.fn(),
-      promise: jest.fn().mockResolvedValue(data.sendData),
-      send: jest.fn(),
-    },
-    true,
-  );
-};
-
-export const managedUploadMock = managedUploadMockFactory({ sendData: sendDataMock });
-
-/* eslint-enable @typescript-eslint/naming-convention */

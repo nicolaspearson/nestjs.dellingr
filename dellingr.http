@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzODA5OTY5LCJleHAiOjE2NDM4MTA4NjksImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiZDZjY2ZhZDktZjNmYy00OWFjLTk2NTctNDdkM2VkMWM3ZmQyIn0.PGq8R-xn0PXpBBl-Q683h-6WYXnhwrNTuK8xEHOY85k
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMzQzYzZhYzUtMmI3Mi00YzQxLWE5ZWItMjhmNWFlNDlhZjgwIiwiaWF0IjoxNjQzODk1MDcxLCJleHAiOjE2NDM4OTU5NzEsImlzcyI6InN1cHBvcnRAZGVsbGluZ3IuY29tIiwianRpIjoiNjY0YTkxZjQtYjliNy00MTYzLWIzMWEtMTVlN2VlMGZkNmUxIn0.9imQP1atttjgy_ak-dSVs0Wi2xFP_uIo0-tpwHpnip4
 
 ########################################################################
 ###########                       AUTH                       ###########

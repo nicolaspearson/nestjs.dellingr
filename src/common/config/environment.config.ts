@@ -9,6 +9,7 @@ export function getValidationSchema(): Joi.ObjectSchema {
     API_HOST: Joi.string().hostname().description('The server host url').default('localhost'),
     API_PORT: Joi.number().port().description('The server port').default(3000),
     AWS_ACCESS_KEY_ID: Joi.string().description('The access key id for the AWS user.').required(),
+    AWS_ENDPOINT: Joi.string().uri().optional().allow('').description('The optional AWS endpoint'),
     AWS_REGION: Joi.string().description('The AWS region').required(),
     AWS_SECRET_ACCESS_KEY: Joi.string()
       .description('The secret access key for the AWS user.')

@@ -165,6 +165,7 @@ module.exports = {
             format: ['camelCase', 'UPPER_CASE'],
           },
         ],
+        '@typescript-eslint/explicit-function-return-type': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'warn',
         '@typescript-eslint/no-unsafe-assignment': 'warn',
         '@typescript-eslint/no-unsafe-call': 'warn',

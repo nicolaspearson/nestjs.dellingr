@@ -20,11 +20,11 @@ export class DocumentRepository implements Api.Repositories.Document {
 
   create(data: Api.Repositories.Requests.CreateDocument): Promise<Api.Entities.Document> {
     const partialDocument: QueryDeepPartialEntity<Api.Entities.Document> = {
+      key: data.key,
       name: data.name,
       transaction: {
         uuid: data.transactionUuid,
       },
-      url: data.url,
       uuid: data.uuid,
     };
     return this.getManager().save(Document, partialDocument as Document);

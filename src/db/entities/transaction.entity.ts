@@ -58,7 +58,7 @@ export default class Transaction implements Api.Entities.Transaction {
   @AfterLoad()
   @AfterInsert()
   @AfterUpdate()
-  setDefaults() {
+  setDefaults(): void {
     if (!this.documents) {
       this.documents = [];
     }

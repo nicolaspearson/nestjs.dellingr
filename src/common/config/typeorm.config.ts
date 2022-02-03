@@ -55,6 +55,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       } as ConnectionOptions);
     }
 
+    // FIXME: Find a better way to configure this instead of relying on the `NODE_ENV`
     if (process.env.NODE_ENV === Environment.Production) {
       // Production options that will override anything 'unsafe'
       const productionOptions: MergedConnectionOptions = {

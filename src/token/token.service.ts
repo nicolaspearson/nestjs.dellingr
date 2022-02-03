@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -30,7 +30,7 @@ export class TokenService {
       // Set the `exp` here to include it in the claims.
       expiresIn: this.tokenExpiration,
       // Set the `jti` to avoid replay attacks.
-      jwtid: uuidv4(),
+      jwtid: uuid(),
     });
     return token as JwtToken;
   }

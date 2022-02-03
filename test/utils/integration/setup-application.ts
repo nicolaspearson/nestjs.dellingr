@@ -10,12 +10,13 @@ import { Test, TestingModule, TestingModuleBuilder } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppModule } from '$/app/app.module';
+import { seedS3 } from '$/aws/utils/seed.util';
 import { getValidationSchema } from '$/common/config/environment.config';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
-import { seed } from '$/db/utils/seed.util';
+import { seedDatabase } from '$/db/utils/seed.util';
 
 import { NoOutputLogger } from '#/utils/integration/no-output.logger';
 
@@ -27,20 +28,20 @@ export interface IntegrationTestApplication {
 
 export interface Options {
   dbSchema: string;
-  disableLogging?: boolean;
   enableCors?: boolean;
   enableHelmet?: boolean;
+  enableLogging?: boolean;
   globalFilters?: ExceptionFilter[];
   globalPipes?: ValidationPipe[];
   globalPrefix?: string;
   metadata?: ModuleMetadata;
   overrides?: { token: string | symbol | Type<unknown>; value: unknown }[];
+  seedS3?: boolean;
 }
 
 export async function setupApplication(options: Options): Promise<IntegrationTestApplication> {
   const instance = await createApplication({
     ...options,
-    disableLogging: true,
     enableCors: true,
     enableHelmet: true,
     globalPrefix: API_GLOBAL_PREFIX,
@@ -63,6 +64,10 @@ async function createApplication(options: Options): Promise<IntegrationTestAppli
     }),
   );
 
+  if (options.seedS3) {
+    await seedS3();
+  }
+
   const connection = await createDatabase(options.dbSchema);
   imports.push(TypeOrmModule.forRoot(connection.options));
 
@@ -79,10 +84,10 @@ async function createApplication(options: Options): Promise<IntegrationTestAppli
     }
   }
 
-  if (options.disableLogging) {
-    builder.setLogger(new NoOutputLogger());
-  } else {
+  if (options.enableLogging) {
     builder.setLogger(console);
+  } else {
+    builder.setLogger(new NoOutputLogger());
   }
 
   const module: TestingModule = await builder.compile();
@@ -143,7 +148,7 @@ async function createDatabase(schema: string): Promise<Connection> {
   const connection = await createConnection(connectionOptions);
 
   // Seed the database fixtures
-  await seed(connection);
+  await seedDatabase(connection);
 
   // Close default connection, Nest will open a new one
   await connection.close();
