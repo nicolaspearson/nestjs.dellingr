@@ -21,6 +21,31 @@ import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
 import { NoOutputLogger } from './no-output.logger';
 
+/**
+ * The TestRunner class is responsible for providing
+ * setup and teardown logic for integration tests.
+ *
+ * A new instance should be created for every integration
+ * test suite. Data is isolated between instances by
+ * using a unique database schema for each one.
+ * 
+ * The TestRunner instance returns the created NestJS
+ * Application, and a connection to the database via
+ * TypeORM.
+ * 
+ * @example
+ * 
+ * let runner: TestRunner;
+ * 
+ * beforeAll(async () => {
+ *   runner = await TestRunner.create({ schema: '<SCHEMA_NAME>' });
+ * });
+
+ * afterAll(async () => {
+ *   await runner.close();
+ * });
+ * 
+ */
 export class TestRunner {
   private memoizeCreateJwt = pMemoize(this.createJwt);
 
@@ -55,6 +80,12 @@ export class TestRunner {
     return createConnection({ ...connectionOptions, logging: false, schema } as ConnectionOptions);
   }
 
+  /**
+   * Create a new JWT via the API for the provided user.
+   *
+   * @param data The {@link LoginRequest} dto.
+   * @returns A {@link JwtResponse} object.
+   */
   private async createJwt(data: LoginRequest): Promise<JwtResponse> {
     const res = await request(this.application.getHttpServer())
       .post(`${API_GLOBAL_PREFIX}/auth/login`)
@@ -121,7 +152,10 @@ export class TestRunner {
   /**
    * Get a JWT for the provided user.
    *
-   * @param data The {@link LoginRequest} dto.
+   * If a dto is not provided, the first user fixture
+   * from the database seeding process is used instead.
+   *
+   * @param data The optional {@link LoginRequest} dto.
    * @returns A {@link JwtResponse} object.
    */
   async getJwt(data?: LoginRequest): Promise<JwtResponse> {
