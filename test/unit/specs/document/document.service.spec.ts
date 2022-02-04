@@ -1,4 +1,3 @@
-import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
@@ -36,7 +35,6 @@ describe('Document Service', () => {
           provide: TransactionRepository,
           useValue: transactionMockRepo,
         },
-        ConfigService,
         DocumentService,
       ],
     }).compile();

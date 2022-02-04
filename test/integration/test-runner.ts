@@ -5,21 +5,20 @@ import { default as request } from 'supertest';
 import { Connection, ConnectionOptions, createConnection } from 'typeorm';
 
 import { INestApplication } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
 
 import { AppModule } from '$/app/app.module';
 import { AppService } from '$/app/app.service';
-import { getValidationSchema } from '$/common/config/environment.config';
+import { Config } from '$/common/config/environment.config';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, LoginRequest } from '$/common/dto';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
+import { configValidator } from '$/common/validators/config.validator';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
-
-import { NoOutputLogger } from './no-output.logger';
 
 /**
  * The TestRunner class is responsible for providing
@@ -110,17 +109,18 @@ export class TestRunner {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         AppModule,
-        ConfigModule.forRoot({
+        TypedConfigModule.forRoot({
           isGlobal: true,
-          ignoreEnvFile: true,
-          ignoreEnvVars: false,
-          validationSchema: getValidationSchema(),
+          load: dotenvLoader({
+            ignoreEnvFile: true,
+            ignoreEnvVars: false,
+          }),
+          schema: Config,
+          validate: configValidator,
         }),
         TypeOrmModule.forRoot(connection.options),
       ],
-    })
-      .setLogger(new NoOutputLogger())
-      .compile();
+    }).compile();
 
     // Create and configure the application
     const application = module.createNestApplication();
@@ -133,6 +133,7 @@ export class TestRunner {
     application.use(helmet());
     application.useGlobalFilters(new ErrorFilter());
     application.useGlobalPipes(new DtoValidationPipe());
+    application.useLogger(false);
 
     // Seed and initialize the application
     await application.get<AppService>(AppService).seed(connection);
