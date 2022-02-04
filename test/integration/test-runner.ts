@@ -27,6 +27,45 @@ export class TestRunner {
   constructor(readonly application: INestApplication, readonly connection: Connection) {}
 
   /**
+   * Configure the database and create a new connection.
+   *
+   * @param schema The name of the database schema.
+   * @returns A new database {@link Connection}.
+   */
+  private static async connectToDatabase(schema: string): Promise<Connection> {
+    // Create the default connection options
+    const connectionOptions = TypeOrmConfigService.creatConnectionOptions();
+
+    // Connect to the database using the public schema and configure it
+    const connection = await createConnection({
+      ...connectionOptions,
+      logging: false,
+      schema: 'public',
+    } as ConnectionOptions);
+    await connection.query(oneLine`
+    CREATE EXTENSION IF NOT EXISTS pgcrypto;
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+    DROP SCHEMA IF EXISTS ${schema} CASCADE;
+    CREATE SCHEMA IF NOT EXISTS ${schema};
+  `);
+    await connection.close();
+
+    // Create a new connection using the specified schema
+    return createConnection({ ...connectionOptions, logging: false, schema } as ConnectionOptions);
+  }
+
+  private async createJwt(data: LoginRequest): Promise<JwtResponse> {
+    const res = await request(this.application.getHttpServer())
+      .post(`${API_GLOBAL_PREFIX}/auth/login`)
+      .send({
+        email: data.email,
+        password: data.password,
+      } as LoginRequest);
+    return res.body as JwtResponse;
+  }
+
+  /**
    * Creates a new test runner instance.
    *
    * @param options The {@link TestRunner} options.
@@ -34,7 +73,7 @@ export class TestRunner {
    */
   public static async create(options: { schema: string }): Promise<TestRunner> {
     // Configure the database and create a connection
-    const connection = await TestRunner.connect(options.schema);
+    const connection = await TestRunner.connectToDatabase(options.schema);
 
     // Create the testing module
     const module: TestingModule = await Test.createTestingModule({
@@ -72,35 +111,6 @@ export class TestRunner {
   }
 
   /**
-   * Configure the database and create a new connection.
-   *
-   * @param schema The name of the database schema.
-   * @returns A new database {@link Connection}.
-   */
-  private static async connect(schema: string): Promise<Connection> {
-    // Create the default connection options
-    const connectionOptions = TypeOrmConfigService.creatConnectionOptions();
-
-    // Connect to the database using the public schema and configure it
-    const connection = await createConnection({
-      ...connectionOptions,
-      logging: false,
-      schema: 'public',
-    } as ConnectionOptions);
-    await connection.query(oneLine`
-    CREATE EXTENSION IF NOT EXISTS pgcrypto;
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-    DROP SCHEMA IF EXISTS ${schema} CASCADE;
-    CREATE SCHEMA IF NOT EXISTS ${schema};
-  `);
-    await connection.close();
-
-    // Create a new connection using the specified schema
-    return createConnection({ ...connectionOptions, logging: false, schema } as ConnectionOptions);
-  }
-
-  /**
    * Closes the database connection and application.
    */
   async close(): Promise<void> {
@@ -108,16 +118,12 @@ export class TestRunner {
     await this.application.close();
   }
 
-  private async createJwt(data: LoginRequest): Promise<JwtResponse> {
-    const res = await request(this.application.getHttpServer())
-      .post(`${API_GLOBAL_PREFIX}/auth/login`)
-      .send({
-        email: data.email,
-        password: data.password,
-      } as LoginRequest);
-    return res.body as JwtResponse;
-  }
-
+  /**
+   * Get a JWT for the provided user.
+   *
+   * @param data The {@link LoginRequest} dto.
+   * @returns A {@link JwtResponse} object.
+   */
   async getJwt(data?: LoginRequest): Promise<JwtResponse> {
     return this.memoizeCreateJwt(
       data ??

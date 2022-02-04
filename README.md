@@ -51,6 +51,16 @@ yarn test:unit
 yarn test:integration
 ```
 
+Test may also be run individually:
+
+```bash
+# Execute a specific unit test
+yarn test:unit test/unit/specs/user/user.service.spec.ts
+
+# Execute a specific integration test
+yarn test:integration test/integration/specs/user.module.spec.ts
+```
+
 The project can also be built and started using docker:
 
 > Note: Using docker will start the application in production mode, which excludes database
@@ -96,7 +106,7 @@ This package uses TypeORM and PostgreSQL.
 To generate the missing migrations TypeORM applies existing migrations, and uses the diff between
 the database schema and the TypeORM entities to create a migration file.
 
-```sh
+```bash
 # Replace <migration-name> with a descriptive name for the generated migration
 yarn db:migration:generate:missing <migration-name>
 ```
@@ -118,7 +128,7 @@ except for the `common` and `db` directories.
   `controller`, e.g. the `token` module only has a `service` implementation that is imported by
   other application `modules`.
 
-```sh
+```bash
 src
 ├── app
 │   ├── app.module.ts
@@ -330,7 +340,7 @@ concerned with performing end-to-end tests on exposed endpoints.
 
 The `utils` directory contains test helper functions, `fixtures`, and `mocks`.
 
-```sh
+```bash
 test
 ├── integration
 │   ├── jest.config.js
