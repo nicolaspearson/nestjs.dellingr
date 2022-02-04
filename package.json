@@ -14,9 +14,10 @@
     "yarn": ">=v3.1.1"
   },
   "engineStrict": true,
-  "main": "src/main.ts",
+  "exports": "./index.js",
+  "type": "module",
   "scripts": {
-    "build": "rimraf dist && webpack --config webpack.config.js",
+    "build": "rimraf dist && webpack --config webpack.config.cjs",
     "build:tsc": "rimraf dist && tsc --project tsconfig.tsc.json",
     "db:logs": "yarn exec:docker-compose logs -f db",
     "db:migration:create": "typeorm migration:create -n",
@@ -33,7 +34,7 @@
     "docker:up": "yarn exec:docker-compose up -d --renew-anon-volumes --wait",
     "docs": "typedoc",
     "doctor": "yarn dlx @yarnpkg/doctor .",
-    "dts:generate": "rimraf dist && nest build --webpack --webpackPath webpack-dts.config.js",
+    "dts:generate": "rimraf dist && nest build --webpack --webpackPath webpack-dts.config.cjs",
     "exec:docker-compose": "docker-compose -f docker-compose.yml",
     "exec:eslint": "eslint \"{src,test}/**/*.ts\" --cache",
     "exec:jest": "jest --coverage --color --forceExit --runInBand",
@@ -51,11 +52,11 @@
     "localstack:stop": "docker-compose rm -f -s -v localstack",
     "postinstall": "husky install",
     "sdk": "yarn dlx @yarnpkg/sdks vscode",
-    "start:dev": "rimraf dist && yarn localstack:start && yarn db:start:recreate && nest build --webpack --webpackPath webpack-hmr.config.js --watch",
-    "start": "node dist/server.js",
-    "test:integration:ci": "yarn exec:jest --config test/integration/jest.config.js",
+    "start:dev": "rimraf dist && yarn localstack:start && yarn db:start:recreate && nest build --webpack --webpackPath webpack-hmr.config.cjs --watch",
+    "start": "node dist/server.cjs",
+    "test:integration:ci": "yarn exec:jest --config test/integration/jest.config.cjs",
     "test:integration": "yarn localstack:start && yarn db:start && yarn test:integration:ci",
-    "test:unit": "yarn exec:jest --config test/unit/jest.config.js"
+    "test:unit": "yarn exec:jest --config test/unit/jest.config.cjs"
   },
   "dependencies": {
     "$": "link:./src",

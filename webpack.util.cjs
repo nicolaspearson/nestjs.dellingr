@@ -26,7 +26,7 @@ module.exports = (options) => {
     },
     plugins,
     resolve: {
-      extensions: ['.js', '.ts'],
+      extensions: ['.cjs', '.js', '.ts'],
     },
     target: 'node',
   };

@@ -1,10 +1,10 @@
 const { RunScriptWebpackPlugin } = require('run-script-webpack-plugin');
 const { WebpackPnpExternals } = require('webpack-pnp-externals');
 
-const webpackConfig = require('./webpack.util');
+const webpackConfig = require('./webpack.util.cjs');
 
 module.exports = function (options, webpack) {
-  const bundleFilename = 'dts-server.js';
+  const bundleFilename = 'dts-server.cjs';
   return webpackConfig({
     ...options,
     bundleFilename,

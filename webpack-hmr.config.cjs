@@ -1,10 +1,10 @@
 const { RunScriptWebpackPlugin } = require('run-script-webpack-plugin');
 const { WebpackPnpExternals } = require('webpack-pnp-externals');
 
-const webpackConfig = require('./webpack.util');
+const webpackConfig = require('./webpack.util.cjs');
 
 module.exports = (options, webpack) => {
-  const bundleFilename = 'dev-server.js';
+  const bundleFilename = 'dev-server.cjs';
   return webpackConfig({
     ...options,
     bundleFilename,
@@ -19,7 +19,7 @@ module.exports = (options, webpack) => {
       ...options.plugins,
       new webpack.HotModuleReplacementPlugin(),
       new webpack.WatchIgnorePlugin({
-        paths: [/\.js$/, /\.d\.ts$/],
+        paths: [/\.cjs$/, /\.js$/, /\.d\.ts$/],
       }),
       new RunScriptWebpackPlugin({ name: bundleFilename }),
     ],

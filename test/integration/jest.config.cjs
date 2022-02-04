@@ -1,4 +1,4 @@
-module.exports = Object.assign({}, require(`../../jest.config.js`), {
+module.exports = Object.assign({}, require(`../../jest.config.cjs`), {
   collectCoverageFrom: [
     'src/**/*.controller.ts',
     'src/**/*.dto.ts',

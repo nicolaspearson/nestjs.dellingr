@@ -10,8 +10,8 @@
 !.yarnrc.yml
 !package.json
 !tsconfig.json
-!webpack.config.js
-!webpack.util.js
+!webpack.config.cjs
+!webpack.util.cjs
 !yarn.lock
 
 # Ignore inside allowed directories (you will most probably never want this in a docker image)
