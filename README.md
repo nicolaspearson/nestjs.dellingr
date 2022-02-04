@@ -4,11 +4,11 @@ A simple [NestJS](https://github.com/nestjs/nest) starter repository built using
 
 ## Getting Started
 
-### Installation
-
-```bash
-yarn install
-```
+1. Clone the repo: `git clone git@github.com:nicolaspearson/nestjs.dellingr.git`
+2. Install the modern version of [Yarn](https://yarnpkg.com/getting-started/install).
+3. Switch to the latest stable version: `yarn set version stable`
+4. Install dependencies: `yarn install`
+5. Ensure that you have [Docker](https://docs.docker.com/get-docker/) installed and running.
 
 ### Environment Configuration
 
@@ -16,21 +16,6 @@ yarn install
 # Make a copy of the default environment variables
 cp .env.example .env
 ```
-
-### AWS
-
-Locally no additional configuration for `AWS` is required. We use
-[`localstack`](https://localstack.cloud/) in the development environment.
-
-There is a seeding process that automatically creates an `S3` bucket if the `SEED_ENVIRONMENT`
-environment variable is set to `true`.
-
-The following is important for a **production** environment:
-
-- A new bucket that will contain `document` uploads will need to be created, access must be
-  granted for a user to write to this bucket, and the `AWS` credentials need to be set accordingly.
-- All `AWS_*` environment variables except for the `AWS_ENDPOINT` (which is optional and only
-  required in the **development** environment) MUST be set.
 
 ### Building, Running, and Testing the Application
 
@@ -76,6 +61,21 @@ yarn docker:start
 # Attach to the docker logs for the application
 yarn docker:logs
 ```
+
+### AWS
+
+Locally no additional configuration for `AWS` is required. We use
+[`localstack`](https://localstack.cloud/) in the development environment.
+
+There is a seeding process that automatically creates an `S3` bucket if the `SEED_ENVIRONMENT`
+environment variable is set to `true`.
+
+The following is important for a **production** environment:
+
+- A new bucket that will contain `document` uploads will need to be created, access must be
+  granted for a user to write to this bucket, and the `AWS` credentials need to be set accordingly.
+- All `AWS_*` environment variables except for the `AWS_ENDPOINT` (which is optional and only
+  required in the **development** environment) MUST be set.
 
 ### Swagger
 
