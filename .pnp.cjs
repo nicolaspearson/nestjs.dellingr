@@ -75,7 +75,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],
             ["common-tags", "npm:1.8.2"],
             ["dotenv", "npm:16.0.0"],
-            ["dtsgenerator", "npm:3.14.0"],
+            ["dtsgenerator", "npm:3.15.0"],
             ["eslint", "npm:8.8.0"],
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.3.0"],
             ["eslint-import-resolver-node", "npm:0.3.6"],
@@ -5579,6 +5579,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commander", "npm:8.3.0"]
           ],
           "linkType": "HARD",
+        }],
+        ["npm:9.0.0", {
+          "packageLocation": "./.yarn/cache/commander-npm-9.0.0-b4ddcedf46-15066e433d.zip/node_modules/commander/",
+          "packageDependencies": [
+            ["commander", "npm:9.0.0"]
+          ],
+          "linkType": "HARD",
         }]
       ]],
       ["common-tags", [
@@ -6110,7 +6117,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],
             ["common-tags", "npm:1.8.2"],
             ["dotenv", "npm:16.0.0"],
-            ["dtsgenerator", "npm:3.14.0"],
+            ["dtsgenerator", "npm:3.15.0"],
             ["eslint", "npm:8.8.0"],
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.3.0"],
             ["eslint-import-resolver-node", "npm:0.3.6"],
@@ -6312,11 +6319,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["dtsgenerator", [
-        ["npm:3.14.0", {
-          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.14.0-ac3356c2bd-85e0254141.zip/node_modules/dtsgenerator/",
+        ["npm:3.15.0", {
+          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.15.0-9673a1c16b-df1f12ef23.zip/node_modules/dtsgenerator/",
           "packageDependencies": [
-            ["dtsgenerator", "npm:3.14.0"],
-            ["commander", "npm:8.3.0"],
+            ["dtsgenerator", "npm:3.15.0"],
+            ["commander", "npm:9.0.0"],
             ["cross-fetch", "npm:3.1.5"],
             ["debug", "virtual:e5e72b8ce4b39c9ab6a47d8d08d725dccb716bd95217c12bbc98e5d3a6b7a9c0525366241540ebcfaa8e5f425c3ad207e651c3544a3bc8b2bdf38c619d2d3045#npm:4.3.3"],
             ["glob", "npm:7.2.0"],
