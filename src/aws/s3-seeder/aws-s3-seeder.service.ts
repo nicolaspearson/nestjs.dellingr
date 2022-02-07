@@ -6,9 +6,9 @@ import {
 } from '@aws-sdk/client-s3';
 
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
+import { ConfigService } from '$/common/config/environment.config';
 
 @Injectable()
 export class AwsS3SeederService {
@@ -35,7 +35,7 @@ export class AwsS3SeederService {
     this.logger.debug('Seeding AWS S3');
     try {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const bucketName = this.configService.get<string>('AWS_S3_BUCKET_NAME')!;
+      const bucketName = this.configService.awsS3BucketName;
 
       // Check if the bucket already exists
       const buckets = await this.getBuckets();

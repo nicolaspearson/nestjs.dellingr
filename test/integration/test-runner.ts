@@ -5,21 +5,19 @@ import { default as request } from 'supertest';
 import { Connection, ConnectionOptions, createConnection } from 'typeorm';
 
 import { INestApplication } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppModule } from '$/app/app.module';
 import { AppService } from '$/app/app.service';
-import { getValidationSchema } from '$/common/config/environment.config';
-import { TypeOrmConfigService } from '$/common/config/typeorm.config';
+import { MergedConnectionOptions, TypeOrmConfigService } from '$/common/config/typeorm.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, LoginRequest } from '$/common/dto';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
-import { NoOutputLogger } from './no-output.logger';
+import { configService, typedConfigModule } from '#/utils/config';
 
 /**
  * The TestRunner class is responsible for providing
@@ -54,13 +52,14 @@ export class TestRunner {
   /**
    * Configure the database and create a new connection.
    *
+   * @param connectionOptions The default connection options.
    * @param schema The name of the database schema.
    * @returns A new database {@link Connection}.
    */
-  private static async connectToDatabase(schema: string): Promise<Connection> {
-    // Create the default connection options
-    const connectionOptions = TypeOrmConfigService.creatConnectionOptions();
-
+  private static async connectToDatabase(
+    connectionOptions: MergedConnectionOptions,
+    schema: string,
+  ): Promise<Connection> {
     // Connect to the database using the public schema and configure it
     const connection = await createConnection({
       ...connectionOptions,
@@ -103,24 +102,16 @@ export class TestRunner {
    * @returns A new instance of the {@link TestRunner}
    */
   public static async create(options: { schema: string }): Promise<TestRunner> {
+    // Create the default connection options
+    const connectionOptions = new TypeOrmConfigService(configService).creatConnectionOptions();
+
     // Configure the database and create a connection
-    const connection = await TestRunner.connectToDatabase(options.schema);
+    const connection = await TestRunner.connectToDatabase(connectionOptions, options.schema);
 
     // Create the testing module
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        AppModule,
-        ConfigModule.forRoot({
-          isGlobal: true,
-          ignoreEnvFile: true,
-          ignoreEnvVars: false,
-          validationSchema: getValidationSchema(),
-        }),
-        TypeOrmModule.forRoot(connection.options),
-      ],
-    })
-      .setLogger(new NoOutputLogger())
-      .compile();
+      imports: [AppModule, typedConfigModule, TypeOrmModule.forRoot(connection.options)],
+    }).compile();
 
     // Create and configure the application
     const application = module.createNestApplication();
@@ -133,6 +124,7 @@ export class TestRunner {
     application.use(helmet());
     application.useGlobalFilters(new ErrorFilter());
     application.useGlobalPipes(new DtoValidationPipe());
+    application.useLogger(false);
 
     // Seed and initialize the application
     await application.get<AppService>(AppService).seed(connection);

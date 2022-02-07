@@ -3,7 +3,8 @@ import { S3Client, ServiceOutputTypes } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
+import { ConfigService } from '$/common/config/environment.config';
 
 @Injectable()
 export class AwsS3Service extends S3Client {
@@ -12,14 +13,12 @@ export class AwsS3Service extends S3Client {
   constructor(protected readonly configService: ConfigService) {
     super({
       credentials: {
-        /* eslint-disable @typescript-eslint/no-non-null-assertion */
-        accessKeyId: configService.get<string>('AWS_ACCESS_KEY_ID')!,
-        secretAccessKey: configService.get<string>('AWS_SECRET_ACCESS_KEY')!,
-        /* eslint-enable @typescript-eslint/no-non-null-assertion */
+        accessKeyId: configService.awsAccessKeyId,
+        secretAccessKey: configService.awsSecretAccessKey,
       },
-      endpoint: configService.get<string>('AWS_ENDPOINT'),
+      endpoint: configService.awsEndpoint,
       forcePathStyle: true,
-      region: configService.get<string>('AWS_REGION'),
+      region: configService.awsRegion,
     });
     this.logger.debug('AWS S3 service created!');
   }

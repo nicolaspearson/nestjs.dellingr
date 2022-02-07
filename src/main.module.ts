@@ -1,18 +1,22 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
 
 import { AppModule } from '$/app/app.module';
-import { getValidationSchema } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/environment.config';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
+import { configValidator } from '$/common/validators/config.validator';
 
 @Module({
   imports: [
     AppModule,
-    ConfigModule.forRoot({
-      envFilePath: ['.env'],
+    TypedConfigModule.forRoot({
       isGlobal: true,
-      validationSchema: getValidationSchema(),
+      load: dotenvLoader({
+        envFilePath: ['.env'],
+      }),
+      schema: ConfigService,
+      validate: configValidator,
     }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,

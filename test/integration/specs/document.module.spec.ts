@@ -2,6 +2,7 @@ import { default as request } from 'supertest';
 
 import { HttpStatus } from '@nestjs/common';
 
+import { ConfigService } from '$/common/config/environment.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { UploadDocumentRequest } from '$/common/dto';
 import { Document } from '$/db/entities/document.entity';
@@ -25,10 +26,15 @@ describe('Document Module', () => {
   });
 
   describe(`POST ${baseUrl}/documents`, () => {
+    let configService: ConfigService;
+
     const filePath = require.resolve(`../../utils/files/invoice.pdf`);
 
     afterEach(() => {
-      process.env.AWS_S3_BUCKET_NAME = 'dellingr';
+      configService = runner.application.get<ConfigService>(ConfigService);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      configService.awsS3BucketName = 'dellingr';
     });
 
     test('[201] => should allow a user to upload a new document', async () => {
@@ -87,7 +93,9 @@ describe('Document Module', () => {
     test('[424] => should throw a failed dependency error if the AWS S3 upload fails', async () => {
       const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
-      process.env.AWS_S3_BUCKET_NAME = 'this-bucket-does-not-exist';
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      configService.awsS3BucketName = 'this-bucket-does-not-exist';
       const uploadDocumentRequest: UploadDocumentRequest = {
         name: 'Second integration test document',
         transactionId: transaction.uuid,

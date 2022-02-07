@@ -25,6 +25,7 @@ process.env.TYPEORM_MIGRATIONS = path.resolve(__dirname, '../../src/db/migration
 process.env.TYPEORM_MIGRATIONS_RUN = 'false';
 process.env.TYPEORM_PASSWORD = 'masterkey';
 process.env.TYPEORM_PORT = process.env.TYPEORM_PORT || '5432';
+process.env.TYPEORM_SCHEMA = 'public';
 process.env.TYPEORM_SYNCHRONIZE = 'true';
 process.env.TYPEORM_USERNAME = 'admin';
 process.env.TYPEORM_USE_WEBPACK = 'false';

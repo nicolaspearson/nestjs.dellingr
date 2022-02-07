@@ -37,19 +37,8 @@ describe('App Service', () => {
 
   describe('seed', () => {
     const connection = {} as unknown as Connection;
-    afterEach(() => {
-      process.env.SEED_ENVIRONMENT = 'true';
-    });
 
-    test('should not seed if SEED_ENVIRONMENT is set to false', async () => {
-      process.env.SEED_ENVIRONMENT = 'false';
-      await service.seed(connection);
-      expect(awsS3SeederMockService.seed).not.toHaveBeenCalled();
-      expect(databaseSeederMockService.seed).not.toHaveBeenCalled();
-    });
-
-    test('should seed if SEED_ENVIRONMENT is set to true', async () => {
-      process.env.SEED_ENVIRONMENT = 'true';
+    test('should seed the environment correctly', async () => {
       await service.seed(connection);
       expect(awsS3SeederMockService.seed).toHaveBeenCalledTimes(1);
       expect(databaseSeederMockService.seed).toHaveBeenCalledWith(connection);

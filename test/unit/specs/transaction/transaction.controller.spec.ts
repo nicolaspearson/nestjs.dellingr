@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { ConfigService } from '$/common/config/environment.config';
 import { TransactionResponse } from '$/common/dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { BadRequestError } from '$/common/error';
@@ -7,6 +8,7 @@ import { DatabaseTransactionService } from '$/db/services/database-transaction.s
 import { TransactionController } from '$/transaction/transaction.controller';
 import { TransactionService } from '$/transaction/transaction.service';
 
+import { configService } from '#/utils/config';
 import {
   authenticatedRequestMock,
   createTransactionRequestMockCredit,
@@ -25,11 +27,12 @@ describe('Transaction Controller', () => {
     module = await Test.createTestingModule({
       controllers: [TransactionController],
       providers: [
-        { provide: TransactionService, useValue: transactionMockService },
+        { provide: ConfigService, useValue: configService },
         {
           provide: DatabaseTransactionService,
           useValue: databaseTransactionMockService,
         },
+        { provide: TransactionService, useValue: transactionMockService },
       ],
     }).compile();
 

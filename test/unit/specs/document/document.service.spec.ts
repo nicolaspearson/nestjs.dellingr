@@ -1,13 +1,13 @@
-import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
+import { ConfigService } from '$/common/config/environment.config';
 import { FailedDependencyError } from '$/common/error';
 import { DocumentRepository, TransactionRepository } from '$/db/repositories';
 import { DocumentService } from '$/document/document.service';
 
+import { configService } from '#/utils/config';
 import {
-  awsS3DocumentBucketName,
   documentMockInvoice,
   multerFileMock,
   transactionMockPaymentFromBob,
@@ -28,16 +28,16 @@ describe('Document Service', () => {
           provide: AwsS3Service,
           useValue: awsS3MockService,
         },
+        { provide: ConfigService, useValue: configService },
         {
           provide: DocumentRepository,
           useValue: documentMockRepo,
         },
+        DocumentService,
         {
           provide: TransactionRepository,
           useValue: transactionMockRepo,
         },
-        ConfigService,
-        DocumentService,
       ],
     }).compile();
     service = module.get<DocumentService>(DocumentService);
@@ -61,7 +61,7 @@ describe('Document Service', () => {
       });
       expect(awsS3MockService.upload).toHaveBeenCalledWith({
         body: multerFileMock.buffer,
-        bucket: awsS3DocumentBucketName,
+        bucket: configService.awsS3BucketName,
         key: expect.stringContaining(`-${documentMockInvoice.name}`),
       });
       expect(documentMockRepo.create).toHaveBeenCalledWith({
@@ -86,7 +86,7 @@ describe('Document Service', () => {
       });
       expect(awsS3MockService.upload).toHaveBeenCalledWith({
         body: multerFileMock.buffer,
-        bucket: awsS3DocumentBucketName,
+        bucket: configService.awsS3BucketName,
         key: expect.stringContaining(`-${documentMockInvoice.name}`),
       });
       expect(documentMockRepo.create).not.toHaveBeenCalled();

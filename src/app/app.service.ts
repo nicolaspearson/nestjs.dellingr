@@ -17,12 +17,10 @@ export class AppService {
   }
 
   async seed(connection: Connection): Promise<void> {
-    if (process.env.SEED_ENVIRONMENT === 'true') {
-      this.logger.debug('Seeding environment...');
-      // Seed the database with fixtures.
-      await this.databaseSeederService.seed(connection);
-      // Seed AWS S3 with the default bucket.
-      await this.awsS3SeederService.seed();
-    }
+    this.logger.debug('Seeding environment...');
+    // Seed the database with fixtures.
+    await this.databaseSeederService.seed(connection);
+    // Seed AWS S3 with the default bucket.
+    await this.awsS3SeederService.seed();
   }
 }

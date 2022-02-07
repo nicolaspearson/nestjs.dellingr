@@ -3,17 +3,13 @@ import { S3Client } from '@aws-sdk/client-s3';
 import { Progress, Upload } from '@aws-sdk/lib-storage';
 import { mockClient, mockLibStorageUpload } from 'aws-sdk-client-mock';
 
-import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
+import { ConfigService } from '$/common/config/environment.config';
 
-import {
-  awsS3DocumentBucketName,
-  documentMockInvoice,
-  multerFileBufferStringMock,
-  multerFileMock,
-} from '#/utils/fixtures';
+import { configService } from '#/utils/config';
+import { documentMockInvoice, multerFileBufferStringMock, multerFileMock } from '#/utils/fixtures';
 
 // Reference: https://github.com/m-radzikowski/aws-sdk-client-mock#lib-storage-upload
 const s3Mock = mockClient(S3Client);
@@ -25,7 +21,7 @@ describe('AWS S3 Service', () => {
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
-      providers: [AwsS3Service, ConfigService],
+      providers: [AwsS3Service, { provide: ConfigService, useValue: configService }],
     }).compile();
     service = module.get<AwsS3Service>(AwsS3Service);
   });
@@ -42,7 +38,7 @@ describe('AWS S3 Service', () => {
   describe('upload', () => {
     const data = {
       body: multerFileMock.buffer,
-      bucket: awsS3DocumentBucketName,
+      bucket: configService.awsS3BucketName,
       key: `${documentMockInvoice.uuid}-${documentMockInvoice.name}`,
     };
 

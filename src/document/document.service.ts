@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Injectable, Logger } from '@nestjs/common';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
+import { ConfigService } from '$/common/config/environment.config';
 import { UploadDocumentRequest } from '$/common/dto';
 import { FailedDependencyError } from '$/common/error';
 import { DocumentRepository, TransactionRepository } from '$/db/repositories';
@@ -13,6 +14,7 @@ export class DocumentService {
 
   constructor(
     private readonly awsS3Service: AwsS3Service,
+    private readonly configService: ConfigService,
     private readonly documentRepository: DocumentRepository,
     private readonly transactionRepository: TransactionRepository,
   ) {
@@ -46,14 +48,7 @@ export class DocumentService {
     try {
       await this.awsS3Service.upload({
         body: buffer,
-        // We should use the config service to retrieve the `AWS_S3_BUCKET_NAME`
-        // environment variable, however we set it explicitly in the integration
-        // test in order to simulate an AWS S3 upload failure scenario.
-        //
-        // FIXME: Find a better way to simulate this failure.
-        //
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        bucket: process.env.AWS_S3_BUCKET_NAME!,
+        bucket: this.configService.awsS3BucketName,
         key: documentKey,
       });
     } catch (error) {
