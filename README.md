@@ -147,8 +147,7 @@ src
 ├── common
 │   ├── config
 │   │   ├── config.service.ts
-│   │   ├── helmet.config.ts
-│   │   └── typeorm-config.service.ts
+│   │   └── helmet.config.ts
 │   ├── constants
 │   │   └── index.ts
 │   ├── dto
@@ -197,6 +196,8 @@ src
 │       ├── config.validator.ts
 │       └── is-valid-password.validator.ts
 ├── db
+│   ├── config
+│   │   └── typeorm-config.service.ts
 │   ├── database.module.ts
 │   ├── entities
 │   │   ├── document.entity.ts

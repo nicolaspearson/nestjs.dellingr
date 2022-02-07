@@ -10,14 +10,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppModule } from '$/app/app.module';
 import { AppService } from '$/app/app.service';
-import {
-  MergedConnectionOptions,
-  TypeOrmConfigService,
-} from '$/common/config/typeorm-config.service';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, LoginRequest } from '$/common/dto';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
+import { MergedConnectionOptions, TypeOrmConfigService } from '$/db/config/typeorm-config.service';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
 import { configService, typedConfigModule } from '#/utils/config';
