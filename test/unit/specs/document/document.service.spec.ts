@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { FailedDependencyError } from '$/common/error';
 import { DocumentRepository, TransactionRepository } from '$/db/repositories';
 import { DocumentService } from '$/document/document.service';

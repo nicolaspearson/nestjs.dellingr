@@ -2,7 +2,7 @@ import { default as request } from 'supertest';
 
 import { HttpStatus } from '@nestjs/common';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { UploadDocumentRequest } from '$/common/dto';
 import { Document } from '$/db/entities/document.entity';

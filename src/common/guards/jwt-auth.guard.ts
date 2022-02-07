@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { UnauthorizedError } from '$/common/error';
 
 @Injectable()

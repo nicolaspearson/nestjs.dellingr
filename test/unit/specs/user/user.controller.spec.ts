@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { ConflictError, InternalServerError } from '$/common/error';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 import { UserController } from '$/user/user.controller';

@@ -2,7 +2,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypedConfigModule } from 'nest-typed-config';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { TokenService } from '$/token/token.service';
 
 import { configService } from '#/utils/config';

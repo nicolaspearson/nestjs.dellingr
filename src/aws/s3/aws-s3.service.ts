@@ -4,7 +4,7 @@ import { Upload } from '@aws-sdk/lib-storage';
 
 import { Injectable, Logger } from '@nestjs/common';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 
 @Injectable()
 export class AwsS3Service extends S3Client {

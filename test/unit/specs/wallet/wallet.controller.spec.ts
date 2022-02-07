@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { WalletResponse } from '$/common/dto';
 import { WalletController } from '$/wallet/wallet.controller';
 import { WalletService } from '$/wallet/wallet.service';

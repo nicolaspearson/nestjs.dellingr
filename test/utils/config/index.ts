@@ -1,6 +1,6 @@
 import { TypedConfigModule, dotenvLoader, selectConfig } from 'nest-typed-config';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { configValidator } from '$/common/validators/config.validator';
 
 export const typedConfigModule = TypedConfigModule.forRoot({

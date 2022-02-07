@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Injectable, Logger } from '@nestjs/common';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { UploadDocumentRequest } from '$/common/dto';
 import { FailedDependencyError } from '$/common/error';
 import { DocumentRepository, TransactionRepository } from '$/db/repositories';

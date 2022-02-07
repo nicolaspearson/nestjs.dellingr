@@ -8,7 +8,7 @@ import {
 import { Injectable, Logger } from '@nestjs/common';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 
 @Injectable()
 export class AwsS3SeederService {

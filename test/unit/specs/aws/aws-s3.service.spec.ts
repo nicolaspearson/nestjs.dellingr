@@ -6,7 +6,7 @@ import { mockClient, mockLibStorageUpload } from 'aws-sdk-client-mock';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AwsS3Service } from '$/aws/s3/aws-s3.service';
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 
 import { configService } from '#/utils/config';
 import { documentMockInvoice, multerFileBufferStringMock, multerFileMock } from '#/utils/fixtures';

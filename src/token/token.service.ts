@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 
 @Injectable()
 export class TokenService {

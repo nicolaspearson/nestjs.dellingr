@@ -36,7 +36,7 @@ yarn test:unit
 yarn test:integration
 ```
 
-Test may also be run individually:
+Tests may also be run individually:
 
 ```bash
 # Execute a specific unit test
@@ -146,10 +146,9 @@ src
 │       └── aws-s3-seeder.service.ts
 ├── common
 │   ├── config
-│   │   ├── environment.config.ts
+│   │   ├── config.service.ts
 │   │   ├── helmet.config.ts
-│   │   ├── typeorm-webpack.config.ts
-│   │   └── typeorm.config.ts
+│   │   └── typeorm-config.service.ts
 │   ├── constants
 │   │   └── index.ts
 │   ├── dto
@@ -195,6 +194,7 @@ src
 │   │   ├── dts-exporter.swagger.ts
 │   │   └── dts-generator.swagger.ts
 │   └── validators
+│       ├── config.validator.ts
 │       └── is-valid-password.validator.ts
 ├── db
 │   ├── database.module.ts
@@ -376,6 +376,7 @@ test
 │       │   ├── pipes
 │       │   │   └── dto-validation.pipe.spec.ts
 │       │   └── validators
+│       │       ├── config.validator.spec.ts
 │       │       └── is-valid-password.validator.spec.ts
 │       ├── document
 │       │   ├── document.controller.spec.ts
@@ -394,6 +395,8 @@ test
 │           ├── wallet.controller.spec.ts
 │           └── wallet.service.spec.ts
 └── utils
+    ├── config
+    │   └── index.ts
     ├── files
     │   └── invoice.pdf
     ├── fixtures

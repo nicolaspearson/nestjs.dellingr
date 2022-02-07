@@ -3,7 +3,7 @@ import { validateSync } from 'class-validator';
 
 import { TypedConfigModule } from 'nest-typed-config';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 
 export function configValidator(rawConfig: Record<string, string>): ConfigService {
   // Convert all environment variables from upper snake

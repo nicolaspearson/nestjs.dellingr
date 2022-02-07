@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ConfigService } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/config.service';
 import { TransactionResponse } from '$/common/dto';
 import { TransactionState } from '$/common/enum/transaction-state.enum';
 import { BadRequestError } from '$/common/error';
