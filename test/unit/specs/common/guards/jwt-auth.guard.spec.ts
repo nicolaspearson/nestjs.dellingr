@@ -1,10 +1,14 @@
 import { sign } from 'jsonwebtoken';
 
 import { ExecutionContext } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { TypedConfigModule } from 'nest-typed-config';
 
+import { ConfigService } from '$/common/config/environment.config';
 import { UnauthorizedError } from '$/common/error';
 import { JwtAuthGuard } from '$/common/guards/jwt-auth.guard';
 
+import { configService } from '#/utils/config';
 import { jwtResponseMock, userMockJohn } from '#/utils/fixtures';
 
 const switchToHttpMock = {
@@ -26,9 +30,22 @@ const contextMock = {
 } as ExecutionContext;
 
 describe('Jwt Auth Guard', () => {
-  const guard = new JwtAuthGuard();
+  let module: TestingModule;
+  let guard: JwtAuthGuard;
+
+  beforeAll(async () => {
+    module = await Test.createTestingModule({
+      imports: [TypedConfigModule],
+      providers: [{ provide: ConfigService, useValue: configService }, JwtAuthGuard],
+    }).compile();
+    guard = module.get<JwtAuthGuard>(JwtAuthGuard);
+  });
 
   beforeEach(jest.clearAllMocks);
+
+  test('should be defined', () => {
+    expect(guard).toBeDefined();
+  });
 
   test('should throw if the jwt is not provided in the request', () => {
     switchToHttpMock.getRequest.mockReturnValueOnce({
@@ -45,7 +62,7 @@ describe('Jwt Auth Guard', () => {
   });
 
   test('should return true if the jwt is valid', () => {
-    const jwt = sign({ uuid: userMockJohn.uuid } as Api.JwtPayload, process.env.JWT_SECRET!, {
+    const jwt = sign({ uuid: userMockJohn.uuid } as Api.JwtPayload, configService.jwtSecret, {
       expiresIn: '15m',
     });
     switchToHttpMock.getRequest.mockReturnValueOnce({

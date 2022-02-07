@@ -151,12 +151,6 @@ export const createWalletRequestMock = {
 export const walletResponseMock = new WalletResponse(walletMockMain);
 
 // ----------------------------
-// AWS
-// ----------------------------
-
-export const awsS3DocumentBucketName = process.env.AWS_S3_BUCKET_NAME!;
-
-// ----------------------------
 // Express
 // ----------------------------
 

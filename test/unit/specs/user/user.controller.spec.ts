@@ -1,10 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { ConfigService } from '$/common/config/environment.config';
 import { ConflictError, InternalServerError } from '$/common/error';
 import { DatabaseTransactionService } from '$/db/services/database-transaction.service';
 import { UserController } from '$/user/user.controller';
 import { UserService } from '$/user/user.service';
 
+import { configService } from '#/utils/config';
 import {
   authenticatedRequestMock,
   userMockJohn,
@@ -21,6 +23,7 @@ describe('User Controller', () => {
     module = await Test.createTestingModule({
       controllers: [UserController],
       providers: [
+        { provide: ConfigService, useValue: configService },
         {
           provide: DatabaseTransactionService,
           useValue: databaseTransactionMockService,

@@ -9,7 +9,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppService } from '$/app/app.service';
-import { Config } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/environment.config';
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ApiGroup } from '$/common/enum/api-group.enum';
@@ -34,14 +34,14 @@ async function bootstrap(): Promise<void> {
       origin: [/localhost$/],
     },
   });
-  const config = app.get(Config);
-  app.useLogger([config.logLevel]);
+  const configService = app.get(ConfigService);
+  app.useLogger([configService.logLevel]);
 
   // Helmet can help protect the app from some well-known web
   // vulnerabilities by setting the appropriate HTTP headers
   app.use(
     helmet({
-      contentSecurityPolicy: getContentResourcePolicy(),
+      contentSecurityPolicy: getContentResourcePolicy(configService.nodeEnv),
     }),
   );
 
@@ -67,10 +67,12 @@ async function bootstrap(): Promise<void> {
   SwaggerModule.setup('docs/dellingr', app, document);
 
   // Initiate the seeding process
-  await app.get<AppService>(AppService).seed(getConnection());
+  if (configService.seedEnvironment) {
+    await app.get<AppService>(AppService).seed(getConnection());
+  }
 
   // Serve the application
-  await app.listen(config.apiPort, config.apiHost);
+  await app.listen(configService.apiPort, configService.apiHost);
 
   // Hot module replacement with Webpack
   if (module.hot) {

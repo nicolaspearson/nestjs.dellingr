@@ -3,13 +3,16 @@ import { v4 as uuid } from 'uuid';
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { Config } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/environment.config';
 
 @Injectable()
 export class TokenService {
   private readonly logger = new Logger(TokenService.name);
 
-  constructor(protected readonly config: Config, private readonly jwtService: JwtService) {
+  constructor(
+    protected readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
+  ) {
     this.logger.debug('Token service created!');
   }
 
@@ -22,7 +25,7 @@ export class TokenService {
     this.logger.log(`Generating JWT for user with uuid: ${payload.uuid}`);
     const token = await this.jwtService.signAsync(payload, {
       // Set the `exp` here to include it in the claims.
-      expiresIn: this.config.jwtTokenExpiration,
+      expiresIn: this.configService.jwtTokenExpiration,
       // Set the `jti` to avoid replay attacks.
       jwtid: uuid(),
     });

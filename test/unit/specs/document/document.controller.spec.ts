@@ -1,8 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { ConfigService } from '$/common/config/environment.config';
 import { DocumentController } from '$/document/document.controller';
 import { DocumentService } from '$/document/document.service';
 
+import { configService } from '#/utils/config';
 import {
   authenticatedRequestMock,
   multerFileMock,
@@ -17,7 +19,10 @@ describe('Document Controller', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [DocumentController],
-      providers: [{ provide: DocumentService, useValue: documentMockService }],
+      providers: [
+        { provide: ConfigService, useValue: configService },
+        { provide: DocumentService, useValue: documentMockService },
+      ],
     }).compile();
 
     controller = module.get<DocumentController>(DocumentController);

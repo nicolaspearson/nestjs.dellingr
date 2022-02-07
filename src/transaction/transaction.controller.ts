@@ -34,8 +34,8 @@ export class TransactionController {
   private readonly logger: Logger = new Logger(TransactionController.name);
 
   constructor(
-    private readonly transactionService: TransactionService,
     private readonly databaseTransactionService: DatabaseTransactionService,
+    private readonly transactionService: TransactionService,
   ) {
     this.logger.debug('Transaction controller created!');
   }

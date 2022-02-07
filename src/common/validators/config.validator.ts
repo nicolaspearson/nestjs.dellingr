@@ -3,9 +3,9 @@ import { validateSync } from 'class-validator';
 
 import { TypedConfigModule } from 'nest-typed-config';
 
-import { Config } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/environment.config';
 
-export function configValidator(rawConfig: Record<string, string>): Config {
+export function configValidator(rawConfig: Record<string, string>): ConfigService {
   // Convert all environment variables from upper snake
   // case to camel case, e.g. from NODE_ENV to nodeEnv.
   const camelCaseConfig: Record<string, string> = {};
@@ -14,21 +14,23 @@ export function configValidator(rawConfig: Record<string, string>): Config {
   }
 
   // Convert the config object to it's class equivalent.
-  const config = plainToInstance(Config, camelCaseConfig);
-  const schemaErrors = validateSync(config, {
+  const configService = plainToInstance(ConfigService, camelCaseConfig);
+  const schemaErrors = validateSync(configService, {
     forbidUnknownValues: true,
     whitelist: true,
   });
 
   // Check for errors
+  /* istanbul ignore next */
   if (schemaErrors.length > 0) {
+    /* istanbul ignore next */
     console.log(TypedConfigModule.getConfigErrorMessage(schemaErrors));
     // eslint-disable-next-line unicorn/no-process-exit
-    process.exit(1);
+    /* istanbul ignore next */ process.exit(1);
   }
 
   // Return the validated and transformed config.
-  return config;
+  return configService;
 }
 
 function snakeCaseToCamelCase(value: string): string {

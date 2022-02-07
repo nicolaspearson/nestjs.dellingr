@@ -1,9 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { ConfigService } from '$/common/config/environment.config';
 import { WalletResponse } from '$/common/dto';
 import { WalletController } from '$/wallet/wallet.controller';
 import { WalletService } from '$/wallet/wallet.service';
 
+import { configService } from '#/utils/config';
 import {
   authenticatedRequestMock,
   createWalletRequestMock,
@@ -19,7 +21,10 @@ describe('Wallet Controller', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       controllers: [WalletController],
-      providers: [{ provide: WalletService, useValue: walletMockService }],
+      providers: [
+        { provide: ConfigService, useValue: configService },
+        { provide: WalletService, useValue: walletMockService },
+      ],
     }).compile();
 
     controller = module.get<WalletController>(WalletController);

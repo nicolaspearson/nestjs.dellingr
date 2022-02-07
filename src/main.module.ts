@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
 
 import { AppModule } from '$/app/app.module';
-import { Config } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/environment.config';
 import { TypeOrmConfigService } from '$/common/config/typeorm.config';
 import { configValidator } from '$/common/validators/config.validator';
 
@@ -15,7 +15,7 @@ import { configValidator } from '$/common/validators/config.validator';
       load: dotenvLoader({
         envFilePath: ['.env'],
       }),
-      schema: Config,
+      schema: ConfigService,
       validate: configValidator,
     }),
     TypeOrmModule.forRootAsync({

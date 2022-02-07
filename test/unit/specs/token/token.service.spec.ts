@@ -2,9 +2,10 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypedConfigModule } from 'nest-typed-config';
 
-import { Config } from '$/common/config/environment.config';
+import { ConfigService } from '$/common/config/environment.config';
 import { TokenService } from '$/token/token.service';
 
+import { configService } from '#/utils/config';
 import { jwtPayloadMock, userMockJohn } from '#/utils/fixtures';
 
 describe('Token Service', () => {
@@ -18,7 +19,7 @@ describe('Token Service', () => {
         TypedConfigModule,
         JwtModule.register({ secret: 'secretKey', signOptions: { expiresIn: '15m' } }),
       ],
-      providers: [Config, TokenService],
+      providers: [{ provide: ConfigService, useValue: configService }, TokenService],
     }).compile();
     jwtService = module.get<JwtService>(JwtService);
     service = module.get<TokenService>(TokenService);

@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsBoolean,
   IsEnum,
@@ -15,7 +15,28 @@ import { LogLevel } from '@nestjs/common';
 
 import { Environment } from '$/common/enum/environment.enum';
 
-export class Config {
+const optionalBooleanMapper = new Map([
+  ['undefined', false],
+  ['true', true],
+  ['false', false],
+]);
+
+// Decorators should be PascalCase
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const ParseOptionalBoolean = (): PropertyDecorator =>
+  Transform(({ value }: { value: string }) => optionalBooleanMapper.get(value));
+
+/**
+ * This ConfigService is injected globally by the
+ * `TypedConfigModule`: https://github.com/Nikaple/nest-typed-config
+ *
+ * It can be imported into any provider as follows:
+ *
+ * @example
+ *
+ * constructor(private readonly configService: ConfigService) {}
+ */
+export class ConfigService {
   @IsString()
   readonly apiHost: string = 'localhost';
 
@@ -71,13 +92,13 @@ export class Config {
   readonly nodeEnv: Environment.Development | Environment.Production = Environment.Development;
 
   // If set to true, the environment will be seed with database fixtures, and default S3 buckets
-  @Type(() => Boolean)
+  @ParseOptionalBoolean()
   @IsBoolean()
   readonly seedEnvironment: boolean = false;
 
   // The database vendor, e.g. MySQL, PostgreSQL, etc.
   @IsIn(['postgres'])
-  readonly typeormConnection: string = 'postgres';
+  readonly typeormConnection: 'postgres' = 'postgres';
 
   // The name of the database
   @IsString()
@@ -85,7 +106,7 @@ export class Config {
   readonly typeormDatabase!: string;
 
   // TypeORM will drop existing schemas if set to true
-  @Type(() => Boolean)
+  @ParseOptionalBoolean()
   @IsBoolean()
   readonly typeormDropSchema: boolean = false;
 
@@ -101,7 +122,7 @@ export class Config {
   @IsString()
   readonly typeormMigrationsDir: string = 'src/db/migrations';
 
-  @Type(() => Boolean)
+  @ParseOptionalBoolean()
   @IsBoolean()
   readonly typeormMigrationsRun: boolean = true;
 
@@ -116,7 +137,7 @@ export class Config {
   @Type(() => Number)
   @IsNumber()
   @IsNotEmpty()
-  readonly typeormPort!: string;
+  readonly typeormPort!: number;
 
   // The name of the database schema
   @IsString()
@@ -124,7 +145,7 @@ export class Config {
   readonly typeormSchema!: string;
 
   // If set to true the database schema will be synchronized (should always be false in production!)
-  @Type(() => Boolean)
+  @ParseOptionalBoolean()
   @IsBoolean()
   readonly typeormSynchronize: boolean = false;
 
@@ -133,7 +154,7 @@ export class Config {
   readonly typeormUsername!: string;
 
   // Should be to true if the application is being bundled with webpack
-  @Type(() => Boolean)
+  @ParseOptionalBoolean()
   @IsBoolean()
   readonly typeormUseWebpack: boolean = true;
 }
