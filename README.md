@@ -6,9 +6,8 @@ A simple [NestJS](https://github.com/nestjs/nest) starter repository built using
 
 1. Clone the repo: `git clone git@github.com:nicolaspearson/nestjs.dellingr.git`
 2. Install the modern version of [Yarn](https://yarnpkg.com/getting-started/install).
-3. Switch to the latest stable version: `yarn set version stable`
-4. Install dependencies: `yarn install`
-5. Ensure that you have [Docker](https://docs.docker.com/get-docker/) installed and running.
+3. Install the dependencies: `yarn install`
+4. Ensure that you have [Docker](https://docs.docker.com/get-docker/) installed and running.
 
 ### Environment Configuration
 

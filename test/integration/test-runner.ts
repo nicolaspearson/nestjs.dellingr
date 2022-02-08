@@ -67,12 +67,12 @@ export class TestRunner {
       schema: 'public',
     } as ConnectionOptions);
     await connection.query(oneLine`
-    CREATE EXTENSION IF NOT EXISTS pgcrypto;
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+      CREATE EXTENSION IF NOT EXISTS pgcrypto;
+      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-    DROP SCHEMA IF EXISTS ${schema} CASCADE;
-    CREATE SCHEMA IF NOT EXISTS ${schema};
-  `);
+      DROP SCHEMA IF EXISTS ${schema} CASCADE;
+      CREATE SCHEMA IF NOT EXISTS ${schema};
+    `);
     await connection.close();
 
     // Create a new connection using the specified schema
@@ -136,7 +136,7 @@ export class TestRunner {
   /**
    * Closes the database connection and application.
    */
-  async close(): Promise<void> {
+  public async close(): Promise<void> {
     await this.connection.close();
     await this.application.close();
   }
@@ -150,7 +150,7 @@ export class TestRunner {
    * @param data The optional {@link LoginRequest} dto.
    * @returns A {@link JwtResponse} object.
    */
-  async getJwt(data?: LoginRequest): Promise<JwtResponse> {
+  public async getJwt(data?: LoginRequest): Promise<JwtResponse> {
     return this.memoizeCreateJwt(
       data ??
         ({
