@@ -94,7 +94,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jsonwebtoken", "npm:8.5.1"],
             ["markdownlint-cli", "npm:0.31.0"],
             ["multer", "npm:1.4.4"],
-            ["nest-typed-config", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.3.0"],
+            ["nest-typed-config", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.4.0"],
             ["nocache", "npm:3.0.1"],
             ["p-memoize", "npm:4.0.4"],
             ["pg", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.7.3"],
@@ -2672,10 +2672,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:04319ddf2d6997e00dab7a4adaa3a2e6aa59f26d9a3eea0ae003be181a001923cdaee3959ffd31fed3c4afa09cf11bed127c23540db794291bce63b0236a6faa#npm:0.0.3", {
-          "packageLocation": "./.yarn/__virtual__/@nestjs-axios-virtual-1f6aabee46/0/cache/@nestjs-axios-npm-0.0.3-34f1129592-b45fd0f137.zip/node_modules/@nestjs/axios/",
+        ["virtual:faf9dc31abae255b955c0089e8238a7163a7e4c40e325b58e17756409da724bdf96051ac30c2df1ffa32680a185294a7a99b031aa61c2102c25bb7aa086ff6e5#npm:0.0.3", {
+          "packageLocation": "./.yarn/__virtual__/@nestjs-axios-virtual-735eca711b/0/cache/@nestjs-axios-npm-0.0.3-34f1129592-b45fd0f137.zip/node_modules/@nestjs/axios/",
           "packageDependencies": [
-            ["@nestjs/axios", "virtual:04319ddf2d6997e00dab7a4adaa3a2e6aa59f26d9a3eea0ae003be181a001923cdaee3959ffd31fed3c4afa09cf11bed127c23540db794291bce63b0236a6faa#npm:0.0.3"],
+            ["@nestjs/axios", "virtual:faf9dc31abae255b955c0089e8238a7163a7e4c40e325b58e17756409da724bdf96051ac30c2df1ffa32680a185294a7a99b031aa61c2102c25bb7aa086ff6e5#npm:0.0.3"],
             ["@nestjs/common", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.2.6"],
             ["@types/nestjs__common", null],
             ["@types/reflect-metadata", null],
@@ -6103,7 +6103,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jsonwebtoken", "npm:8.5.1"],
             ["markdownlint-cli", "npm:0.31.0"],
             ["multer", "npm:1.4.4"],
-            ["nest-typed-config", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.3.0"],
+            ["nest-typed-config", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.4.0"],
             ["nocache", "npm:3.0.1"],
             ["p-memoize", "npm:4.0.4"],
             ["pg", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.7.3"],
@@ -10205,19 +10205,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["nest-typed-config", [
-        ["npm:2.3.0", {
-          "packageLocation": "./.yarn/cache/nest-typed-config-npm-2.3.0-a71c94ce72-a1e3fb468e.zip/node_modules/nest-typed-config/",
+        ["npm:2.4.0", {
+          "packageLocation": "./.yarn/cache/nest-typed-config-npm-2.4.0-6707cb441a-212c6887e7.zip/node_modules/nest-typed-config/",
           "packageDependencies": [
-            ["nest-typed-config", "npm:2.3.0"]
+            ["nest-typed-config", "npm:2.4.0"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.3.0", {
-          "packageLocation": "./.yarn/__virtual__/nest-typed-config-virtual-04319ddf2d/0/cache/nest-typed-config-npm-2.3.0-a71c94ce72-a1e3fb468e.zip/node_modules/nest-typed-config/",
+        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.4.0", {
+          "packageLocation": "./.yarn/__virtual__/nest-typed-config-virtual-faf9dc31ab/0/cache/nest-typed-config-npm-2.4.0-6707cb441a-212c6887e7.zip/node_modules/nest-typed-config/",
           "packageDependencies": [
-            ["nest-typed-config", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.3.0"],
+            ["nest-typed-config", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:2.4.0"],
             ["@iarna/toml", "npm:2.2.5"],
-            ["@nestjs/axios", "virtual:04319ddf2d6997e00dab7a4adaa3a2e6aa59f26d9a3eea0ae003be181a001923cdaee3959ffd31fed3c4afa09cf11bed127c23540db794291bce63b0236a6faa#npm:0.0.3"],
+            ["@nestjs/axios", "virtual:faf9dc31abae255b955c0089e8238a7163a7e4c40e325b58e17756409da724bdf96051ac30c2df1ffa32680a185294a7a99b031aa61c2102c25bb7aa086ff6e5#npm:0.0.3"],
             ["@nestjs/common", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.2.6"],
             ["@types/nestjs__common", null],
             ["@types/reflect-metadata", null],
