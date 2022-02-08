@@ -76,7 +76,11 @@ export class TestRunner {
     await connection.close();
 
     // Create a new connection using the specified schema
-    return createConnection({ ...connectionOptions, logging: false, schema } as ConnectionOptions);
+    return createConnection({
+      ...connectionOptions,
+      logging: false,
+      schema,
+    } as ConnectionOptions);
   }
 
   /**

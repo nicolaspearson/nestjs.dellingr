@@ -91,7 +91,7 @@ export class ConfigService {
   @IsIn([Environment.Development, Environment.Production])
   readonly nodeEnv: Environment.Development | Environment.Production = Environment.Development;
 
-  // If set to true, the environment will be seed with database fixtures, and default S3 buckets
+  // If set to true, the environment will be seeded with database fixtures, and default S3 buckets (should always be false in production!)
   @ParseOptionalBoolean()
   @IsBoolean()
   readonly seedEnvironment: boolean = false;
@@ -118,7 +118,7 @@ export class ConfigService {
   @IsNotEmpty()
   readonly typeormHost!: string;
 
-  // The path to the TypeORM migrations directory
+  // The path to the TypeORM migrations directory (used by the CLI)
   @IsString()
   readonly typeormMigrationsDir: string = 'src/db/migrations';
 

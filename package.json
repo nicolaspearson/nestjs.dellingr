@@ -36,7 +36,7 @@
     "dts:generate": "rimraf dist && nest build --webpack --webpackPath webpack-dts.config.js",
     "exec:docker-compose": "docker-compose -f docker-compose.yml",
     "exec:eslint": "eslint \"{src,test}/**/*.ts\" --cache",
-    "exec:jest": "jest --coverage --color --forceExit --runInBand",
+    "exec:jest": "jest --coverage --color --forceExit",
     "exec:prettier": "prettier  --config .prettierrc --ignore-path .prettierignore --no-editorconfig",
     "exec:script:generate-migration": "./scripts/shell/generate-migration.sh",
     "lint:eslint": "yarn exec:eslint --cache-file .eslintcache .",
@@ -53,7 +53,7 @@
     "sdk": "yarn dlx @yarnpkg/sdks vscode",
     "start:dev": "rimraf dist && yarn localstack:start && yarn db:start:recreate && nest build --webpack --webpackPath webpack-hmr.config.js --watch",
     "start": "node dist/server.js",
-    "test:integration:ci": "yarn exec:jest --config test/integration/jest.config.js",
+    "test:integration:ci": "yarn exec:jest --runInBand --config test/integration/jest.config.js",
     "test:integration": "yarn localstack:start && yarn db:start && yarn test:integration:ci",
     "test:unit": "yarn exec:jest --config test/unit/jest.config.js"
   },
