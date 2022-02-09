@@ -12,8 +12,6 @@ describe('Health Module', () => {
 
   const baseUrl = `${API_GLOBAL_PREFIX}/health`;
 
-  beforeEach(jest.clearAllMocks);
-
   beforeAll(async () => {
     runner = await TestRunner.getInstance();
   });

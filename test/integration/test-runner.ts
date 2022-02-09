@@ -51,6 +51,13 @@ export class TestRunner {
 
   constructor(readonly application: INestApplication, readonly connection: Connection) {}
 
+  /**
+   * Fetches an instance of the {@link TestRunner} class.
+   *
+   * If an instance does not exist yet, one will be created.
+   *
+   * @returns An instance of the {@link TestRunner} class
+   */
   public static async getInstance(): Promise<TestRunner> {
     if (!TestRunner.instance) {
       TestRunner.instance = await TestRunner.create();
@@ -59,12 +66,12 @@ export class TestRunner {
   }
 
   /**
-   * Creates a new test runner instance.
+   * Creates a new {@link TestRunner} instance.
    *
-   * @returns A new instance of the {@link TestRunner}
+   * @returns A new instance of the {@link TestRunner} class
    */
   private static async create(): Promise<TestRunner> {
-    // Create the default connection options
+    // Create the database connection
     const connection = await createConnection({
       ...new TypeOrmConfigService(configService).get(),
       logging: false,
