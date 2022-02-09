@@ -23,11 +23,7 @@ describe('Transaction Module', () => {
   const transaction = transactionFixtures[0] as Api.Entities.Transaction;
 
   beforeAll(async () => {
-    runner = await TestRunner.create({ schema: 'integration_transaction' });
-  });
-
-  afterAll(async () => {
-    await runner.close();
+    runner = await TestRunner.getInstance();
   });
 
   describe(`POST ${baseUrl}/transactions`, () => {

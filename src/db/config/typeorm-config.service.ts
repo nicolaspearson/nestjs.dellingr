@@ -21,16 +21,23 @@ export type MergedConnectionOptions = TypeOrmModuleOptions &
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   private readonly logger: Logger = new Logger(TypeOrmConfigService.name);
 
-  constructor(private readonly configService: ConfigService) {}
+  private readonly options: MergedConnectionOptions;
 
-  createTypeOrmOptions(): TypeOrmModuleOptions {
-    const connectionOptions = this.creatConnectionOptions();
+  constructor(private readonly configService: ConfigService) {
+    this.options = this.create();
+  }
+
+  public createTypeOrmOptions(): TypeOrmModuleOptions {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...optionsWithoutPassword } = connectionOptions;
+    const { password, ...optionsWithoutPassword } = this.options;
     this.logger.debug(oneLineTrim`
       TypeORM options: ${JSON.stringify(optionsWithoutPassword)}
     `);
-    return connectionOptions;
+    return this.options;
+  }
+
+  public get(): MergedConnectionOptions {
+    return this.options;
   }
 
   /**
@@ -38,7 +45,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
    *
    * @returns The {@link MergedConnectionOptions} connection options which TypeORM will use.
    */
-  creatConnectionOptions(): MergedConnectionOptions {
+  private create(): MergedConnectionOptions {
     // Create the default connection using the supplied config values / environment variables.
     const connectionOptions: MergedConnectionOptions = {
       type: this.configService.typeormConnection,

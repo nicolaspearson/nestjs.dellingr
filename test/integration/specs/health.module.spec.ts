@@ -15,11 +15,7 @@ describe('Health Module', () => {
   beforeEach(jest.clearAllMocks);
 
   beforeAll(async () => {
-    runner = await TestRunner.create({ schema: 'integration_health' });
-  });
-
-  afterAll(async () => {
-    await runner.close();
+    runner = await TestRunner.getInstance();
   });
 
   describe(`GET ${baseUrl}`, () => {

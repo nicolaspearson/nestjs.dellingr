@@ -19,5 +19,6 @@ module.exports = Object.assign({}, require(`../../jest.config.js`), {
   },
   coverageDirectory: '<rootDir>/coverage/integration',
   setupFiles: ['<rootDir>/test/integration/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/integration/setup-test-runner.ts'],
   testMatch: ['**/test/integration/**/*.spec.ts'],
 });

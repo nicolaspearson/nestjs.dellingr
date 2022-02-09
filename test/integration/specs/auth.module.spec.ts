@@ -15,11 +15,7 @@ describe('Auth Module', () => {
   const user = userFixtures[0] as Api.Entities.User;
 
   beforeAll(async () => {
-    runner = await TestRunner.create({ schema: 'integration_auth' });
-  });
-
-  afterAll(async () => {
-    await runner.close();
+    runner = await TestRunner.getInstance();
   });
 
   describe(`POST ${baseUrl}/login`, () => {

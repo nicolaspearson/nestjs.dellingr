@@ -17,11 +17,7 @@ describe('Wallet Module', () => {
   const wallet = walletFixtures[0] as Api.Entities.Wallet;
 
   beforeAll(async () => {
-    runner = await TestRunner.create({ schema: 'integration_wallet' });
-  });
-
-  afterAll(async () => {
-    await runner.close();
+    runner = await TestRunner.getInstance();
   });
 
   describe(`POST ${baseUrl}/wallets`, () => {
