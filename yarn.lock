@@ -2704,12 +2704,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/sinon@npm:10.0.2":
-  version: 10.0.2
-  resolution: "@types/sinon@npm:10.0.2"
+"@types/sinon@npm:10.0.10":
+  version: 10.0.10
+  resolution: "@types/sinon@npm:10.0.10"
   dependencies:
     "@sinonjs/fake-timers": ^7.1.0
-  checksum: 442e62fe1962bfaa8d80314cfc4411f5a6afd98909c18bea570c8393829e4deb0f7478e3dbd02c52da9faa8229ea82be6b8c3876c6dc82a4e948506a38a2cb1d
+  checksum: 3169f8a53adcabeb44418f6cf3340c565653044164d9deb87602747142f0ee7a1d51be9dc2d2840aa77d6358c76e90c58ba0815f358724f67241f5e71d2bc12d
   languageName: node
   linkType: hard
 
@@ -3548,17 +3548,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk-client-mock@npm:^0.5.6":
-  version: 0.5.6
-  resolution: "aws-sdk-client-mock@npm:0.5.6"
+"aws-sdk-client-mock@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "aws-sdk-client-mock@npm:0.6.0"
   dependencies:
-    "@types/sinon": 10.0.2
+    "@types/sinon": 10.0.10
     sinon: ^11.1.1
     tslib: ^2.1.0
   peerDependencies:
     "@aws-sdk/client-s3": ^3.0.0
     "@aws-sdk/types": ^3.0.0
-  checksum: 92e21e659607dcc6a91122ffcf6e53c553127eeffb14610189f9185cac9345b7de066bc917fe752d90c16ef4f0f462108fbe94db4500c0dcde193da0fe1404b6
+  checksum: e09a54cabce93a25d29186401d021aa5c504cd352d721f0b45813442e2e51c3e2464f7ef57432ba909603c340ffcc5a69b92b5f5f74801c36863360f540b7102
   languageName: node
   linkType: hard
 
@@ -4677,7 +4677,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.11.0
     "@typescript-eslint/parser": ^5.11.0
     async_hooks: ^1.0.0
-    aws-sdk-client-mock: ^0.5.6
+    aws-sdk-client-mock: ^0.6.0
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
     common-tags: ^1.8.2
