@@ -108,7 +108,7 @@
     "@types/supertest": "^2.0.11",
     "@types/uuid": "^8.3.4",
     "@types/webpack-env": "^1.16.3",
-    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/eslint-plugin": "^5.11.1-alpha",
     "@typescript-eslint/parser": "^5.12.0",
     "aws-sdk-client-mock": "^0.6.0",
     "dtsgenerator": "^3.15.0",
