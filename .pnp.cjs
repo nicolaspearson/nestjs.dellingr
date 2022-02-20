@@ -108,7 +108,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],
             ["ts-jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.1.3"],
             ["ts-loader", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.2.6"],
-            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11"],
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.12"],
             ["typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.2.43"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["uuid", "npm:8.3.2"],
@@ -6216,7 +6216,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],
             ["ts-jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.1.3"],
             ["ts-loader", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.2.6"],
-            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11"],
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.12"],
             ["typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.2.43"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["uuid", "npm:8.3.2"],
@@ -13094,17 +13094,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["typedoc", [
-        ["npm:0.22.11", {
-          "packageLocation": "./.yarn/cache/typedoc-npm-0.22.11-aa5ea7b88b-7d29f4b771.zip/node_modules/typedoc/",
+        ["npm:0.22.12", {
+          "packageLocation": "./.yarn/cache/typedoc-npm-0.22.12-4e9d45cb5c-8e04851fed.zip/node_modules/typedoc/",
           "packageDependencies": [
-            ["typedoc", "npm:0.22.11"]
+            ["typedoc", "npm:0.22.12"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11", {
-          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-a61b887e0d/0/cache/typedoc-npm-0.22.11-aa5ea7b88b-7d29f4b771.zip/node_modules/typedoc/",
+        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.12", {
+          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-d641c64c41/0/cache/typedoc-npm-0.22.12-4e9d45cb5c-8e04851fed.zip/node_modules/typedoc/",
           "packageDependencies": [
-            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.11"],
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.12"],
             ["@types/typescript", null],
             ["glob", "npm:7.2.0"],
             ["lunr", "npm:2.3.9"],
