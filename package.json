@@ -59,10 +59,10 @@
   },
   "dependencies": {
     "$": "link:./src",
-    "@aws-sdk/abort-controller": "^3.52.0",
-    "@aws-sdk/client-s3": "^3.52.0",
-    "@aws-sdk/lib-storage": "^3.52.0",
-    "@aws-sdk/node-config-provider": "^3.52.0",
+    "@aws-sdk/abort-controller": "^3.53.0",
+    "@aws-sdk/client-s3": "^3.53.1",
+    "@aws-sdk/lib-storage": "^3.53.1",
+    "@aws-sdk/node-config-provider": "^3.53.0",
     "@nestjs/common": "^8.3.1",
     "@nestjs/core": "^8.3.1",
     "@nestjs/jwt": "^8.0.0",
@@ -91,7 +91,7 @@
   },
   "devDependencies": {
     "#": "link:./test",
-    "@aws-sdk/types": "^3.52.0",
+    "@aws-sdk/types": "^3.53.0",
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
     "@nestjs/cli": "^8.2.1",
