@@ -10,7 +10,7 @@
   "packageRules": [
     {
       "commitMessageSuffix": "dev",
-      "automerge": false,
+      "automerge": true,
       "matchDepTypes": ["devDependencies"]
     }
   ],
