@@ -4,19 +4,19 @@
   "branchPrefix": "chore/renovate/",
   "commitBodyTable": true,
   "commitMessageAction": "Pin",
-  "commitMessageExtra": "{{#if isMajor}}v{{{newMajor}}}{{else}}{{#if isSingleVersion}}v{{{toVersion}}}{{else}}{{{newValue}}}{{/if}}{{/if}}",
+  "commitMessageExtra": "{{#if isMajor}}v{{{newMajor}}}{{else}}{{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}{{/if}}",
   "commitMessageTopic": "{{depName}}",
   "enabledManagers": ["dockerfile", "github-actions", "npm", "nvm"],
   "packageRules": [
     {
-      "automerge": true,
       "commitMessageSuffix": "dev",
+      "automerge": true,
       "depTypeList": ["devDependencies"]
     }
   ],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 3,
   "rangeStrategy": "bump",
-  "semanticCommits": "auto",
+  "semanticCommits": "enabled",
   "semanticCommitScope": "{{parentDir}}"
 }
