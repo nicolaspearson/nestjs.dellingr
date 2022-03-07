@@ -57,7 +57,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:16.11.26"],\
-            ["@types/pg", "npm:8.6.4"],\
+            ["@types/pg", "npm:8.6.5"],\
             ["@types/prettier", "npm:2.4.4"],\
             ["@types/supertest", "npm:2.0.11"],\
             ["@types/uuid", "npm:8.3.4"],\
@@ -3659,10 +3659,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/pg", [\
-        ["npm:8.6.4", {\
-          "packageLocation": "./.yarn/cache/@types-pg-npm-8.6.4-9ff7d54253-cebc40d6f0.zip/node_modules/@types/pg/",\
+        ["npm:8.6.5", {\
+          "packageLocation": "./.yarn/cache/@types-pg-npm-8.6.5-6ef0ab2e57-49ef858d95.zip/node_modules/@types/pg/",\
           "packageDependencies": [\
-            ["@types/pg", "npm:8.6.4"],\
+            ["@types/pg", "npm:8.6.5"],\
             ["@types/node", "npm:17.0.12"],\
             ["pg-protocol", "npm:1.5.0"],\
             ["pg-types", "npm:2.2.0"]\
@@ -6219,7 +6219,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:16.11.26"],\
-            ["@types/pg", "npm:8.6.4"],\
+            ["@types/pg", "npm:8.6.5"],\
             ["@types/prettier", "npm:2.4.4"],\
             ["@types/supertest", "npm:2.0.11"],\
             ["@types/uuid", "npm:8.3.4"],\
@@ -13138,7 +13138,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/mssql", null],\
             ["@types/mysql2", null],\
             ["@types/oracledb", null],\
-            ["@types/pg", "npm:8.6.4"],\
+            ["@types/pg", "npm:8.6.5"],\
             ["@types/pg-native", null],\
             ["@types/pg-query-stream", null],\
             ["@types/redis", null],\
