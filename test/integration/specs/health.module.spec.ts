@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { default as request } from 'supertest';
 
 import { HttpStatus } from '@nestjs/common';
@@ -46,3 +47,4 @@ describe('Health Module', () => {
     });
   });
 });
+/* eslint-enable @typescript-eslint/naming-convention */

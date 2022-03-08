@@ -9,6 +9,7 @@ import { BaseError, DEFAULT_INTERNAL_SERVER_ERROR_MESSAGE } from '$/common/error
 export class ErrorFilter implements ExceptionFilter {
   private readonly logger = new Logger(ErrorFilter.name);
 
+  /* eslint-disable @typescript-eslint/naming-convention */
   private readonly httpExceptionMapper: { [code: number]: string } = {
     400: ErrorName.BadRequest.toString(),
     401: ErrorName.Unauthorized.toString(),
@@ -19,6 +20,7 @@ export class ErrorFilter implements ExceptionFilter {
     500: ErrorName.InternalServerError.toString(),
     501: ErrorName.NotImplemented.toString(),
   };
+  /* eslint-enable @typescript-eslint/naming-convention */
 
   /**
    * Catches all thrown exceptions that occur in the application.
