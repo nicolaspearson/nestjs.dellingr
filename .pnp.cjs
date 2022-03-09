@@ -100,7 +100,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["reflect-metadata", "npm:0.1.13"],\
             ["rimraf", "npm:3.0.2"],\
             ["run-script-webpack-plugin", "npm:0.0.11"],\
-            ["rxjs", "npm:7.5.4"],\
+            ["rxjs", "npm:7.5.5"],\
             ["source-map-support", "npm:0.5.21"],\
             ["supertest", "npm:6.2.2"],\
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],\
@@ -2750,7 +2750,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/rxjs", null],\
             ["axios", "npm:0.23.0"],\
             ["reflect-metadata", "npm:0.1.13"],\
-            ["rxjs", "npm:7.5.4"]\
+            ["rxjs", "npm:7.5.5"]\
           ],\
           "packagePeers": [\
             "@nestjs/common",\
@@ -2817,7 +2817,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["iterare", "npm:1.2.1"],\
             ["reflect-metadata", "npm:0.1.13"],\
-            ["rxjs", "npm:7.5.4"],\
+            ["rxjs", "npm:7.5.5"],\
             ["tslib", "npm:2.3.1"],\
             ["uuid", "npm:8.3.2"]\
           ],\
@@ -2864,7 +2864,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["object-hash", "npm:3.0.0"],\
             ["path-to-regexp", "npm:3.2.0"],\
             ["reflect-metadata", "npm:0.1.13"],\
-            ["rxjs", "npm:7.5.4"],\
+            ["rxjs", "npm:7.5.5"],\
             ["tslib", "npm:2.3.1"],\
             ["uuid", "npm:8.3.2"]\
           ],\
@@ -3123,7 +3123,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/rxjs", null],\
             ["@types/typeorm", null],\
             ["reflect-metadata", "npm:0.1.13"],\
-            ["rxjs", "npm:7.5.4"],\
+            ["rxjs", "npm:7.5.5"],\
             ["typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.2.45"],\
             ["uuid", "npm:8.3.2"]\
           ],\
@@ -6224,7 +6224,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["reflect-metadata", "npm:0.1.13"],\
             ["rimraf", "npm:3.0.2"],\
             ["run-script-webpack-plugin", "npm:0.0.11"],\
-            ["rxjs", "npm:7.5.4"],\
+            ["rxjs", "npm:7.5.5"],\
             ["source-map-support", "npm:0.5.21"],\
             ["supertest", "npm:6.2.2"],\
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],\
@@ -10391,7 +10391,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash.set", "npm:4.3.2"],\
             ["parse-json", "npm:5.2.0"],\
             ["reflect-metadata", "npm:0.1.13"],\
-            ["rxjs", "npm:7.5.4"],\
+            ["rxjs", "npm:7.5.5"],\
             ["yaml", "npm:1.10.2"]\
           ],\
           "packagePeers": [\
@@ -11728,10 +11728,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:7.5.4", {\
-          "packageLocation": "./.yarn/cache/rxjs-npm-7.5.4-1527612cf9-6f55f835f2.zip/node_modules/rxjs/",\
+        ["npm:7.5.5", {\
+          "packageLocation": "./.yarn/cache/rxjs-npm-7.5.5-d0546b1ccb-e034f60805.zip/node_modules/rxjs/",\
           "packageDependencies": [\
-            ["rxjs", "npm:7.5.4"],\
+            ["rxjs", "npm:7.5.5"],\
             ["tslib", "npm:2.3.1"]\
           ],\
           "linkType": "HARD"\
