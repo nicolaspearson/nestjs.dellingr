@@ -71,7 +71,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\
             ["dotenv", "npm:16.0.0"],\
-            ["dtsgenerator", "npm:3.15.0"],\
+            ["dtsgenerator", "npm:3.15.1"],\
             ["eslint", "npm:8.10.0"],\
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.5.0"],\
             ["eslint-import-resolver-node", "npm:0.3.6"],\
@@ -6195,7 +6195,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\
             ["dotenv", "npm:16.0.0"],\
-            ["dtsgenerator", "npm:3.15.0"],\
+            ["dtsgenerator", "npm:3.15.1"],\
             ["eslint", "npm:8.10.0"],\
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.5.0"],\
             ["eslint-import-resolver-node", "npm:0.3.6"],\
@@ -6397,10 +6397,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["dtsgenerator", [\
-        ["npm:3.15.0", {\
-          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.15.0-9673a1c16b-df1f12ef23.zip/node_modules/dtsgenerator/",\
+        ["npm:3.15.1", {\
+          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.15.1-cb7747b27f-58e696adf9.zip/node_modules/dtsgenerator/",\
           "packageDependencies": [\
-            ["dtsgenerator", "npm:3.15.0"],\
+            ["dtsgenerator", "npm:3.15.1"],\
             ["commander", "npm:9.0.0"],\
             ["cross-fetch", "npm:3.1.5"],\
             ["debug", "virtual:e5e72b8ce4b39c9ab6a47d8d08d725dccb716bd95217c12bbc98e5d3a6b7a9c0525366241540ebcfaa8e5f425c3ad207e651c3544a3bc8b2bdf38c619d2d3045#npm:4.3.3"],\
@@ -6408,7 +6408,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["https-proxy-agent", "npm:5.0.0"],\
             ["js-yaml", "npm:4.1.0"],\
             ["tslib", "npm:2.3.1"],\
-            ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=bda367"]\
+            ["typescript", "patch:typescript@npm%3A4.6.2#~builtin<compat/typescript>::version=4.6.2&hash=bda367"]\
           ],\
           "linkType": "HARD"\
         }]\
