@@ -4705,7 +4705,7 @@ __metadata:
     class-validator: ^0.13.2
     common-tags: ^1.8.2
     dotenv: ^16.0.0
-    dtsgenerator: ^3.15.0
+    dtsgenerator: ^3.15.1
     eslint: ^8.10.0
     eslint-config-prettier: ^8.5.0
     eslint-import-resolver-node: ^0.3.6
@@ -4886,9 +4886,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dtsgenerator@npm:^3.15.0":
-  version: 3.15.0
-  resolution: "dtsgenerator@npm:3.15.0"
+"dtsgenerator@npm:^3.15.1":
+  version: 3.15.1
+  resolution: "dtsgenerator@npm:3.15.1"
   dependencies:
     commander: ^9.0.0
     cross-fetch: ^3.1.5
@@ -4897,10 +4897,10 @@ __metadata:
     https-proxy-agent: ^5.0.0
     js-yaml: ^4.1.0
     tslib: ^2.3.1
-    typescript: ^4.5.5
+    typescript: ^4.6.2
   bin:
     dtsgen: bin/dtsgen
-  checksum: df1f12ef23bd4aba8c66055d28321e82b8e1b32d10b1dfb7e4570bf034a17a9d31c685c35582a8db0611dfd54e9357ec5d1ad211cf3a7b0c40fe6c584e1125ed
+  checksum: 58e696adf9cba5eb051711524e9825af3e068b892c1fd61138ee72b2933d094f651fff49d9caa850c125b698ed8da612cc599d2cbb9f67e90000b74a4fd92349
   languageName: node
   linkType: hard
 
@@ -10661,7 +10661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.4.3, typescript@npm:^4.5.5":
+"typescript@npm:^4.4.3":
   version: 4.5.5
   resolution: "typescript@npm:4.5.5"
   bin:
@@ -10681,7 +10681,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.4.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.5.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.4.3#~builtin<compat/typescript>":
   version: 4.5.5
   resolution: "typescript@patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=bda367"
   bin:
