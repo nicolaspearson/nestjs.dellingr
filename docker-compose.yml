@@ -87,7 +87,6 @@ services:
     ports:
       - 4510-4559:4510-4559 # External service port range
       - 4566:4566 # LocalStack edge proxy
-    network_mode: bridge
     networks:
       - development
     healthcheck:

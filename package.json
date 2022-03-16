@@ -30,7 +30,7 @@
     "docker:build": "yarn exec:docker-compose build --no-cache dellingr",
     "docker:logs": "yarn exec:docker-compose logs -f dellingr",
     "docker:start": "yarn exec:docker-compose up -d --build dellingr",
-    "docker:up": "yarn exec:docker-compose up -d --renew-anon-volumes --wait",
+    "docker:up": "yarn exec:docker-compose up -d --renew-anon-volumes",
     "docs": "typedoc",
     "doctor": "yarn dlx @yarnpkg/doctor .",
     "dts:generate": "rimraf dist && nest build --webpack --webpackPath webpack-dts.config.js",

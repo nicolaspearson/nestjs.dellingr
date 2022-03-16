@@ -10,6 +10,21 @@ import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 import { TestRunner } from '#/integration/test-runner';
 import { jwtResponseMock } from '#/utils/fixtures';
 
+const registrationTest = function (
+  runner: TestRunner,
+  baseUrl: string,
+  iteration: number,
+): Promise<request.Response> {
+  const newUserRegistrationRequest: UserRegistrationRequest = {
+    email: `new-user+${iteration}@example.com` as Email,
+    password: DEFAULT_PASSWORD,
+  };
+  return request(runner.application.getHttpServer())
+    .post(`${baseUrl}/users/registration`)
+    .send(newUserRegistrationRequest)
+    .expect(HttpStatus.CREATED);
+};
+
 describe('User Module', () => {
   let runner: TestRunner;
 
@@ -73,15 +88,14 @@ describe('User Module', () => {
 
   describe(`POST ${baseUrl}/users/registration`, () => {
     test('[201] => should allow a user to register', async () => {
-      const newUserRegistrationRequest: UserRegistrationRequest = {
-        email: 'new-user@example.com' as Email,
-        password: DEFAULT_PASSWORD,
-      };
-      const res = await request(runner.application.getHttpServer())
-        .post(`${baseUrl}/users/registration`)
-        .send(newUserRegistrationRequest)
-        .expect(HttpStatus.CREATED);
-      expect(res.body).toMatchObject({});
+      const registrations = [];
+      for (let iteration = 0; iteration < 100; iteration++) {
+        registrations.push(registrationTest(runner, baseUrl, iteration));
+      }
+      const results = await Promise.all(registrations);
+      for (const res of results) {
+        expect(res.body).toMatchObject({});
+      }
     });
 
     test('[201] => should not throw an error if the user already exists', async () => {
