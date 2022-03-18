@@ -9,7 +9,7 @@
   "author": "Nicolas Pearson",
   "license": "MIT",
   "engines": {
-    "node": ">=v16.14.1",
+    "node": ">=v16.14.2",
     "npm": "please-use-yarn",
     "yarn": ">=3.2.0"
   },
