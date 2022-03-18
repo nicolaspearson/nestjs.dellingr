@@ -71,8 +71,11 @@ describe('User Module', () => {
         .get(`${baseUrl}/user`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .expect(HttpStatus.OK);
-      const databaseUser = await runner.connection.manager.findOne(User, user.uuid, {
+      const databaseUser = await runner.dataSource.manager.findOne(User, {
         relations: ['wallets', 'wallets.transactions'],
+        where: {
+          uuid: user.uuid,
+        } as any,
       });
       expect(databaseUser).toBeDefined();
       expect(res.body).toMatchObject(new UserProfileResponse(databaseUser!));

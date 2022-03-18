@@ -32,7 +32,7 @@ describe('Wallet Module', () => {
         .set('Authorization', `Bearer ${jwt.token}`)
         .send(createWalletRequest)
         .expect(HttpStatus.CREATED);
-      const databaseWallet = await runner.connection.manager.findOne(Wallet, {
+      const databaseWallet = await runner.dataSource.manager.findOne(Wallet, {
         where: {
           name: createWalletRequest.name,
         },
@@ -74,8 +74,9 @@ describe('Wallet Module', () => {
         .get(`${baseUrl}/wallet/${wallet.uuid}`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .expect(HttpStatus.OK);
-      const databaseWallet = await runner.connection.manager.findOne(Wallet, wallet.uuid, {
+      const databaseWallet = await runner.dataSource.manager.findOne(Wallet, {
         relations: ['transactions'],
+        where: { uuid: wallet.uuid } as any,
       });
       expect(databaseWallet).toBeDefined();
       expect(res.body).toMatchObject(new WalletResponse(databaseWallet!));

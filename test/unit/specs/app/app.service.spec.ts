@@ -1,4 +1,4 @@
-import { Connection } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 import { Test, TestingModule } from '@nestjs/testing';
 
@@ -36,12 +36,12 @@ describe('App Service', () => {
   });
 
   describe('seed', () => {
-    const connection = {} as unknown as Connection;
+    const dataSource = {} as unknown as DataSource;
 
     test('should seed the environment correctly', async () => {
-      await service.seed(connection);
+      await service.seed(dataSource);
       expect(awsS3SeederMockService.seed).toHaveBeenCalledTimes(1);
-      expect(databaseSeederMockService.seed).toHaveBeenCalledWith(connection);
+      expect(databaseSeederMockService.seed).toHaveBeenCalledWith(dataSource);
     });
   });
 });

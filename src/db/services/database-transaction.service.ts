@@ -1,6 +1,6 @@
 import { AsyncLocalStorage } from 'async_hooks';
 import { Observable, lastValueFrom } from 'rxjs';
-import { Connection, EntityManager } from 'typeorm';
+import { DataSource, EntityManager } from 'typeorm';
 
 import { CallHandler, Injectable, Logger } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
@@ -16,7 +16,7 @@ export class DatabaseTransactionService implements Api.Services.DatabaseTransact
 
   constructor(
     @InjectConnection()
-    private readonly connection: Connection,
+    private readonly dataSource: DataSource,
   ) {
     this.logger.debug('Database transaction service created!');
   }
@@ -24,13 +24,13 @@ export class DatabaseTransactionService implements Api.Services.DatabaseTransact
   getManager(): EntityManager {
     const store = this.storage.getStore();
     if (!store?.manager) {
-      return this.connection.manager;
+      return this.dataSource.manager;
     }
     return store.manager;
   }
 
   execute<T>(next: (manager: EntityManager) => Promise<T>): Promise<T> {
-    return this.connection.transaction(async (manager) => {
+    return this.dataSource.transaction(async (manager) => {
       return this.storage.run({ manager }, () => {
         return next(manager);
       });
@@ -38,7 +38,7 @@ export class DatabaseTransactionService implements Api.Services.DatabaseTransact
   }
 
   executeHandler<T>(next: CallHandler<Observable<T>>): Promise<Observable<T>> {
-    return this.connection.transaction((manager) => {
+    return this.dataSource.transaction((manager) => {
       return this.storage.run({ manager }, () => {
         return lastValueFrom(next.handle());
       });

@@ -1,4 +1,4 @@
-import { Connection, ObjectType } from 'typeorm';
+import { DataSource, ObjectType } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 import { Injectable, Logger } from '@nestjs/common';
@@ -25,11 +25,11 @@ export class DatabaseSeederService {
     this.logger.debug('Database seeder service created!');
   }
 
-  async seed(connection: Connection): Promise<void> {
+  async seed(dataSource: DataSource): Promise<void> {
     this.logger.debug('Seeding database');
     try {
       // Avoid seeding multiple times when webpack HMR is used
-      const user = await connection.manager
+      const user = await dataSource.manager
         .createQueryBuilder(User, 'user')
         .where({ uuid: userFixtures[0].uuid })
         .getOne();
@@ -43,7 +43,7 @@ export class DatabaseSeederService {
         ];
         for (const fixture of fixtures) {
           this.logger.debug(`Seeding "${fixture.entity.name}" entity fixures`);
-          await connection
+          await dataSource
             .createQueryBuilder()
             .insert()
             .into(fixture.entity)

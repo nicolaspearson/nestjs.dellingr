@@ -46,7 +46,7 @@ describe('Auth Service', () => {
     });
 
     test("throws when the user's credentials are invalid", async () => {
-      userMockRepo.findByValidCredentials.mockResolvedValueOnce(undefined);
+      userMockRepo.findByValidCredentials.mockResolvedValueOnce(null);
       const { email, password } = loginRequestMock;
       await expect(service.authenticate(email, password)).rejects.toThrowError(NotFoundError);
       expect(userMockRepo.findByValidCredentials).toHaveBeenCalledWith({ email, password });

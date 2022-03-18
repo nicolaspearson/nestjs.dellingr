@@ -40,7 +40,7 @@ describe('Transaction Module', () => {
         .set('Authorization', `Bearer ${jwt.token}`)
         .send(createTransactionRequest)
         .expect(HttpStatus.CREATED);
-      const databaseTransaction = await runner.connection.manager.findOne(Transaction, {
+      const databaseTransaction = await runner.dataSource.manager.findOne(Transaction, {
         where: {
           reference: createTransactionRequest.reference,
         },
@@ -62,7 +62,7 @@ describe('Transaction Module', () => {
         .set('Authorization', `Bearer ${jwt.token}`)
         .send(createTransactionRequest)
         .expect(HttpStatus.CREATED);
-      const databaseTransaction = await runner.connection.manager.findOne(Transaction, {
+      const databaseTransaction = await runner.dataSource.manager.findOne(Transaction, {
         where: {
           reference: createTransactionRequest.reference,
         },
@@ -85,7 +85,7 @@ describe('Transaction Module', () => {
         .set('Authorization', `Bearer ${jwt.token}`)
         .send(createTransactionRequest);
       expect(res.status).toEqual(HttpStatus.BAD_REQUEST);
-      const databaseTransaction = await runner.connection.manager.findOne(Transaction, {
+      const databaseTransaction = await runner.dataSource.manager.findOne(Transaction, {
         where: {
           reference: createTransactionRequest.reference,
         },
@@ -122,10 +122,9 @@ describe('Transaction Module', () => {
         .get(`${baseUrl}/transaction/${transaction.uuid}`)
         .set('Authorization', `Bearer ${jwt.token}`)
         .expect(HttpStatus.OK);
-      const databaseTransaction = await runner.connection.manager.findOne(
-        Transaction,
-        transaction.uuid,
-      );
+      const databaseTransaction = await runner.dataSource.manager.findOne(Transaction, {
+        where: { uuid: transaction.uuid } as any,
+      });
       expect(databaseTransaction).toBeDefined();
       expect(res.body).toMatchObject(new TransactionResponse(databaseTransaction!));
     });

@@ -1,4 +1,4 @@
-import { Connection } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 import { Injectable, Logger } from '@nestjs/common';
 
@@ -16,10 +16,10 @@ export class AppService {
     this.logger.debug('App service created!');
   }
 
-  async seed(connection: Connection): Promise<void> {
+  async seed(dataSource: DataSource): Promise<void> {
     this.logger.debug('Seeding environment...');
     // Seed the database with fixtures.
-    await this.databaseSeederService.seed(connection);
+    await this.databaseSeederService.seed(dataSource);
     // Seed AWS S3 with the default bucket.
     await this.awsS3SeederService.seed();
   }

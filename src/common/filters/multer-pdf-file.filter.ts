@@ -26,7 +26,7 @@ export type MulterFile = {
 export function multerPdfFileFilter(
   _: Request,
   file: MulterFile,
-  callback: (error: Error | null, acceptFile: boolean) => void,
+  callback: (error: Nullable<Error>, acceptFile: boolean) => void,
 ): void {
   file.mimetype === 'application/pdf'
     ? callback(null, true)

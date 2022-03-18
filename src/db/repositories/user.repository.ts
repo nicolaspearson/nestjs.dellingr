@@ -54,7 +54,7 @@ export class UserRepository implements Api.Repositories.User {
 
   findByUserUuid(
     data: Api.Repositories.Requests.FindByUserUuid,
-  ): Promise<Api.Entities.User | undefined> {
+  ): Promise<Nullable<Api.Entities.User>> {
     return this.query({ withWallets: true, withWalletTransactions: true })
       .where({ uuid: data.userUuid })
       .getOne();
@@ -72,7 +72,7 @@ export class UserRepository implements Api.Repositories.User {
 
   findByValidCredentials(
     data: Api.Repositories.Requests.FindByValidCredentials,
-  ): Promise<Api.Entities.User | undefined> {
+  ): Promise<Nullable<Api.Entities.User>> {
     // We use the pgcrypto extension to compare the hashed password to the plain text version
     return this.query()
       .where({ email: data.email })

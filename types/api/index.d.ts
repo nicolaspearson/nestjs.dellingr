@@ -4,7 +4,9 @@ type PublicOnly<T> = Pick<T, keyof T>;
 
 type Email = Opaque<'Email', string>;
 type JwtToken = Opaque<'JwtToken', string>;
-type Uuid = Opaque<'Uuid', string>;
+
+// declare const validUuid: unique symbol;
+type Uuid = Opaque<'Email', string>;
 
 declare namespace Api {
   type Request = import('express').Request;
@@ -148,7 +150,7 @@ declare namespace Api {
       create(data: Api.Repositories.Requests.CreateTransaction): Promise<Api.Entities.Transaction>;
       findByTransactionAndUserUuid(
         data: Api.Repositories.Requests.FindByTransactionAndUserUuid,
-      ): Promise<Api.Entities.Transaction | undefined>;
+      ): Promise<Nullable<Api.Entities.Transaction>>;
       findByTransactionAndUserUuidOrFail(
         data: Api.Repositories.Requests.FindByTransactionAndUserUuid,
       ): Promise<Api.Entities.Transaction>;
@@ -161,20 +163,20 @@ declare namespace Api {
       ): Promise<Api.Repositories.Responses.DeleteResult>;
       findByUserUuid(
         data: Api.Repositories.Requests.FindByUserUuid,
-      ): Promise<Api.Entities.User | undefined>;
+      ): Promise<Nullable<Api.Entities.User>>;
       findByUserUuidOrFail(
         data: Api.Repositories.Requests.FindByUserUuid,
       ): Promise<Api.Entities.User>;
       findByValidCredentials(
         data: Api.Repositories.Requests.FindByValidCredentials,
-      ): Promise<Api.Entities.User | undefined>;
+      ): Promise<Nullable<Api.Entities.User>>;
     }
 
     interface Wallet {
       create(data: Api.Repositories.Requests.CreateWallet): Promise<Api.Entities.Wallet>;
       findByWalletAndUserUuid(
         data: Api.Repositories.Requests.FindByWalletAndUserUuid,
-      ): Promise<Api.Entities.Wallet | undefined>;
+      ): Promise<Nullable<Api.Entities.Wallet>>;
       findByWalletAndUserUuidOrFail(
         data: Api.Repositories.Requests.FindByWalletAndUserUuid,
       ): Promise<Api.Entities.Wallet>;

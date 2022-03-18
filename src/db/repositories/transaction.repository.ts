@@ -50,7 +50,7 @@ export class TransactionRepository implements Api.Repositories.Transaction {
 
   findByTransactionAndUserUuid(
     data: Api.Repositories.Requests.FindByTransactionAndUserUuid,
-  ): Promise<Api.Entities.Transaction | undefined> {
+  ): Promise<Nullable<Api.Entities.Transaction>> {
     return this.query({
       withWallet: true,
       withWalletUser: true,

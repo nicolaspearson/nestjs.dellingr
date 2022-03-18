@@ -2,7 +2,7 @@ import { oneLine } from 'common-tags';
 import helmet from 'helmet';
 import pMemoize from 'p-memoize';
 import { default as request } from 'supertest';
-import { Connection, createConnection } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -26,15 +26,15 @@ import { configService, typedConfigModule } from '#/utils/config';
  * A new instance should be created for every integration
  * test suite. Data is isolated between instances by
  * using a unique database schema for each one.
- * 
+ *
  * The TestRunner instance returns the created NestJS
- * Application, and a connection to the database via
+ * Application, and a dataSource to the database via
  * TypeORM.
- * 
+ *
  * @example
- * 
+ *
  * let runner: TestRunner;
- * 
+ *
  * beforeAll(async () => {
  *   runner = await TestRunner.getInstance();
  * });
@@ -42,14 +42,14 @@ import { configService, typedConfigModule } from '#/utils/config';
  * afterAll(async () => {
  *   await runner.close();
  * });
- * 
+ *
  */
 export class TestRunner {
   private memoizeCreateJwt = pMemoize(this.createJwt);
 
   private static instance: TestRunner;
 
-  constructor(readonly application: INestApplication, readonly connection: Connection) {}
+  constructor(readonly application: INestApplication, readonly dataSource: DataSource) {}
 
   /**
    * Fetches an instance of the {@link TestRunner} class.
@@ -71,19 +71,21 @@ export class TestRunner {
    * @returns A new instance of the {@link TestRunner} class
    */
   private static async create(): Promise<TestRunner> {
-    // Create the database connection
-    const connection = await createConnection({
-      ...new TypeOrmConfigService(configService).get(),
+    // Create the database dataSource
+    const dataSourceOptions = new TypeOrmConfigService(configService).get() as DataSourceOptions;
+    const dataSource = new DataSource({
+      ...dataSourceOptions,
       logging: false,
     });
-    await connection.query(oneLine`
+    await dataSource.initialize();
+    await dataSource.query(oneLine`
       CREATE EXTENSION IF NOT EXISTS pgcrypto;
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
     `);
 
     // Create the testing module
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, typedConfigModule, TypeOrmModule.forRoot(connection.options)],
+      imports: [AppModule, typedConfigModule, TypeOrmModule.forRoot(dataSource.options)],
     }).compile();
 
     // Create and configure the application
@@ -100,17 +102,17 @@ export class TestRunner {
     application.useLogger(false);
 
     // Seed and initialize the application
-    await application.get<AppService>(AppService).seed(connection);
+    await application.get<AppService>(AppService).seed(dataSource);
     await application.init();
 
-    return new TestRunner(application, connection);
+    return new TestRunner(application, dataSource);
   }
 
   /**
-   * Closes the database connection and application.
+   * Closes the database dataSource and application.
    */
   public async close(): Promise<void> {
-    await this.connection.close();
+    await this.dataSource.destroy();
     await this.application.close();
   }
 

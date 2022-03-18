@@ -47,7 +47,7 @@ describe('Document Module', () => {
         .field('name', uploadDocumentRequest.name)
         .field('transactionId', uploadDocumentRequest.transactionId)
         .expect(HttpStatus.CREATED);
-      const databaseDocument = await runner.connection.manager.findOne(Document, {
+      const databaseDocument = await runner.dataSource.manager.findOne(Document, {
         relations: ['transaction'],
         where: {
           name: uploadDocumentRequest.name,
@@ -103,13 +103,13 @@ describe('Document Module', () => {
         .field('name', uploadDocumentRequest.name)
         .field('transactionId', uploadDocumentRequest.transactionId)
         .expect(HttpStatus.FAILED_DEPENDENCY);
-      const databaseDocument = await runner.connection.manager.findOne(Document, {
+      const databaseDocument = await runner.dataSource.manager.findOne(Document, {
         relations: ['transaction'],
         where: {
           name: uploadDocumentRequest.name,
         },
       });
-      expect(databaseDocument).not.toBeDefined();
+      expect(databaseDocument).toBeNull();
     });
   });
 });

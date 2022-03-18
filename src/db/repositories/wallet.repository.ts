@@ -45,7 +45,7 @@ export class WalletRepository implements Api.Repositories.Wallet {
 
   findByWalletAndUserUuid(
     data: Api.Repositories.Requests.FindByWalletAndUserUuid,
-  ): Promise<Api.Entities.Wallet | undefined> {
+  ): Promise<Nullable<Api.Entities.Wallet>> {
     return this.query({ withTransactions: true })
       .where({
         uuid: data.walletUuid,
