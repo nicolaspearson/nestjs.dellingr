@@ -1,12 +1,12 @@
 type Nullable<T> = T | null;
-type Opaque<K, T> = T & { type: K };
 type PublicOnly<T> = Pick<T, keyof T>;
 
-type Email = Opaque<'Email', string>;
-type JwtToken = Opaque<'JwtToken', string>;
+declare const type: unique symbol;
+type Opaque<K, T> = K & { readonly [type]: T };
 
-// declare const validUuid: unique symbol;
-type Uuid = Opaque<'Email', string>;
+type Email = Opaque<string, 'Email'>;
+type JwtToken = Opaque<string, 'JwtToken'>;
+type Uuid = Opaque<string, 'Uuid'>;
 
 declare namespace Api {
   type Request = import('express').Request;
