@@ -4764,7 +4764,7 @@ __metadata:
     markdownlint-cli: ^0.31.1
     multer: ^1.4.4
     nest-typed-config: ^2.4.0
-    nocache: ^3.0.2
+    nocache: ^3.0.3
     p-memoize: ^4.0.4
     pg: ^8.7.3
     prettier: ^2.6.0
@@ -8354,10 +8354,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nocache@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "nocache@npm:3.0.2"
-  checksum: 21037afb86ecd81d89e280689be601a3269fe5bfc1ae52d1b9dee4510c475db23d0bd0a2c1802825833bc77a0782dd486b9e39eb47f4b5dce12097d8a5af381e
+"nocache@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "nocache@npm:3.0.3"
+  checksum: b7b6f7b693a7ad0c52aa9319e4b663e905f1ba83453685f24039ce03650beb686281b939967acba883009219b1a12dfe121a8d20a433b24db1b875ed08426d57
   languageName: node
   linkType: hard
 
