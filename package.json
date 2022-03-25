@@ -67,7 +67,7 @@
     "@nestjs/core": "^8.4.2",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/platform-express": "^8.4.2",
-    "@nestjs/swagger": "^5.2.0",
+    "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.0.3",
     "@types/validator": "^13.7.1",
     "async_hooks": "^1.0.0",
