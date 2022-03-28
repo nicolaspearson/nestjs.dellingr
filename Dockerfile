@@ -5,11 +5,12 @@
 # image:    dellingr
 # tag:      <GITHUB_SHA>
 # how-to:   docker build -t dellingr:<GITHUB_SHA> --build-arg VERSION=<GITHUB_SHA> .
-# requires: node:16.13-alpine3.12
+# requires: node:16.14-alpine3.14
 # ------------------------------------------------------
 
 # BUILDER - Artifacts build for production
-FROM node:16.13-alpine3.12 AS builder
+FROM node:16.14-alpine3.14 AS builder
+
 
 WORKDIR /usr/src/app
 RUN chown node:node .
@@ -21,7 +22,7 @@ RUN yarn install --immutable
 RUN yarn build
 
 # RUNNER - Production image
-FROM node:16.13-alpine3.12
+FROM node:16.14-alpine3.14
 
 # Set the NODE_ENV to production
 ENV NODE_ENV=production
