@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { Ewl, LogLevel, httpContextMiddleware, requestIdHandler } from 'ewl';
 import helmet from 'helmet';
 import { default as nocache } from 'nocache';
 import 'reflect-metadata';
@@ -25,6 +26,16 @@ declare const module: {
 };
 
 async function bootstrap(): Promise<void> {
+  const ewl = new Ewl({
+    attachRequestId: true,
+    environment: process.env.ENVIRONMENT || 'development',
+    label: 'app',
+    logLevel: (process.env.LOG_LEVEL as LogLevel) || 'error',
+    useLogstashFormat: false,
+    version: process.env.VERSION || 'local',
+  });
+
+  // Set the default NestJS logger, allowing EWL to be the proxy.
   const app = await NestFactory.create(MainModule, {
     // Cross-origin resource sharing (CORS) is a mechanism that
     // allows resources to be requested from another domain
@@ -33,9 +44,39 @@ async function bootstrap(): Promise<void> {
       methods: 'DELETE,HEAD,GET,OPTIONS,PATCH,POST,PUT',
       origin: [/localhost$/],
     },
+    logger: ewl,
   });
+
+  // Use express-http-context for context injection (request id)
+  app.use(httpContextMiddleware);
+  app.use(requestIdHandler);
+
+  // Use express-winston for logging request information
+  app.use(
+    ewl.createHandler({
+      bodyBlacklist: ['accessToken', 'password', 'refreshToken'],
+      colorize: true,
+      expressFormat: false,
+      headerBlacklist: ['cookie', 'token'],
+      ignoreRoute: () => false,
+      meta: true,
+      metaField: 'express',
+      msg: 'HTTP {{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}',
+      requestWhitelist: [
+        'headers',
+        'method',
+        'httpVersion',
+        'originalUrl',
+        'query',
+        'params',
+        'url',
+      ],
+      responseWhitelist: ['headers', 'statusCode'],
+      statusLevels: true,
+    }),
+  );
+
   const configService = app.get(ConfigService);
-  app.useLogger([configService.logLevel]);
 
   // Helmet can help protect the app from some well-known web
   // vulnerabilities by setting the appropriate HTTP headers
