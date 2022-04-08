@@ -261,9 +261,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:^3.58.0":
-  version: 3.58.0
-  resolution: "@aws-sdk/client-s3@npm:3.58.0"
+"@aws-sdk/client-s3@npm:^3.66.0":
+  version: 3.66.0
+  resolution: "@aws-sdk/client-s3@npm:3.66.0"
   dependencies:
     "@aws-crypto/sha1-browser": 2.0.0
     "@aws-crypto/sha256-browser": 2.0.0
@@ -288,7 +288,7 @@ __metadata:
     "@aws-sdk/middleware-location-constraint": 3.55.0
     "@aws-sdk/middleware-logger": 3.55.0
     "@aws-sdk/middleware-retry": 3.58.0
-    "@aws-sdk/middleware-sdk-s3": 3.58.0
+    "@aws-sdk/middleware-sdk-s3": 3.66.0
     "@aws-sdk/middleware-serde": 3.55.0
     "@aws-sdk/middleware-signing": 3.58.0
     "@aws-sdk/middleware-ssec": 3.55.0
@@ -297,6 +297,7 @@ __metadata:
     "@aws-sdk/node-config-provider": 3.58.0
     "@aws-sdk/node-http-handler": 3.58.0
     "@aws-sdk/protocol-http": 3.58.0
+    "@aws-sdk/signature-v4-multi-region": 3.66.0
     "@aws-sdk/smithy-client": 3.55.0
     "@aws-sdk/types": 3.55.0
     "@aws-sdk/url-parser": 3.55.0
@@ -317,7 +318,7 @@ __metadata:
     entities: 2.2.0
     fast-xml-parser: 3.19.0
     tslib: ^2.3.1
-  checksum: c3f5aeb53e24b12fff1dcd2cd20c0ca075477afec358aad5e553ec42b9c960964845e0517c093dafd7d6fab900e8012c7f94eac09b23855f53bf7eeb3dc7e1be
+  checksum: 3ff4b17b75dd93b900261505294a9a4266a81f06e9e14957d5b569897020d4f9eec56e32a506f8df58300a97cb91167fdb21e2d5f70df937358e9135c2b6671a
   languageName: node
   linkType: hard
 
@@ -631,9 +632,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/lib-storage@npm:^3.58.0":
-  version: 3.58.0
-  resolution: "@aws-sdk/lib-storage@npm:3.58.0"
+"@aws-sdk/lib-storage@npm:^3.66.0":
+  version: 3.66.0
+  resolution: "@aws-sdk/lib-storage@npm:3.66.0"
   dependencies:
     buffer: 5.6.0
     events: 3.3.0
@@ -642,7 +643,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/abort-controller": ^3.0.0
     "@aws-sdk/client-s3": ^3.0.0
-  checksum: 55f1ca1d1290a487c6877fa0eb954e6803c9d27aba94cfb2724dd6a10377bac91628382f397e959f9b8a7ab934fe7b489b222dcd3bb4cf24cc0e98829e79b7f5
+  checksum: b5269e6f1191c0412c2828977dd3f7d29d7d2b813de70319edc29b96761a18bc8f98ba61c2e332453e9b966d39f893deda80349982f1642888e061ee5ea5fe15
   languageName: node
   linkType: hard
 
@@ -764,21 +765,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/middleware-sdk-s3@npm:3.58.0":
-  version: 3.58.0
-  resolution: "@aws-sdk/middleware-sdk-s3@npm:3.58.0"
+"@aws-sdk/middleware-sdk-s3@npm:3.66.0":
+  version: 3.66.0
+  resolution: "@aws-sdk/middleware-sdk-s3@npm:3.66.0"
   dependencies:
     "@aws-sdk/protocol-http": 3.58.0
-    "@aws-sdk/signature-v4": 3.58.0
     "@aws-sdk/types": 3.55.0
     "@aws-sdk/util-arn-parser": 3.55.0
     tslib: ^2.3.1
-  peerDependencies:
-    "@aws-sdk/signature-v4-crt": ^3.54.1
-  peerDependenciesMeta:
-    "@aws-sdk/signature-v4-crt":
-      optional: true
-  checksum: a387fbb022efb1fc1e0827da7cdcbcacd09335985d0387663e73b41f3034ad16fa2906593b8560660a91867ec227e37ca516d10e023c657c444276a66dfc1889
+  checksum: 8e40dcf053ce422a01399251229641b7cacaf786b566f0e24bac00e801fcb2a730fbfec33eb91bba030d0143b915933e04e0da17acf2acf425046b37769a1b89
   languageName: node
   linkType: hard
 
@@ -928,6 +923,24 @@ __metadata:
   dependencies:
     tslib: ^2.3.1
   checksum: 70e361740788211a9b21f70d882f398759432523d0cfd032c7d086421d618264ac26e97ed755e65ffd53c671f8e69568ced31d9d5c3395b029f5bfe99f7ed9f8
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/signature-v4-multi-region@npm:3.66.0":
+  version: 3.66.0
+  resolution: "@aws-sdk/signature-v4-multi-region@npm:3.66.0"
+  dependencies:
+    "@aws-sdk/protocol-http": 3.58.0
+    "@aws-sdk/signature-v4": 3.58.0
+    "@aws-sdk/types": 3.55.0
+    "@aws-sdk/util-arn-parser": 3.55.0
+    tslib: ^2.3.1
+  peerDependencies:
+    "@aws-sdk/signature-v4-crt": ^3.66.0
+  peerDependenciesMeta:
+    "@aws-sdk/signature-v4-crt":
+      optional: true
+  checksum: d6b86ad27c2ef4a3e1f67cef8c87b24ed0e0d472797f9055ce19173edbcde205e0a8e8e2aef2566f594351571836349fc1ec6d2318c0e97c75d8c5e130d58151
   languageName: node
   linkType: hard
 
@@ -4806,8 +4819,8 @@ __metadata:
     "#": "link:./test"
     $: "link:./src"
     "@aws-sdk/abort-controller": ^3.55.0
-    "@aws-sdk/client-s3": ^3.58.0
-    "@aws-sdk/lib-storage": ^3.58.0
+    "@aws-sdk/client-s3": ^3.66.0
+    "@aws-sdk/lib-storage": ^3.66.0
     "@aws-sdk/node-config-provider": ^3.58.0
     "@aws-sdk/types": ^3.55.0
     "@commitlint/cli": ^16.2.3
