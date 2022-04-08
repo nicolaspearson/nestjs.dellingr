@@ -2293,9 +2293,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/typeorm@npm:^8.0.3":
-  version: 8.0.3
-  resolution: "@nestjs/typeorm@npm:8.0.3"
+"@nestjs/typeorm@npm:next":
+  version: 9.0.0-next.1
+  resolution: "@nestjs/typeorm@npm:9.0.0-next.1"
   dependencies:
     uuid: 8.3.2
   peerDependencies:
@@ -2303,8 +2303,8 @@ __metadata:
     "@nestjs/core": ^8.0.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.2.0
-    typeorm: ^0.2.34
-  checksum: 01b1fc97f18010867805f8718a677d71bb4a757fd1e1625fd0303a356a0a32a0e7da3a7458e0a71766756f894aac8b24eaa74b7c4a625370328338c8ca3f4661
+    typeorm: ^0.3.0
+  checksum: 07d01cb0bd84030352152d8ddded081e698f9f5d872c75fecb2f1631750ba621ccbafb5b26f26049853989390db15f1b90d98a96aa0252ec588c64cf536b923e
   languageName: node
   linkType: hard
 
@@ -4798,7 +4798,7 @@ __metadata:
     "@nestjs/schematics": ^8.0.10
     "@nestjs/swagger": ^5.2.1
     "@nestjs/testing": ^8.4.4
-    "@nestjs/typeorm": ^8.0.3
+    "@nestjs/typeorm": next
     "@types/common-tags": ^1.8.1
     "@types/express": ^4.17.13
     "@types/jest": 27.4.1

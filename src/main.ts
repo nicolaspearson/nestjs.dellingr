@@ -3,7 +3,6 @@ import { Ewl, LogLevel, httpContextMiddleware, requestIdHandler } from 'ewl';
 import helmet from 'helmet';
 import { default as nocache } from 'nocache';
 import 'reflect-metadata';
-import { getConnection } from 'typeorm';
 
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
@@ -109,7 +108,7 @@ async function bootstrap(): Promise<void> {
 
   // Initiate the seeding process
   if (configService.seedEnvironment) {
-    await app.get<AppService>(AppService).seed(getConnection());
+    await app.get<AppService>(AppService).seed();
   }
 
   // Serve the application

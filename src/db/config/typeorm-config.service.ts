@@ -59,7 +59,6 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       dropSchema: this.configService.typeormDropSchema,
       entities: [this.configService.typeormEntities],
       migrations: [this.configService.typeormMigrations],
-      keepConnectionAlive: false,
     };
 
     // This option should always be set to false in the integration tests.
@@ -81,7 +80,6 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
         }
       : {
           ...dataSourceOptions,
-          keepConnectionAlive: true, // This allows HMR to work seamlessly
           logging: ['error', 'schema', 'warn'],
         };
   }

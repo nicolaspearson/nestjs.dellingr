@@ -1,4 +1,5 @@
 import { default as request } from 'supertest';
+import { FindOptionsWhere } from 'typeorm';
 
 import { HttpStatus } from '@nestjs/common';
 
@@ -123,7 +124,7 @@ describe('Transaction Module', () => {
         .set('Authorization', `Bearer ${jwt.token}`)
         .expect(HttpStatus.OK);
       const databaseTransaction = await runner.dataSource.manager.findOne(Transaction, {
-        where: { uuid: transaction.uuid } as any,
+        where: { uuid: transaction.uuid } as unknown as FindOptionsWhere<Transaction>,
       });
       expect(databaseTransaction).toBeDefined();
       expect(res.body).toMatchObject(new TransactionResponse(databaseTransaction!));

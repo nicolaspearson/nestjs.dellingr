@@ -1,4 +1,5 @@
 import { default as request } from 'supertest';
+import { FindOptionsWhere } from 'typeorm';
 
 import { HttpStatus } from '@nestjs/common';
 
@@ -75,7 +76,7 @@ describe('User Module', () => {
         relations: ['wallets', 'wallets.transactions'],
         where: {
           uuid: user.uuid,
-        } as any,
+        } as unknown as FindOptionsWhere<User>,
       });
       expect(databaseUser).toBeDefined();
       expect(res.body).toMatchObject(new UserProfileResponse(databaseUser!));

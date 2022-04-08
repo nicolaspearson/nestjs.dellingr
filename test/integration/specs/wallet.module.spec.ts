@@ -1,4 +1,5 @@
 import { default as request } from 'supertest';
+import { FindOptionsWhere } from 'typeorm';
 
 import { HttpStatus } from '@nestjs/common';
 
@@ -76,7 +77,7 @@ describe('Wallet Module', () => {
         .expect(HttpStatus.OK);
       const databaseWallet = await runner.dataSource.manager.findOne(Wallet, {
         relations: ['transactions'],
-        where: { uuid: wallet.uuid } as any,
+        where: { uuid: wallet.uuid } as unknown as FindOptionsWhere<Wallet>,
       });
       expect(databaseWallet).toBeDefined();
       expect(res.body).toMatchObject(new WalletResponse(databaseWallet!));

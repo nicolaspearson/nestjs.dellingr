@@ -12,6 +12,8 @@ describe('App Service', () => {
   let module: TestingModule;
   let service: AppService;
 
+  const dataSource = {} as unknown as DataSource;
+
   beforeAll(async () => {
     module = await Test.createTestingModule({
       providers: [
@@ -22,6 +24,10 @@ describe('App Service', () => {
         {
           provide: DatabaseSeederService,
           useValue: databaseSeederMockService,
+        },
+        {
+          provide: DataSource,
+          useValue: dataSource,
         },
         AppService,
       ],
@@ -36,10 +42,8 @@ describe('App Service', () => {
   });
 
   describe('seed', () => {
-    const dataSource = {} as unknown as DataSource;
-
     test('should seed the environment correctly', async () => {
-      await service.seed(dataSource);
+      await service.seed();
       expect(awsS3SeederMockService.seed).toHaveBeenCalledTimes(1);
       expect(databaseSeederMockService.seed).toHaveBeenCalledWith(dataSource);
     });

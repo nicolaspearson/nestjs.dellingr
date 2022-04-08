@@ -102,7 +102,7 @@ export class TestRunner {
     application.useLogger(false);
 
     // Seed and initialize the application
-    await application.get<AppService>(AppService).seed(dataSource);
+    await application.get<AppService>(AppService).seed();
     await application.init();
 
     return new TestRunner(application, dataSource);
