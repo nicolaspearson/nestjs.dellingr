@@ -5,7 +5,10 @@ set -u
 schema=$1;
 # Migration file name
 filename=$2;
+# Number of seconds to wait for the database to start
+wait_time=10
 
+# Set environment variable defaults
 export TYPEORM_CONNECTION="${TYPEORM_CONNECTION:-postgres}"
 export TYPEORM_DATABASE="${TYPEORM_DATABASE:-dellingr}"
 export TYPEORM_HOST="${TYPEORM_HOST:-localhost}"
@@ -21,13 +24,13 @@ export TYPEORM_MIGRATIONS_RUN="${TYPEORM_MIGRATIONS_RUN:-true}"
 export TYPEORM_DROP_SCHEMA="${TYPEORM_DROP_SCHEMA:-true}"
 export TYPEORM_USE_WEBPACK="${TYPEORM_USE_WEBPACK:-false}"
 
-wait_time=10
-
 echo "Starting database"
 yarn db:start
 echo "Waiting $wait_time seconds for the database to start"
 sleep $wait_time
-echo "yarn db:migration:run $TYPEORM_ENTITIES"
-yarn db:migration:run
-echo "yarn db:migration:generate $filename"
-yarn db:migration:generate "$filename"
+echo "yarn db:migration:run -d scripts/js/datasource.mjs"
+yarn db:migration:run -d scripts/js/datasource.mjs
+echo "yarn db:migration:generate -d scripts/js/datasource.mjs $filename"
+yarn db:migration:generate -d scripts/js/datasource.mjs "$TYPEORM_MIGRATIONS_DIR/$filename"
+echo "yarn lint:fix"
+yarn lint:fix

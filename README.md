@@ -106,9 +106,11 @@ To generate the missing migrations TypeORM applies existing migrations, and uses
 the database schema and the TypeORM entities to create a migration file.
 
 ```bash
-# Replace <migration-name> with a descriptive name for the generated migration
+# Replace <migration-name> with a descriptive name for the generated migration.
 yarn db:migration:generate:missing <migration-name>
 ```
+
+_Note: The `migration-name` should be lower kebab case, e.g. rename-document-table-url-column_
 
 ## Structure
 

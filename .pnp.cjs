@@ -13198,6 +13198,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
+        ["npm:10.7.0", {\
+          "packageLocation": "./.yarn/cache/ts-node-npm-10.7.0-ef39b1d45e-2a379e43f7.zip/node_modules/ts-node/",\
+          "packageDependencies": [\
+            ["ts-node", "npm:10.7.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
         ["virtual:9d756d4515ec98fcc79bf141cb3c1bf1902fb06a4306a65a87e26abebb94e8e3e046d6f8bf51dd7fc381f86322098d13581b8ce1b75a63f6e17defe386675056#npm:10.4.0", {\
           "packageLocation": "./.yarn/__virtual__/ts-node-virtual-65eefbcdc4/0/cache/ts-node-npm-10.4.0-04cb6e2279-3933ac0a93.zip/node_modules/ts-node/",\
           "packageDependencies": [\
@@ -13220,6 +13227,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["diff", "npm:4.0.2"],\
             ["make-error", "npm:1.3.6"],\
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=bda367"],\
+            ["yn", "npm:3.1.1"]\
+          ],\
+          "packagePeers": [\
+            "@swc/core",\
+            "@swc/wasm",\
+            "@types/node",\
+            "@types/swc__core",\
+            "@types/swc__wasm",\
+            "@types/typescript",\
+            "typescript"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:e40dc8170dfe5fb9834e2768d37d02aa06675b188e6c37d1d533f87b71035e00793396cb40c1a25157c431dbe1e4b84e74a8cc6304ef805e43089782c3fc8d30#npm:10.7.0", {\
+          "packageLocation": "./.yarn/__virtual__/ts-node-virtual-a711ad9b2e/0/cache/ts-node-npm-10.7.0-ef39b1d45e-2a379e43f7.zip/node_modules/ts-node/",\
+          "packageDependencies": [\
+            ["ts-node", "virtual:e40dc8170dfe5fb9834e2768d37d02aa06675b188e6c37d1d533f87b71035e00793396cb40c1a25157c431dbe1e4b84e74a8cc6304ef805e43089782c3fc8d30#npm:10.7.0"],\
+            ["@cspotcode/source-map-support", "npm:0.7.0"],\
+            ["@swc/core", null],\
+            ["@swc/wasm", null],\
+            ["@tsconfig/node10", "npm:1.0.8"],\
+            ["@tsconfig/node12", "npm:1.0.9"],\
+            ["@tsconfig/node14", "npm:1.0.1"],\
+            ["@tsconfig/node16", "npm:1.0.2"],\
+            ["@types/node", null],\
+            ["@types/swc__core", null],\
+            ["@types/swc__wasm", null],\
+            ["@types/typescript", null],\
+            ["acorn", "npm:8.7.0"],\
+            ["acorn-walk", "npm:8.2.0"],\
+            ["arg", "npm:4.1.3"],\
+            ["create-require", "npm:1.1.1"],\
+            ["diff", "npm:4.0.2"],\
+            ["make-error", "npm:1.3.6"],\
+            ["typescript", null],\
+            ["v8-compile-cache-lib", "npm:3.0.0"],\
             ["yn", "npm:3.1.1"]\
           ],\
           "packagePeers": [\
@@ -13499,7 +13542,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sha.js", "npm:2.4.11"],\
             ["sql.js", null],\
             ["sqlite3", null],\
-            ["ts-node", null],\
+            ["ts-node", "virtual:e40dc8170dfe5fb9834e2768d37d02aa06675b188e6c37d1d533f87b71035e00793396cb40c1a25157c431dbe1e4b84e74a8cc6304ef805e43089782c3fc8d30#npm:10.7.0"],\
             ["tslib", "npm:2.3.1"],\
             ["typeorm-aurora-data-api-driver", null],\
             ["uuid", "npm:8.3.2"],\
@@ -13537,7 +13580,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "redis",\
             "sql.js",\
             "sqlite3",\
-            "ts-node",\
             "typeorm-aurora-data-api-driver"\
           ],\
           "linkType": "HARD"\
@@ -13675,6 +13717,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/v8-compile-cache-npm-2.3.0-961375f150-adb0a271ea.zip/node_modules/v8-compile-cache/",\
           "packageDependencies": [\
             ["v8-compile-cache", "npm:2.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["v8-compile-cache-lib", [\
+        ["npm:3.0.0", {\
+          "packageLocation": "./.yarn/cache/v8-compile-cache-lib-npm-3.0.0-82045dda32-674e312bbc.zip/node_modules/v8-compile-cache-lib/",\
+          "packageDependencies": [\
+            ["v8-compile-cache-lib", "npm:3.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
