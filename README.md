@@ -214,7 +214,8 @@ src
 │   ├── migrations
 │   │   ├── 1643121437236-initial.ts
 │   │   ├── 1643790225628-update-constraints.ts
-│   │   └── 1643802227558-add-document-table.ts
+│   │   ├── 1643802227558-add-document-table.ts
+│   │   └── 1649410854961-rename-document-table-url-column.ts
 │   ├── repositories
 │   │   ├── document.repository.ts
 │   │   ├── index.ts
@@ -319,7 +320,7 @@ An HTTP request may be wrapped in a transaction in one of the following two ways
    ```
 
    - Pros:
-     - Datbase transactions can be exectuted on individual service functions.
+     - Database transactions can be executed on individual service functions.
    - Cons:
      - It is not ideal to have business logic in the presentation layer, although in this case the
        business logic is tightly coupled to the transport protocol, i.e. throwing an HTTP exception
@@ -347,6 +348,7 @@ test
 ├── integration
 │   ├── jest.config.js
 │   ├── no-output.logger.ts
+│   ├── setup-test-runner.ts
 │   ├── setup.ts
 │   ├── specs
 │   │   ├── auth.module.spec.ts
