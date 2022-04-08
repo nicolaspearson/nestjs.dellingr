@@ -3,7 +3,7 @@ import { Observable, lastValueFrom } from 'rxjs';
 import { DataSource, EntityManager } from 'typeorm';
 
 import { CallHandler, Injectable, Logger } from '@nestjs/common';
-import { InjectConnection } from '@nestjs/typeorm';
+import { InjectDataSource } from '@nestjs/typeorm';
 
 interface Store {
   manager: EntityManager;
@@ -15,7 +15,7 @@ export class DatabaseTransactionService implements Api.Services.DatabaseTransact
   private readonly storage = new AsyncLocalStorage<Store>();
 
   constructor(
-    @InjectConnection()
+    @InjectDataSource()
     private readonly dataSource: DataSource,
   ) {
     this.logger.debug('Database transaction service created!');
