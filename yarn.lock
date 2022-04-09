@@ -4711,7 +4711,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-promise: ^6.0.0
     eslint-plugin-unicorn: ^42.0.0
-    ewl: ^0.1.4
+    ewl: ^0.1.5
     express: ^4.17.3
     helmet: ^5.0.2
     husky: ^7.0.4
@@ -5503,9 +5503,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ewl@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "ewl@npm:0.1.4"
+"ewl@npm:^0.1.5":
+  version: 0.1.5
+  resolution: "ewl@npm:0.1.5"
   dependencies:
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
@@ -5518,9 +5518,9 @@ __metadata:
     triple-beam: ^1.3.0
     uuid: ^8.3.2
     validator: ^13.7.0
-    winston: ^3.6.0
+    winston: ^3.7.2
     winston-transport: ^4.5.0
-  checksum: 81178af08d5df4cade829cd2a28553667682c0f5b72e2a6a3aa659ee52d2e5c0919e2e9c94dd8a157d8419ba09030f71cb0c03b0ee8dbf9720bee4dad6e54d09
+  checksum: 13dc4f687d7e2fc110187a880c33744e731c2da877f9723461b31429eb99d9e461e61792b4231246f6fbac2633e51d7419fb0315b33415f214e5ee2c42c5336d
   languageName: node
   linkType: hard
 
@@ -11277,7 +11277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston@npm:^3.6.0":
+"winston@npm:^3.7.2":
   version: 3.7.2
   resolution: "winston@npm:3.7.2"
   dependencies:
