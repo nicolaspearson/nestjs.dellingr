@@ -1,8 +1,9 @@
 name: markdown
-'on':
+
+on:
   push:
     branches:
-      - master
+      - main
     paths:
       - '**.md'
       - .github/workflows/markdown.yaml
@@ -13,14 +14,17 @@ name: markdown
   repository_dispatch:
     types:
       - markdown
+
 jobs:
   lint:
     if: "!(github.event.client_payload.scope == 'job' && !contains(github.event.client_payload.jobs, 'lint'))"
     name: lint
     runs-on: ubuntu-latest
-    container: tmknom/markdownlint:latest
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Lint markdown files
-        run: ' find . -type f \( -name "*.md" \) -print | while IFS="" read -r file; do /usr/bin/markdownlint -c markdownlint.yml "$file"; done; '
+        uses: nosborn/github-action-markdown-cli@v3.0.1
+        with:
+          files: .
+          config_file: markdownlint.yml
