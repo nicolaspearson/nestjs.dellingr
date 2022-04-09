@@ -11,7 +11,6 @@
 # BUILDER - Artifacts build for production
 FROM node:16.14-alpine3.14 AS builder
 
-
 WORKDIR /usr/src/app
 RUN chown node:node .
 USER node
