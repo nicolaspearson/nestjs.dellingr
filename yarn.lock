@@ -4711,7 +4711,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-promise: ^6.0.0
     eslint-plugin-unicorn: ^42.0.0
-    ewl: ^0.1.5
+    ewl: ^0.1.4
     express: ^4.17.3
     helmet: ^5.0.2
     husky: ^7.0.4
@@ -5503,7 +5503,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ewl@npm:^0.1.5":
+"ewl@npm:^0.1.4":
   version: 0.1.5
   resolution: "ewl@npm:0.1.5"
   dependencies:
