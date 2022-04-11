@@ -2680,10 +2680,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2.1.5, @types/prettier@npm:^2.4.4":
+"@types/prettier@npm:^2.1.5":
   version: 2.4.4
   resolution: "@types/prettier@npm:2.4.4"
   checksum: 2c2cc57efd49c7d8907415a72f96c84a6dd8696dd3bf8aa4ca3a667427bebf71cbfbc912673624bdfc935d272d1c008c639cf155f6449315990a4dc110f0d216
+  languageName: node
+  linkType: hard
+
+"@types/prettier@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "@types/prettier@npm:2.6.0"
+  checksum: 946f1f82ce6f31664e023a5d65931c31b7d677b454f528f67dce851d72e7fcfe713076f4251b16c3646eecf1545f5f5b909b4962966341ed9ddf5b80113b3674
   languageName: node
   linkType: hard
 
@@ -4656,7 +4663,7 @@ __metadata:
     "@types/multer": ^1.4.7
     "@types/node": ^16.11.26
     "@types/pg": ^8.6.5
-    "@types/prettier": ^2.4.4
+    "@types/prettier": ^2.6.0
     "@types/supertest": ^2.0.12
     "@types/uuid": ^8.3.4
     "@types/validator": ^13.7.2
@@ -4705,7 +4712,7 @@ __metadata:
     swagger-ui-express: ^4.3.0
     ts-jest: ^27.1.4
     ts-loader: ^9.2.8
-    typedoc: ^0.22.14
+    typedoc: ^0.22.15
     typeorm: ^0.3.5
     typescript: ^4.6.3
     uuid: ^8.3.2
@@ -10622,9 +10629,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.22.14":
-  version: 0.22.14
-  resolution: "typedoc@npm:0.22.14"
+"typedoc@npm:^0.22.15":
+  version: 0.22.15
+  resolution: "typedoc@npm:0.22.15"
   dependencies:
     glob: ^7.2.0
     lunr: ^2.3.9
@@ -10635,7 +10642,7 @@ __metadata:
     typescript: 4.0.x || 4.1.x || 4.2.x || 4.3.x || 4.4.x || 4.5.x || 4.6.x
   bin:
     typedoc: bin/typedoc
-  checksum: 7375eeb4a5873408b0b4cda4ebbf52bbded4afa444b9caeee3a572f39f491e0563fed40322c83ac24c027a340691cde0cf9e24fdbed2c151a3977fdcbee13ff4
+  checksum: 3f5f1cb9288bf811f42df59750c7062a026a23257b38dfe227515a30007a28e3d8139187949fcd19300fd6b2ef76bcdc4cf54549100bff3e000e61bb19958fb2
   languageName: node
   linkType: hard
 

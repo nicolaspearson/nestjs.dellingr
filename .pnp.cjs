@@ -58,7 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:16.11.26"],\
             ["@types/pg", "npm:8.6.5"],\
-            ["@types/prettier", "npm:2.4.4"],\
+            ["@types/prettier", "npm:2.6.0"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["@types/validator", "npm:13.7.2"],\
@@ -107,7 +107,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],\
             ["ts-jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.1.4"],\
             ["ts-loader", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.2.8"],\
-            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.14"],\
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.15"],\
             ["typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.3.5"],\
             ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"],\
             ["uuid", "npm:8.3.2"],\
@@ -3622,6 +3622,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prettier", "npm:2.4.4"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:2.6.0", {\
+          "packageLocation": "./.yarn/cache/@types-prettier-npm-2.6.0-68db36c8c1-946f1f82ce.zip/node_modules/@types/prettier/",\
+          "packageDependencies": [\
+            ["@types/prettier", "npm:2.6.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@types/qs", [\
@@ -6109,7 +6116,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:16.11.26"],\
             ["@types/pg", "npm:8.6.5"],\
-            ["@types/prettier", "npm:2.4.4"],\
+            ["@types/prettier", "npm:2.6.0"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["@types/validator", "npm:13.7.2"],\
@@ -6158,7 +6165,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],\
             ["ts-jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.1.4"],\
             ["ts-loader", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.2.8"],\
-            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.14"],\
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.15"],\
             ["typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.3.5"],\
             ["typescript", "patch:typescript@npm%3A4.6.3#~builtin<compat/typescript>::version=4.6.3&hash=bda367"],\
             ["uuid", "npm:8.3.2"],\
@@ -6927,7 +6934,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.0.0"],\
             ["@types/eslint", null],\
             ["@types/eslint-config-prettier", null],\
-            ["@types/prettier", "npm:2.4.4"],\
+            ["@types/prettier", "npm:2.6.0"],\
             ["eslint", "npm:8.13.0"],\
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.5.0"],\
             ["prettier", "npm:2.6.2"],\
@@ -13129,17 +13136,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["typedoc", [\
-        ["npm:0.22.14", {\
-          "packageLocation": "./.yarn/cache/typedoc-npm-0.22.14-147e38f105-7375eeb4a5.zip/node_modules/typedoc/",\
+        ["npm:0.22.15", {\
+          "packageLocation": "./.yarn/cache/typedoc-npm-0.22.15-9a9a433051-3f5f1cb928.zip/node_modules/typedoc/",\
           "packageDependencies": [\
-            ["typedoc", "npm:0.22.14"]\
+            ["typedoc", "npm:0.22.15"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.14", {\
-          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-be612b2433/0/cache/typedoc-npm-0.22.14-147e38f105-7375eeb4a5.zip/node_modules/typedoc/",\
+        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.15", {\
+          "packageLocation": "./.yarn/__virtual__/typedoc-virtual-110c1e68bd/0/cache/typedoc-npm-0.22.15-9a9a433051-3f5f1cb928.zip/node_modules/typedoc/",\
           "packageDependencies": [\
-            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.14"],\
+            ["typedoc", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.22.15"],\
             ["@types/typescript", null],\
             ["glob", "npm:7.2.0"],\
             ["lunr", "npm:2.3.9"],\
