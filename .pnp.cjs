@@ -84,7 +84,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.0.0"],\
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
-            ["ewl", "npm:0.2.2"],\
+            ["ewl", "npm:0.2.3"],\
             ["express", "npm:4.17.3"],\
             ["helmet", "npm:5.0.2"],\
             ["husky", "npm:7.0.4"],\
@@ -6142,7 +6142,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.0.0"],\
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
-            ["ewl", "npm:0.2.2"],\
+            ["ewl", "npm:0.2.3"],\
             ["express", "npm:4.17.3"],\
             ["helmet", "npm:5.0.2"],\
             ["husky", "npm:7.0.4"],\
@@ -7168,14 +7168,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["ewl", [\
-        ["npm:0.2.2", {\
-          "packageLocation": "./.yarn/cache/ewl-npm-0.2.2-416a5b1774-e5cdc75470.zip/node_modules/ewl/",\
+        ["npm:0.2.3", {\
+          "packageLocation": "./.yarn/cache/ewl-npm-0.2.3-7355868b05-8942f9a5de.zip/node_modules/ewl/",\
           "packageDependencies": [\
-            ["ewl", "npm:0.2.2"],\
+            ["ewl", "npm:0.2.3"],\
             ["class-transformer", "npm:0.5.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["express", "npm:4.17.3"],\
-            ["express-winston", "virtual:416a5b1774e969941275987b734aa1b2f0be44a2975c98c5ff53dc9c2d514b94c926800315557c1f1e8f7f0371d93ed3158f97e7cf9070a4399bdae23a4b3c74#npm:4.2.0"],\
+            ["express-winston", "virtual:7355868b0566bc24e23ddce60ef2a2cb91e0b0d2c485aa57c21ee7b06a2ceed5efa59ba7e0fe1acc2f6dc2aa726b108cae2cd9574e8cf029556687437c816828#npm:4.2.0"],\
             ["logform", "npm:2.4.0"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["safe-stable-stringify", "npm:2.3.1"],\
@@ -7291,10 +7291,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:416a5b1774e969941275987b734aa1b2f0be44a2975c98c5ff53dc9c2d514b94c926800315557c1f1e8f7f0371d93ed3158f97e7cf9070a4399bdae23a4b3c74#npm:4.2.0", {\
-          "packageLocation": "./.yarn/__virtual__/express-winston-virtual-438393a9ab/0/cache/express-winston-npm-4.2.0-e4cfb26486-029529107f.zip/node_modules/express-winston/",\
+        ["virtual:7355868b0566bc24e23ddce60ef2a2cb91e0b0d2c485aa57c21ee7b06a2ceed5efa59ba7e0fe1acc2f6dc2aa726b108cae2cd9574e8cf029556687437c816828#npm:4.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/express-winston-virtual-b4d5c11b62/0/cache/express-winston-npm-4.2.0-e4cfb26486-029529107f.zip/node_modules/express-winston/",\
           "packageDependencies": [\
-            ["express-winston", "virtual:416a5b1774e969941275987b734aa1b2f0be44a2975c98c5ff53dc9c2d514b94c926800315557c1f1e8f7f0371d93ed3158f97e7cf9070a4399bdae23a4b3c74#npm:4.2.0"],\
+            ["express-winston", "virtual:7355868b0566bc24e23ddce60ef2a2cb91e0b0d2c485aa57c21ee7b06a2ceed5efa59ba7e0fe1acc2f6dc2aa726b108cae2cd9574e8cf029556687437c816828#npm:4.2.0"],\
             ["@types/winston", null],\
             ["chalk", "npm:2.4.2"],\
             ["lodash", "npm:4.17.21"],\

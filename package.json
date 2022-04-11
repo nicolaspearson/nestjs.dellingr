@@ -75,7 +75,7 @@
     "class-validator": "^0.13.2",
     "common-tags": "^1.8.2",
     "dotenv": "^16.0.0",
-    "ewl": "^0.2.2",
+    "ewl": "^0.2.3",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
