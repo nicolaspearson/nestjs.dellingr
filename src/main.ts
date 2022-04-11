@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { Ewl, LogLevel, httpContextMiddleware, requestIdHandler } from 'ewl';
+import { Ewl, LogLevel } from 'ewl';
 import helmet from 'helmet';
 import { default as nocache } from 'nocache';
 import 'reflect-metadata';
@@ -26,7 +26,6 @@ declare const module: {
 
 async function bootstrap(): Promise<void> {
   const ewl = new Ewl({
-    attachRequestId: true,
     environment: process.env.ENVIRONMENT || 'development',
     label: 'app',
     logLevel: (process.env.LOG_LEVEL as LogLevel) || 'error',
@@ -46,9 +45,8 @@ async function bootstrap(): Promise<void> {
     logger: ewl,
   });
 
-  // Use express-http-context for context injection (request id)
-  app.use(httpContextMiddleware);
-  app.use(requestIdHandler);
+  // Use the context middleware for request id injection
+  app.use(ewl.contextMiddleware);
 
   // Use express-winston for logging request information
   app.use(

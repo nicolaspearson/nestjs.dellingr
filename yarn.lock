@@ -2469,15 +2469,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cls-hooked@npm:^4.2.1":
-  version: 4.3.3
-  resolution: "@types/cls-hooked@npm:4.3.3"
-  dependencies:
-    "@types/node": "*"
-  checksum: 281e7ac237aa0259b73d3f0159dc981b1fa9a040d83aa4248dadeb13c74e663e01b787a6f81223a8d9c386c96d1c0bb2f1e6443cbff740e826d0ebcf6d81a7bd
-  languageName: node
-  linkType: hard
-
 "@types/common-tags@npm:^1.8.1":
   version: 1.8.1
   resolution: "@types/common-tags@npm:1.8.1"
@@ -2539,7 +2530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^4.16.0, @types/express@npm:^4.17.13":
+"@types/express@npm:*, @types/express@npm:^4.17.13":
   version: 4.17.13
   resolution: "@types/express@npm:4.17.13"
   dependencies:
@@ -3470,15 +3461,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"async-hook-jl@npm:^1.7.6":
-  version: 1.7.6
-  resolution: "async-hook-jl@npm:1.7.6"
-  dependencies:
-    stack-chain: ^1.3.7
-  checksum: f84421c83ad5bc4e54a3a6ad7be4fb911840a17c01e5ee3f8e4e9cd077a42c7bc206dbc6b36d52eaca5fa37f16a15f83d63135976cf3e17d5bdc2824f6002705
-  languageName: node
-  linkType: hard
-
 "async@npm:^3.2.3":
   version: 3.2.3
   resolution: "async@npm:3.2.3"
@@ -4117,17 +4099,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cls-hooked@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "cls-hooked@npm:4.2.2"
-  dependencies:
-    async-hook-jl: ^1.7.6
-    emitter-listener: ^1.0.1
-    semver: ^5.4.1
-  checksum: 3a8a4e30b03a81ec275eb9c079c49d4497013e7fa36259e86c9b6aff7990e85eebbc97552ed8a035c19403f0b825000df9bada5c1c0ac7cf1b2506c3a903df60
-  languageName: node
-  linkType: hard
-
 "co@npm:^4.6.0":
   version: 4.6.0
   resolution: "co@npm:4.6.0"
@@ -4711,7 +4682,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-promise: ^6.0.0
     eslint-plugin-unicorn: ^42.0.0
-    ewl: ^0.1.5
+    ewl: ^0.2.2
     express: ^4.17.3
     helmet: ^5.0.2
     husky: ^7.0.4
@@ -4925,15 +4896,6 @@ __metadata:
   version: 1.4.106
   resolution: "electron-to-chromium@npm:1.4.106"
   checksum: 79eae050a775f6f674a24d4541d54cdb1c35e956d6e112ee9ec8d752fa9bcd94739e5f86c58d8e04f85199cf720146aee301b2e397932ad5c8d8e8cffe65a2ee
-  languageName: node
-  linkType: hard
-
-"emitter-listener@npm:^1.0.1":
-  version: 1.1.2
-  resolution: "emitter-listener@npm:1.1.2"
-  dependencies:
-    shimmer: ^1.2.0
-  checksum: 05166bad42a27e51a765ebac3b7d26ac111564fc2d36443cd819f95ef88ea1b9ba6f2895becbcea36f8009890a2a8cb7c36eb9e776d4978e370bd33cb0a181e8
   languageName: node
   linkType: hard
 
@@ -5503,14 +5465,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ewl@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "ewl@npm:0.1.5"
+"ewl@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "ewl@npm:0.2.2"
   dependencies:
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
     express: ^4.17.3
-    express-http-context: ^1.2.4
     express-winston: ^4.2.0
     logform: ^2.4.0
     reflect-metadata: ^0.1.13
@@ -5520,7 +5481,7 @@ __metadata:
     validator: ^13.7.0
     winston: ^3.7.2
     winston-transport: ^4.5.0
-  checksum: 13dc4f687d7e2fc110187a880c33744e731c2da877f9723461b31429eb99d9e461e61792b4231246f6fbac2633e51d7419fb0315b33415f214e5ee2c42c5336d
+  checksum: e5cdc7547071600a13e92f7969c5e9953a548a9d68eb0b4b64bd8c9bfdd654330fc51bdc898f62d4f6959b645176933c5b7d653a265da0ad39964b151ab7b860
   languageName: node
   linkType: hard
 
@@ -5574,17 +5535,6 @@ __metadata:
     jest-matcher-utils: ^27.5.1
     jest-message-util: ^27.5.1
   checksum: b2c66beb52de53ef1872165aace40224e722bca3c2274c54cfa74b6d617d55cf0ccdbf36783ccd64dbea501b280098ed33fd0b207d4f15bc03cd3c7a24364a6a
-  languageName: node
-  linkType: hard
-
-"express-http-context@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "express-http-context@npm:1.2.4"
-  dependencies:
-    "@types/cls-hooked": ^4.2.1
-    "@types/express": ^4.16.0
-    cls-hooked: ^4.2.2
-  checksum: 959fb2897dee2171734d4cb45225150c2192014a62c868c515794e6c78c0a7439dcc5dae8fcaea000a97ad0e206322b729c9587e3ecbdbe0e930218b74886f59
   languageName: node
   linkType: hard
 
@@ -9615,7 +9565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.6.0":
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.6.0":
   version: 5.7.1
   resolution: "semver@npm:5.7.1"
   bin:
@@ -9769,13 +9719,6 @@ __metadata:
     vscode-oniguruma: ^1.6.1
     vscode-textmate: 5.2.0
   checksum: fb746f3cb3de7e545e3b10a6cb658d3938f840e4ccc9a3c90ceb7e69a8f89dbb432171faac1e9f02a03f103684dad88ee5e54b5c4964fa6b579fca6e8e26424d
-  languageName: node
-  linkType: hard
-
-"shimmer@npm:^1.2.0":
-  version: 1.2.1
-  resolution: "shimmer@npm:1.2.1"
-  checksum: aa0d6252ad1c682a4fdfda69e541be987f7a265ac7b00b1208e5e48cc68dc55f293955346ea4c71a169b7324b82c70f8400b3d3d2d60b2a7519f0a3522423250
   languageName: node
   linkType: hard
 
@@ -9963,13 +9906,6 @@ __metadata:
   dependencies:
     minipass: ^3.1.1
   checksum: bf33174232d07cc64e77ab1c51b55d28352273380c503d35642a19627e88a2c5f160039bb0a28608a353485075dda084dbf0390c7070f9f284559eb71d01b84b
-  languageName: node
-  linkType: hard
-
-"stack-chain@npm:^1.3.7":
-  version: 1.3.7
-  resolution: "stack-chain@npm:1.3.7"
-  checksum: c2428e794a60e1f8e3b66898657d10b81ea18eefd0842d65f18bad6f53fbca597075079bbda8df5b409aebb82d2055bf9c4a8d439df18c554756ead197fc2260
   languageName: node
   linkType: hard
 

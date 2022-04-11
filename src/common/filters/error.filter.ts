@@ -31,6 +31,7 @@ export class ErrorFilter implements ExceptionFilter {
    * @returns The {@link Api.Error} that was created.
    */
   catch(exception: Record<string, unknown>, host: ArgumentsHost): Api.Error {
+    console.log(exception);
     const context = host.switchToHttp();
     const response: Response = context.getResponse();
 
