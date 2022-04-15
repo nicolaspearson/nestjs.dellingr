@@ -62,7 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["@types/validator", "npm:13.7.2"],\
-            ["@types/webpack-env", "npm:1.16.3"],\
+            ["@types/webpack-env", "npm:1.16.4"],\
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.19.0"],\
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.19.0"],\
             ["async_hooks", "npm:1.0.0"],\
@@ -3719,10 +3719,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/webpack-env", [\
-        ["npm:1.16.3", {\
-          "packageLocation": "./.yarn/cache/@types-webpack-env-npm-1.16.3-0fd64e1f17-faefa7c0a7.zip/node_modules/@types/webpack-env/",\
+        ["npm:1.16.4", {\
+          "packageLocation": "./.yarn/cache/@types-webpack-env-npm-1.16.4-d2d28938bb-9755423836.zip/node_modules/@types/webpack-env/",\
           "packageDependencies": [\
-            ["@types/webpack-env", "npm:1.16.3"]\
+            ["@types/webpack-env", "npm:1.16.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6198,7 +6198,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["@types/validator", "npm:13.7.2"],\
-            ["@types/webpack-env", "npm:1.16.3"],\
+            ["@types/webpack-env", "npm:1.16.4"],\
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.19.0"],\
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.19.0"],\
             ["async_hooks", "npm:1.0.0"],\
