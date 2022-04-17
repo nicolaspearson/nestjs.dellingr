@@ -3,6 +3,7 @@
 .yarn/**
 .vscode/**
 coverage/**
+cue.mod/**
 dist/**
 docs/**
 

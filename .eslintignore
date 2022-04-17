@@ -1,6 +1,7 @@
 .vscode/**
 .yarn/**
 coverage/**
+cue.mod/**
 dist/**
 docs/**
 .eslintrc.js
