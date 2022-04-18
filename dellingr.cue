@@ -6,7 +6,6 @@ import (
 	"universe.dagger.io/alpine"
 	"universe.dagger.io/bash"
 	"universe.dagger.io/docker"
-	"universe.dagger.io/docker/cli"
 )
 
 dagger.#Plan & {
@@ -28,7 +27,6 @@ dagger.#Plan & {
 			}
 			"./dist": write: contents: actions.build.contents.output
 		}
-		network: "unix:///var/run/docker.sock": connect: dagger.#Socket
 	}
 
 	actions: {
@@ -37,8 +35,8 @@ dagger.#Plan & {
 				alpine.#Build & {
 					packages: {
 						bash: {}
-						yarn: {}
 						git: {}
+						yarn: {}
 					}
 				},
 				docker.#Copy & {
@@ -48,7 +46,7 @@ dagger.#Plan & {
 				bash.#Run & {
 					workdir: "/usr/src/app"
 					script: contents: #"""
-						yarn install
+						yarn install --immutable
 						"""#
 				},
 			]
@@ -88,41 +86,6 @@ dagger.#Plan & {
 			script: contents: #"""
 				yarn test:unit
 				"""#
-		}
-
-		testIntegration: {
-			db: docker.#Build & {
-				steps: [
-					docker.#Pull & {
-						source: "postgres:14-alpine"
-					},
-					docker.#Run & {
-						_config: core.#ImageConfig & {
-							healthcheck: core.#HealthCheck & {
-								interval: 10
-								retries:  5
-								test: ["pg_isready"]
-								timeout: 5
-							}
-						}
-						env: {
-							"POSTGRES_DB":       "dellingr"
-							"POSTGRES_PORT":     "5432"
-							"POSTGRES_PASSWORD": "masterkey"
-							"POSTGRES_USER":     "admin"
-						}
-					},
-				]
-			}
-
-			run: cli.#Run & {
-				input: db.output
-				host:  client.network."unix:///var/run/docker.sock".connect
-				command: {
-					name: "test:integration"
-					args: ["yarn", "test:integration:ci"]
-				}
-			}
 		}
 	}
 }
