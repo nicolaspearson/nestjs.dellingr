@@ -36,7 +36,7 @@ jobs:
         with:
           install-only: true
       - name: Update Dagger
-        run: project update
+        run: dagger project update
       - name: Build package
         run: dagger do build
       - name: Lint package
