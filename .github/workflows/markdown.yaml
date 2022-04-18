@@ -28,4 +28,4 @@ jobs:
         with:
           config_file: markdownlint.yml
           files: .
-          ignore_files: cue.mod/*
+          ignore_files: ./cue.mod/**/*
