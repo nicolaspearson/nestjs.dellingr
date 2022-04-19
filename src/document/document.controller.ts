@@ -1,5 +1,3 @@
-import { Express } from 'express';
-
 import {
   Body,
   Controller,
@@ -80,7 +78,7 @@ export class DocumentController {
   async upload(
     @Req() req: Api.AuthenticatedRequest,
     @Body() dto: UploadDocumentRequest,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Api.ThirdParty.MulterFile,
   ): Promise<void> {
     return this.documentService.upload(req.userUuid, dto, file.buffer);
   }

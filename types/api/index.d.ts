@@ -197,4 +197,9 @@ declare namespace Api {
       executeHandler<T>(next: CallHandler<Observable<T>>): Promise<Observable<T>>;
     }
   }
+
+  namespace ThirdParty {
+    type Express = import('express').Express;
+    export type MulterFile = Express.Multer.File;
+  }
 }

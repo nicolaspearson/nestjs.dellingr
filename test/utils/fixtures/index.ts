@@ -159,7 +159,7 @@ export const multerFileBufferStringMock = 'Test buffer!';
 
 export const multerFileMock = {
   buffer: Buffer.from(multerFileBufferStringMock),
-} as Express.Multer.File;
+} as Api.ThirdParty.MulterFile;
 
 // Request
 export const requestMock = {
