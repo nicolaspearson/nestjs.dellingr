@@ -61,9 +61,9 @@
   "dependencies": {
     "$": "link:./src",
     "@aws-sdk/abort-controller": "^3.55.0",
-    "@aws-sdk/client-s3": "^3.74.0",
-    "@aws-sdk/lib-storage": "^3.74.0",
-    "@aws-sdk/node-config-provider": "^3.58.0",
+    "@aws-sdk/client-s3": "^3.75.0",
+    "@aws-sdk/lib-storage": "^3.75.0",
+    "@aws-sdk/node-config-provider": "^3.75.0",
     "@nestjs/common": "^8.4.4",
     "@nestjs/core": "^8.4.4",
     "@nestjs/jwt": "^8.0.0",
