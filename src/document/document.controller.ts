@@ -36,7 +36,7 @@ export class DocumentController {
   }
 
   @Post('documents')
-  @HttpCode(HttpStatus.CREATED)
+  @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(JwtAuthGuard)
   @ApiOperation({
     summary: 'Allows a user to upload a new document and link it to a transaction.',
@@ -45,9 +45,8 @@ export class DocumentController {
   @ApiTags(TAG)
   @ApiBearerAuth()
   @ApiResponse({
-    status: HttpStatus.CREATED,
+    status: HttpStatus.NO_CONTENT,
     description: 'Document successfully uploaded.',
-    type: UploadDocumentRequest,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,

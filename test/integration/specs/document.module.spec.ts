@@ -33,7 +33,7 @@ describe('Document Module', () => {
       configService.awsS3BucketName = 'dellingr';
     });
 
-    test('[201] => should allow a user to upload a new document', async () => {
+    test('[204] => should allow a user to upload a new document', async () => {
       const jwt = await runner.getJwt();
       expect(jwt.token).toBeDefined();
       const uploadDocumentRequest: UploadDocumentRequest = {
@@ -46,7 +46,7 @@ describe('Document Module', () => {
         .attach('file', filePath)
         .field('name', uploadDocumentRequest.name)
         .field('transactionId', uploadDocumentRequest.transactionId)
-        .expect(HttpStatus.CREATED);
+        .expect(HttpStatus.NO_CONTENT);
       const databaseDocument = await runner.dataSource.manager.findOne(Document, {
         relations: ['transaction'],
         where: {
