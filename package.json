@@ -33,7 +33,7 @@
     "docker:up": "yarn exec:docker-compose up -d --renew-anon-volumes",
     "docs": "typedoc",
     "doctor": "yarn dlx @yarnpkg/doctor .",
-    "dts:generate": "rimraf dist && nest build --webpack --webpackPath webpack-dts.config.js",
+    "dts:generate": "rimraf dist && yarn db:start && nest build --webpack --webpackPath webpack-dts.config.js",
     "exec:docker-compose": "docker-compose -f docker-compose.yml",
     "exec:eslint": "eslint \"{src,test}/**/*.ts\" --cache",
     "exec:jest": "jest --coverage --color --detectOpenHandles",
