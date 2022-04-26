@@ -82,7 +82,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
             ["ewl", "npm:0.2.3"],\
-            ["express", "npm:4.17.3"],\
+            ["express", "npm:4.18.0"],\
             ["helmet", "npm:5.0.2"],\
             ["husky", "npm:7.0.4"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.5.1"],\
@@ -5802,6 +5802,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cookie", "npm:0.4.2"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.5.0", {\
+          "packageLocation": "./.yarn/cache/cookie-npm-0.5.0-e2d58a161a-1f4bd2ca57.zip/node_modules/cookie/",\
+          "packageDependencies": [\
+            ["cookie", "npm:0.5.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["cookie-signature", [\
@@ -6215,7 +6222,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
             ["ewl", "npm:0.2.3"],\
-            ["express", "npm:4.17.3"],\
+            ["express", "npm:4.18.0"],\
             ["helmet", "npm:5.0.2"],\
             ["husky", "npm:7.0.4"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:27.5.1"],\
@@ -7291,6 +7298,44 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vary", "npm:1.1.2"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:4.18.0", {\
+          "packageLocation": "./.yarn/cache/express-npm-4.18.0-ecc3a35e9e-2d83ccb02a.zip/node_modules/express/",\
+          "packageDependencies": [\
+            ["express", "npm:4.18.0"],\
+            ["accepts", "npm:1.3.8"],\
+            ["array-flatten", "npm:1.1.1"],\
+            ["body-parser", "npm:1.20.0"],\
+            ["content-disposition", "npm:0.5.4"],\
+            ["content-type", "npm:1.0.4"],\
+            ["cookie", "npm:0.5.0"],\
+            ["cookie-signature", "npm:1.0.6"],\
+            ["debug", "virtual:33c5bfcb21591a3aa3c953b07b035e58848966365cba220b5c05a15cd876e9b6405c78b28630cabc0fc86bfdb2b193f165deec91edded54607c3be036d752c04#npm:2.6.9"],\
+            ["depd", "npm:2.0.0"],\
+            ["encodeurl", "npm:1.0.2"],\
+            ["escape-html", "npm:1.0.3"],\
+            ["etag", "npm:1.8.1"],\
+            ["finalhandler", "npm:1.2.0"],\
+            ["fresh", "npm:0.5.2"],\
+            ["http-errors", "npm:2.0.0"],\
+            ["merge-descriptors", "npm:1.0.1"],\
+            ["methods", "npm:1.1.2"],\
+            ["on-finished", "npm:2.4.1"],\
+            ["parseurl", "npm:1.3.3"],\
+            ["path-to-regexp", "npm:0.1.7"],\
+            ["proxy-addr", "npm:2.0.7"],\
+            ["qs", "npm:6.10.3"],\
+            ["range-parser", "npm:1.2.1"],\
+            ["safe-buffer", "npm:5.2.1"],\
+            ["send", "npm:0.18.0"],\
+            ["serve-static", "npm:1.15.0"],\
+            ["setprototypeof", "npm:1.2.0"],\
+            ["statuses", "npm:2.0.1"],\
+            ["type-is", "npm:1.6.18"],\
+            ["utils-merge", "npm:1.0.1"],\
+            ["vary", "npm:1.1.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["express-winston", [\
@@ -7467,6 +7512,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["on-finished", "npm:2.3.0"],\
             ["parseurl", "npm:1.3.3"],\
             ["statuses", "npm:1.5.0"],\
+            ["unpipe", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.2.0", {\
+          "packageLocation": "./.yarn/cache/finalhandler-npm-1.2.0-593d001463-92effbfd32.zip/node_modules/finalhandler/",\
+          "packageDependencies": [\
+            ["finalhandler", "npm:1.2.0"],\
+            ["debug", "virtual:33c5bfcb21591a3aa3c953b07b035e58848966365cba220b5c05a15cd876e9b6405c78b28630cabc0fc86bfdb2b193f165deec91edded54607c3be036d752c04#npm:2.6.9"],\
+            ["encodeurl", "npm:1.0.2"],\
+            ["escape-html", "npm:1.0.3"],\
+            ["on-finished", "npm:2.4.1"],\
+            ["parseurl", "npm:1.3.3"],\
+            ["statuses", "npm:2.0.1"],\
             ["unpipe", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
@@ -11862,6 +11921,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["statuses", "npm:1.5.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.18.0", {\
+          "packageLocation": "./.yarn/cache/send-npm-0.18.0-faadf6353f-74fc07ebb5.zip/node_modules/send/",\
+          "packageDependencies": [\
+            ["send", "npm:0.18.0"],\
+            ["debug", "virtual:33c5bfcb21591a3aa3c953b07b035e58848966365cba220b5c05a15cd876e9b6405c78b28630cabc0fc86bfdb2b193f165deec91edded54607c3be036d752c04#npm:2.6.9"],\
+            ["depd", "npm:2.0.0"],\
+            ["destroy", "npm:1.2.0"],\
+            ["encodeurl", "npm:1.0.2"],\
+            ["escape-html", "npm:1.0.3"],\
+            ["etag", "npm:1.8.1"],\
+            ["fresh", "npm:0.5.2"],\
+            ["http-errors", "npm:2.0.0"],\
+            ["mime", "npm:1.6.0"],\
+            ["ms", "npm:2.1.3"],\
+            ["on-finished", "npm:2.4.1"],\
+            ["range-parser", "npm:1.2.1"],\
+            ["statuses", "npm:2.0.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["serialize-javascript", [\
@@ -11883,6 +11962,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["escape-html", "npm:1.0.3"],\
             ["parseurl", "npm:1.3.3"],\
             ["send", "npm:0.17.2"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.15.0", {\
+          "packageLocation": "./.yarn/cache/serve-static-npm-1.15.0-86c81879f5-af57fc13be.zip/node_modules/serve-static/",\
+          "packageDependencies": [\
+            ["serve-static", "npm:1.15.0"],\
+            ["encodeurl", "npm:1.0.2"],\
+            ["escape-html", "npm:1.0.3"],\
+            ["parseurl", "npm:1.3.3"],\
+            ["send", "npm:0.18.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12462,7 +12552,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],\
             ["@types/express", "npm:4.17.13"],\
-            ["express", "npm:4.17.3"],\
+            ["express", "npm:4.18.0"],\
             ["swagger-ui-dist", "npm:4.10.3"]\
           ],\
           "packagePeers": [\
