@@ -4733,7 +4733,7 @@ __metadata:
     supertest: ^6.2.2
     swagger-ui-express: ^4.3.0
     ts-jest: ^28.0.0-next.1
-    ts-loader: ^9.2.8
+    ts-loader: ^9.2.9
     typedoc: ^0.22.15
     typeorm: ^0.3.6
     typescript: ^4.6.3
@@ -10338,9 +10338,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:^9.2.8":
-  version: 9.2.8
-  resolution: "ts-loader@npm:9.2.8"
+"ts-loader@npm:^9.2.9":
+  version: 9.2.9
+  resolution: "ts-loader@npm:9.2.9"
   dependencies:
     chalk: ^4.1.0
     enhanced-resolve: ^5.0.0
@@ -10349,7 +10349,7 @@ __metadata:
   peerDependencies:
     typescript: "*"
     webpack: ^5.0.0
-  checksum: 3afd9a4cc1d46738ac3f2decc7dfa655e0183d4d2d48c7a113ea9f3ac313304f54be59252cde2ef04757c791e28cfcfc63323d3dd1f2f949485242c1ea4835e5
+  checksum: de817d4b7073bb029ca3e0742b5ef9432fdebb9f80707249b2121c09bb6ae6332ec755ab8e572f475ebfe5525a380a78b4e78a32b4d1c207a8fb1a2a0a490bac
   languageName: node
   linkType: hard
 
