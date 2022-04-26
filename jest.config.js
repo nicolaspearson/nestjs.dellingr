@@ -18,12 +18,13 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['json', 'js', 'ts'],
+  preset: 'ts-jest',
   rootDir,
   roots: ['<rootDir>/src/', '<rootDir>/test/'],
   testEnvironment: 'node',
   testMatch: ['**/test/**/*.spec.ts'],
   transform: {
-    '^.+\\.ts$': require.resolve('ts-jest'),
+    '^.+\\.tsx?$': 'ts-jest/legacy',
   },
   verbose: true,
 };
