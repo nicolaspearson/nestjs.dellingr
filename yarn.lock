@@ -4755,7 +4755,7 @@ __metadata:
     source-map-support: ^0.5.21
     supertest: ^6.2.3
     swagger-ui-express: ^4.3.0
-    ts-jest: ^28.0.0-next.1
+    ts-jest: ^28.0.0-next.2
     ts-loader: ^9.2.9
     typedoc: ^0.22.15
     typeorm: ^0.3.6
@@ -10342,9 +10342,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^28.0.0-next.1":
-  version: 28.0.0-next.1
-  resolution: "ts-jest@npm:28.0.0-next.1"
+"ts-jest@npm:^28.0.0-next.2":
+  version: 28.0.0-next.2
+  resolution: "ts-jest@npm:28.0.0-next.2"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
@@ -10371,7 +10371,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: 81e9fe6872ec092ec23c4a40b40f9d2c1df67185a1fd7f26282ab3c3fa4c741a27edb9ddaafb2cebd34ad9a69c76d11ed9c3d430d7072871dfedb4739f3a5dcc
+  checksum: 50ade2a9a70404f73b0d65a0fdeb5ae340b440da3caee4f6b00525d16859b17f951308573dd6437007cbf9f29f85dda87a04f51698094054328316d41e0d5be9
   languageName: node
   linkType: hard
 
