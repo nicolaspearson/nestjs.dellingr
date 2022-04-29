@@ -124,7 +124,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-unicorn": "^42.0.0",
     "husky": "^7.0.4",
-    "jest": "^28.0.2",
+    "jest": "^28.0.3",
     "jest-mock": "^28.0.2",
     "jest-util": "^28.0.2",
     "markdownlint-cli": "^0.31.1",
