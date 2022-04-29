@@ -82,7 +82,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
             ["ewl", "npm:0.2.3"],\
-            ["express", "npm:4.18.0"],\
+            ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.0.2"],\
             ["husky", "npm:7.0.4"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:28.0.3"],\
@@ -6202,7 +6202,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
             ["ewl", "npm:0.2.3"],\
-            ["express", "npm:4.18.0"],\
+            ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.0.2"],\
             ["husky", "npm:7.0.4"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:28.0.3"],\
@@ -7264,10 +7264,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:4.18.0", {\
-          "packageLocation": "./.yarn/cache/express-npm-4.18.0-ecc3a35e9e-2d83ccb02a.zip/node_modules/express/",\
+        ["npm:4.18.1", {\
+          "packageLocation": "./.yarn/cache/express-npm-4.18.1-842e583ae1-c3d44c92e4.zip/node_modules/express/",\
           "packageDependencies": [\
-            ["express", "npm:4.18.0"],\
+            ["express", "npm:4.18.1"],\
             ["accepts", "npm:1.3.8"],\
             ["array-flatten", "npm:1.1.1"],\
             ["body-parser", "npm:1.20.0"],\
@@ -12424,7 +12424,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["swagger-ui-express", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:4.3.0"],\
             ["@types/express", "npm:4.17.13"],\
-            ["express", "npm:4.18.0"],\
+            ["express", "npm:4.18.1"],\
             ["swagger-ui-dist", "npm:4.10.3"]\
           ],\
           "packagePeers": [\
