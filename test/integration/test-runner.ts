@@ -71,7 +71,7 @@ export class TestRunner {
    * @returns A new instance of the {@link TestRunner} class
    */
   private static async create(): Promise<TestRunner> {
-    // Create the database dataSource
+    // Create the database connection
     const dataSourceOptions = new TypeOrmConfigService(configService).get() as DataSourceOptions;
     const dataSource = new DataSource({
       ...dataSourceOptions,
@@ -109,7 +109,7 @@ export class TestRunner {
   }
 
   /**
-   * Closes the database dataSource and application.
+   * Closes the database connection and application.
    */
   public async close(): Promise<void> {
     await this.dataSource.destroy();
