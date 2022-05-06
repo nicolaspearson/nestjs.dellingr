@@ -28,24 +28,21 @@ jobs:
   test_unit:
     name: Build, Lint, & Unit Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16]
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v3
-      - name: Using node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Install Dagger
+        uses: dagger/dagger-for-github@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install yarn
-        run: yarn install --immutable
+          install-only: true
+      - name: Update Dagger
+        run: dagger project update
       - name: Build package
-        run: yarn build
+        run: dagger do build
       - name: Lint package
-        run: yarn lint
+        run: dagger do lint
       - name: Run package unit tests
-        run: yarn test:unit
+        run: dagger do testUnit
   test_integration:
     name: Test Integration
     runs-on: ubuntu-latest
