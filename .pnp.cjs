@@ -84,7 +84,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ewl", "npm:0.2.3"],\
             ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.0.2"],\
-            ["husky", "npm:8.0.0"],\
+            ["husky", "npm:8.0.1"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:28.1.0"],\
             ["jest-mock", "npm:28.1.0"],\
             ["jest-util", "npm:28.1.0"],\
@@ -6257,7 +6257,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ewl", "npm:0.2.3"],\
             ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.0.2"],\
-            ["husky", "npm:8.0.0"],\
+            ["husky", "npm:8.0.1"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:28.1.0"],\
             ["jest-mock", "npm:28.1.0"],\
             ["jest-util", "npm:28.1.0"],\
@@ -8200,10 +8200,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["husky", [\
-        ["npm:8.0.0", {\
-          "packageLocation": "./.yarn/cache/husky-npm-8.0.0-1b3b519c6d-b6b842abdd.zip/node_modules/husky/",\
+        ["npm:8.0.1", {\
+          "packageLocation": "./.yarn/cache/husky-npm-8.0.1-85fede8470-943a73a13d.zip/node_modules/husky/",\
           "packageDependencies": [\
-            ["husky", "npm:8.0.0"]\
+            ["husky", "npm:8.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
