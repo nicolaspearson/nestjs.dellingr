@@ -4814,7 +4814,7 @@ __metadata:
     prettier: ^2.6.2
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
-    run-script-webpack-plugin: ^0.0.11
+    run-script-webpack-plugin: ^0.0.12
     rxjs: ^7.5.5
     source-map-support: ^0.5.21
     supertest: ^6.2.3
@@ -9494,10 +9494,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-script-webpack-plugin@npm:^0.0.11":
-  version: 0.0.11
-  resolution: "run-script-webpack-plugin@npm:0.0.11"
-  checksum: 662220ac369df0c881c55b335dc79305e10c7390a7a307623a5f2a664ced3238a0551d935bd5698a3370fcda9e821166b55c854d28db580f5c88aa16fcf51a47
+"run-script-webpack-plugin@npm:^0.0.12":
+  version: 0.0.12
+  resolution: "run-script-webpack-plugin@npm:0.0.12"
+  checksum: e2c959136f09c6eaf5edbb872a7d14bf37aad3447914a5fd064f8eb850caa3ca66a4ea36edf8473ad2abb15bee9fb794c39fba99f0204ba2cf847edd1b854aea
   languageName: node
   linkType: hard
 
