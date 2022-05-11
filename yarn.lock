@@ -2764,10 +2764,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.11.33":
-  version: 16.11.33
-  resolution: "@types/node@npm:16.11.33"
-  checksum: 5c86d3f1e3b996607b41405d368d2e19d410eee0054595cef73d230368a609a2863926e75ad19f5091f0fd742cd018b667d54c51292018dd8020a202a5b29fa9
+"@types/node@npm:^16.11.34":
+  version: 16.11.34
+  resolution: "@types/node@npm:16.11.34"
+  checksum: 8dad6065b13a4b68a036e878989a481795bf80a360224c2c72b49ec7b94c8c68fef27a220f3bf6388f5420ca76b95cb9ffa6ada8d8c346c55b11c379f1cf172d
   languageName: node
   linkType: hard
 
@@ -4772,7 +4772,7 @@ __metadata:
     "@types/jest": 27.5.0
     "@types/jsonwebtoken": ^8.5.8
     "@types/multer": ^1.4.7
-    "@types/node": ^16.11.33
+    "@types/node": ^16.11.34
     "@types/pg": ^8.6.5
     "@types/prettier": ^2.6.0
     "@types/supertest": ^2.0.12
@@ -4786,7 +4786,7 @@ __metadata:
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
     common-tags: ^1.8.2
-    dotenv: ^16.0.0
+    dotenv: ^16.0.1
     dtsgenerator: ^3.15.1
     eslint: ^8.15.0
     eslint-config-prettier: ^8.5.0
@@ -4814,7 +4814,7 @@ __metadata:
     prettier: ^2.6.2
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
-    run-script-webpack-plugin: ^0.0.11
+    run-script-webpack-plugin: ^0.0.12
     rxjs: ^7.5.5
     source-map-support: ^0.5.21
     supertest: ^6.2.3
@@ -4969,6 +4969,13 @@ __metadata:
   version: 16.0.0
   resolution: "dotenv@npm:16.0.0"
   checksum: 664cebb51f0a9a1d1b930f51f0271e72e26d62feaecc9dc03df39453dd494b4e724809ca480fb3ec3213382b1ed3f791aaeb83569a137f9329ce58efd4853dbf
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.0.1":
+  version: 16.0.1
+  resolution: "dotenv@npm:16.0.1"
+  checksum: f459ffce07b977b7f15d8cc4ee69cdff77d4dd8c5dc8c85d2d485ee84655352c2415f9dd09d42b5b5985ced3be186130871b34e2f3e2569ebc72fbc2e8096792
   languageName: node
   linkType: hard
 
@@ -9494,10 +9501,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-script-webpack-plugin@npm:^0.0.11":
-  version: 0.0.11
-  resolution: "run-script-webpack-plugin@npm:0.0.11"
-  checksum: 662220ac369df0c881c55b335dc79305e10c7390a7a307623a5f2a664ced3238a0551d935bd5698a3370fcda9e821166b55c854d28db580f5c88aa16fcf51a47
+"run-script-webpack-plugin@npm:^0.0.12":
+  version: 0.0.12
+  resolution: "run-script-webpack-plugin@npm:0.0.12"
+  checksum: e2c959136f09c6eaf5edbb872a7d14bf37aad3447914a5fd064f8eb850caa3ca66a4ea36edf8473ad2abb15bee9fb794c39fba99f0204ba2cf847edd1b854aea
   languageName: node
   linkType: hard
 
