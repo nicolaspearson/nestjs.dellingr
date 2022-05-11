@@ -44,7 +44,11 @@ describe('AWS S3 Service', () => {
 
     test('should upload a document correctly', async () => {
       const result = await service.upload(data);
-      expect(result).not.toBeDefined();
+      expect(result).toMatchObject({
+        Bucket: data.bucket,
+        Key: data.key,
+        Location: `http://localhost/${data.bucket}/${data.key}`,
+      });
       expect(s3Mock.calls().length).toEqual(1);
       const uploadCall = s3Mock.call(0);
       expect(uploadCall.args.length).toEqual(1);

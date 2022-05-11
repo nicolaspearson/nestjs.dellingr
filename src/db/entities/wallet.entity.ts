@@ -49,8 +49,6 @@ export class Wallet implements Api.Entities.Wallet {
   @AfterInsert()
   @AfterUpdate()
   setDefaults(): void {
-    if (!this.transactions) {
-      this.transactions = [];
-    }
+    this.transactions = this.transactions || [];
   }
 }

@@ -59,8 +59,6 @@ export class Transaction implements Api.Entities.Transaction {
   @AfterInsert()
   @AfterUpdate()
   setDefaults(): void {
-    if (!this.documents) {
-      this.documents = [];
-    }
+    this.documents = this.documents || [];
   }
 }
