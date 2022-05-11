@@ -18,7 +18,7 @@ export class User implements Api.Entities.User {
   @PrimaryGeneratedColumn('uuid')
   uuid!: Uuid;
 
-  @Column({ unique: true })
+  @Column({ type: 'varchar', unique: true })
   @Index('IDX_USER_EMAIL')
   email!: Email;
 
