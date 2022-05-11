@@ -98,7 +98,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rimraf", "npm:3.0.2"],\
-            ["run-script-webpack-plugin", "npm:0.0.11"],\
+            ["run-script-webpack-plugin", "npm:0.0.12"],\
             ["rxjs", "npm:7.5.5"],\
             ["source-map-support", "npm:0.5.21"],\
             ["supertest", "npm:6.2.3"],\
@@ -6272,7 +6272,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rimraf", "npm:3.0.2"],\
-            ["run-script-webpack-plugin", "npm:0.0.11"],\
+            ["run-script-webpack-plugin", "npm:0.0.12"],\
             ["rxjs", "npm:7.5.5"],\
             ["source-map-support", "npm:0.5.21"],\
             ["supertest", "npm:6.2.3"],\
@@ -11721,10 +11721,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["run-script-webpack-plugin", [\
-        ["npm:0.0.11", {\
-          "packageLocation": "./.yarn/cache/run-script-webpack-plugin-npm-0.0.11-f5023352c4-662220ac36.zip/node_modules/run-script-webpack-plugin/",\
+        ["npm:0.0.12", {\
+          "packageLocation": "./.yarn/cache/run-script-webpack-plugin-npm-0.0.12-8ed95f61be-e2c959136f.zip/node_modules/run-script-webpack-plugin/",\
           "packageDependencies": [\
-            ["run-script-webpack-plugin", "npm:0.0.11"]\
+            ["run-script-webpack-plugin", "npm:0.0.12"]\
           ],\
           "linkType": "HARD"\
         }]\
