@@ -935,7 +935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/smithy-client@npm:3.85.0":
+"@aws-sdk/smithy-client@npm:*, @aws-sdk/smithy-client@npm:3.85.0":
   version: 3.85.0
   resolution: "@aws-sdk/smithy-client@npm:3.85.0"
   dependencies:

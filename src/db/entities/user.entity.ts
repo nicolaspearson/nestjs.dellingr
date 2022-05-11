@@ -38,8 +38,6 @@ export class User implements Api.Entities.User {
   @AfterInsert()
   @AfterUpdate()
   setDefaults(): void {
-    if (!this.wallets) {
-      this.wallets = [];
-    }
+    this.wallets = this.wallets || [];
   }
 }

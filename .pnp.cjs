@@ -810,6 +810,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@aws-sdk/lib-storage", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:3.88.0"],\
             ["@aws-sdk/abort-controller", "npm:3.78.0"],\
             ["@aws-sdk/client-s3", "npm:3.88.0"],\
+            ["@aws-sdk/smithy-client", "npm:3.85.0"],\
             ["@types/aws-sdk__abort-controller", null],\
             ["@types/aws-sdk__client-s3", null],\
             ["buffer", "npm:5.6.0"],\
