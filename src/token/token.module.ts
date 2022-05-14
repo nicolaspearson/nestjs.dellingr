@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
-import { TypedConfigModule } from 'nest-typed-config';
+import { TypedConfigModuleExtended } from 'nest-typed-config-extended';
 
 import { ConfigService } from '$/common/config/config.service';
 import { TokenService } from '$/token/token.service';
@@ -8,9 +8,9 @@ import { TokenService } from '$/token/token.service';
 @Module({
   exports: [TokenService],
   imports: [
-    TypedConfigModule,
+    TypedConfigModuleExtended,
     JwtModule.registerAsync({
-      imports: [TypedConfigModule],
+      imports: [TypedConfigModuleExtended],
       useFactory: (configService: ConfigService): JwtModuleOptions => ({
         secret: configService.jwtSecret,
         signOptions: {

@@ -1,16 +1,20 @@
-import { TypedConfigModule, dotenvLoader, selectConfig } from 'nest-typed-config';
+import {
+  TypedConfigModuleExtended,
+  dotenvLoaderExtended,
+  selectConfig,
+} from 'nest-typed-config-extended';
 
 import { ConfigService } from '$/common/config/config.service';
-import { configValidator } from '$/common/validators/config.validator';
 
-export const typedConfigModule = TypedConfigModule.forRoot({
+export const typedConfigModule = TypedConfigModuleExtended.forRoot({
   isGlobal: true,
-  load: dotenvLoader({
+  load: dotenvLoaderExtended({
     ignoreEnvFile: true,
     ignoreEnvVars: false,
+    separator: '__',
+    transformFromUpperSnakeCase: true,
   }),
   schema: ConfigService,
-  validate: configValidator,
 });
 
 export const configService = selectConfig(typedConfigModule, ConfigService);

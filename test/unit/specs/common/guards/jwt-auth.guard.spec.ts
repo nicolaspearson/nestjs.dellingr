@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken';
 
 import { ExecutionContext } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypedConfigModule } from 'nest-typed-config';
+import { TypedConfigModuleExtended } from 'nest-typed-config-extended';
 
 import { ConfigService } from '$/common/config/config.service';
 import { UnauthorizedError } from '$/common/error';
@@ -35,7 +35,7 @@ describe('Jwt Auth Guard', () => {
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
-      imports: [TypedConfigModule],
+      imports: [TypedConfigModuleExtended],
       providers: [{ provide: ConfigService, useValue: configService }, JwtAuthGuard],
     }).compile();
     guard = module.get<JwtAuthGuard>(JwtAuthGuard);

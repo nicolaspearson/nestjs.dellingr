@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
+import { TypedConfigModuleExtended, dotenvLoaderExtended } from 'nest-typed-config-extended';
 
 import { AppModule } from '$/app/app.module';
 import { ConfigService } from '$/common/config/config.service';
-import { configValidator } from '$/common/validators/config.validator';
 import { TypeOrmConfigService } from '$/db/config/typeorm-config.service';
 
 @Module({
   imports: [
     AppModule,
-    TypedConfigModule.forRoot({
+    TypedConfigModuleExtended.forRoot({
       isGlobal: true,
-      load: dotenvLoader({
+      load: dotenvLoaderExtended({
         envFilePath: ['.env'],
+        separator: '__',
+        transformFromUpperSnakeCase: true,
       }),
       schema: ConfigService,
-      validate: configValidator,
     }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,

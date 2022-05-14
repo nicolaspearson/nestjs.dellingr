@@ -1,6 +1,6 @@
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypedConfigModule } from 'nest-typed-config';
+import { TypedConfigModuleExtended } from 'nest-typed-config-extended';
 
 import { ConfigService } from '$/common/config/config.service';
 import { TokenService } from '$/token/token.service';
@@ -16,7 +16,7 @@ describe('Token Service', () => {
   beforeAll(async () => {
     module = await Test.createTestingModule({
       imports: [
-        TypedConfigModule,
+        TypedConfigModuleExtended,
         JwtModule.register({ secret: 'secretKey', signOptions: { expiresIn: '15m' } }),
       ],
       providers: [{ provide: ConfigService, useValue: configService }, TokenService],
