@@ -4797,7 +4797,7 @@ __metadata:
     eslint-plugin-ordered-imports: ^0.6.0
     eslint-plugin-promise: ^6.0.0
     eslint-plugin-unicorn: ^42.0.0
-    ewl: ^0.2.3
+    ewl: ^0.2.5
     express: ^4.18.1
     helmet: ^5.0.2
     husky: ^8.0.1
@@ -5546,13 +5546,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ewl@npm:^0.2.3":
-  version: 0.2.3
-  resolution: "ewl@npm:0.2.3"
+"ewl@npm:^0.2.5":
+  version: 0.2.5
+  resolution: "ewl@npm:0.2.5"
   dependencies:
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
-    express: ^4.17.3
+    express: ^4.18.1
     express-winston: ^4.2.0
     logform: ^2.4.0
     reflect-metadata: ^0.1.13
@@ -5562,7 +5562,7 @@ __metadata:
     validator: ^13.7.0
     winston: ^3.7.2
     winston-transport: ^4.5.0
-  checksum: 8942f9a5de21a26406d9a0378b9aeaed76c36d83125b5c5fe606f216bc61101339d19abcd70162b1c6459dae36be9804eeb24633a5e0f85e5d1817b6fdc8e4bd
+  checksum: 13c2a8fdf5e5c709ac1f785350686ab21dc402c83f40eccc22dfd645795564ebbec57111280024e1c64a0665b941c1c3c76e8d9e6e86598e5b2bdcfc71c3d317
   languageName: node
   linkType: hard
 
@@ -5632,7 +5632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.17.3, express@npm:^4.17.3":
+"express@npm:4.17.3":
   version: 4.17.3
   resolution: "express@npm:4.17.3"
   dependencies:
