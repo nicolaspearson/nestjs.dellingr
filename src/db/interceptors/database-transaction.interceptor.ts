@@ -8,7 +8,7 @@ import { DatabaseTransactionService } from '../services/database-transaction.ser
 export class DatabaseTransactionInterceptor<T> implements NestInterceptor {
   constructor(private readonly databaseTransactionService: DatabaseTransactionService) {}
 
-  intercept(_: ExecutionContext, next: CallHandler<Observable<T>>): Promise<Observable<T>> {
+  intercept(_: ExecutionContext, next: CallHandler<T>): Promise<Observable<T>> {
     return this.databaseTransactionService.executeHandler<T>(next);
   }
 }

@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from 'async_hooks';
-import { Observable, lastValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DataSource, EntityManager } from 'typeorm';
 
 import { CallHandler, Injectable, Logger } from '@nestjs/common';
@@ -37,10 +37,10 @@ export class DatabaseTransactionService implements Api.Services.DatabaseTransact
     });
   }
 
-  executeHandler<T>(next: CallHandler<Observable<T>>): Promise<Observable<T>> {
+  executeHandler<T>(next: CallHandler<T>): Promise<Observable<T>> {
     return this.dataSource.transaction((manager) => {
       return this.storage.run({ manager }, () => {
-        return lastValueFrom(next.handle());
+        return new Promise<Observable<T>>((resolve) => resolve(next.handle()));
       });
     });
   }

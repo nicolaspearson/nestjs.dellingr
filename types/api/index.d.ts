@@ -194,7 +194,7 @@ declare namespace Api {
     interface DatabaseTransaction {
       getManager(): EntityManager;
       execute<T>(next: (manager: EntityManager) => Promise<T>): Promise<T>;
-      executeHandler<T>(next: CallHandler<Observable<T>>): Promise<Observable<T>>;
+      executeHandler<T>(next: CallHandler<T>): Promise<Observable<T>>;
     }
   }
 
