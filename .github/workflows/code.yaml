@@ -96,13 +96,13 @@ jobs:
           --health-retries 5
     env:
       AWS_ENDPOINT: http://0.0.0.0:4566
+      DATABASE__CREDENTIALS__DATABASE: dellingr
+      DATABASE__CREDENTIALS__SCHEMA: public
+      DATABASE__CREDENTIALS__HOST: 0.0.0.0
+      DATABASE__CREDENTIALS__PORT: 5432
+      DATABASE__CREDENTIALS__PASSWORD: masterkey
+      DATABASE__CREDENTIALS__USERNAME: admin
       SEED_ENVIRONMENT: true
-      TYPEORM_HOST: 0.0.0.0
-      TYPEORM_PORT: 5432
-      TYPEORM_DATABASE: dellingr
-      TYPEORM_SCHEMA: public
-      TYPEORM_USERNAME: admin
-      TYPEORM_PASSWORD: masterkey
   docker:
     if: github.ref == 'refs/heads/main'
     name: docker build and publish

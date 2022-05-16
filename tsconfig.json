@@ -32,5 +32,11 @@
     "strictPropertyInitialization": true,
     "target": "esnext"
   },
-  "include": ["src", "test", "types"]
+  "include": ["src", "test", "types"],
+  // Used when generating TypeORM migrations via the CLI.
+  "ts-node": {
+    "files": true,
+    // Ignore typechecking.
+    "transpileOnly": true
+  }
 }

@@ -5,6 +5,7 @@ import {
 } from 'nest-typed-config-extended';
 
 import { ConfigService } from '$/common/config/config.service';
+import { DatabaseConfig } from '$/common/config/database/database.config';
 
 export const typedConfigModule = TypedConfigModuleExtended.forRoot({
   isGlobal: true,
@@ -18,3 +19,4 @@ export const typedConfigModule = TypedConfigModuleExtended.forRoot({
 });
 
 export const configService = selectConfig(typedConfigModule, ConfigService);
+export const databaseConfig = selectConfig(typedConfigModule, DatabaseConfig);

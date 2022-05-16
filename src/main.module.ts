@@ -1,25 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypedConfigModuleExtended, dotenvLoaderExtended } from 'nest-typed-config-extended';
 
 import { AppModule } from '$/app/app.module';
-import { ConfigService } from '$/common/config/config.service';
-import { TypeOrmConfigService } from '$/db/config/typeorm-config.service';
+import { DatabaseConfigService } from '$/common/config/database/database.config.service';
+import { createTypedConfigModule } from '$/common/config/typed-config.module';
 
 @Module({
   imports: [
     AppModule,
-    TypedConfigModuleExtended.forRoot({
-      isGlobal: true,
-      load: dotenvLoaderExtended({
-        envFilePath: ['.env'],
-        separator: '__',
-        transformFromUpperSnakeCase: true,
-      }),
-      schema: ConfigService,
-    }),
+    createTypedConfigModule(),
     TypeOrmModule.forRootAsync({
-      useClass: TypeOrmConfigService,
+      useClass: DatabaseConfigService,
     }),
   ],
 })

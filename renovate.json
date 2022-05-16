@@ -18,5 +18,6 @@
   "prHourlyLimit": 3,
   "rangeStrategy": "bump",
   "semanticCommits": "enabled",
-  "semanticCommitScope": "{{parentDir}}"
+  "semanticCommitScope": "{{parentDir}}",
+  "updatePinnedDependencies": false
 }
