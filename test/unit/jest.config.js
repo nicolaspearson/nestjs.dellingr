@@ -4,6 +4,7 @@ module.exports = Object.assign({}, require('../../jest.config.js'), {
     '!src/**/index.ts',
     '!src/**/*.module.ts',
     '!src/**/*-seeder.service.ts',
+    '!src/common/config/database/database.config.service.ts',
     '!src/common/enum/*.enum.ts',
     '!src/common/error/*.error.ts',
     '!src/common/swagger/**/*.ts',

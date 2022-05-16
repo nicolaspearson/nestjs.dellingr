@@ -38,7 +38,7 @@ describe('AWS S3 Service', () => {
   describe('upload', () => {
     const data = {
       body: multerFileMock.buffer,
-      bucket: configService.awsS3BucketName,
+      bucket: configService.aws.s3BucketName,
       key: `${documentMockInvoice.uuid}-${documentMockInvoice.name}`,
     };
 
@@ -65,7 +65,9 @@ describe('AWS S3 Service', () => {
       // will is covered end-to-end in the integration tests so the
       // unit tests for this service could also be removed in future.
       const s3Upload = new Upload({
-        client: new S3Client({}),
+        client: new S3Client({
+          region: configService.aws.region,
+        }),
         params: {
           Body: data.body,
           Bucket: data.bucket,

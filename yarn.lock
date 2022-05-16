@@ -3656,22 +3656,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:0.23.0":
-  version: 0.23.0
-  resolution: "axios@npm:0.23.0"
-  dependencies:
-    follow-redirects: ^1.14.4
-  checksum: 879f61022bd825da2a7ebb72410bc528683ba54c140436baa0b924b7cab02ec0919fe64a04a546f482a75f5fd570b77884f9826764a95f2fd88265e61dcb70db
-  languageName: node
-  linkType: hard
-
-"axios@npm:0.27.2":
+"axios@npm:*, axios@npm:0.27.2":
   version: 0.27.2
   resolution: "axios@npm:0.27.2"
   dependencies:
     follow-redirects: ^1.14.9
     form-data: ^4.0.0
   checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
+  languageName: node
+  linkType: hard
+
+"axios@npm:0.23.0":
+  version: 0.23.0
+  resolution: "axios@npm:0.23.0"
+  dependencies:
+    follow-redirects: ^1.14.4
+  checksum: 879f61022bd825da2a7ebb72410bc528683ba54c140436baa0b924b7cab02ec0919fe64a04a546f482a75f5fd570b77884f9826764a95f2fd88265e61dcb70db
   languageName: node
   linkType: hard
 
@@ -4790,7 +4790,7 @@ __metadata:
     prettier: ^2.6.2
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
-    run-script-webpack-plugin: 0.0.12
+    run-script-webpack-plugin: 0.0.11
     rxjs: ^7.5.5
     source-map-support: ^0.5.21
     supertest: ^6.2.3
@@ -7715,7 +7715,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"logform@npm:^2.3.2, logform@npm:^2.4.0":
+"logform@npm:*, logform@npm:^2.3.2, logform@npm:^2.4.0":
   version: 2.4.0
   resolution: "logform@npm:2.4.0"
   dependencies:
@@ -9398,10 +9398,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-script-webpack-plugin@npm:0.0.12":
-  version: 0.0.12
-  resolution: "run-script-webpack-plugin@npm:0.0.12"
-  checksum: e2c959136f09c6eaf5edbb872a7d14bf37aad3447914a5fd064f8eb850caa3ca66a4ea36edf8473ad2abb15bee9fb794c39fba99f0204ba2cf847edd1b854aea
+"run-script-webpack-plugin@npm:0.0.11":
+  version: 0.0.11
+  resolution: "run-script-webpack-plugin@npm:0.0.11"
+  checksum: 662220ac369df0c881c55b335dc79305e10c7390a7a307623a5f2a664ced3238a0551d935bd5698a3370fcda9e821166b55c854d28db580f5c88aa16fcf51a47
   languageName: node
   linkType: hard
 
@@ -11037,7 +11037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston-transport@npm:^4.5.0":
+"winston-transport@npm:*, winston-transport@npm:^4.5.0":
   version: 4.5.0
   resolution: "winston-transport@npm:4.5.0"
   dependencies:

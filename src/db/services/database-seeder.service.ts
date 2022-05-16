@@ -54,9 +54,7 @@ export class DatabaseSeederService {
         this.logger.debug('Database already seeded, skipped.');
       }
     } catch (error) {
-      console.log(error);
-      // eslint-disable-next-line unicorn/no-process-exit
-      process.exit(1);
+      throw error;
     }
   }
 }

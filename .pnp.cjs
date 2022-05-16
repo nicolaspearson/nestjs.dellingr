@@ -98,7 +98,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rimraf", "npm:3.0.2"],\
-            ["run-script-webpack-plugin", "npm:0.0.12"],\
+            ["run-script-webpack-plugin", "npm:0.0.11"],\
             ["rxjs", "npm:7.5.5"],\
             ["source-map-support", "npm:0.5.21"],\
             ["supertest", "npm:6.2.3"],\
@@ -6282,7 +6282,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["rimraf", "npm:3.0.2"],\
-            ["run-script-webpack-plugin", "npm:0.0.12"],\
+            ["run-script-webpack-plugin", "npm:0.0.11"],\
             ["rxjs", "npm:7.5.5"],\
             ["source-map-support", "npm:0.5.21"],\
             ["supertest", "npm:6.2.3"],\
@@ -7354,7 +7354,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/winston", null],\
             ["chalk", "npm:2.4.2"],\
             ["lodash", "npm:4.17.21"],\
-            ["winston", "npm:3.7.2"]\
+            ["logform", "npm:2.4.0"],\
+            ["winston", "npm:3.7.2"],\
+            ["winston-transport", "npm:4.5.0"]\
           ],\
           "packagePeers": [\
             "@types/winston",\
@@ -10368,6 +10370,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/nestjs__common", null],\
             ["@types/reflect-metadata", null],\
             ["@types/rxjs", null],\
+            ["axios", "npm:0.27.2"],\
             ["chalk", "npm:4.1.2"],\
             ["class-transformer", "npm:0.4.0"],\
             ["class-validator", "npm:0.13.2"],\
@@ -11668,10 +11671,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["run-script-webpack-plugin", [\
-        ["npm:0.0.12", {\
-          "packageLocation": "./.yarn/cache/run-script-webpack-plugin-npm-0.0.12-8ed95f61be-e2c959136f.zip/node_modules/run-script-webpack-plugin/",\
+        ["npm:0.0.11", {\
+          "packageLocation": "./.yarn/cache/run-script-webpack-plugin-npm-0.0.11-f5023352c4-662220ac36.zip/node_modules/run-script-webpack-plugin/",\
           "packageDependencies": [\
-            ["run-script-webpack-plugin", "npm:0.0.12"]\
+            ["run-script-webpack-plugin", "npm:0.0.11"]\
           ],\
           "linkType": "HARD"\
         }]\

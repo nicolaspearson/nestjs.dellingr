@@ -2,7 +2,7 @@ import { oneLine } from 'common-tags';
 import helmet from 'helmet';
 import pMemoize from 'p-memoize';
 import { default as request } from 'supertest';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -14,10 +14,10 @@ import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { JwtResponse, LoginRequest } from '$/common/dto';
 import { ErrorFilter } from '$/common/filters/error.filter';
 import { DtoValidationPipe } from '$/common/pipes/dto-validation.pipe';
-import { TypeOrmConfigService } from '$/db/config/typeorm-config.service';
+import { dataSource, initializeDataSource } from '$/db/data-source/main.data-source';
 import { DEFAULT_PASSWORD, userFixtures } from '$/db/fixtures/user.fixture';
 
-import { configService, typedConfigModule } from '#/utils/config';
+import { typedConfigModule } from '#/utils/config';
 
 /**
  * The TestRunner class is responsible for providing
@@ -71,22 +71,26 @@ export class TestRunner {
    * @returns A new instance of the {@link TestRunner} class
    */
   private static async create(): Promise<TestRunner> {
-    // Create the database connection
-    const dataSourceOptions = new TypeOrmConfigService(configService).get() as DataSourceOptions;
-    const dataSource = new DataSource({
-      ...dataSourceOptions,
+    // Disable database logging
+    dataSource.setOptions({
       logging: false,
     });
-    await dataSource.initialize();
+
+    // Create the testing module
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        AppModule,
+        typedConfigModule,
+        TypeOrmModule.forRootAsync({
+          useFactory: initializeDataSource,
+        }),
+      ],
+    }).compile();
+
     await dataSource.query(oneLine`
       CREATE EXTENSION IF NOT EXISTS pgcrypto;
       CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
     `);
-
-    // Create the testing module
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, typedConfigModule, TypeOrmModule.forRoot(dataSource.options)],
-    }).compile();
 
     // Create and configure the application
     const application = module.createNestApplication();

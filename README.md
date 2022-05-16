@@ -73,7 +73,7 @@ The following is important for a **production** environment:
 
 - A new bucket that will contain `document` uploads will need to be created, access must be
   granted for a user to write to this bucket, and the `AWS` credentials need to be set accordingly.
-- All `AWS_*` environment variables except for the `AWS_ENDPOINT` (which is optional and only
+- All `AWS__*` environment variables except for the `AWS__ENDPOINT` (which is optional and only
   required in the **development** environment) MUST be set.
 
 ### Swagger

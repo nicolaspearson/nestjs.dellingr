@@ -18,7 +18,7 @@ export class JwtAuthGuard implements CanActivate {
    */
   private verifyJwt(jwt: string): Api.JwtPayload {
     try {
-      return verify(jwt, this.configService.jwtSecret, {
+      return verify(jwt, this.configService.jwt.secret, {
         ignoreExpiration: false,
       }) as Api.JwtPayload;
     } catch {

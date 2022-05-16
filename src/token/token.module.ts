@@ -12,11 +12,11 @@ import { TokenService } from '$/token/token.service';
     JwtModule.registerAsync({
       imports: [TypedConfigModuleExtended],
       useFactory: (configService: ConfigService): JwtModuleOptions => ({
-        secret: configService.jwtSecret,
+        secret: configService.jwt.secret,
         signOptions: {
-          algorithm: configService.jwtAlgorithm,
-          expiresIn: configService.jwtTokenExpiration,
-          issuer: configService.jwtIssuer,
+          algorithm: configService.jwt.algorithm,
+          expiresIn: configService.jwt.tokenExpiration,
+          issuer: configService.jwt.issuer,
         },
       }),
       inject: [ConfigService],

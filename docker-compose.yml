@@ -19,18 +19,21 @@ services:
     env_file:
       - .env
     environment:
-      - API_HOST=0.0.0.0
-      - API_PORT=3000
-      - AWS_ENDPOINT=http://localstack:4566
+      - API__HOST=0.0.0.0
+      - API__PORT=3000
+      - AWS__ACCESS_KEY_ID=test
+      - AWS__ENDPOINT=http://localstack:4566
+      - AWS__REGION=eu-west-1
+      - AWS__SECRET_ACCESS_KEY=test
+      - DATABASE__CREDENTIALS__DATABASE=dellingr
+      - DATABASE__CREDENTIALS__SCHEMA=public
+      - DATABASE__CREDENTIALS__HOST=db
+      - DATABASE__CREDENTIALS__PORT=5432
+      - DATABASE__CREDENTIALS__PASSWORD=masterkey
+      - DATABASE__CREDENTIALS__USERNAME=admin
       - ENVIRONMENT=staging
       - NODE_ENV=production
       - SEED_ENVIRONMENT=true
-      - TYPEORM_DATABASE=dellingr
-      - TYPEORM_HOST=db
-      - TYPEORM_PASSWORD=masterkey
-      - TYPEORM_PORT=5432
-      - TYPEORM_SCHEMA=public
-      - TYPEORM_USERNAME=admin
     ports:
       - 3000:3000
     depends_on:

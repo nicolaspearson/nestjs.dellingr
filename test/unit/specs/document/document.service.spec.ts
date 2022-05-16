@@ -61,7 +61,7 @@ describe('Document Service', () => {
       });
       expect(awsS3MockService.upload).toHaveBeenCalledWith({
         body: multerFileMock.buffer,
-        bucket: configService.awsS3BucketName,
+        bucket: configService.aws.s3BucketName,
         key: expect.stringContaining(`-${documentMockInvoice.name}`),
       });
       expect(documentMockRepo.create).toHaveBeenCalledWith({
@@ -86,7 +86,7 @@ describe('Document Service', () => {
       });
       expect(awsS3MockService.upload).toHaveBeenCalledWith({
         body: multerFileMock.buffer,
-        bucket: configService.awsS3BucketName,
+        bucket: configService.aws.s3BucketName,
         key: expect.stringContaining(`-${documentMockInvoice.name}`),
       });
       expect(documentMockRepo.create).not.toHaveBeenCalled();

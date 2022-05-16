@@ -110,7 +110,7 @@ async function bootstrap(): Promise<void> {
   }
 
   // Serve the application
-  await app.listen(configService.apiPort, configService.apiHost);
+  await app.listen(configService.api.port, configService.api.host);
 
   // Hot module replacement with Webpack
   if (module.hot) {

@@ -13,12 +13,12 @@ export class AwsS3Service extends S3Client {
   constructor(protected readonly configService: ConfigService) {
     super({
       credentials: {
-        accessKeyId: configService.awsAccessKeyId,
-        secretAccessKey: configService.awsSecretAccessKey,
+        accessKeyId: configService.aws.accessKeyId,
+        secretAccessKey: configService.aws.secretAccessKey,
       },
-      endpoint: configService.awsEndpoint,
+      endpoint: configService.aws.endpoint,
       forcePathStyle: true,
-      region: configService.awsRegion,
+      region: configService.aws.region,
     });
     this.logger.debug('AWS S3 service created!');
   }
