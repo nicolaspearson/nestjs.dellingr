@@ -35,7 +35,7 @@ export class AwsS3SeederService {
     this.logger.debug('Seeding AWS S3');
     try {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const bucketName = this.configService.awsS3BucketName;
+      const bucketName = this.configService.aws.s3BucketName;
 
       // Check if the bucket already exists
       const buckets = await this.getBuckets();
@@ -48,9 +48,7 @@ export class AwsS3SeederService {
         this.logger.debug(`AWS S3 already seeded, skipped.`);
       }
     } catch (error) {
-      console.log(error);
-      // eslint-disable-next-line unicorn/no-process-exit
-      process.exit(1);
+      throw error;
     }
   }
 }

@@ -62,7 +62,7 @@ describe('Jwt Auth Guard', () => {
   });
 
   test('should return true if the jwt is valid', () => {
-    const jwt = sign({ uuid: userMockJohn.uuid } as Api.JwtPayload, configService.jwtSecret, {
+    const jwt = sign({ uuid: userMockJohn.uuid } as Api.JwtPayload, configService.jwt.secret, {
       expiresIn: '15m',
     });
     switchToHttpMock.getRequest.mockReturnValueOnce({

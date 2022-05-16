@@ -30,7 +30,7 @@ describe('Document Module', () => {
       configService = runner.application.get<ConfigService>(ConfigService);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      configService.awsS3BucketName = 'dellingr';
+      configService.aws.s3BucketName = 'dellingr';
     });
 
     test('[204] => should allow a user to upload a new document', async () => {
@@ -91,7 +91,7 @@ describe('Document Module', () => {
       expect(jwt.token).toBeDefined();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      configService.awsS3BucketName = 'this-bucket-does-not-exist';
+      configService.aws.s3BucketName = 'this-bucket-does-not-exist';
       const uploadDocumentRequest: UploadDocumentRequest = {
         name: 'Second integration test document',
         transactionId: transaction.uuid,

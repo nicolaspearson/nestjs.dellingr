@@ -25,7 +25,7 @@ export class TokenService {
     this.logger.log(`Generating JWT for user with uuid: ${payload.uuid}`);
     const token = await this.jwtService.signAsync(payload, {
       // Set the `exp` here to include it in the claims.
-      expiresIn: this.configService.jwtTokenExpiration,
+      expiresIn: this.configService.jwt.tokenExpiration,
       // Set the `jti` to avoid replay attacks.
       jwtid: uuid(),
     });

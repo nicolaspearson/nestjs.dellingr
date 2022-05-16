@@ -48,7 +48,7 @@ export class DocumentService {
     try {
       await this.awsS3Service.upload({
         body: buffer,
-        bucket: this.configService.awsS3BucketName,
+        bucket: this.configService.aws.s3BucketName,
         key: documentKey,
       });
     } catch (error) {

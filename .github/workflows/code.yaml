@@ -95,7 +95,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
-      AWS_ENDPOINT: http://0.0.0.0:4566
+      AWS__ACCESS_KEY_ID: test
+      AWS__ENDPOINT: http://0.0.0.0:4566
+      AWS__REGION: eu-west-1
+      AWS__SECRET_ACCESS_KEY: test
       DATABASE__CREDENTIALS__DATABASE: dellingr
       DATABASE__CREDENTIALS__SCHEMA: public
       DATABASE__CREDENTIALS__HOST: 0.0.0.0

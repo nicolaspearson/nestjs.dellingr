@@ -19,9 +19,12 @@ services:
     env_file:
       - .env
     environment:
-      - API_HOST=0.0.0.0
-      - API_PORT=3000
-      - AWS_ENDPOINT=http://localstack:4566
+      - API__HOST=0.0.0.0
+      - API__PORT=3000
+      - AWS__ACCESS_KEY_ID=test
+      - AWS__ENDPOINT=http://localstack:4566
+      - AWS__REGION=eu-west-1
+      - AWS__SECRET_ACCESS_KEY=test
       - DATABASE__CREDENTIALS__DATABASE=dellingr
       - DATABASE__CREDENTIALS__SCHEMA=public
       - DATABASE__CREDENTIALS__HOST=db
