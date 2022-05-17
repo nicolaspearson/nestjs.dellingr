@@ -9,17 +9,26 @@ import { createTypedConfigModule } from '$/common/config/typed-config.module';
 const databaseConfig = selectConfig(createTypedConfigModule(), DatabaseConfig);
 
 export const dataSource = new DataSource({
-  type: databaseConfig.type,
   database: databaseConfig.credentials.database,
   schema: databaseConfig.credentials.schema,
   host: databaseConfig.credentials.host,
   port: databaseConfig.credentials.port,
   password: databaseConfig.credentials.password,
   username: databaseConfig.credentials.username,
-  logging: databaseConfig.logging,
+  type: databaseConfig.type,
+
+  // Entities
   entities: databaseConfig.entities,
+
+  // Logging
+  logging: databaseConfig.logging,
+
+  // Migrations
   migrationsRun: databaseConfig.migrationsRun,
+  migrationsTransactionMode: 'all',
   migrations: databaseConfig.migrations,
+
+  // Synchronization
   dropSchema: databaseConfig.dropSchema,
   synchronize: databaseConfig.synchronize,
 });

@@ -18,7 +18,7 @@
   "scripts": {
     "build": "rimraf dist && webpack --config webpack.config.js",
     "db:logs": "yarn exec:docker-compose logs -f db",
-    "db:migration:create": "yarn exec:typeorm migration:create -n",
+    "db:migration:create": "yarn exec:typeorm migration:create -d src/db/data-source/migrations.data-source.ts",
     "db:migration:generate:missing": "yarn db:start:recreate && yarn db:migration:run && yarn db:migration:generate src/db/migrations/${0}",
     "db:migration:generate": "yarn exec:typeorm migration:generate -d src/db/data-source/migrations.data-source.ts",
     "db:migration:revert": "yarn exec:typeorm migration:revert -d src/db/data-source/migrations.data-source.ts",
