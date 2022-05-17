@@ -18,6 +18,7 @@
   "peacock.color": "#42b883",
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
   "search.exclude": {
+    "**/.git": true,
     "**/.yarn": true,
     "**/.pnp.*": true,
     "yarn.lock": true
