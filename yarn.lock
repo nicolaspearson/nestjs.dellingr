@@ -2239,15 +2239,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/jwt@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@nestjs/jwt@npm:8.0.0"
+"@nestjs/jwt@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@nestjs/jwt@npm:8.0.1"
   dependencies:
-    "@types/jsonwebtoken": 8.5.4
+    "@types/jsonwebtoken": 8.5.8
     jsonwebtoken: 8.5.1
   peerDependencies:
     "@nestjs/common": ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 0e344419a840b5d9ebd624474a134b0c3ccaeb317f3d2c30d679db2d0fbbf0434878a4e5c1ae0bc5ccf83ac778644067d0efcfc126bfe0933224c6829564e405
+  checksum: 0af21c609ebc023be009c1fc02c59d6d58548ba54f0648bb8b5bf4d70f334f554690cdf14df889dc424fe170c50d5fd4e6f2adf98a1d493b241899dc96f3c8be
   languageName: node
   linkType: hard
 
@@ -2716,16 +2716,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:8.5.4":
-  version: 8.5.4
-  resolution: "@types/jsonwebtoken@npm:8.5.4"
-  dependencies:
-    "@types/node": "*"
-  checksum: 541d41eb8115afd422e0333d7ba79399febc86818015b3ecb7c36b2b7f9b4476a33aa13a4f23f81a08b201c5cdacbe2903b6d03cd4930abf83a4e14be3696719
-  languageName: node
-  linkType: hard
-
-"@types/jsonwebtoken@npm:^8.5.8":
+"@types/jsonwebtoken@npm:8.5.8, @types/jsonwebtoken@npm:^8.5.8":
   version: 8.5.8
   resolution: "@types/jsonwebtoken@npm:8.5.8"
   dependencies:
@@ -2883,10 +2874,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-env@npm:^1.16.4":
-  version: 1.16.4
-  resolution: "@types/webpack-env@npm:1.16.4"
-  checksum: 97554238364dae6b7369f9e6d409c7eab4b0235f99b16c69e7458afbb9c29cde128b3fd3a79a14b9bbb8b09d9f0ba377b51cc040f0a2bd2c8eddaf22657136be
+"@types/webpack-env@npm:^1.17.0":
+  version: 1.17.0
+  resolution: "@types/webpack-env@npm:1.17.0"
+  checksum: 9ad4d208c4429c9427191d1f4c92e4c43e530384c17a6bc298acb89003fc47fcde1d8372e50acefa3061e9100e57fd9d616e96def875afd06c0c2afe508f298e
   languageName: node
   linkType: hard
 
@@ -4730,7 +4721,7 @@ __metadata:
     "@nestjs/cli": ^8.2.6
     "@nestjs/common": ^8.4.5
     "@nestjs/core": ^8.4.5
-    "@nestjs/jwt": ^8.0.0
+    "@nestjs/jwt": ^8.0.1
     "@nestjs/platform-express": ^8.4.5
     "@nestjs/schematics": ^8.0.11
     "@nestjs/swagger": ^5.2.1
@@ -4747,7 +4738,7 @@ __metadata:
     "@types/supertest": ^2.0.12
     "@types/uuid": ^8.3.4
     "@types/validator": ^13.7.2
-    "@types/webpack-env": ^1.16.4
+    "@types/webpack-env": ^1.17.0
     "@typescript-eslint/eslint-plugin": ^5.25.0
     "@typescript-eslint/parser": ^5.25.0
     async_hooks: ^1.0.0

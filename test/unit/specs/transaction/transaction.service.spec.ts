@@ -25,7 +25,6 @@ describe('Transaction Service', () => {
           provide: TransactionRepository,
           useValue: transactionMockRepo,
         },
-
         {
           provide: WalletRepository,
           useValue: walletMockRepo,
