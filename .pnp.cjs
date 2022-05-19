@@ -83,7 +83,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
             ["ewl", "npm:1.0.0"],\
             ["express", "npm:4.18.1"],\
-            ["helmet", "npm:5.0.2"],\
+            ["helmet", "npm:5.1.0"],\
             ["husky", "npm:8.0.1"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:28.1.0"],\
             ["jest-mock", "npm:28.1.0"],\
@@ -6258,7 +6258,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
             ["ewl", "npm:1.0.0"],\
             ["express", "npm:4.18.1"],\
-            ["helmet", "npm:5.0.2"],\
+            ["helmet", "npm:5.1.0"],\
             ["husky", "npm:8.0.1"],\
             ["jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:28.1.0"],\
             ["jest-mock", "npm:28.1.0"],\
@@ -8046,10 +8046,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["helmet", [\
-        ["npm:5.0.2", {\
-          "packageLocation": "./.yarn/cache/helmet-npm-5.0.2-350a1b4b4b-3fe107f3f7.zip/node_modules/helmet/",\
+        ["npm:5.1.0", {\
+          "packageLocation": "./.yarn/cache/helmet-npm-5.1.0-31ec0d4ca2-076958ed82.zip/node_modules/helmet/",\
           "packageDependencies": [\
-            ["helmet", "npm:5.0.2"]\
+            ["helmet", "npm:5.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
