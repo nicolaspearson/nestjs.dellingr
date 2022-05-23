@@ -609,9 +609,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/lib-storage@npm:^3.95.0":
-  version: 3.95.0
-  resolution: "@aws-sdk/lib-storage@npm:3.95.0"
+"@aws-sdk/lib-storage@npm:^3.97.0":
+  version: 3.97.0
+  resolution: "@aws-sdk/lib-storage@npm:3.97.0"
   dependencies:
     buffer: 5.6.0
     events: 3.3.0
@@ -620,7 +620,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/abort-controller": ^3.0.0
     "@aws-sdk/client-s3": ^3.0.0
-  checksum: b9ce22829584845b49092844dd389344aea60aaa7929e85c5559a34ef21ed02e68e371805711d93261646d4577a7ab943db5976309ffc06b5fbd435f5b725454
+  checksum: 5a272190ab7cdc418f7920054ad191ce814047ba861f15299afd253c9dd5a52699b81ff5b6bfc460dd44232ab49c2a7b2bb5585f3fc6ae87b63f610b5331803a
   languageName: node
   linkType: hard
 
@@ -4713,7 +4713,7 @@ __metadata:
     $: "link:./src"
     "@aws-sdk/abort-controller": ^3.78.0
     "@aws-sdk/client-s3": ^3.95.0
-    "@aws-sdk/lib-storage": ^3.95.0
+    "@aws-sdk/lib-storage": ^3.97.0
     "@aws-sdk/node-config-provider": ^3.80.0
     "@aws-sdk/types": ^3.78.0
     "@commitlint/cli": ^17.0.0
