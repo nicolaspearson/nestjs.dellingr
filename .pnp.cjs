@@ -81,7 +81,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-ordered-imports", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.0"],\
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
-            ["ewl", "npm:1.0.0"],\
+            ["ewl", "npm:1.1.4"],\
             ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.1.0"],\
             ["husky", "npm:8.0.1"],\
@@ -6248,7 +6248,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-ordered-imports", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.0"],\
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:42.0.0"],\
-            ["ewl", "npm:1.0.0"],\
+            ["ewl", "npm:1.1.4"],\
             ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.1.0"],\
             ["husky", "npm:8.0.1"],\
@@ -7205,15 +7205,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["ewl", [\
-        ["npm:1.0.0", {\
-          "packageLocation": "./.yarn/cache/ewl-npm-1.0.0-f2f352c585-149abc3d42.zip/node_modules/ewl/",\
+        ["npm:1.1.4", {\
+          "packageLocation": "./.yarn/cache/ewl-npm-1.1.4-210e52dfd5-af4c26f564.zip/node_modules/ewl/",\
           "packageDependencies": [\
-            ["ewl", "npm:1.0.0"],\
+            ["ewl", "npm:1.1.4"],\
             ["async_hooks", "npm:1.0.0"],\
             ["class-transformer", "npm:0.5.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["express", "npm:4.18.1"],\
-            ["express-winston", "virtual:f2f352c58555b9556be3b559cd32d486d4e26b8adc7a0034e754f46b9279f65a52552dc9064d35e61e4b3d9d2f77586ea5ca8c6b8c2d8904ff694790c73df0a2#npm:4.2.0"],\
+            ["express-winston", "virtual:210e52dfd539684d90eaa9baebd4087851f00892bb894a740110528a13712e1160c3a20cee037b98b30773b5a2ba51b95818b332f7115afb246f1ed3aa3cc4d0#npm:4.2.0"],\
             ["logform", "npm:2.4.0"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["safe-stable-stringify", "npm:2.3.1"],\
@@ -7331,10 +7331,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:f2f352c58555b9556be3b559cd32d486d4e26b8adc7a0034e754f46b9279f65a52552dc9064d35e61e4b3d9d2f77586ea5ca8c6b8c2d8904ff694790c73df0a2#npm:4.2.0", {\
-          "packageLocation": "./.yarn/__virtual__/express-winston-virtual-87aa25f8b5/0/cache/express-winston-npm-4.2.0-e4cfb26486-029529107f.zip/node_modules/express-winston/",\
+        ["virtual:210e52dfd539684d90eaa9baebd4087851f00892bb894a740110528a13712e1160c3a20cee037b98b30773b5a2ba51b95818b332f7115afb246f1ed3aa3cc4d0#npm:4.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/express-winston-virtual-267965e580/0/cache/express-winston-npm-4.2.0-e4cfb26486-029529107f.zip/node_modules/express-winston/",\
           "packageDependencies": [\
-            ["express-winston", "virtual:f2f352c58555b9556be3b559cd32d486d4e26b8adc7a0034e754f46b9279f65a52552dc9064d35e61e4b3d9d2f77586ea5ca8c6b8c2d8904ff694790c73df0a2#npm:4.2.0"],\
+            ["express-winston", "virtual:210e52dfd539684d90eaa9baebd4087851f00892bb894a740110528a13712e1160c3a20cee037b98b30773b5a2ba51b95818b332f7115afb246f1ed3aa3cc4d0#npm:4.2.0"],\
             ["@types/winston", null],\
             ["chalk", "npm:2.4.2"],\
             ["lodash", "npm:4.17.21"],\

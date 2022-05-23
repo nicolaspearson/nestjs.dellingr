@@ -26,6 +26,7 @@ declare const module: {
 
 async function bootstrap(): Promise<void> {
   const ewl = new Ewl({
+    enableRequestLogging: true,
     environment: process.env.ENVIRONMENT || 'development',
     label: 'app',
     logLevel: (process.env.LOG_LEVEL as LogLevel) || 'error',
@@ -48,30 +49,8 @@ async function bootstrap(): Promise<void> {
   // Use the context middleware for request id injection
   app.use(ewl.contextMiddleware);
 
-  // Use express-winston for logging request information
-  app.use(
-    ewl.createHandler({
-      bodyBlacklist: ['accessToken', 'password', 'refreshToken'],
-      colorize: true,
-      expressFormat: false,
-      headerBlacklist: ['cookie', 'token'],
-      ignoreRoute: () => false,
-      meta: true,
-      metaField: 'express',
-      msg: 'HTTP {{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}',
-      requestWhitelist: [
-        'headers',
-        'method',
-        'httpVersion',
-        'originalUrl',
-        'query',
-        'params',
-        'url',
-      ],
-      responseWhitelist: ['headers', 'statusCode'],
-      statusLevels: true,
-    }),
-  );
+  // Use request middleware to inject express metadata.
+  app.use(ewl.requestMiddleware);
 
   const configService = app.get(ConfigService);
 

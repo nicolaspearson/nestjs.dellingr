@@ -4757,7 +4757,7 @@ __metadata:
     eslint-plugin-ordered-imports: ^0.6.0
     eslint-plugin-promise: ^6.0.0
     eslint-plugin-unicorn: ^42.0.0
-    ewl: ^1.0.0
+    ewl: ^1.1.4
     express: ^4.18.1
     helmet: ^5.1.0
     husky: ^8.0.1
@@ -5499,9 +5499,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ewl@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "ewl@npm:1.0.0"
+"ewl@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "ewl@npm:1.1.4"
   dependencies:
     async_hooks: ^1.0.0
     class-transformer: ^0.5.1
@@ -5516,7 +5516,7 @@ __metadata:
     validator: ^13.7.0
     winston: ^3.7.2
     winston-transport: ^4.5.0
-  checksum: 149abc3d42580d1272e0dc50d42ae9784390559eeaa06e8646d7ed67df679015bbe502df2a5fc4035375ff1adf7eb07c10222276fdf37eb5a9e4e680ce36201e
+  checksum: af4c26f5640acebf79893e680dbd3909409ea83a0e5edb19aa14de98173fc051d44a8aa13c69d2c455170500fe8f0540c01ef1d0269c0fc08ed0e1e959657062
   languageName: node
   linkType: hard
 
