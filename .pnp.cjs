@@ -40,7 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@aws-sdk/lib-storage", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:3.97.0"],\
             ["@aws-sdk/node-config-provider", "npm:3.80.0"],\
             ["@aws-sdk/types", "npm:3.78.0"],\
-            ["@commitlint/cli", "npm:17.0.0"],\
+            ["@commitlint/cli", "npm:17.0.1"],\
             ["@commitlint/config-conventional", "npm:17.0.0"],\
             ["@nestjs/cli", "npm:8.2.6"],\
             ["@nestjs/common", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.4.5"],\
@@ -2191,15 +2191,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@commitlint/cli", [\
-        ["npm:17.0.0", {\
-          "packageLocation": "./.yarn/cache/@commitlint-cli-npm-17.0.0-d282c401da-ac7159458e.zip/node_modules/@commitlint/cli/",\
+        ["npm:17.0.1", {\
+          "packageLocation": "./.yarn/cache/@commitlint-cli-npm-17.0.1-f3d480a3b9-7a69ce6eeb.zip/node_modules/@commitlint/cli/",\
           "packageDependencies": [\
-            ["@commitlint/cli", "npm:17.0.0"],\
+            ["@commitlint/cli", "npm:17.0.1"],\
             ["@commitlint/format", "npm:17.0.0"],\
             ["@commitlint/lint", "npm:17.0.0"],\
             ["@commitlint/load", "npm:17.0.0"],\
             ["@commitlint/read", "npm:17.0.0"],\
             ["@commitlint/types", "npm:17.0.0"],\
+            ["execa", "npm:5.1.1"],\
             ["lodash", "npm:4.17.21"],\
             ["resolve-from", "npm:5.0.0"],\
             ["resolve-global", "npm:1.0.0"],\
@@ -6207,7 +6208,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@aws-sdk/lib-storage", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:3.97.0"],\
             ["@aws-sdk/node-config-provider", "npm:3.80.0"],\
             ["@aws-sdk/types", "npm:3.78.0"],\
-            ["@commitlint/cli", "npm:17.0.0"],\
+            ["@commitlint/cli", "npm:17.0.1"],\
             ["@commitlint/config-conventional", "npm:17.0.0"],\
             ["@nestjs/cli", "npm:8.2.6"],\
             ["@nestjs/common", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.4.5"],\
