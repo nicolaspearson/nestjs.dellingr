@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://github.com/nicolaspearson/nestjs.dellingr/compare/v1.0.0...v1.0.1) (2022-05-30)
+
+
+### Bug Fixes
+
+* add markdownlint ignore ([30fa3d6](https://github.com/nicolaspearson/nestjs.dellingr/commit/30fa3d62d8d8cc262e89eb9409bc3efd2cd7455f))
+
 ## 1.0.0 (2022-05-30)
 
 
