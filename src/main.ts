@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { Ewl, LogLevel } from 'ewl';
+import { Ewl } from 'ewl';
 import helmet from 'helmet';
 import { default as nocache } from 'nocache';
 import 'reflect-metadata';
@@ -9,8 +9,8 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppService } from '$/app/app.service';
-import { ConfigService } from '$/common/config/config.service';
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
+import { configService } from '$/common/config/typed-config.module';
 import { API_GLOBAL_PREFIX } from '$/common/constants';
 import { ApiGroup } from '$/common/enum/api-group.enum';
 import { ErrorFilter } from '$/common/filters/error.filter';
@@ -27,11 +27,14 @@ declare const module: {
 async function bootstrap(): Promise<void> {
   const ewl = new Ewl({
     enableRequestLogging: true,
-    environment: process.env.ENVIRONMENT || 'development',
-    label: 'app',
-    logLevel: (process.env.LOG_LEVEL as LogLevel) || 'error',
+    environment: configService.environment,
+    label: 'dellingr',
+    logLevel: configService.logLevel,
+    requestLoggingOptions: {
+      colorize: configService.environment === 'development',
+    },
     useLogstashFormat: false,
-    version: process.env.VERSION || 'local',
+    version: '1.0.1',
   });
 
   // Set the default NestJS logger, allowing EWL to be the proxy.
@@ -51,8 +54,6 @@ async function bootstrap(): Promise<void> {
 
   // Use request middleware to inject express metadata.
   app.use(ewl.requestMiddleware);
-
-  const configService = app.get(ConfigService);
 
   // Helmet can help protect the app from some well-known web
   // vulnerabilities by setting the appropriate HTTP headers
