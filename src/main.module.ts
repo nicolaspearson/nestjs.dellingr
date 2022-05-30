@@ -2,15 +2,15 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppModule } from '$/app/app.module';
-import { DatabaseConfigService } from '$/common/config/database/database.config.service';
-import { createTypedConfigModule } from '$/common/config/typed-config.module';
+import { typedConfigModule } from '$/common/config/typed-config.module';
+import { initializeDataSource } from '$/db/data-source/main.data-source';
 
 @Module({
   imports: [
     AppModule,
-    createTypedConfigModule(),
+    typedConfigModule,
     TypeOrmModule.forRootAsync({
-      useClass: DatabaseConfigService,
+      useFactory: initializeDataSource,
     }),
   ],
 })

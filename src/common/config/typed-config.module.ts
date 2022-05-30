@@ -3,9 +3,11 @@ import {
   DotenvLoaderExtendedOptions,
   TypedConfigModuleExtended,
   dotenvLoaderExtended,
+  selectConfig,
 } from 'nest-typed-config-extended';
 
 import { ConfigService } from '$/common/config/config.service';
+import { DatabaseConfig } from '$/common/config/database/database.config';
 
 export function createTypedConfigModule(options?: DotenvLoaderExtendedOptions): DynamicModule {
   return TypedConfigModuleExtended.forRoot({
@@ -19,3 +21,8 @@ export function createTypedConfigModule(options?: DotenvLoaderExtendedOptions): 
     schema: ConfigService,
   });
 }
+
+export const typedConfigModule = createTypedConfigModule();
+
+export const configService = selectConfig(typedConfigModule, ConfigService);
+export const databaseConfig = selectConfig(typedConfigModule, DatabaseConfig);
