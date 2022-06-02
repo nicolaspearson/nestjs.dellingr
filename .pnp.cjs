@@ -50,10 +50,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/schematics", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.0.11"],\
             ["@nestjs/swagger", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.2.1"],\
             ["@nestjs/testing", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.4.6"],\
-            ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.0-next.2"],\
+            ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.1.0"],\
             ["@types/common-tags", "npm:1.8.1"],\
             ["@types/express", "npm:4.17.13"],\
-            ["@types/jest", "npm:27.5.1"],\
+            ["@types/jest", "npm:28.1.0"],\
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:16.11.38"],\
@@ -3206,17 +3206,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@nestjs/typeorm", [\
-        ["npm:9.0.0-next.2", {\
-          "packageLocation": "./.yarn/cache/@nestjs-typeorm-npm-9.0.0-next.2-43fbb9a555-df962a707a.zip/node_modules/@nestjs/typeorm/",\
+        ["npm:8.1.0", {\
+          "packageLocation": "./.yarn/cache/@nestjs-typeorm-npm-8.1.0-8cf03dad15-80a02723a6.zip/node_modules/@nestjs/typeorm/",\
           "packageDependencies": [\
-            ["@nestjs/typeorm", "npm:9.0.0-next.2"]\
+            ["@nestjs/typeorm", "npm:8.1.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.0-next.2", {\
-          "packageLocation": "./.yarn/__virtual__/@nestjs-typeorm-virtual-7e2beba82f/0/cache/@nestjs-typeorm-npm-9.0.0-next.2-43fbb9a555-df962a707a.zip/node_modules/@nestjs/typeorm/",\
+        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/@nestjs-typeorm-virtual-1bd42c1076/0/cache/@nestjs-typeorm-npm-8.1.0-8cf03dad15-80a02723a6.zip/node_modules/@nestjs/typeorm/",\
           "packageDependencies": [\
-            ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.0-next.2"],\
+            ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.1.0"],\
             ["@nestjs/common", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.4.6"],\
             ["@nestjs/core", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.4.6"],\
             ["@types/nestjs__common", null],\
@@ -3601,10 +3601,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/jest", [\
-        ["npm:27.5.1", {\
-          "packageLocation": "./.yarn/cache/@types-jest-npm-27.5.1-853338350a-be20e39f7a.zip/node_modules/@types/jest/",\
+        ["npm:28.1.0", {\
+          "packageLocation": "./.yarn/cache/@types-jest-npm-28.1.0-6a60b75918-be4d887b24.zip/node_modules/@types/jest/",\
           "packageDependencies": [\
-            ["@types/jest", "npm:27.5.1"],\
+            ["@types/jest", "npm:28.1.0"],\
             ["jest-matcher-utils", "npm:27.5.1"],\
             ["pretty-format", "npm:27.5.1"]\
           ],\
@@ -6171,10 +6171,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/schematics", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.0.11"],\
             ["@nestjs/swagger", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.2.1"],\
             ["@nestjs/testing", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.4.6"],\
-            ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.0-next.2"],\
+            ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.1.0"],\
             ["@types/common-tags", "npm:1.8.1"],\
             ["@types/express", "npm:4.17.13"],\
-            ["@types/jest", "npm:27.5.1"],\
+            ["@types/jest", "npm:28.1.0"],\
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:16.11.38"],\
@@ -6871,7 +6871,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["eslint-plugin-jest", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:26.4.6"],\
             ["@types/eslint", null],\
-            ["@types/jest", "npm:27.5.1"],\
+            ["@types/jest", "npm:28.1.0"],\
             ["@types/typescript-eslint__eslint-plugin", null],\
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.27.0"],\
             ["@typescript-eslint/utils", "virtual:a041c7dfb9ef46f73258605fb1b4582437e25ef75029ef9f11f20608a4e64e06afe69921f46124def89ae8d14dcd70414dfef09221d20d329220626a83b2ab0a#npm:5.26.0"],\
@@ -12676,7 +12676,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/babel-jest", null],\
             ["@types/babel__core", null],\
             ["@types/esbuild", null],\
-            ["@types/jest", "npm:27.5.1"],\
+            ["@types/jest", "npm:28.1.0"],\
             ["@types/typescript", null],\
             ["babel-jest", null],\
             ["bs-logger", "npm:0.2.6"],\
