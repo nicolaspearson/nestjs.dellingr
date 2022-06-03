@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/nicolaspearson/nestjs.dellingr/compare/v1.0.1...v1.0.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* update config service usage in main.ts ([f8afe7f](https://github.com/nicolaspearson/nestjs.dellingr/commit/f8afe7fb482922d59aec67e6d926474c52e9271a))
+
 ### [1.0.1](https://github.com/nicolaspearson/nestjs.dellingr/compare/v1.0.0...v1.0.1) (2022-05-30)
 
 
