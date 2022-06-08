@@ -207,9 +207,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:^3.105.0":
-  version: 3.105.0
-  resolution: "@aws-sdk/client-s3@npm:3.105.0"
+"@aws-sdk/client-s3@npm:^3.107.0":
+  version: 3.107.0
+  resolution: "@aws-sdk/client-s3@npm:3.107.0"
   dependencies:
     "@aws-crypto/sha1-browser": 2.0.0
     "@aws-crypto/sha256-browser": 2.0.0
@@ -265,7 +265,7 @@ __metadata:
     entities: 2.2.0
     fast-xml-parser: 3.19.0
     tslib: ^2.3.1
-  checksum: cbe03c31490294a90e2fc017590ab733d3479611e2e03eb61f80a32a45093b7cf8cd35378c7a498b93cb07aedfd0b6188431c56cea141761de2467944caa8113
+  checksum: 37366f5422e4784a09d85b659b74e47e99c6ef84282c3ecf66ccc3e1d2cd5f38a404e464880f8efa5f235a0e87c84f030eeb96d93157ab97842511af6ca08ca4
   languageName: node
   linkType: hard
 
@@ -581,9 +581,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/lib-storage@npm:^3.105.0":
-  version: 3.105.0
-  resolution: "@aws-sdk/lib-storage@npm:3.105.0"
+"@aws-sdk/lib-storage@npm:^3.107.0":
+  version: 3.107.0
+  resolution: "@aws-sdk/lib-storage@npm:3.107.0"
   dependencies:
     buffer: 5.6.0
     events: 3.3.0
@@ -592,7 +592,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/abort-controller": ^3.0.0
     "@aws-sdk/client-s3": ^3.0.0
-  checksum: 008dba03e038d90ba138e1393c72a1e24db2abd129c38a3a6bed8e38b959d2e831f44ac289612b67923ba5aa2d3a963ee40a122d95430a4bcb6d7274f99f7a3d
+  checksum: 6cca399c5fa32dc5556984b33a989e32eb576bc593015695f8cc8876fdd5350d51b909e96ae16dd51d5c060ba34bf98087823535d64d30260d2b4898d4c50e3e
   languageName: node
   linkType: hard
 
@@ -4705,8 +4705,8 @@ __metadata:
     "#": "link:./test"
     $: "link:./src"
     "@aws-sdk/abort-controller": ^3.78.0
-    "@aws-sdk/client-s3": ^3.105.0
-    "@aws-sdk/lib-storage": ^3.105.0
+    "@aws-sdk/client-s3": ^3.107.0
+    "@aws-sdk/lib-storage": ^3.107.0
     "@aws-sdk/node-config-provider": ^3.80.0
     "@aws-sdk/types": ^3.78.0
     "@commitlint/cli": ^17.0.2
