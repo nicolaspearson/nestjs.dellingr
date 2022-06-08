@@ -35,11 +35,9 @@ COPY --chown=node:node --from=builder /usr/src/app/.yarn/cache ./.yarn/cache
 COPY --chown=node:node --from=builder /usr/src/app/.yarn/plugins ./.yarn/plugins
 COPY --chown=node:node --from=builder /usr/src/app/.yarn/releases ./.yarn/releases
 COPY --chown=node:node --from=builder /usr/src/app/.yarnrc.yml ./.yarnrc.yml
+COPY --chown=node:node --from=builder /usr/src/app/dist ./dist
 COPY --chown=node:node --from=builder /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=builder /usr/src/app/yarn.lock ./yarn.lock
-
-COPY --chown=node:node --from=builder /usr/src/app/package.json ./package.json
-COPY --chown=node:node --from=builder /usr/src/app/dist ./dist
 
 RUN yarn install --immutable
 CMD yarn start
