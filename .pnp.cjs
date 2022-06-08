@@ -56,7 +56,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:28.1.0"],\
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
-            ["@types/node", "npm:16.11.38"],\
+            ["@types/node", "npm:16.11.39"],\
             ["@types/pg", "npm:8.6.5"],\
             ["@types/prettier", "npm:2.6.3"],\
             ["@types/supertest", "npm:2.0.12"],\
@@ -3697,10 +3697,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/node", [\
-        ["npm:16.11.38", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-16.11.38-1c4f053ff5-471df02016.zip/node_modules/@types/node/",\
+        ["npm:16.11.39", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-16.11.39-afb6348701-bc97b9773a.zip/node_modules/@types/node/",\
           "packageDependencies": [\
-            ["@types/node", "npm:16.11.38"]\
+            ["@types/node", "npm:16.11.39"]\
           ],\
           "linkType": "HARD"\
         }],\
@@ -6206,7 +6206,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:28.1.0"],\
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
-            ["@types/node", "npm:16.11.38"],\
+            ["@types/node", "npm:16.11.39"],\
             ["@types/pg", "npm:8.6.5"],\
             ["@types/prettier", "npm:2.6.3"],\
             ["@types/supertest", "npm:2.0.12"],\
