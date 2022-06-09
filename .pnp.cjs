@@ -71,7 +71,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\
             ["dotenv", "npm:16.0.1"],\
-            ["dtsgenerator", "npm:3.15.1"],\
+            ["dtsgenerator", "npm:3.16.0"],\
             ["eslint", "npm:8.17.0"],\
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:3.2.0"],\
@@ -6221,7 +6221,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\
             ["dotenv", "npm:16.0.1"],\
-            ["dtsgenerator", "npm:3.15.1"],\
+            ["dtsgenerator", "npm:3.16.0"],\
             ["eslint", "npm:8.17.0"],\
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:3.2.0"],\
@@ -6419,18 +6419,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["dtsgenerator", [\
-        ["npm:3.15.1", {\
-          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.15.1-cb7747b27f-58e696adf9.zip/node_modules/dtsgenerator/",\
+        ["npm:3.16.0", {\
+          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.16.0-c5b815b652-e894b17d7a.zip/node_modules/dtsgenerator/",\
           "packageDependencies": [\
-            ["dtsgenerator", "npm:3.15.1"],\
+            ["dtsgenerator", "npm:3.16.0"],\
             ["commander", "npm:9.3.0"],\
             ["cross-fetch", "npm:3.1.5"],\
             ["debug", "virtual:b86a9fb34323a98c6519528ed55faa0d9b44ca8879307c0b29aa384bde47ff59a7d0c9051b31246f14521dfb71ba3c5d6d0b35c29fffc17bf875aa6ad977d9e8#npm:4.3.4"],\
-            ["glob", "npm:7.2.3"],\
+            ["glob", "npm:8.0.3"],\
             ["https-proxy-agent", "npm:5.0.1"],\
             ["js-yaml", "npm:4.1.0"],\
             ["tslib", "npm:2.4.0"],\
-            ["typescript", "patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"]\
+            ["typescript", "patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=7ad353"]\
           ],\
           "linkType": "HARD"\
         }]\
