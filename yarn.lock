@@ -4339,7 +4339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^9.0.0":
+"commander@npm:^9.3.0":
   version: 9.3.0
   resolution: "commander@npm:9.3.0"
   checksum: d421ce66fee25792a1470c69aa8d1b86434bf873a96483aa92c8267f81a6f20c6f7c426f5e82f88ac50a8ec4855d3f2787aebcdef8aa559e1080a2337a95a217
@@ -4740,7 +4740,7 @@ __metadata:
     class-validator: ^0.13.2
     common-tags: ^1.8.2
     dotenv: ^16.0.1
-    dtsgenerator: ^3.15.1
+    dtsgenerator: ^3.16.0
     eslint: ^8.17.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-eslint-comments: ^3.2.0
@@ -4918,21 +4918,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dtsgenerator@npm:^3.15.1":
-  version: 3.15.1
-  resolution: "dtsgenerator@npm:3.15.1"
+"dtsgenerator@npm:^3.16.0":
+  version: 3.16.0
+  resolution: "dtsgenerator@npm:3.16.0"
   dependencies:
-    commander: ^9.0.0
+    commander: ^9.3.0
     cross-fetch: ^3.1.5
-    debug: ^4.3.3
-    glob: ^7.2.0
-    https-proxy-agent: ^5.0.0
+    debug: ^4.3.4
+    glob: ^8.0.3
+    https-proxy-agent: ^5.0.1
     js-yaml: ^4.1.0
-    tslib: ^2.3.1
-    typescript: ^4.6.2
+    tslib: ^2.4.0
+    typescript: ^4.7.3
   bin:
     dtsgen: bin/dtsgen
-  checksum: 58e696adf9cba5eb051711524e9825af3e068b892c1fd61138ee72b2933d094f651fff49d9caa850c125b698ed8da612cc599d2cbb9f67e90000b74a4fd92349
+  checksum: e894b17d7aa2acfcba4bbc45878d28845929b467d8b2f042ff5557bc9594a096b77729850b0cf7d7b113f9b37b0dfd8424c3e5ef2ce28ebfe499f90c5eaa4fc8
   languageName: node
   linkType: hard
 
@@ -6298,7 +6298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"https-proxy-agent@npm:^5.0.0":
+"https-proxy-agent@npm:^5.0.0, https-proxy-agent@npm:^5.0.1":
   version: 5.0.1
   resolution: "https-proxy-agent@npm:5.0.1"
   dependencies:
@@ -10394,7 +10394,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.4.0, tslib@npm:^2.1.0, tslib@npm:^2.3.1":
+"tslib@npm:2.4.0, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0":
   version: 2.4.0
   resolution: "tslib@npm:2.4.0"
   checksum: 8c4aa6a3c5a754bf76aefc38026134180c053b7bd2f81338cb5e5ebf96fefa0f417bff221592bf801077f5bf990562f6264fecbc42cd3309b33872cb6fc3b113
@@ -10596,7 +10596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.2, typescript@npm:^4.6.4":
+"typescript@npm:^4.6.4":
   version: 4.7.2
   resolution: "typescript@npm:4.7.2"
   bin:
@@ -10626,7 +10626,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.2#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
   version: 4.7.2
   resolution: "typescript@patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"
   bin:
