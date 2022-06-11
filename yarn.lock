@@ -581,10 +581,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/lib-storage@npm:^3.107.0":
-  version: 3.107.0
-  resolution: "@aws-sdk/lib-storage@npm:3.107.0"
+"@aws-sdk/lib-storage@npm:^3.108.1":
+  version: 3.108.1
+  resolution: "@aws-sdk/lib-storage@npm:3.108.1"
   dependencies:
+    "@aws-sdk/smithy-client": 3.99.0
     buffer: 5.6.0
     events: 3.3.0
     stream-browserify: 3.0.0
@@ -592,7 +593,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/abort-controller": ^3.0.0
     "@aws-sdk/client-s3": ^3.0.0
-  checksum: 6cca399c5fa32dc5556984b33a989e32eb576bc593015695f8cc8876fdd5350d51b909e96ae16dd51d5c060ba34bf98087823535d64d30260d2b4898d4c50e3e
+  checksum: 6f49d56cc2d3bea0db17b0be63d104b46e33d149deb4ca22722cf0cfd079e9e3e5ba58e906c1237b6a24570cc898b2f313473ad3dd8b3af3ff3636a17d404c60
   languageName: node
   linkType: hard
 
@@ -918,7 +919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/smithy-client@npm:*, @aws-sdk/smithy-client@npm:3.99.0":
+"@aws-sdk/smithy-client@npm:3.99.0":
   version: 3.99.0
   resolution: "@aws-sdk/smithy-client@npm:3.99.0"
   dependencies:
@@ -4706,7 +4707,7 @@ __metadata:
     $: "link:./src"
     "@aws-sdk/abort-controller": ^3.78.0
     "@aws-sdk/client-s3": ^3.107.0
-    "@aws-sdk/lib-storage": ^3.107.0
+    "@aws-sdk/lib-storage": ^3.108.1
     "@aws-sdk/node-config-provider": ^3.80.0
     "@aws-sdk/types": ^3.78.0
     "@commitlint/cli": ^17.0.2
