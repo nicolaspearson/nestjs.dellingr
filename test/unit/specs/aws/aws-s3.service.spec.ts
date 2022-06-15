@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { S3Client } from '@aws-sdk/client-s3';
 import { Progress, Upload } from '@aws-sdk/lib-storage';
-import { mockClient, mockLibStorageUpload } from 'aws-sdk-client-mock';
+import { mockClient } from 'aws-sdk-client-mock';
+import { mockLibStorageUpload } from 'aws-sdk-client-mock/libStorage';
 
 import { Test, TestingModule } from '@nestjs/testing';
 
