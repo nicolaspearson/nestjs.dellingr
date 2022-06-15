@@ -2201,7 +2201,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:^8.4.7":
+"@nestjs/common@npm:^8.4.5, @nestjs/common@npm:^8.4.7":
   version: 8.4.7
   resolution: "@nestjs/common@npm:8.4.7"
   dependencies:
@@ -4740,7 +4740,7 @@ __metadata:
     jsonwebtoken: ^8.5.1
     markdownlint-cli: ^0.31.1
     multer: ^1.4.5-lts.1
-    nest-typed-config-extended: ^0.0.6
+    nest-typed-config-extended: ^0.0.5
     nocache: ^3.0.4
     p-memoize: ^4.0.4
     pg: ^8.7.3
@@ -8216,15 +8216,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nest-typed-config-extended@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "nest-typed-config-extended@npm:0.0.6"
+"nest-typed-config-extended@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "nest-typed-config-extended@npm:0.0.5"
   dependencies:
-    "@nestjs/common": ^8.4.7
+    "@nestjs/common": ^8.4.5
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
     nest-typed-config: ^2.4.1
-  checksum: 860ffd0194e929dd097c7a98b796448a3edd2fc33c35a6e8b0ab7cee2c396f49ab59263783707041084e518c5ea8976f5b65ed9fd2b7bef17accce9ec1893276
+  checksum: b7bf8dcf9b0f363cc0976306ad82c9111d71c844591bcb68ded9f0d4cb7edbf1e03c9e01eb0de44c6e5540d9fba79cd01a4fb061ef797dbde0aa350a4515dba9
   languageName: node
   linkType: hard
 
