@@ -66,7 +66,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.28.0"],\
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.28.0"],\
             ["async_hooks", "npm:1.0.0"],\
-            ["aws-sdk-client-mock", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.2"],\
+            ["aws-sdk-client-mock", "npm:1.0.0"],\
             ["class-transformer", "npm:0.5.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\
@@ -4861,30 +4861,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["aws-sdk-client-mock", [\
-        ["npm:0.6.2", {\
-          "packageLocation": "./.yarn/cache/aws-sdk-client-mock-npm-0.6.2-e292cb24ab-bd94429907.zip/node_modules/aws-sdk-client-mock/",\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/aws-sdk-client-mock-npm-1.0.0-677e6a239a-8f8fabd31e.zip/node_modules/aws-sdk-client-mock/",\
           "packageDependencies": [\
-            ["aws-sdk-client-mock", "npm:0.6.2"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.2", {\
-          "packageLocation": "./.yarn/__virtual__/aws-sdk-client-mock-virtual-7defd1ca27/0/cache/aws-sdk-client-mock-npm-0.6.2-e292cb24ab-bd94429907.zip/node_modules/aws-sdk-client-mock/",\
-          "packageDependencies": [\
-            ["aws-sdk-client-mock", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.2"],\
-            ["@aws-sdk/client-s3", "npm:3.110.0"],\
-            ["@aws-sdk/types", "npm:3.110.0"],\
-            ["@types/aws-sdk__client-s3", null],\
-            ["@types/aws-sdk__types", null],\
+            ["aws-sdk-client-mock", "npm:1.0.0"],\
             ["@types/sinon", "npm:10.0.10"],\
             ["sinon", "npm:11.1.2"],\
             ["tslib", "npm:2.4.0"]\
-          ],\
-          "packagePeers": [\
-            "@aws-sdk/client-s3",\
-            "@aws-sdk/types",\
-            "@types/aws-sdk__client-s3",\
-            "@types/aws-sdk__types"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6232,7 +6215,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.28.0"],\
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.28.0"],\
             ["async_hooks", "npm:1.0.0"],\
-            ["aws-sdk-client-mock", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.2"],\
+            ["aws-sdk-client-mock", "npm:1.0.0"],\
             ["class-transformer", "npm:0.5.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\

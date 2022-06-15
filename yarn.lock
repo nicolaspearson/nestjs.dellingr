@@ -3634,17 +3634,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk-client-mock@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "aws-sdk-client-mock@npm:0.6.2"
+"aws-sdk-client-mock@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "aws-sdk-client-mock@npm:1.0.0"
   dependencies:
     "@types/sinon": 10.0.10
     sinon: ^11.1.1
     tslib: ^2.1.0
-  peerDependencies:
-    "@aws-sdk/client-s3": ^3.0.0
-    "@aws-sdk/types": ^3.0.0
-  checksum: bd94429907850a4377f397db2d18c948442e5ba1106b771e017596c08309fc78c8927090a9e6e14a9e7a59e73b1acb52f3439990924a056e2911e2adfbe684df
+  checksum: 8f8fabd31efc1ead0920f532e17a28521fcfd4b9a04b048de1c44083a85cf1ea443a5af713354a59651f3d51d58de35133323cebe0b2294ce8b087ee8bdaea62
   languageName: node
   linkType: hard
 
@@ -4753,7 +4750,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.28.0
     "@typescript-eslint/parser": ^5.28.0
     async_hooks: ^1.0.0
-    aws-sdk-client-mock: ^0.6.2
+    aws-sdk-client-mock: ^1.0.0
     class-transformer: ^0.5.1
     class-validator: ^0.13.2
     common-tags: ^1.8.2
