@@ -8,6 +8,7 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import { NewRelicInterceptor } from '$/apm/interceptors/newrelic.interceptor';
 import { AppService } from '$/app/app.service';
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
 import { configService } from '$/common/config/typed-config.module';
@@ -72,6 +73,7 @@ async function bootstrap(): Promise<void> {
   // Register global filters, pipes, and interceptors
   app.useGlobalFilters(new ErrorFilter());
   app.useGlobalPipes(new DtoValidationPipe());
+  app.useGlobalInterceptors(new NewRelicInterceptor());
 
   // Set the global route prefix
   app.setGlobalPrefix(API_GLOBAL_PREFIX);
