@@ -8,7 +8,7 @@ See the [documentation](https://www.artillery.io/docs) for more information.
 ## Usage
 
 1. Install the CLI: `npm install -g artillery`
-2. Run the tests: `artillery run ./scripts/artillery/registration.yml`
+2. Run the tests: `artillery run ./scripts/artillery/api.yml`
 
 ### Results
 

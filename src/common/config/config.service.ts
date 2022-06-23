@@ -5,6 +5,7 @@ import {
   IsIn,
   IsNotEmpty,
   IsNotEmptyObject,
+  IsString,
   ValidateNested,
 } from 'class-validator';
 
@@ -55,6 +56,18 @@ export class ConfigService {
 
   @IsIn(['verbose', 'debug', 'log', 'warn', 'error'])
   readonly logLevel: LogLevel = 'error';
+
+  @ParseBoolean()
+  @IsBoolean()
+  readonly newRelicApplicationLoggingForwardingEnabled = true;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly newRelicAppName = 'dellingr';
+
+  @IsString()
+  @IsNotEmpty()
+  readonly newRelicLicenseKey!: string;
 
   // The node runtime environment
   @IsIn([Environment.Development, Environment.Production])

@@ -1,0 +1,48 @@
+config:
+  target: 'http://localhost:3000/api/v1'
+  phases:
+    - duration: 100
+      arrivalRate: 15
+      rampTo: 30
+      name: Warm up
+    - duration: 150
+      arrivalRate: 30
+      rampTo: 75
+      name: Ramp up (level 1)
+    - duration: 300
+      arrivalRate: 120
+      name: Ramp up (level 2)
+
+scenarios:
+  - name: 'user-registration-pass'
+    flow:
+      - post:
+          url: '/users/registration'
+          json:
+            email: 'artillery-user+{{ $randomNumber(1,10000000000) }}@example.com'
+            password: 'myS3cretP@55w0rd!'
+  - name: 'user-registration-fail'
+    flow:
+      - post:
+          url: '/users/registration'
+          json:
+            email: 'not-an-email'
+            password: 'secret'
+  - name: 'login-pass'
+    flow:
+      - post:
+          url: '/auth/login'
+          json:
+            email: 'john.doe@example.com'
+            password: 'myS3cretP@55w0rd!'
+  - name: 'login-fail'
+    flow:
+      - post:
+          url: '/auth/login'
+          json:
+            email: 'john.doe@example.com'
+            password: 'secret'
+  - name: 'health'
+    flow:
+      - get:
+          url: '/health'
