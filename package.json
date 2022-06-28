@@ -9,7 +9,7 @@
   "author": "Nicolas Pearson",
   "license": "MIT",
   "engines": {
-    "node": ">=v16.15.1",
+    "node": ">=v18.4.0",
     "npm": "please-use-yarn",
     "yarn": ">=3.2.1"
   },
@@ -104,7 +104,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/multer": "^1.4.7",
     "@types/newrelic": "^7.0.3",
-    "@types/node": "^16.11.41",
+    "@types/node": "^18.0.0",
     "@types/pg": "^8.6.5",
     "@types/prettier": "^2.6.3",
     "@types/supertest": "^2.0.12",
