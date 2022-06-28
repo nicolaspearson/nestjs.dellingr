@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/nicolaspearson/nestjs.dellingr/compare/v1.0.2...v1.1.0) (2022-06-28)
+
+
+### Features
+
+* integrate newrelic ([#260](https://github.com/nicolaspearson/nestjs.dellingr/issues/260)) ([2bb9f01](https://github.com/nicolaspearson/nestjs.dellingr/commit/2bb9f013f0d0cfd4c8b2d4ddf07b96c55346894e))
+
+
+### Bug Fixes
+
+* pin aws-sdk-js-v3 monorepo ^3.118.1 ([#268](https://github.com/nicolaspearson/nestjs.dellingr/issues/268)) ([ad7b6bd](https://github.com/nicolaspearson/nestjs.dellingr/commit/ad7b6bd2142da98bbeb3498738e13a86056affb8))
+* remove redundant dockerfile copy commands ([421f813](https://github.com/nicolaspearson/nestjs.dellingr/commit/421f813f5331b96bb156f0c458d878d0f4cb6f1f))
+
 ## [1.0.2](https://github.com/nicolaspearson/nestjs.dellingr/compare/v1.0.1...v1.0.2) (2022-06-03)
 
 
