@@ -239,9 +239,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:^3.118.1":
-  version: 3.118.1
-  resolution: "@aws-sdk/client-s3@npm:3.118.1"
+"@aws-sdk/client-s3@npm:^3.120.0":
+  version: 3.120.0
+  resolution: "@aws-sdk/client-s3@npm:3.120.0"
   dependencies:
     "@aws-crypto/sha1-browser": 2.0.0
     "@aws-crypto/sha256-browser": 2.0.0
@@ -249,9 +249,9 @@ __metadata:
     "@aws-sdk/client-sts": 3.118.1
     "@aws-sdk/config-resolver": 3.110.0
     "@aws-sdk/credential-provider-node": 3.118.1
-    "@aws-sdk/eventstream-serde-browser": 3.118.1
+    "@aws-sdk/eventstream-serde-browser": 3.120.0
     "@aws-sdk/eventstream-serde-config-resolver": 3.110.0
-    "@aws-sdk/eventstream-serde-node": 3.118.1
+    "@aws-sdk/eventstream-serde-node": 3.120.0
     "@aws-sdk/fetch-http-handler": 3.110.0
     "@aws-sdk/hash-blob-browser": 3.110.0
     "@aws-sdk/hash-node": 3.110.0
@@ -297,7 +297,7 @@ __metadata:
     entities: 2.2.0
     fast-xml-parser: 3.19.0
     tslib: ^2.3.1
-  checksum: fcd87b0e766d142719cebb941b332ebf8c26acd8fb5b6e4a32007de76767ec70449368f5539818c3580b0f046cde9aefb10cf1bc6ac6443cb01b5226ef59f6d2
+  checksum: ac1b57a46afac4c8c0ece9bfdebac400e2b3c849e9874bbe37b30ff429f0c6f514a8da4d3f78a26a4ea58b7030213362466ef67c6fea2a2f11e22769db8284fd
   languageName: node
   linkType: hard
 
@@ -491,26 +491,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/eventstream-marshaller@npm:3.118.1":
-  version: 3.118.1
-  resolution: "@aws-sdk/eventstream-marshaller@npm:3.118.1"
+"@aws-sdk/eventstream-codec@npm:3.119.0":
+  version: 3.119.0
+  resolution: "@aws-sdk/eventstream-codec@npm:3.119.0"
   dependencies:
     "@aws-crypto/crc32": 2.0.0
     "@aws-sdk/types": 3.110.0
     "@aws-sdk/util-hex-encoding": 3.109.0
     tslib: ^2.3.1
-  checksum: df977cca4a8b8f3a88d6fdd8de5d5e81da3f54faa8f3727ac6dc9fc841826225fdd2d7add7c4023f0ade0cb2167f2c2f4267159952a16de9e2f61d6c19427911
+  checksum: 1b843c4a9d2b0cc45f3824aef53ecd45b4b264403866561091cebc6f5291a9b935a565168061139f0d9cdaa11257ee12a288efd9fe96064082529c7a92151799
   languageName: node
   linkType: hard
 
-"@aws-sdk/eventstream-serde-browser@npm:3.118.1":
-  version: 3.118.1
-  resolution: "@aws-sdk/eventstream-serde-browser@npm:3.118.1"
+"@aws-sdk/eventstream-serde-browser@npm:3.120.0":
+  version: 3.120.0
+  resolution: "@aws-sdk/eventstream-serde-browser@npm:3.120.0"
   dependencies:
-    "@aws-sdk/eventstream-serde-universal": 3.118.1
+    "@aws-sdk/eventstream-serde-universal": 3.120.0
     "@aws-sdk/types": 3.110.0
     tslib: ^2.3.1
-  checksum: 14f0d5d22fa8a08862549ab2f322f7c04249facca25f99f8382227c861fcc4ad0430fead463201dd55835afc7fa2f783c82e70d8a5f011c06f05d2bf714a8d4e
+  checksum: 58f17c536e0f01d9b68479cf5e124263bfb244b6da8aede1f19b211029d782f2ffee762a2e07645f7275582a476f2862de6f8f764aa4602dc7b34eb387e6f110
   languageName: node
   linkType: hard
 
@@ -524,25 +524,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/eventstream-serde-node@npm:3.118.1":
-  version: 3.118.1
-  resolution: "@aws-sdk/eventstream-serde-node@npm:3.118.1"
+"@aws-sdk/eventstream-serde-node@npm:3.120.0":
+  version: 3.120.0
+  resolution: "@aws-sdk/eventstream-serde-node@npm:3.120.0"
   dependencies:
-    "@aws-sdk/eventstream-serde-universal": 3.118.1
+    "@aws-sdk/eventstream-serde-universal": 3.120.0
     "@aws-sdk/types": 3.110.0
     tslib: ^2.3.1
-  checksum: 57d0d8505f6d4a3ff9d7a793e5e489ab642a703a735b489bacb8e81c4aa6f8e38999d025fc6c4398efa7b8e5742edf4a7075e984be79e625a0a736bb76842580
+  checksum: e6de82734917e797051c2b9489ddd21c7ee10efe325fb9a003281e0d6a1655cc095b42814202d6337eca676de1c0197a36510da03c8b41bb63e0db3bffe03d4f
   languageName: node
   linkType: hard
 
-"@aws-sdk/eventstream-serde-universal@npm:3.118.1":
-  version: 3.118.1
-  resolution: "@aws-sdk/eventstream-serde-universal@npm:3.118.1"
+"@aws-sdk/eventstream-serde-universal@npm:3.120.0":
+  version: 3.120.0
+  resolution: "@aws-sdk/eventstream-serde-universal@npm:3.120.0"
   dependencies:
-    "@aws-sdk/eventstream-marshaller": 3.118.1
+    "@aws-sdk/eventstream-codec": 3.119.0
     "@aws-sdk/types": 3.110.0
     tslib: ^2.3.1
-  checksum: 485a60081092da1239f91f138df7ac360911a819c6be6cbe599d20d198347769e0d40567c20f3d25707b0f911c3877154dac567b3fd0af2006f6344e5f365b4e
+  checksum: e5b6f540b41a94f4439e9b434d05594e12777fef86d3c69fcfa91272b2ab0036e7e1e3fcd4b108e67a96c22194c9fa77da8e9996e03acb2ac4827e7cd08dd819
   languageName: node
   linkType: hard
 
@@ -611,9 +611,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/lib-storage@npm:^3.118.1":
-  version: 3.118.1
-  resolution: "@aws-sdk/lib-storage@npm:3.118.1"
+"@aws-sdk/lib-storage@npm:^3.120.0":
+  version: 3.120.0
+  resolution: "@aws-sdk/lib-storage@npm:3.120.0"
   dependencies:
     "@aws-sdk/smithy-client": 3.110.0
     buffer: 5.6.0
@@ -623,7 +623,7 @@ __metadata:
   peerDependencies:
     "@aws-sdk/abort-controller": ^3.0.0
     "@aws-sdk/client-s3": ^3.0.0
-  checksum: 274326bbf402ab4b9840dc037838de8f7538e1bad8be4de893801ba60db6da3014eabaa2b830e180eaea4382de6be15fd897a83b81046f708a49b844e3e6be80
+  checksum: bb7e8a5bd055f89d545c430df8ed47f06f2c31aa29cb64344ef48009dcab0465221f258f2d0bf193200ebfbfe555d9c60620eed943e986326b1f5a25a4f5b7f5
   languageName: node
   linkType: hard
 
@@ -4890,8 +4890,8 @@ __metadata:
     "#": "link:./test"
     $: "link:./src"
     "@aws-sdk/abort-controller": ^3.110.0
-    "@aws-sdk/client-s3": ^3.118.1
-    "@aws-sdk/lib-storage": ^3.118.1
+    "@aws-sdk/client-s3": ^3.120.0
+    "@aws-sdk/lib-storage": ^3.120.0
     "@aws-sdk/node-config-provider": ^3.110.0
     "@aws-sdk/types": ^3.110.0
     "@commitlint/cli": ^17.0.3
