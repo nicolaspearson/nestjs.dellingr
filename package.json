@@ -109,7 +109,7 @@
     "@types/prettier": "^2.6.3",
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
-    "@types/validator": "^13.7.3",
+    "@types/validator": "^13.7.4",
     "@types/webpack-env": "^1.17.0",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",
