@@ -4949,7 +4949,7 @@ __metadata:
     nest-typed-config-extended: ^0.0.6
     newrelic: ^8.14.1
     nocache: ^3.0.4
-    p-memoize: ^4.0.4
+    p-memoize: ^7.0.0
     pg: ^8.7.3
     prettier: ^2.7.1
     reflect-metadata: ^0.1.13
@@ -7963,15 +7963,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"map-age-cleaner@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "map-age-cleaner@npm:0.1.3"
-  dependencies:
-    p-defer: ^1.0.0
-  checksum: cb2804a5bcb3cbdfe4b59066ea6d19f5e7c8c196cd55795ea4c28f792b192e4c442426ae52524e5e1acbccf393d3bddacefc3d41f803e66453f6c4eda3650bc1
-  languageName: node
-  linkType: hard
-
 "map-obj@npm:^1.0.0":
   version: 1.0.1
   resolution: "map-obj@npm:1.0.1"
@@ -8167,10 +8158,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mimic-fn@npm:^3.0.0":
-  version: 3.1.0
-  resolution: "mimic-fn@npm:3.1.0"
-  checksum: f7b167f9115b8bbdf2c3ee55dce9149d14be9e54b237259c4bc1d8d0512ea60f25a1b323f814eb1fe8f5a541662804bcfcfff3202ca58df143edb986849d58db
+"mimic-fn@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "mimic-fn@npm:4.0.0"
+  checksum: 995dcece15ee29aa16e188de6633d43a3db4611bcf93620e7e62109ec41c79c0f34277165b8ce5e361205049766e371851264c21ac64ca35499acb5421c2ba56
   languageName: node
   linkType: hard
 
@@ -8770,13 +8761,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-defer@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "p-defer@npm:1.0.0"
-  checksum: 4271b935c27987e7b6f229e5de4cdd335d808465604644cb7b4c4c95bef266735859a93b16415af8a41fd663ee9e3b97a1a2023ca9def613dba1bad2a0da0c7b
-  languageName: node
-  linkType: hard
-
 "p-limit@npm:^1.1.0":
   version: 1.3.0
   resolution: "p-limit@npm:1.3.0"
@@ -8786,7 +8770,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-limit@npm:^2.2.0, p-limit@npm:^2.2.2":
+"p-limit@npm:^2.2.0":
   version: 2.3.0
   resolution: "p-limit@npm:2.3.0"
   dependencies:
@@ -8840,31 +8824,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-memoize@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "p-memoize@npm:4.0.4"
+"p-memoize@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "p-memoize@npm:7.0.0"
   dependencies:
-    map-age-cleaner: ^0.1.3
-    mimic-fn: ^3.0.0
-    p-settle: ^4.1.1
-  checksum: 64bcd13b03899c5cffd26fae01e47211f8d01d60bd7051b69918604ddf5acd0e7fa4c40ca1f5a63a09c0713ac17ac61c806fee768a826d1ca9cf0d24e77e6769
-  languageName: node
-  linkType: hard
-
-"p-reflect@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "p-reflect@npm:2.1.0"
-  checksum: eed3df781b03ed14527c9ff479f423a9d74cb8f3f68fcd1d9e22a400033db80fb132236ba542b1ea6e7e2948608932e7ecceeb9e8d964f564a3ac2d2d73c4721
-  languageName: node
-  linkType: hard
-
-"p-settle@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "p-settle@npm:4.1.1"
-  dependencies:
-    p-limit: ^2.2.2
-    p-reflect: ^2.1.0
-  checksum: 83b3dcffef469e572284b2f36ad78db67b271376ef755ed0f91e4ceaf7d81905fb88aeb7e0aa411c7d5cbf74bf9dec8715a241f2d058f712d0f67827140bf1c0
+    mimic-fn: ^4.0.0
+  checksum: c3f4a607648d643c715f7ac8341b780c44483ed77bc478ef61b13ffe840f248503fa6be904504c0ab550a7af0fac2e5f02e2e7414e121d9768d3abbefc3a908c
   languageName: node
   linkType: hard
 
