@@ -69,6 +69,7 @@
     "@nestjs/platform-express": "^8.4.7",
     "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.1.4",
+    "@newrelic/winston-enricher": "^3.2.0",
     "async_hooks": "^1.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
@@ -88,7 +89,8 @@
     "swagger-ui-express": "^4.4.0",
     "typeorm": "^0.3.7",
     "uuid": "^8.3.2",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "winston": "^3.8.1"
   },
   "devDependencies": {
     "#": "link:./test",
@@ -104,7 +106,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/multer": "^1.4.7",
     "@types/newrelic": "^7.0.3",
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.0.1",
     "@types/pg": "^8.6.5",
     "@types/prettier": "^2.6.3",
     "@types/supertest": "^2.0.12",
@@ -123,7 +125,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-ordered-imports": "^0.6.0",
     "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-unicorn": "^42.0.0",
+    "eslint-plugin-unicorn": "^43.0.0",
     "husky": "^8.0.1",
     "jest": "^28.1.2",
     "jest-mock": "^28.1.1",

@@ -1,8 +1,10 @@
+import newrelicFormatter from '@newrelic/winston-enricher';
 import 'dotenv/config';
 import { Ewl } from 'ewl';
 import helmet from 'helmet';
 import { default as nocache } from 'nocache';
 import 'reflect-metadata';
+import winston from 'winston';
 
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
@@ -35,8 +37,14 @@ async function bootstrap(): Promise<void> {
       colorize: configService.environment === 'development',
     },
     useLogstashFormat: false,
-    version: '1.0.1',
+    version: '1.1.0',
   });
+
+  const newrelicWinstonFormatter = newrelicFormatter(winston);
+  ewl.logger.format = winston.format.combine(
+    winston.format.label({ label: 'test' }),
+    newrelicWinstonFormatter(),
+  );
 
   // Set the default NestJS logger, allowing EWL to be the proxy.
   const app = await NestFactory.create(MainModule, {
@@ -101,4 +109,5 @@ async function bootstrap(): Promise<void> {
   }
 }
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 void bootstrap();

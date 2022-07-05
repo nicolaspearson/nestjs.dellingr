@@ -21,4 +21,5 @@ export async function bootstrap(): Promise<void> {
   process.exit(0);
 }
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 void bootstrap();
