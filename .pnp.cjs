@@ -58,7 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/newrelic", "npm:7.0.3"],\
-            ["@types/node", "npm:18.0.1"],\
+            ["@types/node", "npm:18.0.3"],\
             ["@types/pg", "npm:8.6.5"],\
             ["@types/prettier", "npm:2.6.3"],\
             ["@types/supertest", "npm:2.0.12"],\
@@ -3995,10 +3995,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:18.0.1", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-18.0.1-35e22b3e26-be14b251c5.zip/node_modules/@types/node/",\
+        ["npm:18.0.3", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-18.0.3-c2cbe1f26e-5dec59fbbc.zip/node_modules/@types/node/",\
           "packageDependencies": [\
-            ["@types/node", "npm:18.0.1"]\
+            ["@types/node", "npm:18.0.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6511,7 +6511,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/newrelic", "npm:7.0.3"],\
-            ["@types/node", "npm:18.0.1"],\
+            ["@types/node", "npm:18.0.3"],\
             ["@types/pg", "npm:8.6.5"],\
             ["@types/prettier", "npm:2.6.3"],\
             ["@types/supertest", "npm:2.0.12"],\
