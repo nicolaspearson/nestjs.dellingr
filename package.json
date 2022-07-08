@@ -65,7 +65,7 @@
     "@aws-sdk/node-config-provider": "^3.110.0",
     "@nestjs/common": "^9.0.1",
     "@nestjs/core": "^9.0.1",
-    "@nestjs/jwt": "^8.0.1",
+    "@nestjs/jwt": "^9.0.0",
     "@nestjs/platform-express": "^9.0.1",
     "@nestjs/swagger": "^6.0.1",
     "@nestjs/typeorm": "^8.1.4",
