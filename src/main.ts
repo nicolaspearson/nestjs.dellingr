@@ -1,16 +1,13 @@
-import newrelicFormatter from '@newrelic/winston-enricher';
 import 'dotenv/config';
 import { Ewl } from 'ewl';
 import helmet from 'helmet';
 import { default as nocache } from 'nocache';
 import 'reflect-metadata';
-import winston from 'winston';
 
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-import { NewRelicInterceptor } from '$/apm/interceptors/newrelic.interceptor';
 import { AppService } from '$/app/app.service';
 import { getContentResourcePolicy } from '$/common/config/helmet.config';
 import { configService } from '$/common/config/typed-config.module';
@@ -39,12 +36,6 @@ async function bootstrap(): Promise<void> {
     useLogstashFormat: false,
     version: '1.1.0',
   });
-
-  const newrelicWinstonFormatter = newrelicFormatter(winston);
-  ewl.logger.format = winston.format.combine(
-    winston.format.label({ label: 'test' }),
-    newrelicWinstonFormatter(),
-  );
 
   // Set the default NestJS logger, allowing EWL to be the proxy.
   const app = await NestFactory.create(MainModule, {
@@ -81,7 +72,6 @@ async function bootstrap(): Promise<void> {
   // Register global filters, pipes, and interceptors
   app.useGlobalFilters(new ErrorFilter());
   app.useGlobalPipes(new DtoValidationPipe());
-  app.useGlobalInterceptors(new NewRelicInterceptor());
 
   // Set the global route prefix
   app.setGlobalPrefix(API_GLOBAL_PREFIX);

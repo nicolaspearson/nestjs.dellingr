@@ -16,9 +16,6 @@ coverage
 # Output
 dist
 
-# New Relic
-newrelic_agent.log
-
 # Yarn (https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored)
 .yarn/*
 !.yarn/**/*.zip

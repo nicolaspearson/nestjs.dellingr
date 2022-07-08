@@ -26,7 +26,5 @@ process.env.JWT__ISSUER = 'support@dellingr.com';
 process.env.JWT__SECRET = 'secretKey';
 process.env.JWT__TOKEN_EXPIRATION = '15m';
 process.env.LOG_LEVEL = 'error';
-process.env.NEW_RELIC_APP_NAME = 'dellingr';
-process.env.NEW_RELIC_LICENSE_KEY = 'LICENSE-KEY';
 process.env.NODE_ENV = 'development';
 process.env.SEED_ENVIRONMENT = 'true';
