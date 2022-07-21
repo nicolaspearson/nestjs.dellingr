@@ -11,7 +11,7 @@
   "engines": {
     "node": ">=v18.4.0",
     "npm": "please-use-yarn",
-    "yarn": ">=3.2.1"
+    "yarn": ">=3.2.2"
   },
   "engineStrict": true,
   "main": "src/main.ts",
