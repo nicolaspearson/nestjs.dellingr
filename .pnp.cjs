@@ -81,7 +81,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-ordered-imports", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.0"],\
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:43.0.2"],\
-            ["ewl", "npm:1.2.1"],\
+            ["ewl", "npm:1.2.2"],\
             ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.1.1"],\
             ["husky", "npm:8.0.1"],\
@@ -6247,7 +6247,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-ordered-imports", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:0.6.0"],\
             ["eslint-plugin-promise", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.0"],\
             ["eslint-plugin-unicorn", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:43.0.2"],\
-            ["ewl", "npm:1.2.1"],\
+            ["ewl", "npm:1.2.2"],\
             ["express", "npm:4.18.1"],\
             ["helmet", "npm:5.1.1"],\
             ["husky", "npm:8.0.1"],\
@@ -7193,22 +7193,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["ewl", [\
-        ["npm:1.2.1", {\
-          "packageLocation": "./.yarn/cache/ewl-npm-1.2.1-0cac986d82-0b106ee278.zip/node_modules/ewl/",\
+        ["npm:1.2.2", {\
+          "packageLocation": "./.yarn/cache/ewl-npm-1.2.2-59aacdfe0c-263b9e3d79.zip/node_modules/ewl/",\
           "packageDependencies": [\
-            ["ewl", "npm:1.2.1"],\
+            ["ewl", "npm:1.2.2"],\
             ["async_hooks", "npm:1.0.0"],\
             ["class-transformer", "npm:0.5.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["express", "npm:4.18.1"],\
-            ["express-winston", "virtual:0cac986d82690ce39cc183816bbac10bce71fe5d50f729674ce1f3bb01c04d7f4cbdecce355ed59995d042983b8a77a344b8357af2c06c17428982324be1351a#npm:4.2.0"],\
-            ["logform", "npm:2.4.0"],\
+            ["express-winston", "virtual:59aacdfe0cebf97b16a7a46f58f8175be4eb7c624da036405b520c71c0ca5786aac0a73fdf464520d2a629824b1d4d12214136e1e493ae35f8edffc5e7ed0a42#npm:4.2.0"],\
+            ["logform", "npm:2.4.2"],\
             ["reflect-metadata", "npm:0.1.13"],\
             ["safe-stable-stringify", "npm:2.3.1"],\
             ["triple-beam", "npm:1.3.0"],\
             ["uuid", "npm:8.3.2"],\
             ["validator", "npm:13.7.0"],\
-            ["winston", "npm:3.7.2"],\
+            ["winston", "npm:3.8.1"],\
             ["winston-transport", "npm:4.5.0"]\
           ],\
           "linkType": "HARD"\
@@ -7319,15 +7319,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:0cac986d82690ce39cc183816bbac10bce71fe5d50f729674ce1f3bb01c04d7f4cbdecce355ed59995d042983b8a77a344b8357af2c06c17428982324be1351a#npm:4.2.0", {\
-          "packageLocation": "./.yarn/__virtual__/express-winston-virtual-e7c4583ad2/0/cache/express-winston-npm-4.2.0-e4cfb26486-029529107f.zip/node_modules/express-winston/",\
+        ["virtual:59aacdfe0cebf97b16a7a46f58f8175be4eb7c624da036405b520c71c0ca5786aac0a73fdf464520d2a629824b1d4d12214136e1e493ae35f8edffc5e7ed0a42#npm:4.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/express-winston-virtual-3ab0f985fe/0/cache/express-winston-npm-4.2.0-e4cfb26486-029529107f.zip/node_modules/express-winston/",\
           "packageDependencies": [\
-            ["express-winston", "virtual:0cac986d82690ce39cc183816bbac10bce71fe5d50f729674ce1f3bb01c04d7f4cbdecce355ed59995d042983b8a77a344b8357af2c06c17428982324be1351a#npm:4.2.0"],\
+            ["express-winston", "virtual:59aacdfe0cebf97b16a7a46f58f8175be4eb7c624da036405b520c71c0ca5786aac0a73fdf464520d2a629824b1d4d12214136e1e493ae35f8edffc5e7ed0a42#npm:4.2.0"],\
             ["@types/winston", null],\
             ["chalk", "npm:2.4.2"],\
             ["lodash", "npm:4.17.21"],\
             ["logform", "npm:2.4.0"],\
-            ["winston", "npm:3.7.2"],\
+            ["winston", "npm:3.8.1"],\
             ["winston-transport", "npm:4.5.0"]\
           ],\
           "packagePeers": [\
@@ -9754,6 +9754,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/logform-npm-2.4.0-8b1d55d47a-e75ccccc1a.zip/node_modules/logform/",\
           "packageDependencies": [\
             ["logform", "npm:2.4.0"],\
+            ["@colors/colors", "npm:1.5.0"],\
+            ["fecha", "npm:4.2.3"],\
+            ["ms", "npm:2.1.3"],\
+            ["safe-stable-stringify", "npm:2.3.1"],\
+            ["triple-beam", "npm:1.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.4.2", {\
+          "packageLocation": "./.yarn/cache/logform-npm-2.4.2-c83969e14e-3d00f4e1cc.zip/node_modules/logform/",\
+          "packageDependencies": [\
+            ["logform", "npm:2.4.2"],\
             ["@colors/colors", "npm:1.5.0"],\
             ["fecha", "npm:4.2.3"],\
             ["ms", "npm:2.1.3"],\
@@ -13610,23 +13622,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["winston", [\
-        ["npm:3.7.2", {\
-          "packageLocation": "./.yarn/cache/winston-npm-3.7.2-5336ad5eff-f1f1a860d2.zip/node_modules/winston/",\
-          "packageDependencies": [\
-            ["winston", "npm:3.7.2"],\
-            ["@dabh/diagnostics", "npm:2.0.3"],\
-            ["async", "npm:3.2.3"],\
-            ["is-stream", "npm:2.0.1"],\
-            ["logform", "npm:2.4.0"],\
-            ["one-time", "npm:1.0.0"],\
-            ["readable-stream", "npm:3.6.0"],\
-            ["safe-stable-stringify", "npm:2.3.1"],\
-            ["stack-trace", "npm:0.0.10"],\
-            ["triple-beam", "npm:1.3.0"],\
-            ["winston-transport", "npm:4.5.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:3.8.1", {\
           "packageLocation": "./.yarn/cache/winston-npm-3.8.1-b9bfc92cf2-14637222a4.zip/node_modules/winston/",\
           "packageDependencies": [\
