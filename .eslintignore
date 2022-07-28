@@ -1,8 +1,13 @@
+# Directories
 .vscode/**
 .yarn/**
 coverage/**
 dist/**
 docs/**
+node_modules/**
+public/**
+
+# Files
 .eslintrc.js
 commitlint.config.js
 jest.config.js

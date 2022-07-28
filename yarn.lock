@@ -2415,6 +2415,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nicolaspearson/dellingr.generated@npm:0.0.1":
+  version: 0.0.1
+  resolution: "@nicolaspearson/dellingr.generated@npm:0.0.1::__archiveUrl=https%3A%2F%2Fnode.bit.cloud%2F%40nicolaspearson%2Fdellingr.generated%2F-%2F%40nicolaspearson-dellingr.generated-0.0.1.tgz"
+  checksum: 11fd1fc3cfb1d90b388ce7187c290c4c4efd1ef60296fe60f23c9032f089f063b3ef021ec5f879b3e367bbea1c8c77b6379975be72047f845062066a33192cd3
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -4753,6 +4760,7 @@ __metadata:
     "@nestjs/swagger": ^6.0.4
     "@nestjs/testing": ^9.0.6
     "@nestjs/typeorm": ^9.0.0
+    "@nicolaspearson/dellingr.generated": 0.0.1
     "@types/common-tags": ^1.8.1
     "@types/express": ^4.17.13
     "@types/jest": ^28.1.6

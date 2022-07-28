@@ -13,8 +13,12 @@ coverage
 # macOS
 .DS_Store
 
+# NPM
+node_modules
+
 # Output
 dist
+public
 
 # Yarn (https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored)
 .yarn/*

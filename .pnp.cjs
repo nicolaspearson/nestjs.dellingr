@@ -51,6 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/swagger", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.4"],\
             ["@nestjs/testing", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.6"],\
             ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.0"],\
+            ["@nicolaspearson/dellingr.generated", "npm:0.0.1::__archiveUrl=https%3A%2F%2Fnode.bit.cloud%2F%40nicolaspearson%2Fdellingr.generated%2F-%2F%40nicolaspearson-dellingr.generated-0.0.1.tgz"],\
             ["@types/common-tags", "npm:1.8.1"],\
             ["@types/express", "npm:4.17.13"],\
             ["@types/jest", "npm:28.1.6"],\
@@ -3294,6 +3295,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@nicolaspearson/dellingr.generated", [\
+        ["npm:0.0.1::__archiveUrl=https%3A%2F%2Fnode.bit.cloud%2F%40nicolaspearson%2Fdellingr.generated%2F-%2F%40nicolaspearson-dellingr.generated-0.0.1.tgz", {\
+          "packageLocation": "./.yarn/cache/@nicolaspearson-dellingr.generated-npm-0.0.1-fa7a1495a3-11fd1fc3cf.zip/node_modules/@nicolaspearson/dellingr.generated/",\
+          "packageDependencies": [\
+            ["@nicolaspearson/dellingr.generated", "npm:0.0.1::__archiveUrl=https%3A%2F%2Fnode.bit.cloud%2F%40nicolaspearson%2Fdellingr.generated%2F-%2F%40nicolaspearson-dellingr.generated-0.0.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@nodelib/fs.scandir", [\
         ["npm:2.1.5", {\
           "packageLocation": "./.yarn/cache/@nodelib-fs.scandir-npm-2.1.5-89c67370dd-a970d595bd.zip/node_modules/@nodelib/fs.scandir/",\
@@ -6217,6 +6227,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/swagger", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:6.0.4"],\
             ["@nestjs/testing", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.6"],\
             ["@nestjs/typeorm", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:9.0.0"],\
+            ["@nicolaspearson/dellingr.generated", "npm:0.0.1::__archiveUrl=https%3A%2F%2Fnode.bit.cloud%2F%40nicolaspearson%2Fdellingr.generated%2F-%2F%40nicolaspearson-dellingr.generated-0.0.1.tgz"],\
             ["@types/common-tags", "npm:1.8.1"],\
             ["@types/express", "npm:4.17.13"],\
             ["@types/jest", "npm:28.1.6"],\

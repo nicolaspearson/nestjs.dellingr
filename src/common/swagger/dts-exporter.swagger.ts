@@ -43,7 +43,7 @@ export async function convertSwaggerToDts(options: SwaggerToDtsOptions): Promise
         /**
          * Note: This file is auto generated and should NOT be edited manually.
          */
-        declare namespace ${options.namespace} {
+        export declare namespace ${options.namespace} {
           ${dtsLines.slice(2, -3).join('\n')}
         }
         /* eslint-enable @typescript-eslint/no-explicit-any */
