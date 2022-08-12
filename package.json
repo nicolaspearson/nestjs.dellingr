@@ -66,7 +66,7 @@
     "@nestjs/common": "^9.0.9",
     "@nestjs/core": "^9.0.9",
     "@nestjs/jwt": "^9.0.0",
-    "@nestjs/platform-express": "^9.0.6",
+    "@nestjs/platform-express": "^9.0.9",
     "@nestjs/swagger": "^6.0.5",
     "@nestjs/typeorm": "^9.0.1",
     "async_hooks": "^1.0.0",
