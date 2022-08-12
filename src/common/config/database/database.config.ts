@@ -52,7 +52,7 @@ export class DatabaseConfig implements BaseDataSourceOptions {
   // The database engine.
   @IsIn(['postgres'])
   @IsNotEmpty()
-  readonly type: 'postgres' = 'postgres';
+  readonly type = 'postgres' as const;
 
   // Should be to true if the application is being bundled with webpack.
   @ParseBoolean()
