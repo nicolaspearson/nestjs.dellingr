@@ -54,7 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/common-tags", "npm:1.8.1"],\
             ["@types/express", "npm:4.17.13"],\
             ["@types/jest", "npm:28.1.8"],\
-            ["@types/jsonwebtoken", "npm:8.5.8"],\
+            ["@types/jsonwebtoken", "npm:8.5.9"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:18.6.2"],\
             ["@types/pg", "npm:8.6.5"],\
@@ -3703,6 +3703,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.36"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:8.5.9", {\
+          "packageLocation": "./.yarn/cache/@types-jsonwebtoken-npm-8.5.9-79c2843a81-33815ab02d.zip/node_modules/@types/jsonwebtoken/",\
+          "packageDependencies": [\
+            ["@types/jsonwebtoken", "npm:8.5.9"],\
+            ["@types/node", "npm:17.0.36"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@types/mime", [\
@@ -6249,7 +6257,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/common-tags", "npm:1.8.1"],\
             ["@types/express", "npm:4.17.13"],\
             ["@types/jest", "npm:28.1.8"],\
-            ["@types/jsonwebtoken", "npm:8.5.8"],\
+            ["@types/jsonwebtoken", "npm:8.5.9"],\
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:18.6.2"],\
             ["@types/pg", "npm:8.6.5"],\
