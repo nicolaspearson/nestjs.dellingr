@@ -71,7 +71,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\
             ["dotenv", "npm:16.0.1"],\
-            ["dtsgenerator", "npm:3.16.0"],\
+            ["dtsgenerator", "npm:3.16.1"],\
             ["eslint", "npm:8.22.0"],\
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:3.2.0"],\
@@ -5797,17 +5797,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:9.3.0", {\
-          "packageLocation": "./.yarn/cache/commander-npm-9.3.0-1393a6e1f6-d421ce66fe.zip/node_modules/commander/",\
-          "packageDependencies": [\
-            ["commander", "npm:9.3.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:9.4.0", {\
           "packageLocation": "./.yarn/cache/commander-npm-9.4.0-3cc611cdba-a322de584a.zip/node_modules/commander/",\
           "packageDependencies": [\
             ["commander", "npm:9.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:9.4.1", {\
+          "packageLocation": "./.yarn/cache/commander-npm-9.4.1-9deffb2749-bfb18e325a.zip/node_modules/commander/",\
+          "packageDependencies": [\
+            ["commander", "npm:9.4.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6311,7 +6311,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["class-validator", "npm:0.13.2"],\
             ["common-tags", "npm:1.8.2"],\
             ["dotenv", "npm:16.0.1"],\
-            ["dtsgenerator", "npm:3.16.0"],\
+            ["dtsgenerator", "npm:3.16.1"],\
             ["eslint", "npm:8.22.0"],\
             ["eslint-config-prettier", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:8.5.0"],\
             ["eslint-plugin-eslint-comments", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:3.2.0"],\
@@ -6492,18 +6492,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["dtsgenerator", [\
-        ["npm:3.16.0", {\
-          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.16.0-c5b815b652-e894b17d7a.zip/node_modules/dtsgenerator/",\
+        ["npm:3.16.1", {\
+          "packageLocation": "./.yarn/cache/dtsgenerator-npm-3.16.1-06728cf620-15600f51ef.zip/node_modules/dtsgenerator/",\
           "packageDependencies": [\
-            ["dtsgenerator", "npm:3.16.0"],\
-            ["commander", "npm:9.3.0"],\
+            ["dtsgenerator", "npm:3.16.1"],\
+            ["commander", "npm:9.4.1"],\
             ["cross-fetch", "npm:3.1.5"],\
             ["debug", "virtual:b86a9fb34323a98c6519528ed55faa0d9b44ca8879307c0b29aa384bde47ff59a7d0c9051b31246f14521dfb71ba3c5d6d0b35c29fffc17bf875aa6ad977d9e8#npm:4.3.4"],\
             ["glob", "npm:8.0.3"],\
             ["https-proxy-agent", "npm:5.0.1"],\
             ["js-yaml", "npm:4.1.0"],\
             ["tslib", "npm:2.4.0"],\
-            ["typescript", "patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=f456af"]\
+            ["typescript", "patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=f456af"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -13251,17 +13251,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=f456af", {\
-          "packageLocation": "./.yarn/cache/typescript-patch-4da399e779-137d18a77f.zip/node_modules/typescript/",\
-          "packageDependencies": [\
-            ["typescript", "patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=f456af"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af", {\
           "packageLocation": "./.yarn/cache/typescript-patch-fc259c5d56-9096d8f6c1.zip/node_modules/typescript/",\
           "packageDependencies": [\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=f456af", {\
+          "packageLocation": "./.yarn/cache/typescript-patch-41441e7ac3-563a0ef47a.zip/node_modules/typescript/",\
+          "packageDependencies": [\
+            ["typescript", "patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=f456af"]\
           ],\
           "linkType": "HARD"\
         }]\
