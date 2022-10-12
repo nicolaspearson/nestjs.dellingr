@@ -61,7 +61,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prettier", "npm:2.7.1"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
-            ["@types/validator", "npm:13.7.5"],\
+            ["@types/validator", "npm:13.7.7"],\
             ["@types/webpack-env", "npm:1.18.0"],\
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.35.1"],\
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.35.1"],\
@@ -3919,10 +3919,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/validator", [\
-        ["npm:13.7.5", {\
-          "packageLocation": "./.yarn/cache/@types-validator-npm-13.7.5-12756303a3-cc143351a2.zip/node_modules/@types/validator/",\
+        ["npm:13.7.7", {\
+          "packageLocation": "./.yarn/cache/@types-validator-npm-13.7.7-34c5f5c17d-e32d2bc3b8.zip/node_modules/@types/validator/",\
           "packageDependencies": [\
-            ["@types/validator", "npm:13.7.5"]\
+            ["@types/validator", "npm:13.7.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6301,7 +6301,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/prettier", "npm:2.7.1"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
-            ["@types/validator", "npm:13.7.5"],\
+            ["@types/validator", "npm:13.7.7"],\
             ["@types/webpack-env", "npm:1.18.0"],\
             ["@typescript-eslint/eslint-plugin", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.35.1"],\
             ["@typescript-eslint/parser", "virtual:2d7463141d4d94eb1c8411977117bf15b4a2e7ed20f49f052b1e4bf01d2be3770a3d696f0d7143e87066901445ab22075cd928dbecaddf6a351ff45ea53dc62e#npm:5.35.1"],\
