@@ -58,7 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:18.6.2"],\
             ["@types/pg", "npm:8.6.5"],\
-            ["@types/prettier", "npm:2.7.0"],\
+            ["@types/prettier", "npm:2.7.1"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["@types/validator", "npm:13.7.5"],\
@@ -3832,10 +3832,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:2.7.0", {\
-          "packageLocation": "./.yarn/cache/@types-prettier-npm-2.7.0-5da1b0a357-bf5d0c7c12.zip/node_modules/@types/prettier/",\
+        ["npm:2.7.1", {\
+          "packageLocation": "./.yarn/cache/@types-prettier-npm-2.7.1-d46ada27e6-5e3f58e229.zip/node_modules/@types/prettier/",\
           "packageDependencies": [\
-            ["@types/prettier", "npm:2.7.0"]\
+            ["@types/prettier", "npm:2.7.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6298,7 +6298,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/multer", "npm:1.4.7"],\
             ["@types/node", "npm:18.6.2"],\
             ["@types/pg", "npm:8.6.5"],\
-            ["@types/prettier", "npm:2.7.0"],\
+            ["@types/prettier", "npm:2.7.1"],\
             ["@types/supertest", "npm:2.0.12"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["@types/validator", "npm:13.7.5"],\
