@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/nicolaspearson/nestjs.dellingr/compare/v1.1.0...v1.2.0) (2022-10-12)
+
+
+### Features
+
+* remove newrelic ([758da21](https://github.com/nicolaspearson/nestjs.dellingr/commit/758da21e74ecb96cb6241a108292798650211e15))
+
+
+### Bug Fixes
+
+* adapt new relic logger ([0ac6097](https://github.com/nicolaspearson/nestjs.dellingr/commit/0ac6097caef93e0084601d40783def73393947cb))
+
 ## [1.1.0](https://github.com/nicolaspearson/nestjs.dellingr/compare/v1.0.2...v1.1.0) (2022-06-28)
 
 
