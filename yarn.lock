@@ -4428,10 +4428,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^9.3.0":
-  version: 9.3.0
-  resolution: "commander@npm:9.3.0"
-  checksum: d421ce66fee25792a1470c69aa8d1b86434bf873a96483aa92c8267f81a6f20c6f7c426f5e82f88ac50a8ec4855d3f2787aebcdef8aa559e1080a2337a95a217
+"commander@npm:^9.4.0":
+  version: 9.4.1
+  resolution: "commander@npm:9.4.1"
+  checksum: bfb18e325a5bdf772763c2213d5c7d9e77144d944124e988bcd8e5e65fb6d45d5d4e86b09155d0f2556c9a59c31e428720e57968bcd050b2306e910a0bf3cf13
   languageName: node
   linkType: hard
 
@@ -4829,7 +4829,7 @@ __metadata:
     class-validator: ^0.13.2
     common-tags: ^1.8.2
     dotenv: ^16.0.1
-    dtsgenerator: ^3.16.0
+    dtsgenerator: ^3.16.1
     eslint: ^8.22.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-eslint-comments: ^3.2.0
@@ -4991,21 +4991,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dtsgenerator@npm:^3.16.0":
-  version: 3.16.0
-  resolution: "dtsgenerator@npm:3.16.0"
+"dtsgenerator@npm:^3.16.1":
+  version: 3.16.1
+  resolution: "dtsgenerator@npm:3.16.1"
   dependencies:
-    commander: ^9.3.0
+    commander: ^9.4.0
     cross-fetch: ^3.1.5
     debug: ^4.3.4
     glob: ^8.0.3
     https-proxy-agent: ^5.0.1
     js-yaml: ^4.1.0
     tslib: ^2.4.0
-    typescript: ^4.7.3
+    typescript: ^4.8.2
   bin:
     dtsgen: bin/dtsgen
-  checksum: e894b17d7aa2acfcba4bbc45878d28845929b467d8b2f042ff5557bc9594a096b77729850b0cf7d7b113f9b37b0dfd8424c3e5ef2ce28ebfe499f90c5eaa4fc8
+  checksum: 15600f51ef7665edb1406e8d65077aa669f4f55df0e9389d65f6cbca259d50a9f0e3869117c2ece133d20d50beae190844a9f2a492dcd04f38c18fb211a7b69c
   languageName: node
   linkType: hard
 
@@ -10705,13 +10705,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.7.3":
-  version: 4.7.3
-  resolution: "typescript@npm:4.7.3"
+"typescript@npm:^4.8.2":
+  version: 4.8.4
+  resolution: "typescript@npm:4.8.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: fd13a1ce53790a36bb8350e1f5e5e384b5f6cb9b0635114a6d01d49cb99916abdcfbc13c7521cdae2f2d3f6d8bc4a8ae7625edf645a04ee940588cd5e7597b2f
+  checksum: 3e4f061658e0c8f36c820802fa809e0fd812b85687a9a2f5430bc3d0368e37d1c9605c3ce9b39df9a05af2ece67b1d844f9f6ea8ff42819f13bcb80f85629af0
   languageName: node
   linkType: hard
 
@@ -10735,13 +10735,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.7.3#~builtin<compat/typescript>":
-  version: 4.7.3
-  resolution: "typescript@patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=f456af"
+"typescript@patch:typescript@^4.8.2#~builtin<compat/typescript>":
+  version: 4.8.4
+  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=f456af"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 137d18a77f52254a284960b16ab53d0619f57b69b5d585804b8413f798a1175ce3e774fb95e6a101868577aafe357d8fcfc9171f0dc9fc0c210e9ae59d107cc0
+  checksum: 563a0ef47abae6df27a9a3ab38f75fc681f633ccf1a3502b1108e252e187787893de689220f4544aaf95a371a4eb3141e4a337deb9895de5ac3c1ca76430e5f0
   languageName: node
   linkType: hard
 
